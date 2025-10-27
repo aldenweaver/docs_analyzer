@@ -60,3 +60,6 @@ docs/gitignored
 tmp/
 temp/
 *.tmp
+
+# Front End
+frontend/node_modules/
