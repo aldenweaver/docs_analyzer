@@ -1,0 +1,1 @@
+How many documents do we have? Please list total and by category, manufacturer, series, year, document type.

@@ -1,0 +1,1 @@
+What is the status of this current project, any processes running in the background, and the next steps we should take to progress towards the project goals?

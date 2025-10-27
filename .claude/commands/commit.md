@@ -1,0 +1,1 @@
+Please commit all changes. Ensure the commit message is thorough but not verbose.
