@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  analyzer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docs_analyzer
+    # Load environment variables from .env file
+    env_file:
+      - .env
+    environment:
+      # Optional: Override ANTHROPIC_API_KEY from .env
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    volumes:
+      # Mount documentation directory to analyze
+      - ./docs_input:/app/docs_input:ro
+      # Mount output directory for reports
+      - ./reports:/app/reports
+      # Optional: Mount custom config
+      - ./config.yaml:/app/config.yaml:ro
+    # Override default command - analyze mounted docs
+    command: python doc_analyzer.py /app/docs_input --format all --output /app/reports/report
+    # Prevent container from exiting immediately
+    stdin_open: true
+    tty: true
+
+  # Alternative service for running tests
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docs_analyzer_test
+    env_file:
+      - .env
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    command: pytest test_analyzer.py -v
+    profiles:
+      - testing
+
+  # Alternative service for interactive shell
+  shell:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docs_analyzer_shell
+    env_file:
+      - .env
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    volumes:
+      - ./docs_input:/app/docs_input:ro
+      - ./reports:/app/reports
+      - ./config.yaml:/app/config.yaml:ro
+    command: /bin/bash
+    stdin_open: true
+    tty: true
+    profiles:
+      - dev

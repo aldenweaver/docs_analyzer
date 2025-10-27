@@ -11,16 +11,49 @@ This is a **documentation quality analyzer** designed for Mintlify-based documen
 ## Key Commands
 
 ### Setup
-```bash
-# Install dependencies
-pip install -r requirements.txt
 
-# Set API key for AI-powered analysis (optional but recommended)
-export ANTHROPIC_API_KEY='your-api-key-here'
+**Docker (Recommended):**
+```bash
+# Build and run with Docker Compose
+docker-compose up
+
+# Run tests in Docker
+docker-compose --profile testing run test
+
+# Interactive shell
+docker-compose --profile dev run shell
+```
+
+**Local with Virtual Environment:**
+```bash
+# Automated setup (creates venv, installs deps)
+./setup.sh          # Linux/macOS
+setup.bat           # Windows
+
+# Manual setup
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+**Environment Configuration:**
+```bash
+# Copy example environment file
+cp .env.example .env
+
+# Edit .env and configure:
+# - ANTHROPIC_API_KEY (optional - for AI analysis)
+# - ENABLE_AI_ANALYSIS=true/false
+# - CLAUDE_MODEL (default: claude-sonnet-4-5-20250929)
+# - AI_MAX_TOKENS (default: 2000)
 ```
 
 ### Running the Analyzer
+
 ```bash
+# Using convenience script (auto-activates venv)
+./run.sh /path/to/docs
+
 # Basic analysis
 python doc_analyzer.py /path/to/docs
 
@@ -36,7 +69,7 @@ python doc_analyzer.py /path/to/docs --format all
 # Analyze remote repository
 python doc_analyzer.py --repo-url https://github.com/user/docs --repo-type mintlify
 
-# Disable AI analysis (faster, less comprehensive)
+# Disable AI analysis (faster, works without API key)
 python doc_analyzer.py /path/to/docs --no-ai
 ```
 
@@ -192,7 +225,77 @@ Tests use pytest with fixtures for temporary documentation directories. Key test
 
 ## Dependencies
 
-Core: `anthropic`, `pyyaml`
+Core: `anthropic`, `pyyaml`, `python-dotenv`
 Repository: `GitPython` (for remote cloning)
 Testing: `pytest`, `coverage`
 Optional: `markdown`, `beautifulsoup4`, `textstat`, `jinja2`
+
+## Infrastructure & Security
+
+### Containerization
+
+The project is fully containerized for easy deployment:
+
+**Dockerfile**: Multi-stage build with non-root user (UID 1000) for security. Includes all dependencies and runs as `analyzer` user.
+
+**docker-compose.yml**: Provides three service profiles:
+- `analyzer` (default): Runs analysis on mounted docs
+- `test`: Runs test suite
+- `shell`: Interactive development shell
+
+**Volumes**:
+- `./docs_input:/app/docs_input:ro` - Mount documentation (read-only)
+- `./reports:/app/reports` - Output reports
+- `./config.yaml:/app/config.yaml:ro` - Custom configuration
+
+### Environment Variables & Security
+
+**Security Best Practices:**
+1. API keys stored in `.env` (gitignored, never committed)
+2. `.env.example` provides template without secrets
+3. Environment variables override config file settings
+4. Analyzer works without API key (graceful degradation)
+
+**Key Environment Variables:**
+- `ANTHROPIC_API_KEY`: Claude API key (optional)
+- `ENABLE_AI_ANALYSIS`: Enable/disable AI features (default: true)
+- `CLAUDE_MODEL`: Model selection (default: claude-sonnet-4-5-20250929)
+- `AI_MAX_TOKENS`: Token limit per request (default: 2000)
+
+**Loading Order:**
+1. `.env` file loaded via `python-dotenv` at startup
+2. Environment variables override config.yaml values
+3. CLI flags override environment variables
+
+### Virtual Environment Management
+
+**Setup Scripts:**
+- `setup.sh` / `setup.bat`: Automated venv creation and dependency installation
+- `run.sh`: Convenience wrapper that activates venv and runs analyzer
+
+**Manual venv:**
+```bash
+python3 -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate.bat on Windows
+pip install -r requirements.txt
+```
+
+### Running Without API Key
+
+The analyzer is designed to run in two modes:
+
+**Full Mode (with API key):**
+- All quality checks
+- AI-powered clarity analysis
+- Semantic gap detection
+- User journey validation
+
+**Basic Mode (without API key):**
+- All quality checks except AI-powered analysis
+- Readability metrics
+- Style guide compliance
+- Information architecture validation
+- Consistency checks
+- Content duplication detection
+
+Set `ENABLE_AI_ANALYSIS=false` or omit `ANTHROPIC_API_KEY` to run in basic mode.

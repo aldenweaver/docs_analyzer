@@ -489,31 +489,19 @@ integrations:
     output_file: "metrics.json"
 
 # Claude API Configuration
+# NOTE: API keys and sensitive configuration has been moved to .env file for security
+# See .env.example for available environment variables:
+#   - ANTHROPIC_API_KEY: Your Claude API key
+#   - ENABLE_AI_ANALYSIS: Enable/disable AI analysis (true/false)
+#   - CLAUDE_MODEL: Model to use (default: claude-sonnet-4-5-20250929)
+#   - AI_MAX_TOKENS: Maximum tokens per request (default: 2000)
 claude_api:
-  # API key source (environment variable)
-  api_key_env: "ANTHROPIC_API_KEY"
-  
-  # Model selection
-  default_model: "claude-sonnet-4-5-20250929"
-  
-  # Rate limiting
+  # Rate limiting (future feature)
   rate_limit:
     requests_per_minute: 50
     tokens_per_minute: 40000
-  
-  # Retry configuration
+
+  # Retry configuration (future feature)
   retry:
     max_attempts: 3
     backoff_factor: 2
-  
-  # Token management
-  tokens:
-    max_per_request: 4000
-    reserve_for_response: 1000
-  
-  # Analysis types
-  analysis_types:
-    clarity: true
-    semantic_gaps: true
-    user_journey: true
-    content_quality: true

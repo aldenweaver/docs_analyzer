@@ -49,14 +49,75 @@ This analyzer addresses all key responsibilities from the job posting:
 
 ## 🚀 Quick Start
 
-### Prerequisites
+### Option 1: Docker (Recommended)
+
+The easiest way to run the analyzer with all dependencies:
 
 ```bash
-# Python 3.8+
-python --version
+# 1. Clone the repository
+git clone <repository-url>
+cd docs_analyzer
+
+# 2. (Optional) Configure environment
+cp .env.example .env
+# Edit .env and add your ANTHROPIC_API_KEY if you want AI analysis
+
+# 3. Place your documentation in docs_input/
+mkdir -p docs_input reports
+cp -r /path/to/your/docs docs_input/
+
+# 4. Run with Docker Compose
+docker-compose up
+
+# Reports will be generated in ./reports/
+```
+
+**Without AI analysis:**
+```bash
+# Set ENABLE_AI_ANALYSIS=false in .env or:
+ENABLE_AI_ANALYSIS=false docker-compose up
+```
+
+### Option 2: Local Setup with Virtual Environment
+
+For development or when Docker is not available:
+
+```bash
+# 1. Clone the repository
+git clone <repository-url>
+cd docs_analyzer
+
+# 2. Run setup script (creates venv and installs dependencies)
+./setup.sh          # Linux/macOS
+setup.bat           # Windows
+
+# 3. Configure environment (optional for AI features)
+cp .env.example .env
+# Edit .env and add your ANTHROPIC_API_KEY
+
+# 4. Activate virtual environment
+source venv/bin/activate    # Linux/macOS
+venv\Scripts\activate.bat   # Windows
+
+# 5. Run the analyzer
+python doc_analyzer.py /path/to/docs
+```
+
+### Option 3: Quick Run (Manual)
+
+```bash
+# Install Python 3.8+
+python3 --version
 
 # Install dependencies
-pip install anthropic pyyaml
+pip install -r requirements.txt
+
+# Configure (optional - analyzer works without API key)
+cp .env.example .env
+# Add ANTHROPIC_API_KEY to .env for AI analysis
+
+# Run analysis
+python doc_analyzer.py /path/to/docs
 ```
 
 ### Basic Usage
@@ -70,16 +131,33 @@ python doc_analyzer.py /path/to/docs --config config.yaml
 
 # Generate multiple report formats
 python doc_analyzer.py /path/to/docs --format all
+
+# Analyze remote repository
+python doc_analyzer.py --repo-url https://github.com/user/docs --repo-type mintlify
+
+# Disable AI analysis (faster, works without API key)
+python doc_analyzer.py /path/to/docs --no-ai
 ```
 
-### With Claude API (Optional but Recommended)
+### Environment Configuration
 
-The analyzer can use Claude to perform AI-powered clarity checks:
+The analyzer can run **with or without** a Claude API key:
 
+**With AI Analysis (Recommended):**
 ```bash
-export ANTHROPIC_API_KEY='your-api-key-here'
-python doc_analyzer.py /path/to/docs
+# Add to .env file:
+ANTHROPIC_API_KEY=your-api-key-here
+ENABLE_AI_ANALYSIS=true
 ```
+
+**Without AI Analysis:**
+```bash
+# Add to .env file:
+ENABLE_AI_ANALYSIS=false
+# Or simply don't set ANTHROPIC_API_KEY
+```
+
+The analyzer will automatically skip AI-powered features if no API key is configured, while still performing all other quality checks.
 
 ## 📖 How It Demonstrates Key Responsibilities
 

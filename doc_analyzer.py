@@ -27,6 +27,10 @@ from urllib.parse import urlparse
 import anthropic
 from difflib import SequenceMatcher
 
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
 # Try to import optional dependencies
 try:
     import git
@@ -348,17 +352,26 @@ class MintlifyValidator:
 
 class SemanticAnalyzer:
     """AI-powered semantic analysis using Claude"""
-    
+
     def __init__(self, config: dict):
         self.config = config.get('claude_api', {})
         self.gap_config = config.get('gap_detection', {})
         self.claude_client = None
-        
-        api_key = os.getenv(self.config.get('api_key_env', 'ANTHROPIC_API_KEY'))
-        if api_key:
+
+        # Check if AI analysis is enabled via environment variable or config
+        ai_enabled_env = os.getenv('ENABLE_AI_ANALYSIS', 'true').lower() in ('true', '1', 'yes')
+        ai_enabled_config = self.gap_config.get('semantic_analysis', {}).get('enabled', True)
+
+        # Load configuration from environment variables (with fallbacks to config)
+        self.model = os.getenv('CLAUDE_MODEL') or self.config.get('default_model', 'claude-sonnet-4-5-20250929')
+        self.max_tokens = int(os.getenv('AI_MAX_TOKENS', '2000'))
+
+        # Load API key from environment
+        api_key = os.getenv('ANTHROPIC_API_KEY')
+        if api_key and ai_enabled_env and ai_enabled_config:
             self.claude_client = anthropic.Anthropic(api_key=api_key)
-        
-        self.enabled = self.gap_config.get('semantic_analysis', {}).get('enabled', True) and self.claude_client is not None
+
+        self.enabled = self.claude_client is not None
     
     def analyze_clarity(self, file_path: str, content: str, issues: List[Issue]):
         """AI-powered clarity analysis"""
@@ -391,8 +404,8 @@ Provide a JSON array of issues (max 5 most important). Each issue should have:
 Return ONLY valid JSON array, no other text."""
 
             message = self.claude_client.messages.create(
-                model=self.config.get('default_model', 'claude-sonnet-4-5-20250929'),
-                max_tokens=2000,
+                model=self.model,
+                max_tokens=self.max_tokens,
                 messages=[{"role": "user", "content": prompt}]
             )
             
@@ -452,8 +465,8 @@ Provide:
 Return ONLY valid JSON array."""
 
             message = self.claude_client.messages.create(
-                model=self.config.get('default_model', 'claude-sonnet-4-5-20250929'),
-                max_tokens=2000,
+                model=self.model,
+                max_tokens=self.max_tokens,
                 messages=[{"role": "user", "content": prompt}]
             )
             

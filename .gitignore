@@ -1,2 +1,62 @@
+# OS Files
 .DS_Store
+Thumbs.db
+
+# Environment and Secrets
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+.hypothesis/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Reports and Output
+reports/
+*.json
+*.html
+!docker-compose.yml
+
+# Logs
+*.log
+
+# Documentation (project specific)
 docs/gitignored
+
+# Temporary files
+tmp/
+temp/
+*.tmp
