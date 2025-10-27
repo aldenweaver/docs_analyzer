@@ -1,0 +1,519 @@
+# Enhanced Documentation Analyzer Configuration
+# Pre-populated with Claude Docs / Mintlify best practices
+
+# Repository Configuration
+repository:
+  # Path to documentation (local or will be cloned)
+  path: "./docs"
+  
+  # Auto-detect platform or specify: mintlify, docusaurus, mkdocs, generic
+  type: "auto"
+  
+  # Remote repository support
+  remote:
+    enabled: false
+    url: ""  # e.g., "https://github.com/anthropic/docs"
+    branch: "main"
+    auth_token_env: "GITHUB_TOKEN"
+  
+  # File patterns to include/exclude
+  include_patterns:
+    - "**/*.md"
+    - "**/*.mdx"
+  
+  exclude_patterns:
+    - "**/node_modules/**"
+    - "**/dist/**"
+    - "**/.git/**"
+    - "**/build/**"
+    - "**/.next/**"
+
+# Mintlify-Specific Configuration
+mintlify:
+  enabled: true
+  config_file: "mint.json"  # or docs.json
+  
+  # Required frontmatter fields
+  required_frontmatter:
+    - title
+    - description
+  
+  # Optional frontmatter fields
+  optional_frontmatter:
+    - sidebarTitle
+    - icon
+    - mode
+  
+  # Mintlify components to validate
+  components:
+    enabled: true
+    valid_components:
+      - Card
+      - CardGroup
+      - Accordion
+      - AccordionGroup
+      - Tab
+      - Tabs
+      - CodeGroup
+      - Frame
+      - Steps
+      - Info
+      - Warning
+      - Tip
+      - Note
+      - Check
+      - ParamField
+  
+  # Link validation
+  links:
+    internal_must_be_relative: true
+    check_broken_links: true
+
+# Claude Docs Style Guide (Discovered Rules)
+style_rules:
+  # Line and sentence limits
+  max_line_length: 100
+  max_sentence_length: 30
+  max_paragraph_sentences: 5
+  
+  # Valid heading levels
+  heading_levels: [1, 2, 3, 4]
+  
+  # Voice and tone
+  voice:
+    person: "second"  # Use "you" not "we" or "I"
+    tone: "conversational"
+    technical_tone: "direct_and_clear"
+  
+  # Preferred terminology (old → new)
+  preferred_terms:
+    utilize: use
+    leverage: use
+    in order to: to
+    at this point in time: now
+    due to the fact that: because
+    prior to: before
+    subsequent to: after
+    in the event that: if
+    by means of: by
+    with regard to: about
+    a number of: several
+    at the present time: now
+    for the purpose of: to
+    in the near future: soon
+    on a daily basis: daily
+  
+  # Words to avoid (weak language)
+  avoid_terms:
+    - simply
+    - just
+    - easily
+    - obviously
+    - clearly
+    - very
+    - really
+    - quite
+    - rather
+    - fairly
+    - basically
+    - actually
+    - literally
+    - definitely
+  
+  # Formatting requirements
+  code_blocks:
+    require_language_tag: true
+    test_before_publishing: true
+    include_both_basic_and_advanced: true
+  
+  images:
+    require_alt_text: true
+    max_size_mb: 5
+    recommend_external_hosting_above_mb: 5
+  
+  links:
+    avoid_click_here: true
+    require_descriptive_text: true
+    internal_use_relative_paths: true
+  
+  # Content structure requirements
+  required_sections:
+    guide:
+      - overview
+      - prerequisites
+      - steps
+      - examples
+      - troubleshooting
+    
+    reference:
+      - description
+      - parameters
+      - examples
+      - related
+    
+    tutorial:
+      - introduction
+      - prerequisites
+      - steps
+      - verification
+      - next-steps
+    
+    concept:
+      - overview
+      - use-cases
+      - how-it-works
+      - best-practices
+  
+  # Critical rules from Claude Docs
+  critical_rules:
+    # Technical documentation formatting
+    prose_over_bullets: true  # NO bullet points in technical docs/reports
+    bullets_only_when_requested: true
+    bullet_min_length_sentences: 2
+    
+    # Git workflow
+    never_use_no_verify: true
+    never_skip_precommit_hooks: true
+    commit_frequently: true
+
+# Information Architecture Patterns
+ia_patterns:
+  # Standard category structure (from Claude Docs)
+  categories:
+    getting-started:
+      description: "Installation and first steps"
+      typical_docs:
+        - overview
+        - quickstart
+        - installation
+    
+    guides:
+      description: "How-to guides and tutorials"
+      typical_docs:
+        - common-workflows
+        - best-practices
+        - tutorials
+    
+    build:
+      description: "Building with the product"
+      typical_docs:
+        - features
+        - integrations
+        - customization
+    
+    reference:
+      description: "Technical specifications"
+      typical_docs:
+        - api
+        - cli
+        - configuration
+        - sdk
+    
+    deployment:
+      description: "Deployment and infrastructure"
+      typical_docs:
+        - cloud-providers
+        - self-hosting
+        - security
+    
+    administration:
+      description: "Admin and management"
+      typical_docs:
+        - setup
+        - monitoring
+        - costs
+        - analytics
+  
+  # Maximum documents per category before subdivision
+  max_docs_per_category: 20
+  
+  # Maximum section length before requiring subheadings
+  max_section_lines: 50
+  
+  # Heading hierarchy rules
+  heading_hierarchy:
+    allow_skipping: false
+    max_depth: 4
+
+# Content Quality Rules
+content_rules:
+  # Minimum words for substantive content
+  min_content_words: 50
+  
+  # Required content types for complete documentation
+  required_content_types:
+    - overview
+    - quickstart
+    - troubleshooting
+    - examples
+    - reference
+  
+  # Link quality checks
+  link_checks:
+    require_descriptive_text: true
+    check_broken_links: true
+    avoid_click_here: true
+    internal_must_be_relative: true  # Critical for Mintlify
+    
+  # Code block requirements
+  code_blocks:
+    require_language: true
+    require_explanation: true
+    test_examples: true
+
+# Consistency Checks
+consistency:
+  # Terms that should be consistent
+  term_variants:
+    api:
+      canonical: API
+      variants: [api, Api, A.P.I.]
+    
+    cli:
+      canonical: CLI
+      variants: [cli, Cli, command-line, command line]
+    
+    setup:
+      canonical: "set up"
+      variants: [setup, set-up]
+    
+    login:
+      canonical: "log in"
+      variants: [login, log-in]
+    
+    email:
+      canonical: email
+      variants: [e-mail, Email, E-mail]
+    
+    claude-code:
+      canonical: "Claude Code"
+      variants: [claude code, Claude code, claude-code]
+  
+  # List marker preference
+  preferred_list_marker: "-"
+  
+  # Heading style preference
+  heading_style: "sentence"  # or "title"
+
+# Severity Thresholds
+severity_thresholds:
+  critical:
+    - missing_frontmatter
+    - broken_links
+    - absolute_internal_urls
+    - missing_language_tag
+    - missing_alt_text
+  
+  high:
+    - empty_link_text
+    - file_error
+    - major_inconsistency
+    - missing_required_section
+  
+  medium:
+    - heading_skip
+    - long_section
+    - passive_voice
+    - term_inconsistency
+    - weak_language
+  
+  low:
+    - line_too_long
+    - sentence_too_long
+    - terminology_preference
+    - non_descriptive_link
+
+# Gap Detection Configuration
+gap_detection:
+  # Enable semantic analysis with Claude API
+  semantic_analysis:
+    enabled: true
+    model: "claude-sonnet-4-5-20250929"
+    max_tokens: 4000
+  
+  # User journey validation
+  required_journeys:
+    - name: "First time setup"
+      steps: [overview, install, authenticate, first-use]
+    
+    - name: "Feature implementation"
+      steps: [concept-doc, how-to-guide, code-example, troubleshooting]
+    
+    - name: "Troubleshooting"
+      steps: [error-identification, diagnostic-guide, solution]
+    
+    - name: "API integration"
+      steps: [api-overview, authentication, endpoints, sdk-reference, examples]
+  
+  # Forbidden orphans (concepts without docs)
+  forbidden_orphans:
+    - concepts_without_explanation
+    - features_without_examples
+    - errors_without_solutions
+    - apis_without_reference
+  
+  # Cross-reference requirements
+  cross_references:
+    validate_prerequisites: true
+    detect_circular_refs: true
+    find_dead_ends: true
+
+# Content Duplication Detection
+duplication_detection:
+  enabled: true
+  similarity_threshold: 0.8  # 80% similar = duplicate
+  
+  # What to check
+  check_levels:
+    - paragraph
+    - code_block
+    - heading_structure
+  
+  # When duplicates are okay
+  allowed_duplicates:
+    - boilerplate_text
+    - standard_disclaimers
+    - common_code_examples
+
+# Analysis Options
+analysis:
+  # Use Claude AI for advanced checks (requires API key)
+  enable_ai_analysis: true
+  
+  # Claude model to use
+  ai_model: "claude-sonnet-4-5-20250929"
+  
+  # Maximum tokens for AI analysis per file
+  ai_max_tokens: 2000
+  
+  # Skip certain file patterns
+  exclude_patterns:
+    - "*/node_modules/*"
+    - "*/vendor/*"
+    - "*/dist/*"
+    - "*/.git/*"
+    - "*/CHANGELOG.md"
+    - "*/package-lock.json"
+  
+  # Only analyze certain file types
+  include_extensions:
+    - ".md"
+    - ".mdx"
+  
+  # Parallel processing (number of threads)
+  parallel_threads: 4
+  
+  # Documentation map comparison
+  reference_map:
+    enabled: true
+    path: ""  # Path to reference doc map (e.g., claude_code_docs_map.md)
+    compare_structure: true
+    suggest_reorganization: true
+
+# Reporting Options
+reporting:
+  # Maximum issues to include in HTML report
+  max_issues_html: 200
+  
+  # Maximum issues per severity in markdown
+  max_issues_per_severity_md: 50
+  
+  # Group issues by file or by type
+  group_by: "file"  # or "type"
+  
+  # Include context snippets
+  include_context: true
+  
+  # Context length (characters)
+  context_length: 100
+  
+  # Generate executive summary
+  executive_summary: true
+  
+  # Include before/after suggestions
+  include_suggestions: true
+
+# Custom Rules (Advanced)
+custom_rules:
+  # Platform-specific patterns
+  patterns:
+    - name: "avoid_future_tense"
+      regex: '\b(will|shall)\s+\w+'
+      severity: low
+      category: style
+      description: "Avoid future tense where possible"
+      suggestion: "Use present tense for documentation"
+    
+    - name: "proper_product_capitalization"
+      regex: '\b(claude code|anthropic)\b'
+      severity: low
+      category: consistency
+      description: "Ensure proper capitalization of product names"
+      suggestion: "Use 'Claude Code' and 'Anthropic' with proper capitalization"
+    
+    - name: "frontmatter_present"
+      regex: '^---\n'
+      severity: critical
+      category: mintlify
+      description: "MDX files must have frontmatter"
+      suggestion: "Add YAML frontmatter with title and description"
+      file_types: [".mdx"]
+    
+    - name: "relative_internal_links"
+      regex: '\[.*?\]\(https?://docs\..*?\)'
+      severity: critical
+      category: mintlify
+      description: "Internal links must be relative, not absolute"
+      suggestion: "Convert to relative path (e.g., ./page.md)"
+
+# Integration Settings
+integrations:
+  # GitHub integration
+  github:
+    enabled: false
+    create_issues: false
+    issue_labels: ["documentation", "quality"]
+    repo: ""  # e.g., "username/repo"
+  
+  # Slack notifications
+  slack:
+    enabled: false
+    webhook_url: ""
+    notify_on_severity: ["critical", "high"]
+  
+  # Metrics tracking
+  metrics:
+    enabled: false
+    export_format: "json"
+    track_trends: true
+    output_file: "metrics.json"
+
+# Claude API Configuration
+claude_api:
+  # API key source (environment variable)
+  api_key_env: "ANTHROPIC_API_KEY"
+  
+  # Model selection
+  default_model: "claude-sonnet-4-5-20250929"
+  
+  # Rate limiting
+  rate_limit:
+    requests_per_minute: 50
+    tokens_per_minute: 40000
+  
+  # Retry configuration
+  retry:
+    max_attempts: 3
+    backoff_factor: 2
+  
+  # Token management
+  tokens:
+    max_per_request: 4000
+    reserve_for_response: 1000
+  
+  # Analysis types
+  analysis_types:
+    clarity: true
+    semantic_gaps: true
+    user_journey: true
+    content_quality: true

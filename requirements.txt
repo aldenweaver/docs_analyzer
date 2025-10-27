@@ -1,0 +1,25 @@
+# Core dependencies for enhanced analyzer
+anthropic>=0.40.0
+pyyaml>=6.0
+
+# Repository management
+GitPython>=3.1.40
+
+# Optional but recommended for advanced features
+markdown>=3.4.0
+beautifulsoup4>=4.12.0
+requests>=2.31.0
+
+# For text analysis
+textstat>=0.7.3
+
+# For generating reports
+jinja2>=3.1.2
+
+# For CI/CD integration and testing
+pytest>=7.4.0
+coverage>=7.3.0
+
+# For rate limiting (Claude API)
+ratelimit>=2.2.1
+backoff>=2.2.1
