@@ -3,7 +3,7 @@
 ## Installation (One-Time Setup)
 
 ```bash
-pip install -r enhanced_requirements.txt
+pip install -r requirements.txt
 export ANTHROPIC_API_KEY='your-key-here'
 ```
 
@@ -11,29 +11,29 @@ export ANTHROPIC_API_KEY='your-key-here'
 
 ```bash
 # Simple analysis
-python enhanced_doc_analyzer.py ./docs
+python doc_analyzer.py ./docs
 
 # With config
-python enhanced_doc_analyzer.py --config enhanced_config.yaml
+python doc_analyzer.py --config config.yaml
 
 # All formats
-python enhanced_doc_analyzer.py ./docs --format all
+python doc_analyzer.py ./docs --format all
 
 # No AI (faster)
-python enhanced_doc_analyzer.py ./docs --no-ai
+python doc_analyzer.py ./docs --no-ai
 
 # Remote repo
-python enhanced_doc_analyzer.py --repo-url https://github.com/user/repo
+python doc_analyzer.py --repo-url https://github.com/user/repo
 ```
 
 ## Files You Need
 
 | File | Purpose |
 |------|---------|
-| `enhanced_doc_analyzer.py` | The analyzer |
-| `enhanced_config.yaml` | Configuration |
-| `enhanced_requirements.txt` | Dependencies |
-| `ENHANCED_USAGE_GUIDE.md` | Full documentation |
+| `doc_analyzer.py` | The analyzer |
+| `config.yaml` | Configuration |
+| `requirements.txt` | Dependencies |
+| `USAGE_GUIDE.md` | Full documentation |
 | `RESEARCH_FINDINGS.md` | Background info |
 
 ## Issue Severities
@@ -56,7 +56,7 @@ python enhanced_doc_analyzer.py --repo-url https://github.com/user/repo
 ## Common Issues
 
 **No API key**: `export ANTHROPIC_API_KEY='...'`
-**Import error**: `pip install -r enhanced_requirements.txt`
+**Import error**: `pip install -r requirements.txt`
 **Type not detected**: `--repo-type mintlify`
 
 ## Report Formats
@@ -81,21 +81,21 @@ python enhanced_doc_analyzer.py --repo-url https://github.com/user/repo
 ```bash
 mkdir test-docs
 echo '# Test\nSimply check this.' > test-docs/test.md
-python enhanced_doc_analyzer.py ./test-docs
+python doc_analyzer.py ./test-docs
 ```
 
 Should find: weak language ("simply")
 
 ## Links
 
-- [Full Usage Guide](./ENHANCED_USAGE_GUIDE.md)
+- [Full Usage Guide](./USAGE_GUIDE.md)
 - [Research Findings](./RESEARCH_FINDINGS.md)
 - [Implementation Summary](./IMPLEMENTATION_SUMMARY.md)
 
 ## One-Liner
 
 ```bash
-pip install -r enhanced_requirements.txt && export ANTHROPIC_API_KEY='...' && python enhanced_doc_analyzer.py ./docs --format html && open doc_analysis_report.html
+pip install -r requirements.txt && export ANTHROPIC_API_KEY='...' && python doc_analyzer.py ./docs --format html && open doc_analysis_report.html
 ```
 
 ---

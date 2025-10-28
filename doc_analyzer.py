@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Enhanced Documentation Quality Analyzer for Claude Docs
+Documentation Quality Analyzer for Claude Docs
 Comprehensive tool with Mintlify support, MDX validation, AI analysis, and advanced gap detection
 
-This enhanced version includes:
+This version includes:
 - Phase 1: MDX/frontmatter validation, Mintlify-specific checks, configurable repository
 - Phase 2: AI semantic analysis, cross-reference validation, doc map integration
 - Phase 3: User journey mapping, advanced duplication detection, platform-specific analyzers
@@ -591,9 +591,9 @@ class UserJourneyAnalyzer:
                 ))
 
 
-class EnhancedDocumentationAnalyzer:
+class DocumentationAnalyzer:
     """
-    Enhanced documentation analyzer with full Phase 1-3 features
+    Documentation analyzer with full Phase 1-3 features
     """
     
     def __init__(self, repo_manager: RepositoryManager, config: dict):
@@ -620,7 +620,7 @@ class EnhancedDocumentationAnalyzer:
     
     def analyze_all(self) -> AnalysisReport:
         """Run comprehensive analysis"""
-        print("🔍 Starting enhanced documentation analysis...")
+        print("🔍 Starting documentation analysis...")
         print(f"Repository type: {self.repo_manager.repo_type}")
         
         # Get files
@@ -1090,7 +1090,7 @@ class EnhancedDocumentationAnalyzer:
         """Export as HTML (using existing implementation)"""
         output_path = output_path or 'doc_analysis_report.html'
         
-        # Use enhanced HTML template with AI insights
+        # Use HTML template with AI insights
         html = self._generate_html_report()
         
         with open(output_path, 'w', encoding='utf-8') as f:
@@ -1100,13 +1100,13 @@ class EnhancedDocumentationAnalyzer:
         return output_path
     
     def _generate_html_report(self) -> str:
-        """Generate enhanced HTML report"""
+        """Generate HTML report"""
         # Implementation similar to original but with AI insights section
         # (Keeping it concise - full implementation would be quite long)
         html = f"""<!DOCTYPE html>
 <html>
 <head>
-    <title>Enhanced Documentation Analysis Report</title>
+    <title>Documentation Analysis Report</title>
     <meta charset="UTF-8">
     <style>
         body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }}
@@ -1131,7 +1131,7 @@ class EnhancedDocumentationAnalyzer:
 </head>
 <body>
     <div class="header">
-        <h1>📊 Enhanced Documentation Analysis Report</h1>
+        <h1>📊 Documentation Analysis Report</h1>
         <p><strong>Generated:</strong> {self.report.timestamp}</p>
         <p><strong>Repository:</strong> {self.report.repository_info.get('path')}</p>
         <p><strong>Platform:</strong> {self.report.repository_info.get('type')}</p>
@@ -1222,7 +1222,7 @@ class EnhancedDocumentationAnalyzer:
         """Export as Markdown"""
         output_path = output_path or 'doc_analysis_report.md'
         
-        md = f"""# Enhanced Documentation Analysis Report
+        md = f"""# Documentation Analysis Report
 
 **Generated:** {self.report.timestamp}
 **Repository:** {self.report.repository_info.get('path')}
@@ -1287,7 +1287,7 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(
-        description='Enhanced Documentation Quality Analyzer with Mintlify support'
+        description='Documentation Quality Analyzer with Mintlify support'
     )
     
     # Repository specification
@@ -1343,6 +1343,10 @@ def main():
     if args.config:
         with open(args.config, 'r') as f:
             config = yaml.safe_load(f)
+    elif os.path.exists('config.yaml'):
+        # Load config.yaml by default if it exists
+        with open('config.yaml', 'r') as f:
+            config = yaml.safe_load(f)
     else:
         config = {'repository': {}, 'analysis': {}}
     
@@ -1386,7 +1390,7 @@ def main():
     print(f"🔧 Platform: {repo_manager.repo_type}")
     
     # Initialize analyzer
-    analyzer = EnhancedDocumentationAnalyzer(repo_manager, config)
+    analyzer = DocumentationAnalyzer(repo_manager, config)
     
     # Run analysis
     report = analyzer.analyze_all()
