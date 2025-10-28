@@ -383,34 +383,46 @@ class SemanticAnalyzer:
         self.enabled = self.claude_client is not None
     
     def analyze_clarity(self, file_path: str, content: str, issues: List[Issue]):
-        """AI-powered clarity analysis"""
+        """AI-powered clarity analysis with evidence-based recommendations"""
         if not self.enabled:
             return
-        
+
         try:
             # Sample content to stay within limits
             lines = content.split('\n')
             sample = '\n'.join(lines[:200])  # First 200 lines
-            
-            prompt = f"""Analyze this documentation excerpt for clarity issues. 
-Focus on:
-1. Confusing explanations
-2. Missing context or prerequisites
-3. Undefined jargon or acronyms
-4. Ambiguous instructions
-5. Logical gaps or unclear flow
 
-Documentation excerpt from {file_path}:
+            prompt = f"""You are a technical documentation analyst. Analyze this documentation for clarity issues using evidence-based criteria.
 
+Documentation file: {file_path}
+
+Content:
 {sample}
 
-Provide a JSON array of issues (max 5 most important). Each issue should have:
-- line_number (approximate)
-- issue_type
-- description (brief, specific)
-- suggestion (actionable fix)
+Apply these research-backed principles:
 
-Return ONLY valid JSON array, no other text."""
+1. **Cognitive Load (Nielsen Norman Group)**: Identify sentences >25 words that increase cognitive load
+2. **Information Scent (Pirolli & Card)**: Find unclear headings that don't indicate content
+3. **Progressive Disclosure**: Spot missing prerequisite information or context
+4. **Plain Language (plainlanguage.gov)**: Flag jargon/acronyms undefined on first use
+5. **Task-Oriented Writing (Redish)**: Identify ambiguous instructions lacking concrete steps
+
+For EVERY issue found (prioritize by severity, but include ALL), provide:
+
+{{
+  "line_number": <exact line number>,
+  "quoted_text": "<exact text with issue>",
+  "issue_type": "<specific issue: cognitive_load | unclear_heading | missing_context | undefined_jargon | ambiguous_instruction>",
+  "severity": "<critical | high | medium based on user impact>",
+  "evidence": "<research principle violated and why it matters>",
+  "user_impact": "<specific consequence for reader: 'Users cannot...' or 'Developers will...')>",
+  "fix_approach": "<what strategy to use: simplify, split, define, add context, etc>",
+  "before": "<quoted problematic text>",
+  "after": "<concrete rewrite example>",
+  "citation": "<principle: Nielsen Norman Group, Google Dev Docs Style, etc>"
+}}
+
+Prioritize issues by user impact. Return ONLY valid JSON array."""
 
             message = self.claude_client.messages.create(
                 model=self.model,
@@ -424,54 +436,94 @@ Return ONLY valid JSON array, no other text."""
             json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
             if json_match:
                 ai_issues = json.loads(json_match.group())
-                
-                for issue in ai_issues[:5]:  # Limit to 5
+
+                for issue in ai_issues:  # Process all issues
+                    # Build detailed description with evidence
+                    description = (
+                        f"[{issue.get('issue_type', 'clarity_issue').replace('_', ' ').title()}] "
+                        f"{issue.get('user_impact', 'Impacts user comprehension')}. "
+                        f"Evidence: {issue.get('evidence', 'See citation')} "
+                        f"(Source: {issue.get('citation', 'Documentation research')})"
+                    )
+
+                    # Build actionable suggestion with before/after
+                    before_text = issue.get('before', issue.get('quoted_text', ''))[:100]
+                    after_text = issue.get('after', '')[:150]
+
+                    suggestion = (
+                        f"{issue.get('fix_approach', 'Review and improve')}. "
+                        f"Before: \"{before_text}{'...' if len(before_text) == 100 else ''}\" "
+                        f"→ After: \"{after_text}{'...' if len(after_text) == 150 else ''}\""
+                    )
+
                     issues.append(Issue(
-                        severity='medium',
+                        severity=issue.get('severity', 'medium'),
                         category='clarity',
                         file_path=file_path,
                         line_number=issue.get('line_number'),
-                        issue_type='ai_clarity_check',
-                        description=issue.get('description', 'AI-identified clarity issue'),
-                        suggestion=issue.get('suggestion', 'Review and clarify')
+                        issue_type=f"ai_{issue.get('issue_type', 'clarity_check')}",
+                        description=description,
+                        suggestion=suggestion,
+                        context=issue.get('quoted_text', '')[:200]  # Add quoted text as context
                     ))
         
         except Exception as e:
             print(f"  ⚠️  AI clarity check failed for {file_path}: {str(e)}")
     
     def analyze_semantic_gaps(self, doc_structure: Dict[str, Any], issues: List[Issue], insights: List[str]):
-        """Identify conceptual gaps in documentation coverage"""
+        """Identify conceptual gaps in documentation coverage with evidence-based analysis"""
         if not self.enabled:
             return
-        
+
         try:
-            # Build structure summary
+            # Build detailed structure summary with file names
+            files_list = doc_structure.get('files', [])
             structure_summary = {
-                'total_files': len(doc_structure.get('files', [])),
+                'total_files': len(files_list),
+                'file_names': [str(f) for f in files_list[:100]],  # Show actual file names
                 'categories': list(doc_structure.get('categories', {}).keys()),
                 'topics_covered': list(doc_structure.get('topics', {}).keys())[:50],
-                'has_quickstart': any('quickstart' in f.lower() for f in doc_structure.get('files', [])),
-                'has_troubleshooting': any('troubleshoot' in f.lower() for f in doc_structure.get('files', [])),
-                'has_api_reference': any('api' in f.lower() for f in doc_structure.get('files', [])),
+                'has_quickstart': any('quickstart' in f.lower() for f in files_list),
+                'has_troubleshooting': any('troubleshoot' in f.lower() for f in files_list),
+                'has_api_reference': any('api' in f.lower() or 'reference' in f.lower() for f in files_list),
             }
-            
-            prompt = f"""Analyze this documentation structure and identify semantic gaps.
+
+            prompt = f"""You are analyzing documentation structure using the Divio Documentation Framework and user journey mapping.
 
 Documentation structure:
 {json.dumps(structure_summary, indent=2)}
 
-Identify:
-1. Missing user journey steps (e.g., no migration guide, no upgrade path)
-2. Concepts mentioned but not explained
-3. Features without examples
-4. Incomplete coverage areas
-5. Missing troubleshooting scenarios
+Apply these frameworks:
 
-Provide:
-1. Top 5 most critical gaps
-2. Each as: {{"gap_type": "...", "description": "...", "impact": "...", "suggestion": "..."}}
+1. **Divio Documentation System**: Check for all four types
+   - Tutorials (learning-oriented): Getting started, first steps
+   - How-To Guides (task-oriented): Specific problem solutions
+   - Reference (information-oriented): Technical specifications, API docs
+   - Explanation (understanding-oriented): Concepts, architecture, design decisions
 
-Return ONLY valid JSON array."""
+2. **User Journey Analysis (Nielsen Norman Group)**: Identify gaps in typical user paths
+   - First-time setup → Configuration → First success
+   - Problem encountered → Troubleshooting → Resolution
+   - Basic use → Advanced features → Optimization
+
+3. **Information Architecture (Rosenfeld & Morville)**: Assess completeness
+
+For EVERY gap found (prioritize critical gaps first, but include ALL), provide:
+
+{{
+  "gap_type": "<specific gap: missing_tutorial | missing_reference | incomplete_journey | orphaned_concept | missing_troubleshooting>",
+  "severity": "<critical | high | medium based on user impact>",
+  "evidence": "<what's missing and how you identified it from the file list>",
+  "affected_files": ["<list specific files that reference this missing content>"],
+  "user_journey_blocked": "<which user journey is broken: setup | learning | troubleshooting | etc>",
+  "user_impact": "<specific consequence: 'Users cannot complete...' or 'Developers must guess...')>",
+  "framework_principle": "<Divio type missing or user journey gap>",
+  "concrete_suggestion": "<exactly what page/section to create with title suggestion>",
+  "example_content": "<brief outline of what this missing doc should contain>",
+  "priority_reason": "<why this gap is critical: frequency, severity, user stage>"
+}}
+
+Cite SPECIFIC files from the provided list. Return ONLY valid JSON array."""
 
             message = self.claude_client.messages.create(
                 model=self.model,
@@ -484,19 +536,46 @@ Return ONLY valid JSON array."""
             json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
             if json_match:
                 gaps = json.loads(json_match.group())
-                
-                for gap in gaps[:5]:
+
+                for gap in gaps:  # Process all gaps
+                    # Build evidence-based description
+                    affected = gap.get('affected_files', [])
+                    affected_str = ', '.join(affected[:3]) if affected else 'Multiple files'
+                    if len(affected) > 3:
+                        affected_str += f' (+{len(affected) - 3} more)'
+
+                    description = (
+                        f"[{gap.get('gap_type', 'gap').replace('_', ' ').title()}] "
+                        f"{gap.get('user_impact', 'Documentation gap identified')}. "
+                        f"Evidence: {gap.get('evidence', 'See analysis')}. "
+                        f"Framework: {gap.get('framework_principle', 'Divio/User Journey')}. "
+                        f"Affected files: {affected_str}. "
+                        f"Priority: {gap.get('priority_reason', 'High impact on users')}"
+                    )
+
+                    # Build concrete suggestion with example content
+                    suggestion = (
+                        f"{gap.get('concrete_suggestion', 'Add missing documentation')}. "
+                        f"User journey blocked: {gap.get('user_journey_blocked', 'Unknown')}. "
+                        f"Suggested content: {gap.get('example_content', 'See gap analysis')[:200]}"
+                    )
+
                     issues.append(Issue(
-                        severity='high',
+                        severity=gap.get('severity', 'high'),
                         category='gaps',
                         file_path='[documentation set]',
                         line_number=None,
-                        issue_type='semantic_gap',
-                        description=gap.get('description', 'Semantic gap identified'),
-                        suggestion=gap.get('suggestion', 'Address this gap')
+                        issue_type=f"gap_{gap.get('gap_type', 'semantic')}",
+                        description=description,
+                        suggestion=suggestion
                     ))
-                    
-                    insights.append(f"Gap: {gap.get('gap_type')} - {gap.get('impact')}")
+
+                    # Add detailed insight
+                    insights.append(
+                        f"📊 {gap.get('gap_type', 'Gap').replace('_', ' ').title()}: "
+                        f"{gap.get('concrete_suggestion', 'Documentation needed')} "
+                        f"(Affects: {affected_str})"
+                    )
         
         except Exception as e:
             print(f"  ⚠️  Semantic gap analysis failed: {str(e)}")
