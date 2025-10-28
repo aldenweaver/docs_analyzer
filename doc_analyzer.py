@@ -88,30 +88,39 @@ class AnalysisReport:
 
 class RepositoryManager:
     """Manages different documentation repository sources and types"""
-    
+
     def __init__(self, config: dict):
         self.config = config.get('repository', {})
         self.repo_path = Path(self.config.get('path', './docs'))
+        self.repo_root = Path(self.config.get('root', self.repo_path))  # For platform detection
         self.repo_type = None
         self.platform_config = None
-        
+
     def detect_repo_type(self) -> str:
         """Auto-detect documentation platform"""
         if self.config.get('type') != 'auto':
             return self.config.get('type')
-        
-        # Check for Mintlify
-        if (self.repo_path / 'mint.json').exists():
-            return 'mintlify'
-        elif (self.repo_path / 'docs.json').exists():
-            return 'mintlify'
-        # Check for other platforms
-        elif (self.repo_path / 'docusaurus.config.js').exists():
-            return 'docusaurus'
-        elif (self.repo_path / 'mkdocs.yml').exists():
-            return 'mkdocs'
-        else:
-            return 'generic'
+
+        # Look for platform files starting from repo_root, then check parents
+        search_paths = [self.repo_root] + list(self.repo_root.parents)[:3]  # Check up to 3 levels up
+
+        for search_path in search_paths:
+            # Check for Mintlify
+            if (search_path / 'mint.json').exists():
+                self.repo_root = search_path  # Update to where we found it
+                return 'mintlify'
+            elif (search_path / 'docs.json').exists():
+                self.repo_root = search_path
+                return 'mintlify'
+            # Check for other platforms
+            elif (search_path / 'docusaurus.config.js').exists():
+                self.repo_root = search_path
+                return 'docusaurus'
+            elif (search_path / 'mkdocs.yml').exists():
+                self.repo_root = search_path
+                return 'mkdocs'
+
+        return 'generic'
     
     def load_platform_config(self) -> dict:
         """Load platform-specific configuration"""
@@ -124,10 +133,10 @@ class RepositoryManager:
     
     def _load_mintlify_config(self) -> dict:
         """Load Mintlify configuration"""
-        config_file = self.repo_path / 'mint.json'
+        config_file = self.repo_root / 'mint.json'
         if not config_file.exists():
-            config_file = self.repo_path / 'docs.json'
-        
+            config_file = self.repo_root / 'docs.json'
+
         if config_file.exists():
             with open(config_file, 'r') as f:
                 return json.load(f)
@@ -1053,6 +1062,19 @@ class DocumentationAnalyzer:
                 f"AI analysis identified {len(self.report.ai_insights)} key insights. Review AI insights section."
             )
     
+    def _create_timestamped_report_dir(self) -> Path:
+        """Create timestamped report directory (cached for this analysis run)"""
+        from datetime import datetime
+
+        # Cache the report directory to ensure all formats go to the same place
+        if not hasattr(self, '_report_dir'):
+            timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+            self._report_dir = Path('reports') / timestamp
+            self._report_dir.mkdir(parents=True, exist_ok=True)
+            print(f"\n📁 Creating report directory: {self._report_dir}")
+
+        return self._report_dir
+
     def export_report(self, output_format: str = 'json', output_path: Optional[str] = None):
         """Export analysis report"""
         if output_format == 'json':
@@ -1064,8 +1086,10 @@ class DocumentationAnalyzer:
     
     def _export_json(self, output_path: Optional[str]) -> str:
         """Export as JSON"""
-        output_path = output_path or 'doc_analysis_report.json'
-        
+        if not output_path:
+            report_dir = self._create_timestamped_report_dir()
+            output_path = str(report_dir / 'doc_analysis_report.json')
+
         report_data = {
             'timestamp': self.report.timestamp,
             'repository': self.report.repository_info,
@@ -1079,23 +1103,25 @@ class DocumentationAnalyzer:
             'ai_insights': self.report.ai_insights,
             'issues': [issue.to_dict() for issue in self.report.issues]
         }
-        
+
         with open(output_path, 'w', encoding='utf-8') as f:
             json.dump(report_data, f, indent=2)
-        
+
         print(f"\n📄 JSON report exported to: {output_path}")
         return output_path
     
     def _export_html(self, output_path: Optional[str]) -> str:
         """Export as HTML (using existing implementation)"""
-        output_path = output_path or 'doc_analysis_report.html'
-        
+        if not output_path:
+            report_dir = self._create_timestamped_report_dir()
+            output_path = str(report_dir / 'doc_analysis_report.html')
+
         # Use HTML template with AI insights
         html = self._generate_html_report()
-        
+
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(html)
-        
+
         print(f"\n📄 HTML report exported to: {output_path}")
         return output_path
     
@@ -1220,8 +1246,10 @@ class DocumentationAnalyzer:
     
     def _export_markdown(self, output_path: Optional[str]) -> str:
         """Export as Markdown"""
-        output_path = output_path or 'doc_analysis_report.md'
-        
+        if not output_path:
+            report_dir = self._create_timestamped_report_dir()
+            output_path = str(report_dir / 'doc_analysis_report.md')
+
         md = f"""# Documentation Analysis Report
 
 **Generated:** {self.report.timestamp}
@@ -1315,7 +1343,13 @@ def main():
         default='auto',
         help='Documentation platform type'
     )
-    
+
+    parser.add_argument(
+        '--repo-root',
+        help='Repository root for platform detection (if analyzing subfolder). Auto-detects by default.',
+        default=None
+    )
+
     # Output options
     parser.add_argument(
         '--format',
@@ -1369,7 +1403,10 @@ def main():
     # Override config with CLI args
     if args.repo_type != 'auto':
         config['repository']['type'] = args.repo_type
-    
+
+    if args.repo_root:
+        config['repository']['root'] = args.repo_root
+
     if args.no_ai:
         config['analysis']['enable_ai_analysis'] = False
         config['gap_detection'] = config.get('gap_detection', {})

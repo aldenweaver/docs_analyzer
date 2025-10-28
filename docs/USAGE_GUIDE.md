@@ -24,9 +24,29 @@ python doc_analyzer.py --config config.yaml
 # Clone and analyze remote repository
 python doc_analyzer.py --repo-url https://github.com/username/docs
 
-# Generate all report formats
+# Generate all report formats (saves to timestamped directory)
 python doc_analyzer.py ./docs --format all
+
+# Analyze specific subfolder (e.g., only /pages or /guides)
+python doc_analyzer.py ./docs/pages
+
+# Analyze subfolder with explicit repo root for platform detection
+python doc_analyzer.py ./docs/pages --repo-root ./docs
+
+# Custom output location (overrides timestamped directory)
+python doc_analyzer.py ./docs --output my_report.json
 ```
+
+**Report Organization:**
+Reports are automatically saved in timestamped directories:
+```
+reports/
+  2024-10-27_14-30-15/
+    doc_analysis_report.json
+    doc_analysis_report.html
+    doc_analysis_report.md
+```
+This prevents overwriting previous analyses and allows tracking improvements over time.
 
 ## 📋 What's New in Enhanced Version
 
@@ -47,6 +67,11 @@ python doc_analyzer.py ./docs --format all
 - **Content Duplication Detection**: Find similar/duplicate content
 - **Platform Detection**: Auto-detect Mintlify, Docusaurus, MkDocs, etc.
 - **Comprehensive Gap Analysis**: Missing sections, incomplete journeys
+
+### Latest Improvements ✅
+- **Subfolder Analysis**: Analyze specific sections (e.g., `/pages`, `/guides`) while maintaining platform detection
+- **Timestamped Reports**: Automatic organization of reports in dated directories to prevent overwriting
+- **Smart Platform Detection**: Auto-detects platform config from parent directories (up to 3 levels)
 
 ## 🔧 Configuration
 
@@ -131,6 +156,15 @@ gap_detection:
 ```
 
 ## 📊 Understanding Reports
+
+All reports are saved in timestamped directories under `reports/YYYY-MM-DD_HH-MM-SS/` to preserve analysis history. Each analysis run creates a new directory containing all requested report formats.
+
+**Location Examples:**
+- JSON: `reports/2024-10-27_14-30-15/doc_analysis_report.json`
+- HTML: `reports/2024-10-27_14-30-15/doc_analysis_report.html`
+- Markdown: `reports/2024-10-27_14-30-15/doc_analysis_report.md`
+
+When using `--format all`, all three formats are saved to the same timestamped directory.
 
 ### HTML Report (Recommended)
 

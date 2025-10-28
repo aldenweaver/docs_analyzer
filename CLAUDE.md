@@ -116,9 +116,32 @@ python doc_analyzer.py /path/to/docs --format all
 # Analyze remote repository
 python doc_analyzer.py --repo-url https://github.com/user/docs --repo-type mintlify
 
+# Analyze specific subfolder (maintains platform detection from parent)
+# Useful for analyzing only a section like /pages, /guides, etc.
+python doc_analyzer.py /path/to/docs/pages
+python doc_analyzer.py /path/to/docs/pages --repo-root /path/to/docs  # Explicit root
+
 # Disable AI analysis (faster, works without API key)
 python doc_analyzer.py /path/to/docs --no-ai
+
+# Custom output path (overrides default timestamped directory)
+python doc_analyzer.py /path/to/docs --output custom_report.json
 ```
+
+**Report Organization:**
+Reports are automatically organized in timestamped directories to prevent overwriting:
+```
+reports/
+  2024-10-27_14-30-15/
+    doc_analysis_report.json
+    doc_analysis_report.html
+    doc_analysis_report.md
+  2024-10-27_15-45-22/
+    doc_analysis_report.json
+    doc_analysis_report.html
+    doc_analysis_report.md
+```
+When using `--format all`, all three formats are saved to the same timestamped directory.
 
 ### Testing
 ```bash
@@ -144,6 +167,10 @@ pytest test_analyzer.py -v -m "not skipif"
 - Handles local and remote repositories (with git cloning)
 - Manages file inclusion/exclusion patterns
 - Loads platform-specific configuration (e.g., `mint.json` for Mintlify)
+- **Subfolder Analysis:** Supports analyzing specific subfolders while maintaining platform detection
+  - `repo_path`: Directory to analyze (can be a subfolder)
+  - `repo_root`: Repository root for platform detection (auto-detected up to 3 parent levels)
+  - Searches parent directories for platform config files (mint.json, docusaurus.config.js, etc.)
 
 **MDXParser** (`doc_analyzer.py:176-211`)
 - Extracts YAML frontmatter from MDX files
