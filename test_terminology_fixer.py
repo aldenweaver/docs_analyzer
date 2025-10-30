@@ -270,21 +270,22 @@ description: Test page with enough characters
 
 Visit [the API docs](https://docs.anthropic.com/en/api/messages) for details.
 See also [claude code guide](/en/docs/claude-code/overview).
-Link to <Card href="/en/docs/about-claude/models">models</Card>
+Link to <Card href="/en/docs/about-claude/models">models</Card>.
+Claude is great. The API is powerful.
 """
         issues = fixer.check_file("test.mdx", content)
 
-        # Should not detect capitalization issues in URLs
-        cap_issues = [i for i in issues if i.issue_type == "improper_capitalization"]
-        assert len(cap_issues) == 0
-
-        # Apply fixes
+        # Apply fixes - should fix "claude" and "api" in text but NOT in URLs
         result = fixer.fix("test.mdx", content, issues)
 
-        # URLs should remain unchanged
-        assert "/en/api/messages" in result.fixed_content
+        # URLs should remain unchanged (lowercase)
+        assert "https://docs.anthropic.com/en/api/messages" in result.fixed_content
         assert "/en/docs/claude-code/overview" in result.fixed_content
         assert "/en/docs/about-claude/models" in result.fixed_content
+
+        # But text should be fixed
+        assert "Claude is great" in result.fixed_content
+        assert "The API is powerful" in result.fixed_content
 
 
 if __name__ == "__main__":

@@ -130,8 +130,11 @@ class TerminologyFixer(BaseFixer):
         return issues
 
     def fix(self, file_path: str, content: str, issues: List[Issue]) -> FixResult:
-        """Apply terminology fixes"""
-        fixed_content = content
+        """Apply terminology fixes while preserving URLs"""
+        # Step 1: Protect URLs and links by replacing them with placeholders
+        protected_content, url_map = self._protect_urls(content)
+
+        fixed_content = protected_content
         fixes_applied = []
         issues_fixed = []
 
@@ -175,6 +178,9 @@ class TerminologyFixer(BaseFixer):
                         fixes_applied.append(fix_msg)
                         issues_fixed.append(issue)
 
+        # Step 2: Restore original URLs
+        fixed_content = self._restore_urls(fixed_content, url_map)
+
         return FixResult(
             file_path=file_path,
             original_content=content,
@@ -183,13 +189,77 @@ class TerminologyFixer(BaseFixer):
             issues_fixed=issues_fixed
         )
 
+    def _protect_urls(self, content: str) -> tuple:
+        """
+        Replace URLs and paths with placeholders to prevent modification
+
+        Returns:
+            Tuple of (protected_content, url_map) where url_map maps placeholders back to originals
+        """
+        url_map = {}
+        placeholder_counter = 0
+        protected_content = content
+
+        # Pattern 1: Markdown links [text](url) - protect the URL part only
+        def replace_markdown_link(match):
+            nonlocal placeholder_counter
+            text = match.group(1)
+            url = match.group(2)
+            placeholder = f"__URL_PLACEHOLDER_{placeholder_counter}__"
+            url_map[placeholder] = url
+            placeholder_counter += 1
+            return f"[{text}]({placeholder})"
+
+        protected_content = re.sub(r'\[([^\]]+)\]\(([^\)]+)\)', replace_markdown_link, protected_content)
+
+        # Pattern 2: HTML href attributes - protect the URL value
+        def replace_href(match):
+            nonlocal placeholder_counter
+            quote = match.group(1)
+            url = match.group(2)
+            placeholder = f"__URL_PLACEHOLDER_{placeholder_counter}__"
+            url_map[placeholder] = url
+            placeholder_counter += 1
+            return f'href={quote}{placeholder}{quote}'
+
+        protected_content = re.sub(r'href=([\"\'])([^\"\']+)\1', replace_href, protected_content)
+
+        # Pattern 3: Bare URLs (less common but handle them)
+        def replace_bare_url(match):
+            nonlocal placeholder_counter
+            url = match.group(0)
+            placeholder = f"__URL_PLACEHOLDER_{placeholder_counter}__"
+            url_map[placeholder] = url
+            placeholder_counter += 1
+            return placeholder
+
+        protected_content = re.sub(r'https?://[^\s\)]+', replace_bare_url, protected_content)
+
+        return protected_content, url_map
+
+    def _restore_urls(self, content: str, url_map: dict) -> str:
+        """
+        Restore original URLs from placeholders
+
+        Args:
+            content: Content with placeholders
+            url_map: Mapping of placeholders to original URLs
+
+        Returns:
+            Content with original URLs restored
+        """
+        restored_content = content
+        for placeholder, original_url in url_map.items():
+            restored_content = restored_content.replace(placeholder, original_url)
+        return restored_content
+
     def _is_url_line(self, line: str) -> bool:
         """
-        Check if a line contains URLs that we should skip
+        Check if a line contains URLs that we should skip during checking
         Returns True if line contains markdown links or bare URLs
         """
         # Check for markdown links: [text](url)
-        if '](http' in line or '](./' in line or '](..' in line or '](/en/' in line:
+        if '](http' in line or '](./' in line or '](..' in line or '](/en/' in line or '](/docs/' in line or '](/api/' in line:
             return True
 
         # Check for bare URLs
