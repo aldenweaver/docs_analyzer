@@ -57,12 +57,12 @@ class Config:
     @property
     def preferred_terms(self) -> Dict[str, str]:
         """Get preferred terminology mappings"""
-        return self.get('terminology.preferred_terms', {})
+        return self.get('style_rules.preferred_terms', {})
 
     @property
     def avoid_terms(self) -> list:
         """Get terms to avoid"""
-        return self.get('terminology.avoid_terms', [])
+        return self.get('style_rules.avoid_terms', [])
 
     @property
     def required_frontmatter(self) -> list:
