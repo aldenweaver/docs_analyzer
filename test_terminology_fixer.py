@@ -259,6 +259,33 @@ You should utilize this feature in order to leverage the claude API.
         assert "use this feature" in result.fixed_content
         assert "Claude API" in result.fixed_content
 
+    def test_skip_urls(self, fixer):
+        """Test that URLs are not capitalized"""
+        content = """---
+title: Test
+description: Test page with enough characters
+---
+
+# Test Page
+
+Visit [the API docs](https://docs.anthropic.com/en/api/messages) for details.
+See also [claude code guide](/en/docs/claude-code/overview).
+Link to <Card href="/en/docs/about-claude/models">models</Card>
+"""
+        issues = fixer.check_file("test.mdx", content)
+
+        # Should not detect capitalization issues in URLs
+        cap_issues = [i for i in issues if i.issue_type == "improper_capitalization"]
+        assert len(cap_issues) == 0
+
+        # Apply fixes
+        result = fixer.fix("test.mdx", content, issues)
+
+        # URLs should remain unchanged
+        assert "/en/api/messages" in result.fixed_content
+        assert "/en/docs/claude-code/overview" in result.fixed_content
+        assert "/en/docs/about-claude/models" in result.fixed_content
+
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

@@ -64,6 +64,10 @@ class TerminologyFixer(BaseFixer):
             if line.strip().startswith('```'):
                 continue
 
+            # Skip lines that are primarily URLs (to avoid capitalizing URLs)
+            if self._is_url_line(line):
+                continue
+
             # Check for deprecated terms (preferred_terms)
             for old_term, new_term in self.preferred_terms.items():
                 # Use word boundary matching to avoid partial matches
@@ -178,3 +182,22 @@ class TerminologyFixer(BaseFixer):
             fixes_applied=fixes_applied,
             issues_fixed=issues_fixed
         )
+
+    def _is_url_line(self, line: str) -> bool:
+        """
+        Check if a line contains URLs that we should skip
+        Returns True if line contains markdown links or bare URLs
+        """
+        # Check for markdown links: [text](url)
+        if '](http' in line or '](./' in line or '](..' in line or '](/en/' in line:
+            return True
+
+        # Check for bare URLs
+        if line.strip().startswith('http://') or line.strip().startswith('https://'):
+            return True
+
+        # Check for href attributes
+        if 'href=' in line:
+            return True
+
+        return False
