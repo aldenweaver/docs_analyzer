@@ -1,0 +1,361 @@
+# Documentation Quality Automation Configuration
+# This file configures all aspects of the quality automation system
+
+# Database configuration
+database:
+  path: "doc_quality_metrics.db"
+  backup_enabled: true
+  backup_interval_days: 7
+
+# Repository configuration
+repository:
+  path: "./docs"  # Path to documentation repository
+  exclude_patterns:
+    - "**/node_modules/**"
+    - "**/.git/**"
+    - "**/dist/**"
+    - "**/build/**"
+  file_patterns:
+    - "**/*.md"
+    - "**/*.mdx"
+
+# Terminology standards (from Claude Docs analysis)
+terminology:
+  case_sensitive: false
+  
+  # Preferred terms mapped to their deprecated versions
+  preferred_terms:
+    "claude agent sdk": "claude code sdk"
+    "built-in tools": ["tools", "server tools"]
+    "agent skills": ["skills", "Claude skills"]
+  
+  # Terms to flag as deprecated
+  deprecated_terms:
+    - "Claude Code SDK"
+    - "ClaudeCodeOptions"
+    - "console.anthropic.com"  # Old console URL
+  
+  # Capitalization rules
+  proper_nouns:
+    - "Claude"
+    - "Claude Code"
+    - "Anthropic"
+    - "Agent Skills"
+    - "MCP"
+
+# Frontmatter validation (Mintlify requirements)
+frontmatter:
+  required:
+    - title
+    - description
+  
+  optional:
+    - sidebarTitle
+    - icon
+    - mode
+    - og:title
+    - og:description
+  
+  max_description_length: 160
+  min_description_length: 50
+  
+  # Auto-generate missing frontmatter
+  auto_generate:
+    enabled: true
+    title_from_filename: true
+
+# Content duplication detection
+duplication:
+  threshold: 0.8  # 80% similarity = duplicate
+  
+  # Known duplicate content paths requiring consolidation
+  known_patterns:
+    - canonical: "/en/docs/agents-and-tools/agent-skills/"
+      locations:
+        - "/en/docs/agents-and-tools/agent-skills/"
+        - "/en/api/skills/"
+        - "/en/api/agent-sdk/skills"
+      action: "consolidate"
+      
+    - canonical: "/en/docs/claude-code/mcp"
+      locations:
+        - "/en/docs/claude-code/mcp"
+        - "/en/mcp/"
+      action: "consolidate"
+
+# Code example quality standards
+code_examples:
+  languages:
+    - python
+    - typescript
+    - javascript
+    - java
+    - go
+    - ruby
+    - php
+    - csharp
+  
+  require_error_handling: true
+  require_language_tags: true
+  require_imports: true
+  
+  # Templates for production-ready examples
+  templates:
+    python: |
+      import anthropic
+      import os
+      from anthropic import APIError, RateLimitError
+      
+      try:
+          client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+          # Your code here
+      except RateLimitError as e:
+          # Handle rate limiting
+          pass
+      except APIError as e:
+          # Handle API errors
+          pass
+
+# Link validation
+links:
+  check_internal: true
+  check_external: false  # External checks slow, enable for comprehensive audits
+  check_anchors: true
+  
+  # Poor link text patterns to flag
+  poor_link_text:
+    - "here"
+    - "click here"
+    - "link"
+    - "this"
+    - "read more"
+  
+  # Known redirects/changes
+  url_redirects:
+    "console.anthropic.com": "platform.claude.com"
+
+# Information architecture rules
+information_architecture:
+  max_navigation_depth: 3
+  max_section_length: 500  # lines
+  
+  # Required sections for different page types
+  required_sections:
+    guide:
+      - "Prerequisites"
+      - "Overview"
+      - "Examples"
+    
+    api_reference:
+      - "Parameters"
+      - "Response"
+      - "Examples"
+      - "Errors"
+    
+    troubleshooting:
+      - "Problem"
+      - "Solution"
+      - "Prevention"
+
+# Metrics and monitoring
+metrics:
+  # Metric collection frequency
+  collection_interval: "daily"
+  
+  # KPIs to track (from analysis)
+  kpis:
+    # Primary KPIs
+    - name: "critical_issues"
+      target: 0
+      alert_threshold: 3
+    
+    - name: "support_ticket_reduction"
+      target: -25  # 25% reduction
+      baseline: 20  # tickets/week
+    
+    - name: "feedback_widget_score"
+      target: 4.5
+      baseline: 3.8
+    
+    - name: "search_success_rate"
+      target: 0.85
+      baseline: 0.70
+    
+    - name: "documentation_debt"
+      target: 2
+      baseline: 12
+    
+    # Secondary KPIs
+    - name: "content_consistency_score"
+      target: 0.95
+    
+    - name: "page_improvement_velocity"
+      target: 20  # pages/week
+    
+    - name: "navigation_depth"
+      target: 2.5
+      baseline: 3.2
+  
+  # Trend analysis
+  trends:
+    window_days: 30
+    significant_change_threshold: 0.1  # 10%
+
+# Alerting configuration
+alerts:
+  enabled: true
+  
+  channels:
+    - type: "email"
+      enabled: false
+      recipients:
+        - "docs-team@example.com"
+    
+    - type: "slack"
+      enabled: false
+      webhook_url: "${SLACK_WEBHOOK_URL}"
+    
+    - type: "file"
+      enabled: true
+      path: "alerts.log"
+  
+  # Alert rules
+  rules:
+    - name: "Critical Issues Detected"
+      condition: "critical_issues > 0"
+      severity: "critical"
+      message: "Critical documentation issues detected requiring immediate attention"
+    
+    - name: "Documentation Debt Increase"
+      condition: "documentation_debt > 10"
+      severity: "high"
+      message: "Documentation debt exceeds threshold"
+    
+    - name: "Consistency Degradation"
+      condition: "content_consistency_score < 0.80"
+      severity: "medium"
+      message: "Content consistency has degraded below acceptable threshold"
+
+# Automated fixing
+auto_fix:
+  enabled: true
+  dry_run: false  # Set to true to see what would be fixed
+  
+  # What to auto-fix
+  fix_types:
+    - terminology
+    - missing_frontmatter
+    - simple_formatting
+  
+  # Create backup before fixing
+  backup_before_fix: true
+  backup_dir: ".doc_quality_backups"
+  
+  # Require approval for certain fix types
+  require_approval:
+    - duplicate_content
+    - navigation_restructuring
+    - content_deletion
+
+# CI/CD integration
+ci_cd:
+  # Fail build conditions
+  fail_on:
+    critical_issues: true
+    high_issues: false  # Allow high issues but report them
+  
+  # Quality gates
+  quality_gates:
+    - metric: "critical_issues"
+      max_value: 0
+    
+    - metric: "issues_per_file"
+      max_value: 5.0
+  
+  # GitHub Actions integration
+  github_actions:
+    enabled: false
+    check_name: "Documentation Quality"
+    
+  # GitLab CI integration
+  gitlab_ci:
+    enabled: false
+
+# Reporting
+reporting:
+  # Report generation schedule
+  schedule: "daily"
+  
+  # Report formats
+  formats:
+    - markdown
+    - json
+    - html
+  
+  # Output paths
+  output_dir: "quality_reports"
+  
+  # What to include
+  include:
+    - executive_summary
+    - trends
+    - top_issues
+    - metrics
+    - recommendations
+    - audit_log
+  
+  # Dashboard generation
+  dashboard:
+    enabled: true
+    port: 8080
+    update_interval_seconds: 300
+
+# Advanced analysis (using Claude AI)
+ai_analysis:
+  enabled: false  # Requires ANTHROPIC_API_KEY
+  model: "claude-sonnet-4-5-20250929"
+  
+  # What to analyze with AI
+  analyze:
+    - clarity
+    - completeness
+    - semantic_gaps
+    - user_journey_validation
+  
+  # AI analysis throttling
+  max_requests_per_hour: 50
+  batch_size: 10
+
+# Version control integration
+version_control:
+  # Create branches for auto-fixes
+  create_branches: true
+  branch_prefix: "docs-quality-fix/"
+  
+  # Create pull requests
+  create_pull_requests: false
+  pr_template: |
+    ## Automated Documentation Quality Fix
+    
+    This PR contains automated fixes for documentation quality issues:
+    
+    {{ issue_summary }}
+    
+    ### Changes Made
+    {{ changes }}
+    
+    ### Impact
+    - Issues fixed: {{ issues_fixed }}
+    - Files modified: {{ files_modified }}
+
+# Extensibility
+plugins:
+  enabled: true
+  directory: "plugins"
+  
+# Logging
+logging:
+  level: "INFO"
+  file: "doc_quality.log"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5

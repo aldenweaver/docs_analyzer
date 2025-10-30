@@ -1,4 +1,4 @@
-# Enhanced Documentation Analyzer Configuration
+# Documentation Analyzer Configuration
 # Pre-populated with Claude Docs / Mintlify best practices
 
 # Repository Configuration
@@ -360,7 +360,7 @@ gap_detection:
 
 # Content Duplication Detection
 duplication_detection:
-  enabled: true
+  enabled: false  # DISABLED: Performance issue with large repos (O(n²×m²) complexity)
   similarity_threshold: 0.8  # 80% similar = duplicate
   
   # What to check

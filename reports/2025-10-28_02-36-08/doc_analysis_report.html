@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Documentation Analysis Report</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .header { background: white; padding: 30px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .stat-number { font-size: 2.5em; font-weight: bold; margin: 10px 0; }
+        .critical { color: #dc2626; }
+        .high { color: #ea580c; }
+        .medium { color: #ca8a04; }
+        .low { color: #65a30d; }
+        .recommendations { background: #dbeafe; border-left: 4px solid #3b82f6; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .ai-insights { background: #f0fdf4; border-left: 4px solid #10b981; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .issues { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .issue-item { border-left: 4px solid #e5e7eb; padding: 15px; margin: 10px 0; background: #f9fafb; border-radius: 4px; }
+        .issue-item.critical { border-left-color: #dc2626; }
+        .issue-item.high { border-left-color: #ea580c; }
+        .issue-item.medium { border-left-color: #ca8a04; }
+        .issue-item.low { border-left-color: #65a30d; }
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: 600; margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Documentation Analysis Report</h1>
+        <p><strong>Generated:</strong> 2025-10-28T02:20:39.016707</p>
+        <p><strong>Repository:</strong> /Users/alden/dev/claude_docs_clone/pages</p>
+        <p><strong>Platform:</strong> mintlify</p>
+        <p><strong>Files Analyzed:</strong> 61</p>
+    </div>
+    
+    <div class="summary">
+        <div class="stat-card">
+            <div>Total Issues</div>
+            <div class="stat-number">4039</div>
+        </div>
+        <div class="stat-card">
+            <div>Critical</div>
+            <div class="stat-number critical">304</div>
+        </div>
+        <div class="stat-card">
+            <div>High</div>
+            <div class="stat-number high">0</div>
+        </div>
+        <div class="stat-card">
+            <div>Medium</div>
+            <div class="stat-number medium">668</div>
+        </div>
+        <div class="stat-card">
+            <div>Low</div>
+            <div class="stat-number low">3067</div>
+        </div>
+    </div>
+    
+    <div class="recommendations">
+<h3>💡 Recommendations</h3>
+<ul>
+<li>High number of clarity issues (2749). Recommend focused audit in this area.</li>
+<li>High number of style issues (1210). Recommend focused audit in this area.</li>
+<li>304 critical issues require immediate attention (broken links, missing frontmatter, etc.)</li>
+<li>AI analysis identified 4 key insights. Review AI insights section.</li>
+</ul>
+</div>
+
+    <div class="ai-insights">
+<h3>🤖 AI Insights</h3>
+<ul>
+<li>📊 Missing Tutorial: Comprehensive Claude Developer Platform Tutorial (Affects: claude_code/getting-started/quickstart.mdx, developer_guide/first-steps/quickstart.mdx)</li>
+<li>📊 Incomplete Journey: Integration Progression Guide: From Basic to Advanced Claude Deployments (Affects: claude_code/build-with-claude-code/plugins.mdx, claude_code/build-with-claude-code/github-actions.mdx, claude_code/build-with-claude-code/gitlab-ci-cd.mdx)</li>
+<li>📊 Missing Reference: Detailed Claude Model Comparison Matrix (Affects: developer_guide/models-and-pricing/models-overview.mdx, developer_guide/models-and-pricing/choosing-a-model.mdx)</li>
+<li>📊 Orphaned Concept: Claude Advanced Capabilities Conceptual Guide (Affects: developer_guide/build-with-claude/extended-thinking.mdx, developer_guide/build-with-claude/embeddings.mdx, developer_guide/build-with-claude/context-editing.mdx)</li>
+</ul>
+</div>
+
+    
+    <div class="issues">
+        <h2>Issues Found</h2>
+        <p>Showing first 100 issues. See JSON report for complete list.</p>
+        
+        <div class="issue-item critical">
+            <div>
+                <span class="badge critical">CRITICAL</span>
+                <span class="badge">mintlify</span>
+                <strong>Missing Frontmatter</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 1
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> MDX files MUST have YAML frontmatter
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Add frontmatter with at minimum: title and description
+            </div>
+            
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">mintlify</span>
+                <strong>Invalid Component</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 101
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Unknown Mintlify component: <sup>
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Verify component name or use standard Mintlify components
+            </div>
+            
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">mintlify</span>
+                <strong>Invalid Component</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 103
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Unknown Mintlify component: <sup>
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Verify component name or use standard Mintlify components
+            </div>
+            
+        </div>
+        
+        <div class="issue-item critical">
+            <div>
+                <span class="badge critical">CRITICAL</span>
+                <span class="badge">mintlify</span>
+                <strong>Absolute Internal Url</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 39
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Internal links MUST use relative paths, not absolute URLs
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Convert "https://docs.claude.com" to relative path (e.g., ./page.md or ../section/page.md)
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* Anthropic Docs ([docs.claude.com](https://docs.claude.com)) → Claude Docs ([docs.claude.com](https://docs.claude.com))</div>
+        </div>
+        
+        <div class="issue-item critical">
+            <div>
+                <span class="badge critical">CRITICAL</span>
+                <span class="badge">mintlify</span>
+                <strong>Absolute Internal Url</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 39
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Internal links MUST use relative paths, not absolute URLs
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Convert "https://docs.claude.com" to relative path (e.g., ./page.md or ../section/page.md)
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* Anthropic Docs ([docs.claude.com](https://docs.claude.com)) → Claude Docs ([docs.claude.com](https://docs.claude.com))</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 3
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">> Updates to the Claude Developer Platform, including the Claude API, client SDKs, and the Claude Co...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 6
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  For release notes on Claude Apps, see the [Release notes for Claude Apps in the Claude Help Center...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 8
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-c...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 13
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched [Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 14
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * **Anthropic-managed Skills**: Pre-built Skills for working with PowerPoint (.pptx), Excel (.xlsx...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 15
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * **Custom Skills**: Upload your own Skills via the Skills API (`/v1/skills` endpoints) to package...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 16
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * Skills require the [code execution tool](/en/docs/agents-and-tools/tool-use/code-execution-tool)...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 17
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * Learn more in our [Agent Skills documentation](/en/docs/agents-and-tools/agent-skills/overview) ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 21
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched [Claude Haiku 4.5](https://www.anthropic.com/news/claude-haiku-4-5), our fastest an...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 25
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched [Claude Sonnet 4.5](https://www.anthropic.com/news/claude-sonnet-4-5), our best mod...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 26
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've introduced [global endpoint pricing](/en/docs/about-claude/pricing#third-party-platform-pric...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 27
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've introduced a new stop reason `model_context_window_exceeded` that allows you to request the ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 28
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched the memory tool in beta, enabling Claude to store and consult information across co...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 29
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched context editing in beta, providing strategies to automatically manage conversation ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 33
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched tool helpers in beta for the Python and TypeScript SDKs, simplifying tool creation ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 37
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've unified our developer offerings under the Claude brand. You should see updated naming and UR...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 38
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * Anthropic Console ([console.anthropic.com](https://console.anthropic.com)) → Claude Console ([pl...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 39
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * Anthropic Docs ([docs.claude.com](https://docs.claude.com)) → Claude Docs ([docs.claude.com](htt...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 40
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * Anthropic Help Center ([support.claude.com](https://support.claude.com)) → Claude Help Center ([...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 41
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * API endpoints, headers, environment variables, and SDKs remain the same. Your existing integrati...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 45
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched the web fetch tool in beta, allowing Claude to retrieve full content from specified...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 46
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched the [Claude Code Analytics API](/en/api/claude-code-analytics-api), enabling organi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 54
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched [rate limit charts](/en/api/rate-limits#monitoring-your-rate-limits-in-the-console)...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 58
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched support for citable documents in client-side tool results. Learn more in our [tool ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 62
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched v2 of the [Code Execution Tool](/en/docs/agents-and-tools/tool-use/code-execution-t...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 70
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've increased rate limits on the [1M token context window](/en/docs/build-with-claude/context-wi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 71
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* The 1m token context window is now available on Google Cloud's Vertex AI. For more information, se...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 75
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* Request IDs are now included directly in error response bodies alongside the existing `request-id`...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 79
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've released the [Usage & Cost API](/en/api/usage-cost-api), allowing administrators to programm...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 80
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added a new endpoint to the Admin API for retrieving organization information. For details, ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 84
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We announced the deprecation of the Claude Sonnet 3.5 models (`claude-3-5-sonnet-20240620` and `cl...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 85
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* The 1-hour cache duration for prompt caching is now generally available. You can now use the exten...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 89
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched beta support for a [1M token context window](/en/docs/build-with-claude/context-win...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 93
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* Some customers might encounter 429 (`rate_limit_error`) [errors](/en/api/errors) following a sharp...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 97
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* Search result content blocks are now generally available on the Claude API and Google Cloud's Vert...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 101
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched [Claude Opus 4.1](https://www.anthropic.com/news/claude-opus-4-1), an incremental u...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 103
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">*<sup>\* - Opus 4.1 does not allow both `temperature` and `top_p` parameters to be specified. Please...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 107
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've released `text_editor_20250728`, an updated text editor tool that fixes some issues from the...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 111
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've increased [rate limits](/en/api/rate-limits) for Claude Opus 4 on the Claude API to give you...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 115
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've retired the Claude 2.0, Claude 2.1, and Claude Sonnet 3 models. All requests to these models...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 119
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've increased [rate limits](/en/api/rate-limits) for Claude Sonnet 4 on the Claude API to give y...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 123
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched search result content blocks in beta, enabling natural citations for RAG applicatio...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 127
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We announced the deprecation of the Claude Opus 3 model. Read more in [our documentation](/en/docs...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 131
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* Console users with the Developer role can now access the [Cost](https://console.anthropic.com/sett...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 135
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched [fine-grained tool streaming](/en/docs/agents-and-tools/tool-use/fine-grained-tool-...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 139
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched [Claude Opus 4 and Claude Sonnet 4](http://www.anthropic.com/news/claude-4), our la...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 140
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* The default behavior of [extended thinking](/en/docs/build-with-claude/extended-thinking) in Claud...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 141
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched [interleaved thinking](/en/docs/build-with-claude/extended-thinking#interleaved-thi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 142
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched the [Files API](/en/docs/build-with-claude/files) in public beta, enabling you to u...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 143
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched the [Code execution tool](/en/docs/agents-and-tools/tool-use/code-execution-tool) i...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 144
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched the [MCP connector](/en/docs/agents-and-tools/mcp-connector) in public beta, a feat...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 145
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* To increase answer quality and decrease tool errors, we've changed the default value for the `top_...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 146
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  Additionally, when extended thinking is enabled, you can now set `top_p` to values between 0.95 an...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 148
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've included minute and hour level granularity to the [Usage](https://console.anthropic.com/sett...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 156
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched a web search tool in the API, allowing Claude to access up-to-date information from...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 160
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* Cache control must now be specified directly in the parent `content` block of `tool_result` and `d...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 173
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added URL source blocks for images and PDFs in the Messages API. You can now reference image...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 174
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added support for a `none` option to the `tool_choice` parameter in the Messages API that pr...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 175
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched an OpenAI-compatible API endpoint, allowing you to test Claude models by changing j...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Weak Language</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 175
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Avoid weak or unnecessary word: "just"
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Remove or replace with more precise language
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched an OpenAI-compatible API endpoint, allowing you to test Claude models by changing just your API key, base URL, and model name in existing OpenAI integrations. This compatibility layer supports core chat completions functionality. Learn more in our [OpenAI SDK compatibility documentation](/en/api/openai-sdk).</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 179
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched [Claude Sonnet 3.7](http://www.anthropic.com/news/claude-3-7-sonnet), our most inte...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 180
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added vision support to Claude Haiku 3.5, enabling the model to analyze and understand image...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 181
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've released a token-efficient tool use implementation, improving overall performance when using...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 182
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've changed the default temperature in the [Console](https://console.anthropic.com/workbench) fo...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 183
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've released updated versions of our tools that decouple the text edit and bash tools from the c...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 184
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * `bash_20250124`: Same functionality as previous version but is independent from computer use. Do...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 185
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * `text_editor_20250124`: Same functionality as previous version but is independent from computer ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 186
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  * `computer_20250124`: Updated computer use tool with new command options including "hold\_key", "...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 191
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added the `anthropic-organization-id` response header to all API responses. This header prov...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 199
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've launched citations capability in the API, allowing Claude to provide source attribution for ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 204
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We announced the deprecation of the Claude 2, Claude 2.1, and Claude Sonnet 3 models. Read more in...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 208
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've updated [prompt caching](/en/docs/build-with-claude/prompt-caching) to be easier to use. Now...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 213
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've optimized support for [prompt caching in the Message Batches API](/en/docs/build-with-claude...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 217
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added support for a [delete endpoint](/en/api/deleting-message-batches) in the Message Batch...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 223
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* [Models API](/en/api/models-list): Query available models, validate model IDs, and resolve [model ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 224
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* [Message Batches API](/en/docs/build-with-claude/batch-processing): Process large batches of messa...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 225
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* [Token counting API](/en/docs/build-with-claude/token-counting): Calculate token counts for Messag...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 226
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* [Prompt Caching](/en/docs/build-with-claude/prompt-caching): Reduce costs by up to 90% and latency...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 227
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* [PDF support](/en/docs/build-with-claude/pdf-support): Process PDFs to analyze both text and visua...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 236
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added the ability to group by API key to the [Usage](https://console.anthropic.com/settings/...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 237
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added two new **Last used at** and **Cost** columns and the ability to sort by any column in...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 241
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've released the [Admin API](/en/api/administration-api), allowing users to programmatically man...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 245
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've updated our rate limits for the Messages API. We've replaced the tokens per minute rate limi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 246
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added support for [tool use](/en/docs/agents-and-tools/tool-use/overview) in the [Workbench]...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 250
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added PDF support for all Claude Sonnet 3.5 models. Read more in our [documentation](/en/doc...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 254
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've retired the Claude 1 and Instant models. Read more in [our documentation](/en/docs/about-cla...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 258
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* [Claude Haiku 3.5](https://www.anthropic.com/claude/haiku) is now available on the Claude API as a...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 262
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added PDF support for use with the new Claude Sonnet 3.5. Read more in our [documentation](/...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 263
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've also added token counting, which allows you to determine the total number of tokens in a Mes...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 267
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've added Anthropic-defined computer use tools to our API for use with the new Claude Sonnet 3.5...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 268
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* Claude Sonnet 3.5, our most intelligent model yet, just got an upgrade and is now available on the...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Weak Language</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 268
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Avoid weak or unnecessary word: "just"
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Remove or replace with more precise language
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* Claude Sonnet 3.5, our most intelligent model yet, just got an upgrade and is now available on the Claude API. Read more [here](https://www.anthropic.com/claude/sonnet).</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 272
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* The Message Batches API is now available in beta. Process large batches of queries asynchronously ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 273
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've loosened restrictions on the ordering of `user`/`assistant` turns in our Messages API. Conse...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> release_notes.mdx
+                <strong> Line:</strong> 274
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">* We've deprecated the Build and Scale plans in favor of a standard feature suite (formerly referred...</div>
+        </div>
+        
+    </div>
+</body>
+</html>

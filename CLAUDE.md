@@ -8,6 +8,53 @@ This is a **documentation quality analyzer** designed for Mintlify-based documen
 
 **Core Purpose:** Automate key technical writing responsibilities including clarity checks, information architecture validation, style guide compliance, consistency analysis, and content gap detection.
 
+## 🎯 Code Quality Principles
+
+### Naming Conventions: No Version Suffixes
+
+**CRITICAL PRINCIPLE**: Never accumulate deprecated code with version suffixes like "Enhanced", "New", "V2", "Improved", "Better", "Updated", etc.
+
+**Wrong Approach:**
+```python
+class DocumentationAnalyzer:
+    # Old version
+    pass
+
+class EnhancedDocumentationAnalyzer:
+    # Better version - but now we have two classes!
+    pass
+
+class SuperEnhancedDocumentationAnalyzerV3:
+    # Even better - but name is getting ridiculous!
+    pass
+```
+
+**Correct Approach:**
+```python
+class DocumentationAnalyzer:
+    # Just replace the old code with the better code
+    # Keep the same name - Git tracks the evolution!
+    pass
+```
+
+**Rationale:**
+- Prevents accumulation of deprecated files and classes
+- Avoids increasingly verbose names (EnhancedSuperImprovedAnalyzerV4Final)
+- Makes it clear what the "current" version is
+- Simplifies imports and documentation
+- Git history naturally tracks the evolution
+
+**How to Handle Improvements:**
+1. **Replace** the old code with the new code in the same file
+2. **Keep** the same class/function/file name
+3. **Update** the docstring to reflect new capabilities
+4. **Remove** any "Enhanced", "V2", etc. from names
+5. **Commit** with a clear message about what improved
+
+**Exception:** Only use version suffixes for:
+- Genuine API versions that must coexist (e.g., `APIv1`, `APIv2` where both are actively maintained for backward compatibility)
+- Migration periods where both old and new must temporarily coexist (document deprecation timeline clearly)
+
 ## Key Commands
 
 ### Setup
@@ -69,9 +116,32 @@ python doc_analyzer.py /path/to/docs --format all
 # Analyze remote repository
 python doc_analyzer.py --repo-url https://github.com/user/docs --repo-type mintlify
 
+# Analyze specific subfolder (maintains platform detection from parent)
+# Useful for analyzing only a section like /pages, /guides, etc.
+python doc_analyzer.py /path/to/docs/pages
+python doc_analyzer.py /path/to/docs/pages --repo-root /path/to/docs  # Explicit root
+
 # Disable AI analysis (faster, works without API key)
 python doc_analyzer.py /path/to/docs --no-ai
+
+# Custom output path (overrides default timestamped directory)
+python doc_analyzer.py /path/to/docs --output custom_report.json
 ```
+
+**Report Organization:**
+Reports are automatically organized in timestamped directories to prevent overwriting:
+```
+reports/
+  2024-10-27_14-30-15/
+    doc_analysis_report.json
+    doc_analysis_report.html
+    doc_analysis_report.md
+  2024-10-27_15-45-22/
+    doc_analysis_report.json
+    doc_analysis_report.html
+    doc_analysis_report.md
+```
+When using `--format all`, all three formats are saved to the same timestamped directory.
 
 ### Testing
 ```bash
@@ -97,6 +167,10 @@ pytest test_analyzer.py -v -m "not skipif"
 - Handles local and remote repositories (with git cloning)
 - Manages file inclusion/exclusion patterns
 - Loads platform-specific configuration (e.g., `mint.json` for Mintlify)
+- **Subfolder Analysis:** Supports analyzing specific subfolders while maintaining platform detection
+  - `repo_path`: Directory to analyze (can be a subfolder)
+  - `repo_root`: Repository root for platform detection (auto-detected up to 3 parent levels)
+  - Searches parent directories for platform config files (mint.json, docusaurus.config.js, etc.)
 
 **MDXParser** (`doc_analyzer.py:176-211`)
 - Extracts YAML frontmatter from MDX files
@@ -124,7 +198,7 @@ pytest test_analyzer.py -v -m "not skipif"
 - Validates documentation supports required user journeys
 - Checks for missing journey steps (e.g., installation, authentication, first-use)
 
-**EnhancedDocumentationAnalyzer** (`doc_analyzer.py:581-1269`)
+**DocumentationAnalyzer** (`doc_analyzer.py:581-1269`)
 - Main orchestrator that runs all analysis phases
 - Phase 1: File-level checks (readability, style, structure, formatting, links)
 - Phase 2: Cross-file analysis (IA, consistency)
@@ -178,7 +252,7 @@ Violations of these are marked as **critical** severity.
 ## Data Flow
 
 1. `RepositoryManager` detects platform and loads files
-2. `EnhancedDocumentationAnalyzer` runs three phases:
+2. `DocumentationAnalyzer` runs three phases:
    - Phase 1: File-by-file analysis (all validators run on each file)
    - Phase 2: Cross-file analysis (IA patterns, consistency checks)
    - Phase 3: Advanced analysis (AI semantic gaps, duplication, user journeys)
@@ -204,9 +278,9 @@ AI analysis is optional and controlled by:
 
 ## Extension Points
 
-To add custom checks, extend `EnhancedDocumentationAnalyzer` and add methods:
+To add custom checks, extend `DocumentationAnalyzer` and add methods:
 ```python
-class CustomAnalyzer(EnhancedDocumentationAnalyzer):
+class CustomAnalyzer(DocumentationAnalyzer):
     def check_custom_rule(self, content: str, file_path: str):
         # Add issues to self.report
         self.report.add_issue(Issue(...))

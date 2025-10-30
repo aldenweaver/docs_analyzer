@@ -1,4 +1,4 @@
-# Core dependencies for enhanced analyzer
+# Core dependencies for analyzer
 anthropic>=0.40.0
 pyyaml>=6.0
 python-dotenv>=1.0.0

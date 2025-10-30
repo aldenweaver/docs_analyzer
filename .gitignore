@@ -45,9 +45,9 @@ htmlcov/
 *.sublime-workspace
 
 # Reports and Output
-reports/
-*.json
-*.html
+# reports/
+# *.json
+# *.html
 !docker-compose.yml
 
 # Logs

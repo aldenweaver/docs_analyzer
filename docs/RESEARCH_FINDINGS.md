@@ -292,7 +292,7 @@ class UserJourneyAnalyzer:
         """
 ```
 
-#### 4. Content Duplication Detector (Enhanced)
+#### 4. Content Duplication Detector
 
 ```python
 class ContentDuplicationDetector:
@@ -753,7 +753,7 @@ def create_analyzer(repo_manager, config):
 3. ✅ Make repository path configurable
 4. ✅ Add Mintlify-specific checks
 
-### Phase 2: Enhanced Analysis (Week 2)
+### Phase 2: Analysis (Week 2)
 5. ✅ Semantic gap analysis with Claude AI
 6. ✅ Cross-reference validation
 7. ✅ Documentation map integration

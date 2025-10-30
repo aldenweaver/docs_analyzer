@@ -6,7 +6,7 @@
 
 ```bash
 # Install dependencies
-pip install -r enhanced_requirements.txt
+pip install -r requirements.txt
 
 # Set up Claude API key
 export ANTHROPIC_API_KEY='your-api-key-here'
@@ -16,17 +16,37 @@ export ANTHROPIC_API_KEY='your-api-key-here'
 
 ```bash
 # Analyze local documentation
-python enhanced_doc_analyzer.py ./docs
+python doc_analyzer.py ./docs
 
 # Analyze with configuration file
-python enhanced_doc_analyzer.py --config enhanced_config.yaml
+python doc_analyzer.py --config config.yaml
 
 # Clone and analyze remote repository
-python enhanced_doc_analyzer.py --repo-url https://github.com/username/docs
+python doc_analyzer.py --repo-url https://github.com/username/docs
 
-# Generate all report formats
-python enhanced_doc_analyzer.py ./docs --format all
+# Generate all report formats (saves to timestamped directory)
+python doc_analyzer.py ./docs --format all
+
+# Analyze specific subfolder (e.g., only /pages or /guides)
+python doc_analyzer.py ./docs/pages
+
+# Analyze subfolder with explicit repo root for platform detection
+python doc_analyzer.py ./docs/pages --repo-root ./docs
+
+# Custom output location (overrides timestamped directory)
+python doc_analyzer.py ./docs --output my_report.json
 ```
+
+**Report Organization:**
+Reports are automatically saved in timestamped directories:
+```
+reports/
+  2024-10-27_14-30-15/
+    doc_analysis_report.json
+    doc_analysis_report.html
+    doc_analysis_report.md
+```
+This prevents overwriting previous analyses and allows tracking improvements over time.
 
 ## 📋 What's New in Enhanced Version
 
@@ -48,11 +68,16 @@ python enhanced_doc_analyzer.py ./docs --format all
 - **Platform Detection**: Auto-detect Mintlify, Docusaurus, MkDocs, etc.
 - **Comprehensive Gap Analysis**: Missing sections, incomplete journeys
 
+### Latest Improvements ✅
+- **Subfolder Analysis**: Analyze specific sections (e.g., `/pages`, `/guides`) while maintaining platform detection
+- **Timestamped Reports**: Automatic organization of reports in dated directories to prevent overwriting
+- **Smart Platform Detection**: Auto-detects platform config from parent directories (up to 3 levels)
+
 ## 🔧 Configuration
 
 ### Enhanced Config File
 
-The `enhanced_config.yaml` includes:
+The `config.yaml` includes:
 
 ```yaml
 # Repository settings
@@ -131,6 +156,15 @@ gap_detection:
 ```
 
 ## 📊 Understanding Reports
+
+All reports are saved in timestamped directories under `reports/YYYY-MM-DD_HH-MM-SS/` to preserve analysis history. Each analysis run creates a new directory containing all requested report formats.
+
+**Location Examples:**
+- JSON: `reports/2024-10-27_14-30-15/doc_analysis_report.json`
+- HTML: `reports/2024-10-27_14-30-15/doc_analysis_report.html`
+- Markdown: `reports/2024-10-27_14-30-15/doc_analysis_report.md`
+
+When using `--format all`, all three formats are saved to the same timestamped directory.
 
 ### HTML Report (Recommended)
 
@@ -227,7 +261,7 @@ When enabled (requires `ANTHROPIC_API_KEY`):
 
 **Disable for faster analysis:**
 ```bash
-python enhanced_doc_analyzer.py ./docs --no-ai
+python doc_analyzer.py ./docs --no-ai
 ```
 
 ### 2. Platform-Specific Validation
@@ -282,13 +316,13 @@ required_journeys:
 1. **Start with Configuration**
    ```bash
    # Copy and customize
-   cp enhanced_config.yaml my_config.yaml
+   cp config.yaml my_config.yaml
    # Edit repository path and rules
    ```
 
 2. **Run Initial Analysis**
    ```bash
-   python enhanced_doc_analyzer.py --config my_config.yaml --format all
+   python doc_analyzer.py --config my_config.yaml --format all
    ```
 
 3. **Review Critical Issues First**
@@ -318,7 +352,7 @@ required_journeys:
 
 2. **Run Analysis**
    ```bash
-   python enhanced_doc_analyzer.py ./docs --config enhanced_config.yaml --format all
+   python doc_analyzer.py ./docs --config config.yaml --format all
    ```
 
 3. **Fix Top Issues**
@@ -358,7 +392,7 @@ export ANTHROPIC_API_KEY='your-key-here'
 
 Specify manually:
 ```bash
-python enhanced_doc_analyzer.py ./docs --repo-type mintlify
+python doc_analyzer.py ./docs --repo-type mintlify
 ```
 
 ### "Too many issues found"
@@ -435,13 +469,13 @@ jobs:
       
       - name: Install dependencies
         run: |
-          pip install -r enhanced_requirements.txt
+          pip install -r requirements.txt
       
       - name: Run analyzer
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          python enhanced_doc_analyzer.py ./docs --format json
+          python doc_analyzer.py ./docs --format json
       
       - name: Upload report
         uses: actions/upload-artifact@v2
@@ -465,13 +499,13 @@ jobs:
 # .git/hooks/pre-commit
 
 echo "Running documentation quality check..."
-python enhanced_doc_analyzer.py ./docs --no-ai --format json
+python doc_analyzer.py ./docs --no-ai --format json
 
 CRITICAL=$(python -c "import json; print(json.load(open('doc_analysis_report.json'))['summary']['by_severity'].get('critical', 0))")
 
 if [ "$CRITICAL" -gt "0" ]; then
     echo "❌ Cannot commit: $CRITICAL critical documentation issues found"
-    echo "Run: python enhanced_doc_analyzer.py ./docs --format html"
+    echo "Run: python doc_analyzer.py ./docs --format html"
     echo "Then fix critical issues before committing"
     exit 1
 fi
@@ -497,7 +531,7 @@ Track improvements over time:
 
 ```bash
 # More verbose output
-python enhanced_doc_analyzer.py ./docs --format json | tee analysis.log
+python doc_analyzer.py ./docs --format json | tee analysis.log
 ```
 
 ### Test with Sample Data
@@ -522,7 +556,7 @@ print("hello")
 EOF
 
 # Run analysis
-python enhanced_doc_analyzer.py ./test-docs
+python doc_analyzer.py ./test-docs
 ```
 
 ## 🎉 Summary
