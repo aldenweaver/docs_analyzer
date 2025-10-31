@@ -41,6 +41,8 @@ from fixers import (
     CalloutStandardizationFixer,
     BrokenLinkDetector,
     ProductionCodeValidator,
+    # Accessibility
+    AccessibilityFixer,
 )
 import os
 
@@ -126,6 +128,11 @@ class DocFixer:
         if os.getenv('ENABLE_PRODUCTION_CODE_VALIDATOR', 'false').lower() not in ['false', '0', 'no']:
             self.fixers.append(ProductionCodeValidator(self.config))
             print("✓ Production Code Validator enabled (manual fix required)")
+
+        # Accessibility fixer (WCAG 2.1 AA compliance)
+        if os.getenv('ENABLE_ACCESSIBILITY_FIXER', 'true').lower() not in ['false', '0', 'no']:
+            self.fixers.append(AccessibilityFixer(self.config))
+            print("✓ Accessibility Fixer enabled (WCAG 2.1 AA compliance)")
 
         self.stats = FixerStats()
 

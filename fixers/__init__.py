@@ -26,6 +26,9 @@ from .callout_standardization_fixer import CalloutStandardizationFixer
 from .broken_link_detector import BrokenLinkDetector
 from .production_code_validator import ProductionCodeValidator
 
+# Accessibility fixer
+from .accessibility_fixer import AccessibilityFixer
+
 __all__ = [
     'BaseFixer',
     'FrontmatterFixer',
@@ -47,4 +50,6 @@ __all__ = [
     'CalloutStandardizationFixer',
     'BrokenLinkDetector',
     'ProductionCodeValidator',
+    # Accessibility
+    'AccessibilityFixer',
 ]
