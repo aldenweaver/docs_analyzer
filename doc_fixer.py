@@ -21,7 +21,7 @@ from datetime import datetime
 
 from core.config import Config
 from core.models import FixResult, FixerStats
-from fixers import FrontmatterFixer, TerminologyFixer, URLFixer, CodeBlockFixer
+from fixers import FrontmatterFixer, TerminologyFixer, URLFixer, CodeBlockFixer, GitHubInformedFixer
 
 
 class DocFixer:
@@ -36,7 +36,8 @@ class DocFixer:
             FrontmatterFixer(self.config),
             TerminologyFixer(self.config),
             URLFixer(self.config),
-            CodeBlockFixer(self.config)
+            CodeBlockFixer(self.config),
+            GitHubInformedFixer(self.config)  # GitHub user-informed quality checks
         ]
 
         self.stats = FixerStats()

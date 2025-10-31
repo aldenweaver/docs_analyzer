@@ -8,11 +8,13 @@ from .frontmatter import FrontmatterFixer
 from .terminology import TerminologyFixer
 from .urls import URLFixer
 from .code_blocks import CodeBlockFixer
+from .github_informed_fixer import GitHubInformedFixer
 
 __all__ = [
     'BaseFixer',
     'FrontmatterFixer',
     'TerminologyFixer',
     'URLFixer',
-    'CodeBlockFixer'
+    'CodeBlockFixer',
+    'GitHubInformedFixer'
 ]
