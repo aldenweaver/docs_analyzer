@@ -1,0 +1,1162 @@
+# Documentation Analysis Report
+
+**Generated:** 2025-10-31T03:21:30.203527
+**Repository:** /Users/alden/dev/claude_docs_clone_mintlify/docs
+**Platform:** mintlify
+**Files Analyzed:** 115
+**Total Issues:** 5757
+
+## Summary
+
+| Severity | Count |
+|----------|-------|
+| Critical | 449 |
+| High | 1 |
+| Medium | 717 |
+| Low | 4590 |
+
+## Issues by Category
+
+- **Clarity:** 4150 issues
+- **Style:** 1449 issues
+- **Ia:** 109 issues
+- **Gaps:** 29 issues
+- **Ux:** 18 issues
+- **Consistency:** 2 issues
+
+## 💡 Recommendations
+
+- High number of clarity issues (4150). Recommend focused audit in this area.
+- High number of style issues (1449). Recommend focused audit in this area.
+- High number of ia issues (109). Recommend focused audit in this area.
+- 449 critical issues require immediate attention (broken links, missing frontmatter, etc.)
+- AI analysis identified 4 key insights. Review AI insights section.
+
+## 🤖 AI Insights
+
+- 📊 Missing Tutorial: Create 'Claude Code: Zero to Productive in 30 Minutes' tutorial (Affects: claude-code/quickstart.mdx, claude-code/setup.mdx)
+- 📊 Incomplete Journey: Create 'Advanced Tool Composition Patterns' guide (Affects: agents-and-tools/tool-use/overview.mdx, agents-and-tools/tool-use/implement-tool-use.mdx)
+- 📊 Missing Reference: Detailed SDK Migration Reference (Affects: claude-code/sdk/migration-guide.mdx)
+- 📊 Orphaned Concept: Create 'Claude Prompt Engineering: Philosophy and Practice' (Affects: build-with-claude/prompt-engineering/*.mdx)
+
+## Detailed Issues
+
+
+### Critical Priority (472 issues)
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 20)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 63)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 75)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 83)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 105)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 117)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 129)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 137)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 163)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 206)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 218)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 238)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 264)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `get-started.mdx` (Line 297)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/plugins.mdx` (Line 27)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/plugins.mdx` (Line 34)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/plugins.mdx` (Line 50)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/plugins.mdx` (Line 65)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/plugins.mdx` (Line 87)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/plugins.mdx` (Line 124)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/plugins.mdx` (Line 258)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/plugins.mdx` (Line 266)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/plugins.mdx` (Line 287)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `claude-code/data-usage.mdx` (Line 61)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Users cannot understand exact implications of running `/bug` command. Evidence: Task-Oriented Writing requires clear, specific instructions about user actions (Source: Redish Technical Documentation Principles)
+- **Suggestion:** Add explicit details about what happens when command is used. Before: "When users run the `/bug` command, a copy of their full conversation history including code is sent ..." → After: "When users run the `/bug` command, Anthropic will capture and transmit: 1) Complete conversation transcript, 2) Current code context, 3) Error details..."
+- **Context:** `When users run the `/bug` command, a copy of their full conversation history including code is sent to Anthropic.`
+
+---
+
+
+#### Missing Language Tag
+
+- **File:** `claude-code/sandboxing.mdx` (Line 65)
+- **Category:** style
+- **Issue:** Code block missing language identifier (REQUIRED in Mintlify)
+- **Suggestion:** Specify language for syntax highlighting (e.g., ```python)
+
+
+---
+
+
+### High Priority (143 issues)
+
+
+#### Ai Missing Context
+
+- **File:** `get-started.mdx` (Line 14)
+- **Category:** clarity
+- **Issue:** [Missing Context] Users cannot understand the context of this API call. Evidence: Missing explanation of API endpoint purpose (Source: Redish Task-Oriented Writing Principles)
+- **Suggestion:** Add brief description of what the messages endpoint does. Before: "curl https://api.anthropic.com/v1/messages" → After: "# Call the messages endpoint to interact with Claude
+curl https://api.anthropic.com/v1/messages"
+- **Context:** `curl https://api.anthropic.com/v1/messages`
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `intro.mdx` (Line 5)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Developers cannot understand model capabilities without context. Evidence: Undefined technical terms 'complex agents' lack clear explanation (Source: plainlanguage.gov: Define specialized terminology)
+- **Suggestion:** Define technical terms, provide concrete examples. Before: "Claude Sonnet 4.5 - Our smartest model. Best for complex agents, coding, and most advanced tasks." → After: "Claude Sonnet 4.5 - Our most advanced AI model. Ideal for sophisticated multi-step tasks like advanced programming, complex reasoning, and intricate p..."
+- **Context:** `Claude Sonnet 4.5 - Our smartest model. Best for complex agents, coding, and most advanced tasks.`
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `intro.mdx` (Line 13)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Developers cannot understand actual implementation steps. Evidence: No concrete steps provided for API call process (Source: Redish: Task-Oriented Writing Principles)
+- **Suggestion:** Add specific prerequisite steps, code snippet. Before: "If you're new to Claude, start here to learn the essentials and make your first API call." → After: "If you're new to Claude, follow these steps to set up your environment and make your first API call: 1) Install SDK, 2) Get API key, 3) Configure cred..."
+- **Context:** `If you're new to Claude, start here to learn the essentials and make your first API call.`
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `mcp.mdx` (Line 1)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Readers cannot understand what MCP fundamentally represents. Evidence: Acronym introduced without clear initial definition (Source: Plain Language Guidelines)
+- **Suggestion:** Provide explicit first-use definition. Before: "Model Context Protocol (MCP)" → After: "Model Context Protocol (MCP): A standardized framework for contextualizing data interactions between AI models and external systems"
+- **Context:** `Model Context Protocol (MCP)`
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `mcp.mdx` (Line 12)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Developers cannot understand how to actually use the connector. Evidence: No concrete steps or prerequisites for connector implementation (Source: Ginny Redish: Task-Oriented Writing Principles)
+- **Suggestion:** Add specific implementation steps. Before: "Use the MCP connector in the Messages API to connect to MCP servers." → After: "To use the MCP connector: 1) Install Messages API library, 2) Initialize connector with authentication, 3) Define connection parameters, 4) Establish ..."
+- **Context:** `Use the MCP connector in the Messages API to connect to MCP servers.`
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 13)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Users cannot determine which regions will work without extensive investigation. Evidence: Lack of specific guidance on which regions are problematic (Source: Nielsen Norman Group: Information Architecture Clarity Principle)
+- **Suggestion:** Add a table or link to a specific support matrix for region compatibility. Before: "Vertex AI may not support the Claude Code default models on all regions." → After: "Vertex AI supports Claude Code default models in these specific regions: [list regions]. For unsupported regions, consult the Vertex AI compatibility ..."
+- **Context:** `Vertex AI may not support the Claude Code default models on all regions.`
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 44)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Users cannot understand how to request increased rate limits. Evidence: No specific guidance on rate limit escalation process (Source: Plain Language Guidelines: Actionable Instructions)
+- **Suggestion:** Provide specific contact information and expected process. Before: "For heightened rate limits, contact Google Cloud support." → After: "For heightened rate limits: (1) Prepare your current usage metrics, (2) Contact Google Cloud support via support.google.com/cloud, (3) Request a quota..."
+- **Context:** `For heightened rate limits, contact Google Cloud support.`
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `claude-code/plugins.mdx` (Line 50)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Readers cannot understand what MCP means or represents. Evidence: Acronym/technical term used without initial explanation (Source: plainlanguage.gov: Define Technical Terms)
+- **Suggestion:** Define acronym on first use. Before: "MCP servers" → After: "MCP (Master Control Program) servers - external tool integration servers"
+- **Context:** `MCP servers`
+
+---
+
+
+#### Ai Missing Context
+
+- **File:** `claude-code/data-usage.mdx` (Line 5)
+- **Category:** clarity
+- **Issue:** [Missing Context] Users cannot understand the full scope of data usage without additional context. Evidence: Progressive Disclosure: Users need immediate clarity about what 'data' means and implications of this choice (Source: Nielsen Norman Group: Progressive Disclosure Principle)
+- **Suggestion:** Add clarifying sentence about types of data collected. Before: "Starting August 28, 2025, we're giving you the choice to allow your data to be used to improve futur..." → After: "Starting August 28, 2025, we're giving you the choice to allow conversation transcripts and interaction data to be used for improving future Claude AI..."
+- **Context:** `Starting August 28, 2025, we're giving you the choice to allow your data to be used to improve future Claude models.`
+
+---
+
+
+#### Ai Missing Context
+
+- **File:** `claude-code/sandboxing.mdx` (Line 23)
+- **Category:** clarity
+- **Issue:** [Missing Context] Users cannot understand how to actually implement custom path configurations. Evidence: No concrete example or pointer to where/how these settings are configured (Source: Google Developer Documentation Style Guide)
+- **Suggestion:** Add reference to configuration section or provide inline example. Before: "Configurable: Define custom allowed and denied paths through settings" → After: "Configurable: Define custom allowed and denied paths through `settings.json`. Example: `"sandbox": { "allowedPaths": ["/my/safe/directory"] })`"
+- **Context:** `Configurable: Define custom allowed and denied paths through settings`
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `claude-code/sandboxing.mdx` (Line 34)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Users cannot determine how to actually execute this command. Evidence: No context about where/how this command is invoked, what exact environment (Source: Redish: Task-Oriented Writing Principles)
+- **Suggestion:** Add specific context about command environment, potential prerequisites. Before: "You can enable sandboxing by running the `/sandbox` slash command" → After: "In the Claude Code CLI or interface, you can enable sandboxing by running the `/sandbox` slash command. Ensure you are in a project directory before e..."
+- **Context:** `You can enable sandboxing by running the `/sandbox` slash command`
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `claude-code/sandboxing.mdx` (Line 114)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Developers cannot understand how to actually use this command. Evidence: No explanation of `npx`, `@anthropic-ai/sandbox-runtime`, or what `<command-to-sandbox>` represents (Source: Google Developer Documentation Style Guide)
+- **Suggestion:** Add contextual explanation, example usage. Before: "npx @anthropic-ai/sandbox-runtime <command-to-sandbox>" → After: "# Use npx to run the sandbox runtime and isolate a specific command
+# Example: Sandbox a Python script
+npx @anthropic-ai/sandbox-runtime python my_scr..."
+- **Context:** `npx @anthropic-ai/sandbox-runtime <command-to-sandbox>`
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `claude-code/legal-and-compliance.mdx` (Line 16)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Users cannot understand the technical terminology without external context. Evidence: Acronyms '1P' and '3P' are not defined, creating potential comprehension barriers (Source: plainlanguage.gov: Define technical terms at first occurrence)
+- **Suggestion:** Define acronyms on first use. Before: "(1P) or accessing it through AWS Bedrock or Google Vertex (3P)" → After: "(1st Party) or accessing it through AWS Bedrock or Google Vertex (3rd Party)"
+- **Context:** `Whether you're using the Claude API directly (1P) or accessing it through AWS Bedrock or Google Vertex (3P), your existing commercial agreement will apply to Claude Code usage, unless we've mutually a`
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `claude-code/legal-and-compliance.mdx` (Line 19)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Users cannot understand the significance of ZDR. Evidence: Technical term not explained on first use (Source: Google Dev Docs Style: Explain technical terms)
+- **Suggestion:** Add brief explanatory context. Before: "Zero Data Retention (ZDR)" → After: "Zero Data Retention (ZDR: a data management protocol that prevents storing user interaction data)"
+- **Context:** `Zero Data Retention (ZDR)`
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `claude-code/interactive-mode.mdx` (Line 29)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Users cannot understand exactly what 'extended thinking' does or how it changes interaction. Evidence: Missing clear action description violates task-oriented writing principles (Source: Redish, Task-Oriented Writing)
+- **Suggestion:** Clarify functionality with specific explanation. Before: "`Tab` Toggle [extended thinking](/en/docs/build-with-claude/extended-thinking) Switch between Thinki..." → After: "`Tab`: Toggle extended thinking mode. Changes Claude's response generation to provide more detailed, step-by-step reasoning before producing output."
+- **Context:** ``Tab` Toggle [extended thinking](/en/docs/build-with-claude/extended-thinking) Switch between Thinking on and Thinking off`
+
+---
+
+
+#### Ai Cognitive Load
+
+- **File:** `claude-code/interactive-mode.mdx` (Line 138)
+- **Category:** clarity
+- **Issue:** [Cognitive Load] Developers might struggle to understand background command execution. Evidence: Sentence exceeds recommended complexity, increasing cognitive load (Source: Nielsen Norman Group, Cognitive Load Principles)
+- **Suggestion:** Split into shorter, clearer sentences. Before: "When Claude Code runs a command in the background, it runs the command asynchronously and immediatel..." → After: "Background commands in Claude Code run asynchronously. Each background task receives a unique task ID immediately upon execution."
+- **Context:** `When Claude Code runs a command in the background, it runs the command asynchronously and immediately returns a background task ID.`
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `claude-code/vs-code.mdx` (Line 22)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Developers won't understand what MCP means or represents. Evidence: Acronym introduced without explanation (plainlanguage.gov) (Source: Federal Plain Language Guidelines)
+- **Suggestion:** Define acronym on first use. Before: "MCP server usage" → After: "Model Context Protocol (MCP) Server Usage"
+- **Context:** `MCP server usage`
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `claude-code/vs-code.mdx` (Line 49)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Users cannot confidently complete the configuration process. Evidence: Lacks concrete, step-by-step guidance (Redish: Task-Oriented Writing) (Source: Ginny Redish: Letting Go of the Words)
+- **Suggestion:** Provide precise, numbered steps with specific actions. Before: "Add the required environment variables" → After: "1. Click the '+' icon next to environment variables
+2. Enter the variable name exactly as shown
+3. Enter the corresponding value
+4. Click 'Save'"
+- **Context:** `Add the required environment variables`
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `claude-code/overview.mdx` (Line 17)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Users cannot understand core functionality without knowing what MCP means. Evidence: MCP acronym introduced without definition (Source: Google Developer Documentation Style Guide)
+- **Suggestion:** Spell out acronym on first use. Before: "with [MCP](/en/docs/claude-code/mcp) can pull from external datasources" → After: "with [MCP (Master Control Program)](/en/docs/claude-code/mcp) can pull from external datasources"
+- **Context:** `Claude Code maintains awareness of your entire project structure, can find up-to-date information from the web, and with [MCP](/en/docs/claude-code/mcp) can pull from external datasources like Google `
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `claude-code/terminal-config.mdx` (Line 14)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Users cannot predict exact configuration changes or prerequisites. Evidence: Lacks specificity about potential configuration outcomes (Source: Google Developer Documentation Style Guide)
+- **Suggestion:** Expand instruction with expected results and potential limitations. Before: "Run `/terminal-setup` within Claude Code to automatically configure Shift+Enter." → After: "Run `/terminal-setup` within Claude Code to automatically configure Shift+Enter. This command will modify your terminal's keyboard shortcut settings t..."
+- **Context:** `Run `/terminal-setup` within Claude Code to automatically configure Shift+Enter.`
+
+---
+
+
+#### Ai Missing Context
+
+- **File:** `claude-code/costs.mdx` (Line 13)
+- **Category:** clarity
+- **Issue:** [Missing Context] Max and Pro subscribers cannot understand what to do instead. Evidence: No explanation of why this limitation exists or alternative methods for these subscribers (Source: Google Developer Documentation Style Guide: Complete Information)
+- **Suggestion:** Provide alternative cost tracking method. Before: "The `/cost` command is not intended for Claude Max and Pro subscribers." → After: "The `/cost` command is not intended for Claude Max and Pro subscribers. For these subscription tiers, please use the Claude Console billing dashboard ..."
+- **Context:** `The `/cost` command is not intended for Claude Max and Pro subscribers.`
+
+---
+
+
+#### Ai Cognitive Load
+
+- **File:** `claude-code/costs.mdx` (Line 45)
+- **Category:** clarity
+- **Issue:** [Cognitive Load] Users might misunderstand rate limit mechanics. Evidence: Complex explanation of rate limit allocation requires multiple cognitive steps (Source: Nielsen Norman Group: Cognitive Load Reduction)
+- **Suggestion:** Simplify and use concrete example. Before: "These rate limits apply at the organization level, not per individual user, which means individual u..." → After: "Rate limits are shared across your organization. When some team members are inactive, others can temporarily use more tokens."
+- **Context:** `These rate limits apply at the organization level, not per individual user, which means individual users can temporarily consume more than their calculated share when others aren't actively using the `
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `claude-code/statusline.mdx` (Line 10)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Users cannot understand how to actually execute this command or what will happen. Evidence: Lacks specifics about command context or expected interaction flow (Source: Janice (Ginny) Redish: Task-Oriented Writing)
+- **Suggestion:** Provide more detailed, step-by-step guidance. Before: "Run `/statusline` to ask Claude Code to help you set up a custom status line." → After: "Run `/statusline` to launch an interactive configuration wizard. This command opens a guided setup where Claude Code will help you create a custom sta..."
+- **Context:** `Run `/statusline` to ask Claude Code to help you set up a custom status line.`
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `claude-code/statusline.mdx` (Line 22)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Users unfamiliar with technical stdin concept will be confused. Evidence: Technical terms like 'stdin' not explained for potentially novice users (Source: Plain Language Guidelines (plainlanguage.gov))
+- **Suggestion:** Define technical terms, provide context. Before: "Claude Code passes contextual information about the current session (model, directories, etc.) as JS..." → After: "Claude Code automatically transfers contextual session information (like current model, working directories) to your custom script as a JSON-formatted..."
+- **Context:** `Claude Code passes contextual information about the current session (model, directories, etc.) as JSON to your script via stdin`
+
+---
+
+
+#### Ai Missing Context
+
+- **File:** `claude-code/hooks.mdx` (Line 68)
+- **Category:** clarity
+- **Issue:** [Missing Context] Users may not understand potential performance or side-effect risks. Evidence: Lacks explanation of potential implications of parallel hook execution (Source: Google Dev Docs Style: Comprehensive Explanation)
+- **Suggestion:** Add a note about potential parallel execution considerations. Before: "Plugin hooks run alongside your custom hooks. If multiple hooks match an event, they all execute in ..." → After: "Plugin hooks run alongside your custom hooks. When multiple hooks match an event, they execute in parallel. Be cautious: this can introduce potential ..."
+- **Context:** `Plugin hooks run alongside your custom hooks. If multiple hooks match an event, they all execute in parallel.`
+
+---
+
+
+### Medium Priority (1008 issues)
+
+
+#### Ai Undefined Jargon
+
+- **File:** `get-started.mdx` (Line 16)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Developers won't understand version specification purpose. Evidence: Version header not explained (Source: Plain Language Guidelines)
+- **Suggestion:** Add inline explanation of versioning. Before: "anthropic-version: 2023-06-01" → After: "# Specify API version for compatibility
+anthropic-version: 2023-06-01 # Ensures correct API behavior"
+- **Context:** `anthropic-version: 2023-06-01`
+
+---
+
+
+#### Ai Ambiguous Instruction
+
+- **File:** `get-started.mdx` (Line 41)
+- **Category:** clarity
+- **Issue:** [Ambiguous Instruction] Users might be unsure where to save file. Evidence: No context about file location/directory (Source: Nielsen Norman Group Cognitive Load Principles)
+- **Suggestion:** Specify default project/working directory. Before: "Save this as `quickstart.py`" → After: "In your project directory, save this as `quickstart.py`"
+- **Context:** `Save this as `quickstart.py``
+
+---
+
+
+#### Ai Undefined Jargon
+
+- **File:** `intro.mdx` (Line 8)
+- **Category:** clarity
+- **Issue:** [Undefined Jargon] Users cannot understand model's specific capabilities. Evidence: 'Near-frontier intelligence' is ambiguous technical language (Source: Nielsen Norman Group: Reduce Cognitive Load)
+- **Suggestion:** Clarify technical descriptor with concrete example. Before: "Claude Haiku 4.5 - Our fastest model with near-frontier intelligence." → After: "Claude Haiku 4.5 - Our fastest model optimized for quick, accurate responses across a wide range of tasks."
+- **Context:** `Claude Haiku 4.5 - Our fastest model with near-frontier intelligence.`
+
+---
+
+
+#### Ai Missing Context
+
+- **File:** `intro.mdx` (Line 30)
+- **Category:** clarity
+- **Issue:** [Missing Context] Developers cannot understand full scope of vision capabilities. Evidence: No details on image processing capabilities or limitations (Source: Google Dev Docs Style: Provide Comprehensive Context)
+- **Suggestion:** Add brief explanation of supported image types, processing method. Before: "Process and analyze visual input and generate text and code from images." → After: "Process and analyze visual input from JPG, PNG, and GIF files. Can extract text, describe content, and generate contextual responses or code based on ..."
+- **Context:** `Process and analyze visual input and generate text and code from images.`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `mcp.mdx` (Line 5)
+- **Category:** clarity
+- **Issue:** Sentence has 41 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to con...`
+
+---
+
+
+#### Ai Cognitive Load
+
+- **File:** `mcp.mdx` (Line 5)
+- **Category:** clarity
+- **Issue:** [Cognitive Load] Users may struggle to quickly understand the core concept. Evidence: Analogy spans multiple sentences, increasing cognitive processing complexity (Source: Nielsen Norman Group: Cognitive Load Principles)
+- **Suggestion:** Simplify analogy, use more direct language. Before: "Think of MCP like a USB-C port for AI applications..." → After: "MCP is a universal connection protocol for AI models, similar to how USB-C standardizes device connections."
+- **Context:** `Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect your devices to various peripherals and accessories, MCP provides a standardized way to connect`
+
+---
+
+
+#### Ai Unclear Heading
+
+- **File:** `mcp.mdx` (Line 7)
+- **Category:** clarity
+- **Issue:** [Unclear Heading] Users cannot determine what 'building MCP products' entails. Evidence: Heading lacks specific information about product development process (Source: Information Scent Theory (Pirolli & Card))
+- **Suggestion:** Add descriptive subheading or clarifying context. Before: "Build your own MCP products" → After: "Build your own MCP products: Developer Guide for Protocol Implementation"
+- **Context:** `Build your own MCP products`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 102)
+- **Category:** clarity
+- **Issue:** Sentence has 36 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `  For Vertex AI users, Claude Code will not automatically upgrade from Haiku 3.5 to Haiku 4.5. To ma...`
+
+---
+
+
+#### Heading Skip
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 41)
+- **Category:** ia
+- **Issue:** Heading skips from H1 to H3
+- **Suggestion:** Use H2 instead to maintain hierarchy
+- **Context:** `2. Request model access`
+
+---
+
+
+#### Heading Skip
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 92)
+- **Category:** ia
+- **Issue:** Heading skips from H1 to H3
+- **Suggestion:** Use H2 instead to maintain hierarchy
+- **Context:** `5. Model configuration`
+
+---
+
+
+#### Ai Missing Context
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 23)
+- **Category:** clarity
+- **Issue:** [Missing Context] Developers will be uncertain about exact authentication steps. Evidence: No specific steps provided for authentication process (Source: Google Dev Docs Style Guide: Procedural Clarity)
+- **Suggestion:** Add concrete authentication steps or reference a specific documentation section. Before: "Claude Code uses standard Google Cloud authentication." → After: "Claude Code uses standard Google Cloud authentication via these methods: (1) Application Default Credentials, (2) Service Account Key, (3) gcloud CLI ..."
+- **Context:** `Claude Code uses standard Google Cloud authentication.`
+
+---
+
+
+#### Ai Missing Context
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 65)
+- **Category:** clarity
+- **Issue:** [Missing Context] Developers will not know the precise steps to create a custom role. Evidence: No guidance on how to actually create a custom IAM role (Source: Redish: Task-Oriented Documentation Principle)
+- **Suggestion:** Add specific CLI or Console steps for role creation. Before: "Create a custom role with only the permissions above." → After: "Create a custom IAM role via Google Cloud Console: (1) Navigate to IAM & Admin > Roles, (2) Click 'Create Role', (3) Add only aiplatform.endpoints.pre..."
+- **Context:** `Create a custom role with only the permissions above.`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/plugins.mdx` (Line 9)
+- **Category:** clarity
+- **Issue:** Sentence has 39 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `Plugins let you extend Claude Code with custom functionality that can be shared across projects and ...`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/plugins.mdx` (Line 13)
+- **Category:** clarity
+- **Issue:** Sentence has 32 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `Let's create a simple greeting plugin to get you familiar with the plugin system. We'll build a work...`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/plugins.mdx` (Line 234)
+- **Category:** clarity
+- **Issue:** Sentence has 31 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `To add Skills to your plugin, create a `skills/` directory at your plugin root and add Skill folders...`
+
+---
+
+
+#### Heading Skip
+
+- **File:** `claude-code/plugins.mdx` (Line 120)
+- **Category:** ia
+- **Issue:** Heading skips from H1 to H3
+- **Suggestion:** Use H2 instead to maintain hierarchy
+- **Context:** `Plugin structure overview`
+
+---
+
+
+#### Ai Cognitive Load
+
+- **File:** `claude-code/plugins.mdx` (Line 6)
+- **Category:** clarity
+- **Issue:** [Cognitive Load] Users may struggle to quickly understand the core plugin concept. Evidence: Sentence complexity exceeds recommended cognitive load threshold (Source: Nielsen Norman Group: Cognitive Load Principles)
+- **Suggestion:** Break into shorter, clearer sentences. Before: "Plugins let you extend Claude Code with custom functionality that can be shared across projects and ..." → After: "Plugins extend Claude Code. You can create custom functionality and share it across projects and teams."
+- **Context:** `Plugins let you extend Claude Code with custom functionality that can be shared across projects and teams.`
+
+---
+
+
+#### Ai Missing Context
+
+- **File:** `claude-code/plugins.mdx` (Line 11)
+- **Category:** clarity
+- **Issue:** [Missing Context] Beginners won't know if they're qualified to proceed. Evidence: Lacks specific definition of required command-line knowledge (Source: Redish: Task-Oriented Writing)
+- **Suggestion:** Add brief clarification of expected command-line skills. Before: "Basic familiarity with command-line tools" → After: "Basic command-line skills (e.g., creating directories, navigating folders, running basic commands)"
+- **Context:** `Basic familiarity with command-line tools`
+
+---
+
+
+#### Ai Unclear Heading
+
+- **File:** `claude-code/plugins.mdx` (Line 64)
+- **Category:** clarity
+- **Issue:** [Unclear Heading] Users may not understand depth of linked documentation. Evidence: Link text doesn't clearly indicate comprehensive content (Source: Pirolli & Card: Information Scent Principles)
+- **Suggestion:** Create more descriptive link text. Before: "[Plugin marketplaces]" → After: "[Comprehensive Marketplace Management Guide]"
+- **Context:** `For detailed marketplace management including Git repositories, local development, and team distribution, see [Plugin marketplaces]`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/data-usage.mdx` (Line 24)
+- **Category:** clarity
+- **Issue:** Sentence has 64 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `If you explicitly opt in to methods to provide us with materials to train on, such as via the [Devel...`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/data-usage.mdx` (Line 28)
+- **Category:** clarity
+- **Issue:** Sentence has 34 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `If you choose to send us feedback about Claude Code using the `/bug` command, we may use your feedba...`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/data-usage.mdx` (Line 32)
+- **Category:** clarity
+- **Issue:** Sentence has 90 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `When you see the "How is Claude doing this session?" prompt in Claude Code, responding to this surve...`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/data-usage.mdx` (Line 58)
+- **Category:** clarity
+- **Issue:** Sentence has 58 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `Claude Code is installed from [NPM](https://www.npmjs.com/package/@anthropic-ai/claude-code). Claude...`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/data-usage.mdx` (Line 80)
+- **Category:** clarity
+- **Issue:** Sentence has 63 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `Claude Code connects from users' machines to the Statsig service to log operational metrics such as ...`
+
+---
+
+
+#### Sentence Too Long
+
+- **File:** `claude-code/data-usage.mdx` (Line 82)
+- **Category:** clarity
+- **Issue:** Sentence has 45 words (recommend <30)
+- **Suggestion:** Break into shorter sentences for better readability
+- **Context:** `Claude Code connects from users' machines to Sentry for operational error logging. The data is encry...`
+
+---
+
+
+### Low Priority (4614 issues)
+
+
+#### Line Too Long
+
+- **File:** `get-started.mdx` (Line 16)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `        Get your API key from the [Claude Console](https://console.anthropic.com/settings/keys) and ...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `get-started.mdx` (Line 71)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `        Get your API key from the [Claude Console](https://console.anthropic.com/settings/keys) and ...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `get-started.mdx` (Line 125)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `        Get your API key from the [Claude Console](https://console.anthropic.com/settings/keys) and ...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `get-started.mdx` (Line 214)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `        Get your API key from the [Claude Console](https://console.anthropic.com/settings/keys) and ...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `get-started.mdx` (Line 222)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `        Add the Anthropic Java SDK to your project. First find the current version on [Maven Central...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `get-started.mdx` (Line 316)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  <Card title="Claude Cookbook" icon="hat-chef" href="https://github.com/anthropics/anthropic-cookbo...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `intro.mdx` (Line 3)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `description: "Claude is a highly performant, trustworthy, and intelligent AI platform built by Anthr...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `intro.mdx` (Line 6)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `**Claude Sonnet 4.5** - Our smartest model. Best for complex agents, coding, and most advanced tasks...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `intro.mdx` (Line 7)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `**Claude Haiku 4.5** - Our fastest model with near-frontier intelligence. [Learn more](https://www.a...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `intro.mdx` (Line 8)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `**Claude Opus 4.1** - Exceptional model for specialized tasks requiring advanced reasoning. [Learn m...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `intro.mdx` (Line 23)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  <Card title="Learn about Claude" icon="head-side-gear" href="/en/docs/about-claude/models/overview...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `intro.mdx` (Line 40)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `    Enjoy easier, more powerful prompting in your browser with the Workbench and prompt generator to...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `intro.mdx` (Line 47)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  <Card title="Claude Cookbook" icon="hat-chef" href="https://github.com/anthropics/anthropic-cookbo...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `intro.mdx` (Line 59)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  <Card title="Text and code generation" icon="input-text" href="/en/docs/build-with-claude/text-gen...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `mcp.mdx` (Line 5)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to con...`
+
+---
+
+
+#### Weak Language
+
+- **File:** `mcp.mdx` (Line 5)
+- **Category:** style
+- **Issue:** Avoid weak or unnecessary word: "just"
+- **Suggestion:** Remove or replace with more precise language
+- **Context:** `Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect your devices to various peripherals and accessories, MCP provides a standardized way to connect AI models to different data sources and tools.`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `mcp.mdx` (Line 10)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  Learn more about the protocol, how to build servers and clients, and discover those made by others...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `mcp.mdx` (Line 24)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  <Card title="MCP in Claude.ai" icon="comments" href="https://support.claude.com/en/articles/111751...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `mcp.mdx` (Line 28)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  <Card title="MCP in Claude Desktop" icon="desktop" href="https://support.claude.com/en/articles/10...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 3)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `description: "Learn about configuring Claude Code through Google Vertex AI, including setup, IAM con...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 17)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `Claude Code can be used with both Vertex AI [global](https://cloud.google.com/blog/products/ai-machi...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 20)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  Vertex AI may not support the Claude Code default models on all regions. You may need to switch to...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 24)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  Vertex AI may not support the Claude Code default models on global endpoints. You may need to swit...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 54)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `For more information, see [Google Cloud authentication documentation](https://cloud.google.com/docs/...`
+
+---
+
+
+#### Line Too Long
+
+- **File:** `claude-code/google-vertex-ai.mdx` (Line 57)
+- **Category:** clarity
+- **Issue:** Line exceeds 100 characters
+- **Suggestion:** Break into shorter lines or sentences
+- **Context:** `  When authenticating, Claude Code will automatically use the project ID from the `ANTHROPIC_VERTEX_...`
+
+---
+

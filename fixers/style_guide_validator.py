@@ -14,6 +14,8 @@ Version: 1.0.0
 
 import re
 import yaml
+import time
+import json
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
@@ -29,6 +31,33 @@ load_dotenv()
 from .base import BaseFixer
 from core.models import Issue, FixResult
 from core.config import Config
+
+
+def sanitize_content_for_ai(content: str) -> str:
+    """
+    Sanitize content before sending to AI API to prevent JSON parsing errors.
+
+    Handles:
+    - Control characters that break JSON
+    - Escape sequences
+    - Null bytes
+    - Invalid Unicode
+    """
+    # Remove null bytes
+    content = content.replace('\x00', '')
+
+    # Replace other control characters (except newlines, tabs, carriage returns)
+    control_chars = ''.join(chr(i) for i in range(32) if i not in (9, 10, 13))
+    translator = str.maketrans('', '', control_chars)
+    content = content.translate(translator)
+
+    # Normalize line endings
+    content = content.replace('\r\n', '\n').replace('\r', '\n')
+
+    # Remove invalid Unicode sequences
+    content = content.encode('utf-8', errors='ignore').decode('utf-8', errors='ignore')
+
+    return content
 
 
 @dataclass
@@ -397,8 +426,16 @@ class StyleGuideValidationFixer(BaseFixer):
         if not self.ai_client or not body.strip():
             return issues
 
-        # Prepare content for AI analysis
-        analysis_prompt = f"""You are a technical documentation quality analyzer for Claude Documentation.
+        max_retries = 3
+        base_delay = 2  # seconds
+
+        for attempt in range(max_retries):
+            try:
+                # Sanitize content before sending to prevent JSON parsing errors
+                sanitized_body = sanitize_content_for_ai(body[:3000])
+
+                # Prepare content for AI analysis
+                analysis_prompt = f"""You are a technical documentation quality analyzer for Claude Documentation.
 
 Analyze this documentation content against these style guide criteria:
 
@@ -420,7 +457,7 @@ Analyze this documentation content against these style guide criteria:
 - Keep language precise and technical where appropriate
 
 Content to analyze:
-{body[:3000]}{'...' if len(body) > 3000 else ''}
+{sanitized_body}{'...' if len(body) > 3000 else ''}
 
 Respond ONLY with a JSON array of issues found. Each issue should have:
 - "type": One of ["voice", "tone", "context", "clarity", "style"]
@@ -443,51 +480,83 @@ Example response format:
 ]
 """
 
-        try:
-            response = self.ai_client.messages.create(
-                model=self.ai_model,
-                max_tokens=2000,
-                messages=[{
-                    "role": "user",
-                    "content": analysis_prompt
-                }]
-            )
+                response = self.ai_client.messages.create(
+                    model=self.ai_model,
+                    max_tokens=2000,
+                    messages=[{
+                        "role": "user",
+                        "content": analysis_prompt
+                    }]
+                )
 
-            # Parse AI response
-            import json
-            ai_response = response.content[0].text.strip()
+                # Parse AI response
+                ai_response = response.content[0].text.strip()
 
-            # Extract JSON array (handle markdown code blocks)
-            if '```json' in ai_response:
-                ai_response = ai_response.split('```json')[1].split('```')[0].strip()
-            elif '```' in ai_response:
-                ai_response = ai_response.split('```')[1].split('```')[0].strip()
+                # Extract JSON array (handle markdown code blocks and explanatory text)
+                if '```json' in ai_response:
+                    ai_response = ai_response.split('```json')[1].split('```')[0].strip()
+                elif '```' in ai_response:
+                    ai_response = ai_response.split('```')[1].split('```')[0].strip()
 
-            ai_issues = json.loads(ai_response)
+                # Try to find JSON array with regex as fallback
+                if not ai_response or not ai_response.startswith('['):
+                    import re
+                    json_match = re.search(r'\[.*?\]', ai_response, re.DOTALL)
+                    if json_match:
+                        ai_response = json_match.group()
+                    else:
+                        # AI returned no issues (empty or explanatory text)
+                        return issues
 
-            # Convert AI issues to Issue objects
-            for ai_issue in ai_issues:
-                # Find approximate line number from line_hint
-                line_num = None
-                if 'line_hint' in ai_issue and ai_issue['line_hint']:
-                    hint_pos = body.find(ai_issue['line_hint'][:50])
-                    if hint_pos >= 0:
-                        line_num = content[:hint_pos].count('\n') + 1
+                # Handle empty arrays gracefully
+                ai_response = ai_response.strip()
+                if ai_response == '[]' or not ai_response:
+                    return issues
 
-                issues.append(Issue(
-                    severity=ai_issue.get('severity', 'medium'),
-                    category='style',
-                    file_path=file_path,
-                    line_number=line_num,
-                    issue_type=f"AI-{ai_issue.get('type', 'quality').upper()}",
-                    description=ai_issue.get('description', 'Quality issue detected by AI'),
-                    suggestion=ai_issue.get('suggestion', 'Review and improve'),
-                    context=ai_issue.get('line_hint'),
-                    auto_fixable=False  # Human judgment required
-                ))
+                ai_issues = json.loads(ai_response)
 
-        except Exception as e:
-            print(f"AI analysis error for {file_path}: {e}")
+                # Convert AI issues to Issue objects
+                for ai_issue in ai_issues:
+                    # Find approximate line number from line_hint
+                    line_num = None
+                    if 'line_hint' in ai_issue and ai_issue['line_hint']:
+                        hint_pos = body.find(ai_issue['line_hint'][:50])
+                        if hint_pos >= 0:
+                            line_num = content[:hint_pos].count('\n') + 1
+
+                    issues.append(Issue(
+                        severity=ai_issue.get('severity', 'medium'),
+                        category='style',
+                        file_path=file_path,
+                        line_number=line_num,
+                        issue_type=f"AI-{ai_issue.get('type', 'quality').upper()}",
+                        description=ai_issue.get('description', 'Quality issue detected by AI'),
+                        suggestion=ai_issue.get('suggestion', 'Review and improve'),
+                        context=ai_issue.get('line_hint'),
+                        auto_fixable=False  # Human judgment required
+                    ))
+
+                # Success - break retry loop
+                return issues
+
+            except anthropic.RateLimitError as e:
+                # Rate limit error (529) - retry with exponential backoff
+                if attempt < max_retries - 1:
+                    delay = base_delay * (2 ** attempt)  # Exponential backoff: 2s, 4s, 8s
+                    print(f"  ⏳ Rate limit hit for {file_path}, retrying in {delay}s (attempt {attempt + 1}/{max_retries})...")
+                    time.sleep(delay)
+                else:
+                    print(f"  ⚠️  AI analysis failed for {file_path} after {max_retries} retries: Rate limit exceeded")
+
+            except json.JSONDecodeError as e:
+                # JSON parsing error - log and skip
+                print(f"  ⚠️  AI analysis failed for {file_path}: JSON parsing error - {str(e)}")
+                return issues
+
+            except Exception as e:
+                # Other errors - log and skip
+                print(f"  ⚠️  AI analysis error for {file_path}: {e}")
+                return issues
 
         return issues
 

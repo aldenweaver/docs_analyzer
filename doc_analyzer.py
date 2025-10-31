@@ -18,6 +18,7 @@ import re
 import json
 import yaml
 import hashlib
+import time
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Set, Any
 from dataclasses import dataclass, field
@@ -30,6 +31,33 @@ from difflib import SequenceMatcher
 # Load environment variables from .env file
 from dotenv import load_dotenv
 load_dotenv()
+
+
+def sanitize_content_for_ai(content: str) -> str:
+    """
+    Sanitize content before sending to AI API to prevent JSON parsing errors.
+
+    Handles:
+    - Control characters that break JSON
+    - Escape sequences
+    - Null bytes
+    - Invalid Unicode
+    """
+    # Remove null bytes
+    content = content.replace('\x00', '')
+
+    # Replace other control characters (except newlines, tabs, carriage returns)
+    control_chars = ''.join(chr(i) for i in range(32) if i not in (9, 10, 13))
+    translator = str.maketrans('', '', control_chars)
+    content = content.translate(translator)
+
+    # Normalize line endings
+    content = content.replace('\r\n', '\n').replace('\r', '\n')
+
+    # Remove invalid Unicode sequences
+    content = content.encode('utf-8', errors='ignore').decode('utf-8', errors='ignore')
+
+    return content
 
 # Try to import optional dependencies
 try:
@@ -387,12 +415,17 @@ class SemanticAnalyzer:
         if not self.enabled:
             return
 
-        try:
-            # Sample content to stay within limits
-            lines = content.split('\n')
-            sample = '\n'.join(lines[:200])  # First 200 lines
+        max_retries = 3
+        base_delay = 2  # seconds
 
-            prompt = f"""You are a technical documentation analyst. Analyze this documentation for clarity issues using evidence-based criteria.
+        for attempt in range(max_retries):
+            try:
+                # Sample and sanitize content to stay within limits and prevent JSON errors
+                lines = content.split('\n')
+                sample = '\n'.join(lines[:200])  # First 200 lines
+                sample = sanitize_content_for_ai(sample)  # Sanitize before sending
+
+                prompt = f"""You are a technical documentation analyst. Analyze this documentation for clarity issues using evidence-based criteria.
 
 Documentation file: {file_path}
 
@@ -424,51 +457,85 @@ For EVERY issue found (prioritize by severity, but include ALL), provide:
 
 Prioritize issues by user impact. Return ONLY valid JSON array."""
 
-            message = self.claude_client.messages.create(
-                model=self.model,
-                max_tokens=self.max_tokens,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            
-            response_text = message.content[0].text
-            
-            # Try to extract JSON
-            json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
-            if json_match:
-                ai_issues = json.loads(json_match.group())
+                message = self.claude_client.messages.create(
+                    model=self.model,
+                    max_tokens=self.max_tokens,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+
+                response_text = message.content[0].text.strip()
+
+                # Extract JSON array (handle markdown code blocks and explanatory text)
+                if '```json' in response_text:
+                    response_text = response_text.split('```json')[1].split('```')[0].strip()
+                elif '```' in response_text:
+                    response_text = response_text.split('```')[1].split('```')[0].strip()
+
+                # Try to extract JSON array with regex
+                json_match = re.search(r'\[.*?\]', response_text, re.DOTALL)
+                if not json_match:
+                    # AI returned no issues or invalid response
+                    return
+
+                response_text = json_match.group().strip()
+
+                # Handle empty arrays gracefully
+                if response_text == '[]' or not response_text:
+                    return
+
+                ai_issues = json.loads(response_text)
 
                 for issue in ai_issues:  # Process all issues
-                    # Build detailed description with evidence
-                    description = (
-                        f"[{issue.get('issue_type', 'clarity_issue').replace('_', ' ').title()}] "
-                        f"{issue.get('user_impact', 'Impacts user comprehension')}. "
-                        f"Evidence: {issue.get('evidence', 'See citation')} "
-                        f"(Source: {issue.get('citation', 'Documentation research')})"
-                    )
+                        # Build detailed description with evidence
+                        description = (
+                            f"[{issue.get('issue_type', 'clarity_issue').replace('_', ' ').title()}] "
+                            f"{issue.get('user_impact', 'Impacts user comprehension')}. "
+                            f"Evidence: {issue.get('evidence', 'See citation')} "
+                            f"(Source: {issue.get('citation', 'Documentation research')})"
+                        )
 
-                    # Build actionable suggestion with before/after
-                    before_text = issue.get('before', issue.get('quoted_text', ''))[:100]
-                    after_text = issue.get('after', '')[:150]
+                        # Build actionable suggestion with before/after
+                        before_text = issue.get('before', issue.get('quoted_text', ''))[:100]
+                        after_text = issue.get('after', '')[:150]
 
-                    suggestion = (
-                        f"{issue.get('fix_approach', 'Review and improve')}. "
-                        f"Before: \"{before_text}{'...' if len(before_text) == 100 else ''}\" "
-                        f"→ After: \"{after_text}{'...' if len(after_text) == 150 else ''}\""
-                    )
+                        suggestion = (
+                            f"{issue.get('fix_approach', 'Review and improve')}. "
+                            f"Before: \"{before_text}{'...' if len(before_text) == 100 else ''}\" "
+                            f"→ After: \"{after_text}{'...' if len(after_text) == 150 else ''}\""
+                        )
 
-                    issues.append(Issue(
-                        severity=issue.get('severity', 'medium'),
-                        category='clarity',
-                        file_path=file_path,
-                        line_number=issue.get('line_number'),
-                        issue_type=f"ai_{issue.get('issue_type', 'clarity_check')}",
-                        description=description,
-                        suggestion=suggestion,
-                        context=issue.get('quoted_text', '')[:200]  # Add quoted text as context
-                    ))
-        
-        except Exception as e:
-            print(f"  ⚠️  AI clarity check failed for {file_path}: {str(e)}")
+                        issues.append(Issue(
+                            severity=issue.get('severity', 'medium'),
+                            category='clarity',
+                            file_path=file_path,
+                            line_number=issue.get('line_number'),
+                            issue_type=f"ai_{issue.get('issue_type', 'clarity_check')}",
+                            description=description,
+                            suggestion=suggestion,
+                            context=issue.get('quoted_text', '')[:200]  # Add quoted text as context
+                        ))
+
+                # Success - break retry loop
+                return
+
+            except anthropic.RateLimitError as e:
+                # Rate limit error (529) - retry with exponential backoff
+                if attempt < max_retries - 1:
+                    delay = base_delay * (2 ** attempt)  # Exponential backoff: 2s, 4s, 8s
+                    print(f"  ⏳ Rate limit hit for {file_path}, retrying in {delay}s (attempt {attempt + 1}/{max_retries})...")
+                    time.sleep(delay)
+                else:
+                    print(f"  ⚠️  AI clarity check failed for {file_path} after {max_retries} retries: Rate limit exceeded")
+
+            except json.JSONDecodeError as e:
+                # JSON parsing error - log and skip (content sanitization should prevent most of these)
+                print(f"  ⚠️  AI clarity check failed for {file_path}: JSON parsing error - {str(e)}")
+                return
+
+            except Exception as e:
+                # Other errors - log and skip
+                print(f"  ⚠️  AI clarity check failed for {file_path}: {str(e)}")
+                return
     
     def analyze_semantic_gaps(self, doc_structure: Dict[str, Any], issues: List[Issue], insights: List[str]):
         """Identify conceptual gaps in documentation coverage with evidence-based analysis"""
@@ -530,14 +597,30 @@ Cite SPECIFIC files from the provided list. Return ONLY valid JSON array."""
                 max_tokens=self.max_tokens,
                 messages=[{"role": "user", "content": prompt}]
             )
-            
-            response_text = message.content[0].text
-            
-            json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
-            if json_match:
-                gaps = json.loads(json_match.group())
 
-                for gap in gaps:  # Process all gaps
+            response_text = message.content[0].text.strip()
+
+            # Extract JSON array (handle markdown code blocks and explanatory text)
+            if '```json' in response_text:
+                response_text = response_text.split('```json')[1].split('```')[0].strip()
+            elif '```' in response_text:
+                response_text = response_text.split('```')[1].split('```')[0].strip()
+
+            # Try to extract JSON array with regex
+            json_match = re.search(r'\[.*?\]', response_text, re.DOTALL)
+            if not json_match:
+                # AI returned no gaps
+                return
+
+            response_text = json_match.group().strip()
+
+            # Handle empty arrays gracefully
+            if response_text == '[]' or not response_text:
+                return
+
+            gaps = json.loads(response_text)
+
+            for gap in gaps:  # Process all gaps
                     # Build evidence-based description
                     affected = gap.get('affected_files', [])
                     affected_str = ', '.join(affected[:3]) if affected else 'Multiple files'
