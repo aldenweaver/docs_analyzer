@@ -12,7 +12,7 @@ Version: 1.0.0
 
 import re
 import os
-from typing import List, Set, Dict
+from typing import List, Set, Dict, Optional
 from pathlib import Path
 
 from .base import BaseFixer
@@ -169,7 +169,7 @@ class BrokenLinkDetector(BaseFixer):
 
         self.file_anchors[file_path] = anchors
 
-    def _validate_internal_link(self, current_file: str, link_url: str, link_text: str, line_number: int) -> Issue | None:
+    def _validate_internal_link(self, current_file: str, link_url: str, link_text: str, line_number: int) -> Optional[Issue]:
         """Validate an internal link and return Issue if broken"""
 
         # Split anchor from path
