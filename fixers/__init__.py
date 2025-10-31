@@ -11,6 +11,21 @@ from .code_blocks import CodeBlockFixer
 from .github_informed_fixer import GitHubInformedFixer
 from .style_guide_validator import StyleGuideValidationFixer
 
+# High-impact fixers from comprehensive research
+from .code_language_tags import CodeLanguageTagFixer
+from .heading_hierarchy import HeadingHierarchyFixer
+from .link_text_improver import LinkTextImprover
+from .long_sentence_splitter import LongSentenceSplitter
+from .passive_voice_converter import PassiveVoiceConverter
+from .missing_prerequisites_detector import MissingPrerequisitesDetector
+
+# Style consistency fixers from style-consistency-analysis
+from .capitalization_fixer import CapitalizationFixer
+from .terminology_consistency_fixer import TerminologyConsistencyFixer
+from .callout_standardization_fixer import CalloutStandardizationFixer
+from .broken_link_detector import BrokenLinkDetector
+from .production_code_validator import ProductionCodeValidator
+
 __all__ = [
     'BaseFixer',
     'FrontmatterFixer',
@@ -18,5 +33,18 @@ __all__ = [
     'URLFixer',
     'CodeBlockFixer',
     'GitHubInformedFixer',
-    'StyleGuideValidationFixer'
+    'StyleGuideValidationFixer',
+    # High-impact fixers
+    'CodeLanguageTagFixer',
+    'HeadingHierarchyFixer',
+    'LinkTextImprover',
+    'LongSentenceSplitter',
+    'PassiveVoiceConverter',
+    'MissingPrerequisitesDetector',
+    # Style consistency fixers
+    'CapitalizationFixer',
+    'TerminologyConsistencyFixer',
+    'CalloutStandardizationFixer',
+    'BrokenLinkDetector',
+    'ProductionCodeValidator',
 ]

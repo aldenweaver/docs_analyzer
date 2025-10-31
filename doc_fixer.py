@@ -27,7 +27,20 @@ from fixers import (
     URLFixer,
     CodeBlockFixer,
     GitHubInformedFixer,
-    StyleGuideValidationFixer
+    StyleGuideValidationFixer,
+    # High-impact fixers
+    CodeLanguageTagFixer,
+    HeadingHierarchyFixer,
+    LinkTextImprover,
+    LongSentenceSplitter,
+    PassiveVoiceConverter,
+    MissingPrerequisitesDetector,
+    # Style consistency fixers
+    CapitalizationFixer,
+    TerminologyConsistencyFixer,
+    CalloutStandardizationFixer,
+    BrokenLinkDetector,
+    ProductionCodeValidator,
 )
 import os
 
@@ -51,7 +64,7 @@ class DocFixer:
         if env_enable in ['false', '0', 'no']:
             enable_style_guide = False
 
-        # Initialize core fixers
+        # Initialize core fixers (always enabled)
         self.fixers = [
             FrontmatterFixer(self.config),
             TerminologyFixer(self.config),
@@ -67,6 +80,52 @@ class DocFixer:
                 print("✓ Style Guide Validator enabled (with Claude AI analysis)")
             except Exception as e:
                 print(f"⚠ Warning: Could not enable Style Guide Validator: {e}")
+
+        # High-impact fixers (toggleable via environment variables)
+        if os.getenv('ENABLE_CODE_LANGUAGE_FIXER', 'true').lower() not in ['false', '0', 'no']:
+            self.fixers.append(CodeLanguageTagFixer(self.config))
+            print("✓ Code Language Tag Fixer enabled")
+
+        if os.getenv('ENABLE_HEADING_HIERARCHY_FIXER', 'true').lower() not in ['false', '0', 'no']:
+            self.fixers.append(HeadingHierarchyFixer(self.config))
+            print("✓ Heading Hierarchy Fixer enabled")
+
+        if os.getenv('ENABLE_LINK_TEXT_IMPROVER', 'false').lower() not in ['false', '0', 'no']:
+            self.fixers.append(LinkTextImprover(self.config))
+            print("✓ Link Text Improver enabled (manual fix required)")
+
+        if os.getenv('ENABLE_LONG_SENTENCE_SPLITTER', 'false').lower() not in ['false', '0', 'no']:
+            self.fixers.append(LongSentenceSplitter(self.config))
+            print("✓ Long Sentence Splitter enabled")
+
+        if os.getenv('ENABLE_PASSIVE_VOICE_CONVERTER', 'false').lower() not in ['false', '0', 'no']:
+            self.fixers.append(PassiveVoiceConverter(self.config))
+            print("✓ Passive Voice Converter enabled (manual fix required)")
+
+        if os.getenv('ENABLE_MISSING_PREREQUISITES_DETECTOR', 'false').lower() not in ['false', '0', 'no']:
+            self.fixers.append(MissingPrerequisitesDetector(self.config))
+            print("✓ Missing Prerequisites Detector enabled (manual fix required)")
+
+        # Style consistency fixers (toggleable via environment variables)
+        if os.getenv('ENABLE_CAPITALIZATION_FIXER', 'true').lower() not in ['false', '0', 'no']:
+            self.fixers.append(CapitalizationFixer(self.config))
+            print("✓ Capitalization Fixer enabled")
+
+        if os.getenv('ENABLE_TERMINOLOGY_CONSISTENCY_FIXER', 'false').lower() not in ['false', '0', 'no']:
+            self.fixers.append(TerminologyConsistencyFixer(self.config))
+            print("✓ Terminology Consistency Fixer enabled")
+
+        if os.getenv('ENABLE_CALLOUT_STANDARDIZATION_FIXER', 'false').lower() not in ['false', '0', 'no']:
+            self.fixers.append(CalloutStandardizationFixer(self.config))
+            print("✓ Callout Standardization Fixer enabled")
+
+        if os.getenv('ENABLE_BROKEN_LINK_DETECTOR', 'false').lower() not in ['false', '0', 'no']:
+            self.fixers.append(BrokenLinkDetector(self.config))
+            print("✓ Broken Link Detector enabled (manual fix required)")
+
+        if os.getenv('ENABLE_PRODUCTION_CODE_VALIDATOR', 'false').lower() not in ['false', '0', 'no']:
+            self.fixers.append(ProductionCodeValidator(self.config))
+            print("✓ Production Code Validator enabled (manual fix required)")
 
         self.stats = FixerStats()
 
