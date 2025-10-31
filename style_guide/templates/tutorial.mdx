@@ -1,0 +1,315 @@
+---
+title: "[Action Verb] [What You'll Build]"
+description: "[1-2 sentences describing what you'll learn and build in this tutorial]"
+---
+
+[Opening paragraph: 2-3 sentences explaining what users will learn and build by completing this tutorial, and why it's valuable]
+
+## What You'll Build
+
+By the end of this tutorial, you'll have:
+- [Specific outcome 1]
+- [Specific outcome 2]
+- [Specific outcome 3]
+
+**Time to complete**: Approximately [X] minutes
+
+## What You'll Learn
+
+This tutorial teaches you how to:
+- [Skill or concept 1]
+- [Skill or concept 2]
+- [Skill or concept 3]
+
+## Prerequisites
+
+Before starting this tutorial, you should:
+- [Prerequisite knowledge with link]
+- [Another prerequisite with link]
+- [Foundational concept with link]
+
+You'll need:
+- [Required tool or software]
+- [Required account or API key]
+- [Required development environment]
+
+<Note>
+[Helpful note about prerequisites or setup, e.g., "This tutorial uses Python 3.9+. Check your version with `python --version`"]
+</Note>
+
+## Overview
+
+Here's what we'll build:
+
+[Brief description or diagram of the final result]
+
+We'll break this into [X] steps:
+1. [High-level step 1]
+2. [High-level step 2]
+3. [High-level step 3]
+4. [High-level step 4]
+
+Let's get started!
+
+---
+
+## Step 1: [First Major Step]
+
+[Explain what you'll accomplish in this step and why it's important]
+
+### [Substep 1.1 if needed]
+
+[Detailed explanation and instructions]
+
+```python
+# Code for step 1
+# Include explanatory comments
+
+import anthropic
+
+# Initialize the client
+client = anthropic.Anthropic(
+    api_key="your-api-key-here"
+)
+```
+
+**What's happening here?**
+- [Explanation of code line 1]
+- [Explanation of code line 2]
+- [Explanation of key concept]
+
+### Verify Step 1
+
+[How to check that this step worked]
+
+Run the code:
+```bash
+python step1.py
+```
+
+You should see:
+```
+[Expected output]
+```
+
+<Tip>
+[Helpful tip related to this step]
+</Tip>
+
+---
+
+## Step 2: [Second Major Step]
+
+[Explain what you'll accomplish in this step and how it builds on Step 1]
+
+```python
+# Code for step 2
+# Build on the previous code
+
+def create_message(prompt):
+    """Helper function to create messages."""
+    response = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=1024,
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    return response
+
+# Test the function
+result = create_message("Hello, Claude!")
+print(result.content)
+```
+
+**What's happening here?**
+- [Explanation of new concept introduced]
+- [Why this approach was chosen]
+- [How this connects to the overall goal]
+
+### Verify Step 2
+
+[Verification instructions]
+
+<Warning>
+[Common mistake or gotcha users might encounter in this step]
+</Warning>
+
+---
+
+## Step 3: [Third Major Step]
+
+[Continue the pattern for remaining steps]
+
+[Detailed instructions and code]
+
+```python
+# Code for step 3
+# Continue building the application
+
+[code here]
+```
+
+---
+
+## Step 4: [Final Step]
+
+[Bring everything together]
+
+Here's the complete application:
+
+```python
+# complete_application.py
+# Full working code with all steps combined
+
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key="your-api-key-here"
+)
+
+def create_message(prompt):
+    """Create a message using Claude."""
+    response = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=1024,
+        messages=[
+            {"role": "user", "content": prompt}
+        ]
+    )
+    return response
+
+def main():
+    """Main application logic."""
+    # [Application logic]
+    result = create_message("Your prompt here")
+    print(result.content)
+
+if __name__ == "__main__":
+    main()
+```
+
+### Test the Complete Application
+
+Run the full application:
+
+```bash
+python complete_application.py
+```
+
+Expected output:
+```
+[Complete expected output]
+```
+
+**Congratulations!** You've successfully [accomplished the goal].
+
+---
+
+## What You've Learned
+
+In this tutorial, you:
+- ✅ [Learned skill 1]
+- ✅ [Learned skill 2]
+- ✅ [Learned skill 3]
+- ✅ [Built specific thing]
+
+## Next Steps
+
+Now that you've completed this tutorial, you can:
+
+### Extend This Application
+- [Suggested enhancement 1]
+- [Suggested enhancement 2]
+- [Suggested enhancement 3]
+
+### Learn More
+- [Advanced Tutorial](../tutorials/advanced) - Build on what you learned
+- [Related Concept](../concepts/concept) - Understand the theory
+- [API Reference](../api/endpoint) - Explore all available options
+
+### Production Considerations
+
+Before deploying this to production, consider:
+- [Production consideration 1, e.g., error handling]
+- [Production consideration 2, e.g., rate limiting]
+- [Production consideration 3, e.g., security]
+
+See [Production Best Practices](../guides/production) for details.
+
+## Troubleshooting
+
+### Issue: [Common Problem 1]
+
+**Symptom**: [What the user sees]
+
+**Cause**: [Why this happens]
+
+**Solution**:
+```python
+# Fixed code
+[solution]
+```
+
+### Issue: [Common Problem 2]
+
+**Symptom**: [What the user sees]
+
+**Cause**: [Why this happens]
+
+**Solution**: [How to fix it]
+
+## Complete Code
+
+You can find the complete working code for this tutorial at:
+- [GitHub repository link if available]
+- [Code download link if available]
+
+## Related Tutorials
+
+- [Beginner Tutorial](./beginner-tutorial) - If this was too advanced
+- [Advanced Tutorial](./advanced-tutorial) - Next level
+- [Related Tutorial](./related-tutorial) - Similar topic
+
+## Related Topics
+
+- [Conceptual Overview](../concepts/concept) - Theory behind this tutorial
+- [How-To Guide](../guides/guide) - Quick task instructions
+- [API Reference](../api/endpoint) - Detailed API documentation
+- [Best Practices](../guides/best-practices) - Production recommendations
+- [Troubleshooting](../troubleshooting/common-issues) - Debug common issues
+
+---
+
+## Template Usage Notes
+
+**When to use this template**:
+- Learning-oriented content
+- Step-by-step guided learning
+- Building a complete application or feature
+- Teaching concepts through practice
+
+**Minimum word count**: 300 words
+
+**Required elements**:
+- [ ] Frontmatter with title and description
+- [ ] Clear learning objectives (what they'll build and learn)
+- [ ] Prerequisites section
+- [ ] Time estimate
+- [ ] Step-by-step instructions with explanations
+- [ ] Code verification at each major step
+- [ ] Complete working code at the end
+- [ ] "What you've learned" summary
+- [ ] Next steps and extensions
+- [ ] Troubleshooting section
+- [ ] 3-5 related topic links
+
+**Writing tips**:
+- Focus on learning, not just completing a task
+- Explain the "why" behind each decision
+- Build progressively (each step builds on previous)
+- Include verification steps so users know they're on track
+- Provide complete, tested code that users can copy and run
+- Anticipate and address common mistakes
+- Suggest ways to extend and experiment
+- Link to conceptual docs for deeper understanding

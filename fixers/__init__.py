@@ -9,6 +9,7 @@ from .terminology import TerminologyFixer
 from .urls import URLFixer
 from .code_blocks import CodeBlockFixer
 from .github_informed_fixer import GitHubInformedFixer
+from .style_guide_validator import StyleGuideValidationFixer
 
 __all__ = [
     'BaseFixer',
@@ -16,5 +17,6 @@ __all__ = [
     'TerminologyFixer',
     'URLFixer',
     'CodeBlockFixer',
-    'GitHubInformedFixer'
+    'GitHubInformedFixer',
+    'StyleGuideValidationFixer'
 ]

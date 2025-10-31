@@ -1,0 +1,124 @@
+---
+title: "[Feature/Concept Name]"
+description: "[1-2 sentence summary explaining what this is and why it matters]"
+---
+
+[Opening paragraph: 2-3 sentences explaining what this concept/feature is and its primary benefit]
+
+## What Is [Concept Name]?
+
+[Detailed explanation of what this is. Include:
+- Definition in clear, simple terms
+- Key characteristics
+- How it fits into the larger system]
+
+## Why Use [Concept Name]?
+
+[Explain the benefits and use cases. Include:
+- Primary use cases (bulleted list)
+- Problems it solves
+- When to use it vs alternatives]
+
+**Common use cases**:
+- [Use case 1 with brief explanation]
+- [Use case 2 with brief explanation]
+- [Use case 3 with brief explanation]
+
+## How [Concept Name] Works
+
+[High-level explanation of the mechanics. Include:
+- Overview of the process/mechanism
+- Key components or steps
+- Simple diagram if helpful]
+
+## Key Concepts
+
+[Define important terminology and concepts. Use subsections:]
+
+### [Key Concept 1]
+
+[Brief explanation]
+
+### [Key Concept 2]
+
+[Brief explanation]
+
+### [Key Concept 3]
+
+[Brief explanation]
+
+## Example Use Case
+
+[Provide a concrete example showing the concept in action]
+
+```python
+# Code example demonstrating the concept
+# Include complete, runnable code
+import anthropic
+
+client = anthropic.Anthropic()
+
+# [Demonstration of the concept]
+response = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Example usage"}
+    ]
+)
+
+print(response.content)
+```
+
+## Best Practices
+
+[List recommended approaches and patterns:]
+
+<Tip>
+**Do**: [Recommended practice with brief explanation]
+</Tip>
+
+<Warning>
+**Avoid**: [Anti-pattern or common mistake to avoid]
+</Warning>
+
+## Limitations and Considerations
+
+[Explain any limitations, constraints, or important considerations:]
+
+- [Limitation 1]
+- [Limitation 2]
+- [Important consideration]
+
+## Related Topics
+
+- [Related Concept 1](../path/to/concept1) - Brief description
+- [Related Concept 2](../path/to/concept2) - Brief description
+- [How-To Guide](../path/to/guide) - Practical implementation
+- [API Reference](../path/to/api) - Technical details
+- [Tutorial](../path/to/tutorial) - Step-by-step learning
+
+---
+
+## Template Usage Notes
+
+**When to use this template**:
+- Explaining what a feature or concept is
+- Providing overview and context
+- Answering "what is X?" and "why use X?"
+
+**Minimum word count**: 150 words
+
+**Required elements**:
+- [ ] Frontmatter with title and description
+- [ ] What it is (definition)
+- [ ] Why use it (benefits and use cases)
+- [ ] How it works (high-level)
+- [ ] At least one code example
+- [ ] 3-5 related topic links
+
+**Writing tips**:
+- Focus on understanding, not implementation details
+- Use analogies to explain complex concepts
+- Include "when to use" and "when not to use"
+- Link to how-to guides for implementation

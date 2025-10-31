@@ -1,0 +1,190 @@
+---
+title: "[Action Verb] [Object/Goal]"
+description: "[1-2 sentences describing what you'll accomplish and why]"
+---
+
+[Opening paragraph: 1-2 sentences explaining what you'll accomplish by following this guide]
+
+## Prerequisites
+
+Before [performing this task], you should:
+- [Prerequisite knowledge or skill - link to docs]
+- [Another prerequisite with link if applicable]
+- [Understanding of related concept]
+
+You'll need:
+- [Required tool, account, or access]
+- [Required API key or credentials]
+- [Required software or environment]
+
+## Overview
+
+[Brief overview of the process - 2-3 sentences explaining the steps at a high level]
+
+This guide covers:
+1. [High-level step 1]
+2. [High-level step 2]
+3. [High-level step 3]
+
+## Step 1: [First Action]
+
+[Explain what you're doing in this step and why]
+
+```python
+# Code for step 1
+# Include complete, runnable code
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key="your-api-key-here"
+)
+```
+
+<Note>
+[Helpful tip or clarification about this step]
+</Note>
+
+## Step 2: [Second Action]
+
+[Explain what you're doing in this step and why]
+
+```python
+# Code for step 2
+# Build on previous code
+
+response = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Your message here"}
+    ]
+)
+```
+
+<Warning>
+[Important caveat or potential gotcha for this step]
+</Warning>
+
+## Step 3: [Third Action]
+
+[Explain what you're doing in this step and why]
+
+```python
+# Code for step 3
+# Complete the task
+
+print(response.content)
+```
+
+## Verify It Works
+
+[Explain how to verify the task was completed successfully]
+
+You should see:
+```
+[Expected output]
+```
+
+If you see `[error message]`, [explanation of what went wrong and how to fix it].
+
+## Complete Example
+
+[Provide the complete, working code all in one place]
+
+```python
+# Complete working example
+# Copy and run this entire block
+
+import anthropic
+
+client = anthropic.Anthropic(
+    api_key="your-api-key-here"
+)
+
+response = client.messages.create(
+    model="claude-3-5-sonnet-20241022",
+    max_tokens=1024,
+    messages=[
+        {"role": "user", "content": "Your message here"}
+    ]
+)
+
+print(response.content)
+```
+
+## Common Issues
+
+[Address common problems users might encounter]
+
+### [Issue 1: Error Message or Problem]
+
+**Cause**: [Why this happens]
+
+**Solution**: [How to fix it]
+
+```python
+# Example of the fix
+[corrected code]
+```
+
+### [Issue 2: Another Common Problem]
+
+**Cause**: [Why this happens]
+
+**Solution**: [How to fix it]
+
+## Best Practices
+
+[Recommendations for production use or optimization]
+
+<Tip>
+**Performance**: [Performance optimization tip]
+</Tip>
+
+<Tip>
+**Security**: [Security best practice]
+</Tip>
+
+## Next Steps
+
+Now that you've [completed this task], you can:
+- [Logical next task with link]
+- [Related advanced task with link]
+- [Another related task with link]
+
+## Related Topics
+
+- [Conceptual Overview](../path/to/concept) - Understand the underlying concept
+- [API Reference](../path/to/api) - Detailed API documentation
+- [Related How-To](../path/to/guide) - Similar task or next step
+- [Troubleshooting](../path/to/troubleshooting) - Debug common issues
+- [Tutorial](../path/to/tutorial) - Comprehensive step-by-step learning
+
+---
+
+## Template Usage Notes
+
+**When to use this template**:
+- Task-oriented instructions
+- "How do I...?" questions
+- Procedural documentation
+- Step-by-step guides
+
+**Minimum word count**: 200 words
+
+**Required elements**:
+- [ ] Frontmatter with title and description
+- [ ] Prerequisites section (what users need first)
+- [ ] Step-by-step instructions
+- [ ] Complete working code example
+- [ ] Verification/testing section
+- [ ] Common issues/troubleshooting
+- [ ] 3-5 related topic links
+
+**Writing tips**:
+- Use action verbs in title ("Set Up", "Configure", "Implement")
+- Number the steps clearly
+- Explain the "why" for each step, not just the "how"
+- Include a complete working example
+- Address common mistakes proactively
+- Link to next logical steps

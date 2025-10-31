@@ -1,0 +1,579 @@
+# Claude Documentation Style Guide - Validation Rules
+# Machine-readable validation rules for automated quality checking
+# Version: 1.0
+# Last Updated: October 31, 2025
+
+---
+
+# Severity Levels
+# CRITICAL: Breaks functionality or user experience - Block publishing
+# HIGH: Inconsistency or usability issues - Fix within 1 week
+# MEDIUM: Style violations - Fix within 1 month
+# LOW: Best practice suggestions - Fix when convenient
+
+severity_levels:
+  critical:
+    description: "Breaks functionality or user experience"
+    action: "Block publishing"
+    examples: ["Missing frontmatter", "Broken links"]
+
+  high:
+    description: "Inconsistency or usability issues"
+    action: "Fix within 1 week"
+    examples: ["Deprecated terms", "Hierarchy skips"]
+
+  medium:
+    description: "Style violations"
+    action: "Fix within 1 month"
+    examples: ["Weak words", "Passive voice"]
+
+  low:
+    description: "Best practice suggestions"
+    action: "Fix when convenient"
+    examples: ["Oxford comma", "Line length"]
+
+---
+
+# CRITICAL RULES
+# These rules block publishing if violated
+
+critical_rules:
+
+  - rule_id: FMT-001
+    name: "Missing Frontmatter"
+    severity: critical
+    category: frontmatter
+    description: "MDX file lacks YAML frontmatter block"
+    rationale: "Breaks Mintlify rendering and SEO"
+    automation_level: highly_automatable
+    detection_method: regex
+    pattern: "^---\\n"
+    check_position: start_of_file
+    remediation: |
+      Add frontmatter at the beginning of the file:
+      ---
+      title: "Page Title"
+      description: "150-160 character description."
+      ---
+
+  - rule_id: FMT-002
+    name: "Missing title Field"
+    severity: critical
+    category: frontmatter
+    description: "Frontmatter lacks required 'title' field"
+    rationale: "Required for navigation and SEO"
+    automation_level: highly_automatable
+    detection_method: yaml_parse
+    required_field: title
+    remediation: |
+      Add title to frontmatter:
+      title: "Your Page Title"
+
+  - rule_id: FMT-003
+    name: "Missing description Field"
+    severity: critical
+    category: frontmatter
+    description: "Frontmatter lacks required 'description' field"
+    rationale: "Critical for SEO and search results"
+    automation_level: highly_automatable
+    detection_method: yaml_parse
+    required_field: description
+    remediation: |
+      Add description to frontmatter:
+      description: "Concise 150-160 character description with keywords."
+
+  - rule_id: LNK-001
+    name: "Broken Internal Link"
+    severity: critical
+    category: links
+    description: "Internal link points to non-existent file"
+    rationale: "Creates 404 errors for users"
+    automation_level: highly_automatable
+    detection_method: file_existence_check
+    pattern: "\\[([^\\]]+)\\]\\(([^)]+)\\)"
+    exclude_patterns: ["http://", "https://", "#", "mailto:"]
+    remediation: |
+      Verify target file exists or update link path.
+      Remove link if target was intentionally deleted.
+
+  - rule_id: LNK-002
+    name: "Absolute URL for Internal Link"
+    severity: critical
+    category: links
+    description: "Internal documentation link uses absolute URL instead of relative path"
+    rationale: "Breaks local development and makes migrations difficult"
+    automation_level: highly_automatable
+    detection_method: regex
+    pattern: "\\[([^\\]]+)\\]\\((https?://(?:docs\\.anthropic\\.com|docs\\.claude\\.com)/[^)]+)\\)"
+    remediation: |
+      Convert to relative path:
+      ❌ [Learn more](https://docs.anthropic.com/en/docs/streaming)
+      ✅ [Learn more](/en/docs/streaming)
+
+  - rule_id: CODE-001
+    name: "Code Block Missing Language Tag"
+    severity: critical
+    category: code
+    description: "Code block has no language specification"
+    rationale: "Breaks syntax highlighting and copy functionality"
+    automation_level: highly_automatable
+    detection_method: regex
+    pattern: "^```\\s*\\n"
+    multiline: true
+    remediation: |
+      Add language tag to code block:
+      ❌ ```
+      ✅ ```python
+
+---
+
+# HIGH PRIORITY RULES
+# Fix within 1 week of detection
+
+high_priority_rules:
+
+  - rule_id: TERM-001
+    name: "Deprecated Term 'Claude Code SDK'"
+    severity: high
+    category: terminology
+    description: "Uses deprecated term 'Claude Code SDK' instead of 'Claude Agent SDK'"
+    rationale: "Terminology changed in v2.0.0"
+    automation_level: highly_automatable
+    detection_method: regex
+    pattern: "\\bClaude\\s+Code\\s+SDK\\b"
+    case_sensitive: false
+    replacement: "Claude Agent SDK"
+    remediation: |
+      Replace deprecated term:
+      ❌ The Claude Code SDK provides...
+      ✅ The Claude Agent SDK provides...
+
+  - rule_id: TERM-002
+    name: "Inconsistent Product Name Capitalization"
+    severity: high
+    category: terminology
+    description: "Product names not capitalized consistently"
+    rationale: "Unprofessional, inconsistent branding"
+    automation_level: highly_automatable
+    detection_method: pattern_matching
+    incorrect_patterns:
+      - pattern: "\\bclaude\\s+code\\b"
+        correct: "Claude Code"
+      - pattern: "\\bclaude\\s+sonnet\\b"
+        correct: "Claude Sonnet"
+      - pattern: "\\bclaude\\s+haiku\\b"
+        correct: "Claude Haiku"
+      - pattern: "\\bclaude\\s+opus\\b"
+        correct: "Claude Opus"
+    case_sensitive: false
+    remediation: |
+      Use consistent capitalization:
+      ❌ claude code, CLAUDE CODE
+      ✅ Claude Code
+
+  - rule_id: STR-001
+    name: "Heading Hierarchy Skip"
+    severity: high
+    category: structure
+    description: "Document skips heading levels (e.g., H2 directly to H4)"
+    rationale: "Breaks document structure and accessibility"
+    automation_level: highly_automatable
+    detection_method: heading_analysis
+    max_level_jump: 1
+    remediation: |
+      Insert intermediate heading level:
+      ❌ ## Section (H2)
+         #### Subsection (H4)  # Skipped H3!
+      ✅ ## Section (H2)
+         ### Subsection (H3)
+         #### Detail (H4)
+
+  - rule_id: STR-002
+    name: "Multiple H1 Headings"
+    severity: high
+    category: structure
+    description: "Page has more than one H1 heading"
+    rationale: "Confuses document structure and SEO"
+    automation_level: highly_automatable
+    detection_method: regex
+    pattern: "^#\\s+(.+)$"
+    max_occurrences: 1
+    multiline: true
+    remediation: |
+      Use only one H1 per page:
+      ❌ # Main Title
+         # Another Title
+      ✅ # Main Title
+         ## Another Section
+
+  - rule_id: SENT-001
+    name: "Sentence Exceeds 30 Words"
+    severity: high
+    category: readability
+    description: "Sentence contains more than 30 words"
+    rationale: "Reduces readability and comprehension"
+    automation_level: moderately_automatable
+    detection_method: word_count
+    max_words: 30
+    exclude_code_blocks: true
+    exclude_frontmatter: true
+    remediation: |
+      Split long sentences or simplify:
+      Break into 2-3 shorter sentences or use bullets.
+
+  - rule_id: PARA-001
+    name: "Paragraph Exceeds 7 Sentences"
+    severity: high
+    category: readability
+    description: "Paragraph contains more than 7 sentences"
+    rationale: "Large blocks of text reduce readability"
+    automation_level: moderately_automatable
+    detection_method: sentence_count
+    max_sentences: 7
+    exclude_code_blocks: true
+    remediation: |
+      Break into multiple paragraphs or use subheadings:
+      - Add H3 subheading to split content
+      - Use bullet lists for multiple points
+      - Aim for 3-5 sentences per paragraph
+
+---
+
+# MEDIUM PRIORITY RULES
+# Fix within 1 month of detection
+
+medium_priority_rules:
+
+  - rule_id: LANG-001
+    name: "Weak Language - 'simply'"
+    severity: medium
+    category: language
+    description: "Uses dismissive word 'simply'"
+    rationale: "Implies task is easy when it may not be for users"
+    automation_level: highly_automatable
+    detection_method: regex
+    pattern: "\\bsimply\\b"
+    case_sensitive: false
+    remediation: |
+      Remove or replace:
+      ❌ Simply call the API
+      ✅ Call the API
+      ✅ To do this, call the API
+
+  - rule_id: LANG-002
+    name: "Weak Language - 'just'"
+    severity: medium
+    category: language
+    description: "Uses dismissive word 'just'"
+    rationale: "Minimizes complexity and may frustrate users"
+    automation_level: highly_automatable
+    detection_method: regex
+    pattern: "\\bjust\\b"
+    case_sensitive: false
+    remediation: |
+      Remove or replace:
+      ❌ Just add this line
+      ✅ Add this line
+
+  - rule_id: LANG-003
+    name: "Weak Language - 'easily'"
+    severity: medium
+    category: language
+    description: "Uses dismissive word 'easily'"
+    rationale: "What's easy for one user may not be for another"
+    automation_level: highly_automatable
+    detection_method: regex
+    pattern: "\\beasily\\b"
+    case_sensitive: false
+    remediation: |
+      Remove or replace:
+      ❌ You can easily configure this
+      ✅ You can configure this
+      ✅ To configure this:
+
+  - rule_id: LANG-004
+    name: "Passive Voice Usage"
+    severity: medium
+    category: language
+    description: "Sentence uses passive voice"
+    rationale: "Active voice is clearer and more direct"
+    automation_level: moderately_automatable
+    detection_method: nlp_pattern
+    patterns: ["is created", "was updated", "will be sent", "can be done"]
+    exclude_legitimate_uses: true
+    remediation: |
+      Convert to active voice where possible:
+      ❌ The API key is created in your dashboard
+      ✅ Create the API key in your dashboard
+
+      Note: Passive voice is acceptable when:
+      - Agent is unknown or irrelevant
+      - Emphasizing the action over the actor
+
+  - rule_id: QUAL-001
+    name: "Short Page Content"
+    severity: medium
+    category: quality
+    description: "Page has fewer than minimum required words"
+    rationale: "Pages with minimal content lack depth and context"
+    automation_level: highly_automatable
+    detection_method: word_count
+    min_words_by_type:
+      api_reference: 100
+      quickstart: 200
+      guide: 200
+      tutorial: 300
+      conceptual: 300
+      troubleshooting: 200
+    exclude_code_blocks: false
+    exclude_frontmatter: true
+    remediation: |
+      Add more content:
+      - Include examples
+      - Add prerequisites
+      - Provide context
+      - Link to related topics
+
+  - rule_id: QUAL-002
+    name: "Missing Code Examples"
+    severity: medium
+    category: quality
+    description: "Technical page lacks code examples"
+    rationale: "Code examples are essential for technical understanding"
+    automation_level: highly_automatable
+    detection_method: code_block_count
+    min_code_blocks: 1
+    applies_to: ["api_reference", "quickstart", "guide", "tutorial", "sdk_reference"]
+    remediation: |
+      Add at least one code example showing:
+      - Basic usage
+      - Common use case
+      - Expected output
+
+  - rule_id: QUAL-003
+    name: "Missing Prerequisites Section"
+    severity: medium
+    category: quality
+    description: "Procedural content lacks prerequisites section"
+    rationale: "Users need to know what's required before starting"
+    automation_level: highly_automatable
+    detection_method: section_detection
+    required_section: "Prerequisites"
+    applies_to: ["quickstart", "guide", "tutorial"]
+    alternative_headings: ["Before you begin", "Requirements", "What you'll need"]
+    remediation: |
+      Add Prerequisites section:
+      ## Prerequisites
+
+      Before [task], you should:
+      - [Prerequisite 1 with link]
+      - [Prerequisite 2]
+
+      You'll need:
+      - [Required tool/account]
+      - [Required access]
+
+  - rule_id: QUAL-004
+    name: "Missing Related Topics"
+    severity: medium
+    category: quality
+    description: "Page lacks related topics section"
+    rationale: "Users need navigation to related content"
+    automation_level: highly_automatable
+    detection_method: section_detection
+    required_section: "Related Topics"
+    min_links: 3
+    max_links: 5
+    alternative_headings: ["See Also", "Next Steps", "Learn More"]
+    remediation: |
+      Add Related Topics section with 3-5 links:
+      ## Related Topics
+
+      - [Related Topic 1](link) - Brief description
+      - [Related Topic 2](link) - Brief description
+      - [Related Topic 3](link) - Brief description
+
+---
+
+# LOW PRIORITY RULES
+# Best practice suggestions, fix when convenient
+
+low_priority_rules:
+
+  - rule_id: STYLE-001
+    name: "Missing Oxford Comma"
+    severity: low
+    category: style
+    description: "List of 3+ items lacks Oxford comma"
+    rationale: "Improves clarity in complex lists"
+    automation_level: moderately_automatable
+    detection_method: pattern_matching
+    pattern: "(\\w+), (\\w+) and (\\w+)"
+    remediation: |
+      Add Oxford comma:
+      ❌ We support Python, JavaScript and Ruby
+      ✅ We support Python, JavaScript, and Ruby
+
+  - rule_id: STYLE-002
+    name: "Line Exceeds 120 Characters"
+    severity: low
+    category: style
+    description: "Line exceeds 120 characters"
+    rationale: "Long lines reduce readability in some editors"
+    automation_level: highly_automatable
+    detection_method: character_count
+    max_characters: 120
+    exclude_code_blocks: true
+    exclude_urls: true
+    remediation: |
+      Break line at natural point (after punctuation, before 'and'/'or')
+
+  - rule_id: STYLE-003
+    name: "Inconsistent List Marker"
+    severity: low
+    category: style
+    description: "Mixes bullet types (-, *, +) in same list"
+    rationale: "Consistency improves readability"
+    automation_level: highly_automatable
+    detection_method: list_analysis
+    preferred_marker: "-"
+    remediation: |
+      Use consistent markers:
+      ❌ - Item 1
+         * Item 2
+         + Item 3
+      ✅ - Item 1
+         - Item 2
+         - Item 3
+
+---
+
+# CONTENT TYPE TEMPLATES
+# Minimum requirements by documentation type
+
+template_requirements:
+
+  api_reference:
+    min_word_count: 100
+    required_sections: ["Parameters", "Response", "Examples"]
+    required_elements: ["code_example", "frontmatter"]
+    optional_sections: ["Error Responses", "Rate Limits", "Best Practices"]
+
+  quickstart:
+    min_word_count: 200
+    required_sections: ["Prerequisites", "Complete Example"]
+    required_elements: ["code_example", "frontmatter", "step_by_step"]
+    min_code_blocks: 2
+
+  guide:
+    min_word_count: 200
+    required_sections: ["Prerequisites", "Related Topics"]
+    required_elements: ["code_example", "frontmatter", "step_by_step"]
+    min_code_blocks: 1
+
+  tutorial:
+    min_word_count: 300
+    required_sections: ["What You'll Build", "Prerequisites", "What You've Learned", "Next Steps"]
+    required_elements: ["code_example", "frontmatter", "step_by_step", "verification"]
+    min_code_blocks: 3
+
+  conceptual:
+    min_word_count: 300
+    required_sections: ["Use Cases", "Related Topics"]
+    required_elements: ["frontmatter", "examples"]
+    optional_sections: ["Best Practices", "Common Patterns"]
+
+  troubleshooting:
+    min_word_count: 200
+    required_sections: ["Common Issues", "Related Topics"]
+    required_elements: ["frontmatter", "symptoms", "solutions"]
+    min_issues: 3
+
+  sdk_reference:
+    min_word_count: 150
+    required_sections: ["Methods", "Parameters", "Examples"]
+    required_elements: ["code_example", "frontmatter"]
+    min_code_blocks: 2
+
+---
+
+# AUTOMATION CONFIGURATION
+# Settings for programmatic enforcement
+
+automation_settings:
+
+  enforcement_mode:
+    development: "warning"  # Show warnings, don't block
+    pre_commit: "error"  # Block commit if critical rules violated
+    ci_cd: "error"  # Fail build if critical rules violated
+    production: "error"  # Require all rules passing
+
+  output_formats:
+    - console  # Print to terminal
+    - json  # JSON report
+    - html  # HTML report
+    - junit  # JUnit XML for CI/CD
+
+  exclusions:
+    directories:
+      - node_modules
+      - .git
+      - dist
+      - build
+    files:
+      - "*.test.mdx"
+      - "*.draft.mdx"
+      - README.md
+
+  thresholds:
+    critical_violations: 0  # No critical violations allowed
+    high_violations: 5  # Max 5 high priority violations
+    medium_violations: 20  # Max 20 medium priority violations
+    low_violations: 50  # Max 50 low priority violations
+
+  fix_modes:
+    auto_fix: ["TERM-001", "TERM-002", "LANG-001", "LANG-002", "LANG-003"]
+    suggest_fix: ["QUAL-001", "QUAL-002", "QUAL-003", "QUAL-004"]
+    manual_review: ["LANG-004", "SENT-001", "PARA-001"]
+
+---
+
+# INTEGRATION WITH docs_analyzer
+# How to use these rules with the existing tool
+
+integration:
+
+  command_examples:
+    validate_single_file: |
+      python doc_analyzer.py --style-guide ./docs/api/authentication.mdx
+
+    validate_directory: |
+      python doc_analyzer.py --style-guide ./docs --recursive
+
+    auto_fix: |
+      python doc_analyzer.py --style-guide ./docs --auto-fix --rules TERM-001,LANG-001
+
+    generate_report: |
+      python doc_analyzer.py --style-guide ./docs --report html --output report.html
+
+    ci_cd_check: |
+      python doc_analyzer.py --style-guide ./docs --fail-on critical,high --format junit
+
+  expected_output: |
+    Checking: docs/api/authentication.mdx
+
+    ✓ FMT-001: Frontmatter present
+    ✓ FMT-002: Title field present
+    ✓ FMT-003: Description field present
+    ✗ QUAL-002: Missing code examples (add at least 1 code block)
+    ✓ CODE-001: All code blocks have language tags
+    ✗ QUAL-004: Missing Related Topics section (add 3-5 related links)
+    ✓ STR-001: Heading hierarchy valid
+
+    Summary:
+    - Critical: 0 violations
+    - High: 0 violations
+    - Medium: 2 violations
+    - Low: 0 violations
+
+    Status: PASS (no critical violations)

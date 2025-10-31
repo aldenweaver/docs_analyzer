@@ -21,17 +21,37 @@ from datetime import datetime
 
 from core.config import Config
 from core.models import FixResult, FixerStats
-from fixers import FrontmatterFixer, TerminologyFixer, URLFixer, CodeBlockFixer, GitHubInformedFixer
+from fixers import (
+    FrontmatterFixer,
+    TerminologyFixer,
+    URLFixer,
+    CodeBlockFixer,
+    GitHubInformedFixer,
+    StyleGuideValidationFixer
+)
+import os
 
 
 class DocFixer:
     """Main documentation fixer orchestrator"""
 
-    def __init__(self, config_path: Path = None):
-        """Initialize the fixer with configuration"""
+    def __init__(self, config_path: Path = None, enable_style_guide: bool = True):
+        """
+        Initialize the fixer with configuration
+
+        Args:
+            config_path: Optional path to config file
+            enable_style_guide: Enable style guide validation (default: True for testing)
+                               Can be disabled via ENABLE_STYLE_GUIDE_VALIDATOR=false env var
+        """
         self.config = Config(config_path) if config_path else Config()
 
-        # Initialize all fixers
+        # Check environment variable for style guide validator toggle
+        env_enable = os.getenv('ENABLE_STYLE_GUIDE_VALIDATOR', 'true').lower()
+        if env_enable in ['false', '0', 'no']:
+            enable_style_guide = False
+
+        # Initialize core fixers
         self.fixers = [
             FrontmatterFixer(self.config),
             TerminologyFixer(self.config),
@@ -39,6 +59,14 @@ class DocFixer:
             CodeBlockFixer(self.config),
             GitHubInformedFixer(self.config)  # GitHub user-informed quality checks
         ]
+
+        # Add style guide validator if enabled (uses Claude AI API)
+        if enable_style_guide:
+            try:
+                self.fixers.append(StyleGuideValidationFixer(self.config))
+                print("✓ Style Guide Validator enabled (with Claude AI analysis)")
+            except Exception as e:
+                print(f"⚠ Warning: Could not enable Style Guide Validator: {e}")
 
         self.stats = FixerStats()
 

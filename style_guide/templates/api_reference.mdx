@@ -1,0 +1,265 @@
+---
+title: "[Endpoint Name or Method Name]"
+description: "[1-2 sentences describing what this endpoint/method does]"
+---
+
+[Opening paragraph: 2-3 sentences explaining what this endpoint/method does and when to use it]
+
+## Endpoint
+
+```
+POST https://api.anthropic.com/v1/[endpoint-path]
+```
+
+or
+
+```python
+client.[method_name]([parameters])
+```
+
+## Authentication
+
+[Specify authentication requirements]
+
+This endpoint requires authentication via API key in the `x-api-key` header.
+
+```bash
+curl https://api.anthropic.com/v1/[endpoint] \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "content-type: application/json"
+```
+
+## Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `parameter1` | string | Yes | [Description of what this parameter does] |
+| `parameter2` | integer | No | [Description, including default value if applicable]. Default: `0` |
+| `parameter3` | array | No | [Description with example values]. Example: `["value1", "value2"]` |
+
+### Parameter Details
+
+#### `parameter1`
+
+[Detailed explanation of this parameter including:
+- Accepted values or format
+- Constraints or limits
+- Examples of valid values
+- Common mistakes to avoid]
+
+**Example values**:
+- `"value1"` - [When to use this]
+- `"value2"` - [When to use this]
+
+#### `parameter2`
+
+[Detailed explanation]
+
+**Valid range**: `0` to `1000`
+
+#### `parameter3`
+
+[Detailed explanation]
+
+## Request Example
+
+<CodeGroup>
+
+```python Python
+import anthropic
+
+client = anthropic.Anthropic()
+
+response = client.[method_name](
+    parameter1="value",
+    parameter2=100,
+    parameter3=["item1", "item2"]
+)
+
+print(response)
+```
+
+```javascript JavaScript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic();
+
+const response = await client.[methodName]({
+  parameter1: 'value',
+  parameter2: 100,
+  parameter3: ['item1', 'item2']
+});
+
+console.log(response);
+```
+
+```bash cURL
+curl https://api.anthropic.com/v1/[endpoint] \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "content-type: application/json" \
+  -d '{
+    "parameter1": "value",
+    "parameter2": 100,
+    "parameter3": ["item1", "item2"]
+  }'
+```
+
+</CodeGroup>
+
+## Response
+
+### Success Response (200 OK)
+
+```json
+{
+  "field1": "value",
+  "field2": 123,
+  "field3": {
+    "nested_field": "nested value"
+  }
+}
+```
+
+### Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `field1` | string | [Description of what this field contains] |
+| `field2` | integer | [Description] |
+| `field3` | object | [Description of nested object] |
+| `field3.nested_field` | string | [Description of nested field] |
+
+## Error Responses
+
+### 400 Bad Request
+
+**Cause**: Invalid parameters or malformed request
+
+```json
+{
+  "error": {
+    "type": "invalid_request_error",
+    "message": "parameter1 is required"
+  }
+}
+```
+
+### 401 Unauthorized
+
+**Cause**: Missing or invalid API key
+
+```json
+{
+  "error": {
+    "type": "authentication_error",
+    "message": "invalid x-api-key"
+  }
+}
+```
+
+### 429 Too Many Requests
+
+**Cause**: Rate limit exceeded
+
+```json
+{
+  "error": {
+    "type": "rate_limit_error",
+    "message": "rate limit exceeded"
+  }
+}
+```
+
+**Solution**: Implement exponential backoff and respect rate limits. See [Rate Limits](../rate-limits).
+
+## Rate Limits
+
+[Specify rate limits for this endpoint]
+
+- **Requests per minute**: [number]
+- **Tokens per minute**: [number]
+
+See [Rate Limits documentation](../rate-limits) for details.
+
+## Examples
+
+### Example 1: [Common Use Case]
+
+[Brief explanation of this use case]
+
+```python
+import anthropic
+
+client = anthropic.Anthropic()
+
+# [Description of what this example does]
+response = client.[method_name](
+    parameter1="specific_value",
+    parameter2=50
+)
+
+print(response.field1)
+```
+
+### Example 2: [Another Use Case]
+
+[Brief explanation of this use case]
+
+```python
+# [Description of what this example does]
+response = client.[method_name](
+    parameter1="different_value",
+    parameter3=["option1", "option2", "option3"]
+)
+```
+
+## Best Practices
+
+<Tip>
+**Performance**: [Performance tip specific to this endpoint]
+</Tip>
+
+<Tip>
+**Error Handling**: Implement retry logic with exponential backoff for transient errors
+</Tip>
+
+<Warning>
+**Important**: [Critical information about usage limits, costs, or caveats]
+</Warning>
+
+## See Also
+
+- [Related Endpoint](./related-endpoint) - [Brief description of relationship]
+- [Conceptual Overview](../concepts/concept) - Understand the underlying concept
+- [How-To Guide](../guides/guide) - Practical implementation guide
+- [Error Handling](../error-handling) - Handle errors and retries
+- [Rate Limits](../rate-limits) - Rate limit details and best practices
+
+---
+
+## Template Usage Notes
+
+**When to use this template**:
+- Documenting API endpoints
+- Method references
+- Technical specifications
+
+**Minimum word count**: 100 words
+
+**Required elements**:
+- [ ] Frontmatter with title and description
+- [ ] Endpoint/method signature
+- [ ] Complete parameters table
+- [ ] Request example (multiple languages if possible)
+- [ ] Response format with field descriptions
+- [ ] Error responses with causes and solutions
+- [ ] At least one practical example
+- [ ] 3-5 related topic links
+
+**Writing tips**:
+- Be precise and technical
+- Include examples for all common use cases
+- Document all error codes
+- Specify data types clearly
+- Include valid value ranges
+- Show both success and error cases
