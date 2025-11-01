@@ -20,6 +20,7 @@ export interface AnalyzeRequest {
   use_claude_ai?: boolean;
   claude_api_key?: string;
   claude_model?: string;
+  max_tokens?: number;
 }
 
 export interface AnalyzeResponse {
@@ -38,6 +39,7 @@ export interface FixRequest {
   use_claude_ai?: boolean;
   claude_api_key?: string;
   claude_model?: string;
+  max_tokens?: number;
 }
 
 export interface FixResponse {

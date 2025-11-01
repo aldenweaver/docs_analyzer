@@ -35,6 +35,7 @@ class AnalyzeRequest(BaseModel):
     use_claude_ai: bool = False
     claude_api_key: Optional[str] = None
     claude_model: str = "claude-3-5-sonnet-20241022"
+    max_tokens: Optional[int] = 4096
 
 
 class FixRequest(BaseModel):
@@ -44,6 +45,7 @@ class FixRequest(BaseModel):
     use_claude_ai: bool = False
     claude_api_key: Optional[str] = None
     claude_model: str = "claude-3-5-sonnet-20241022"
+    max_tokens: Optional[int] = 4096
 
 
 class ApplyFixesRequest(BaseModel):
@@ -171,14 +173,8 @@ async def analyze_docs(request: AnalyzeRequest) -> Dict[str, Any]:
             timeout=300  # 5 minute timeout
         )
 
-        if result.returncode != 0:
-            raise HTTPException(
-                status_code=500,
-                detail=f"Analysis failed: {result.stderr}"
-            )
-
         # Parse output - look for JSON in stdout
-        output_lines = result.stdout.strip().split('\n')
+        output_lines = result.stdout.strip().split('\n') if result.stdout else []
         json_output = None
 
         for line in output_lines:
@@ -189,20 +185,35 @@ async def analyze_docs(request: AnalyzeRequest) -> Dict[str, Any]:
                 except json.JSONDecodeError:
                     continue
 
+        # If no JSON output and command failed, raise error
+        if not json_output and result.returncode != 0:
+            error_msg = f"Analysis failed with return code {result.returncode}"
+            if result.stderr:
+                error_msg += f"\n\nError output:\n{result.stderr[:500]}"
+            if result.stdout:
+                error_msg += f"\n\nStandard output:\n{result.stdout[:500]}"
+            raise HTTPException(
+                status_code=500,
+                detail=error_msg
+            )
+
         if not json_output:
-            # Return raw output if JSON parsing fails
+            # Return raw output if JSON parsing fails but command succeeded
             return {
                 "summary": {"total_issues": 0, "files_analyzed": 0},
                 "issues": [],
-                "raw_output": result.stdout
+                "raw_output": result.stdout,
+                "stderr": result.stderr if result.stderr else None
             }
 
         return json_output
 
     except subprocess.TimeoutExpired:
-        raise HTTPException(status_code=504, detail="Analysis timed out")
+        raise HTTPException(status_code=504, detail="Analysis timed out after 5 minutes")
+    except HTTPException:
+        raise  # Re-raise HTTP exceptions
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
 
 
 @app.post("/api/fix")
@@ -238,14 +249,8 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
             timeout=600  # 10 minute timeout for fixes
         )
 
-        if result.returncode != 0:
-            raise HTTPException(
-                status_code=500,
-                detail=f"Fix generation failed: {result.stderr}"
-            )
-
         # Parse output - look for JSON in stdout
-        output_lines = result.stdout.strip().split('\n')
+        output_lines = result.stdout.strip().split('\n') if result.stdout else []
         json_output = None
 
         for line in output_lines:
@@ -256,20 +261,35 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
                 except json.JSONDecodeError:
                     continue
 
+        # If no JSON output and command failed, raise error
+        if not json_output and result.returncode != 0:
+            error_msg = f"Fix generation failed with return code {result.returncode}"
+            if result.stderr:
+                error_msg += f"\n\nError output:\n{result.stderr[:500]}"
+            if result.stdout:
+                error_msg += f"\n\nStandard output:\n{result.stdout[:500]}"
+            raise HTTPException(
+                status_code=500,
+                detail=error_msg
+            )
+
         if not json_output:
-            # Return raw output if JSON parsing fails
+            # Return raw output if JSON parsing fails but command succeeded
             return {
                 "summary": {"total_fixes": 0, "files_modified": 0},
                 "fixes": [],
-                "raw_output": result.stdout
+                "raw_output": result.stdout,
+                "stderr": result.stderr if result.stderr else None
             }
 
         return json_output
 
     except subprocess.TimeoutExpired:
-        raise HTTPException(status_code=504, detail="Fix generation timed out")
+        raise HTTPException(status_code=504, detail="Fix generation timed out after 10 minutes")
+    except HTTPException:
+        raise  # Re-raise HTTP exceptions
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
 
 
 @app.post("/api/apply-fixes")

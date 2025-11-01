@@ -15,6 +15,8 @@ export default function AnalyzePage() {
   const [projectPath, setProjectPath] = useState("");
   const [useClaudeAI, setUseClaudeAI] = useState(false);
   const [apiKey, setApiKey] = useState("");
+  const [claudeModel, setClaudeModel] = useState("claude-3-5-sonnet-20241022");
+  const [maxTokens, setMaxTokens] = useState(4096);
 
   // State for analysis
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -64,6 +66,8 @@ export default function AnalyzePage() {
         enabled_analyzers: selectedAnalyzers,
         use_claude_ai: useClaudeAI,
         claude_api_key: useClaudeAI ? apiKey : undefined,
+        claude_model: useClaudeAI ? claudeModel : undefined,
+        max_tokens: useClaudeAI ? maxTokens : undefined,
       };
 
       const result = await runAnalysis(analyzeRequest);
@@ -76,6 +80,8 @@ export default function AnalyzePage() {
           enabled_fixers: selectedFixers,
           use_claude_ai: useClaudeAI,
           claude_api_key: useClaudeAI ? apiKey : undefined,
+          claude_model: useClaudeAI ? claudeModel : undefined,
+          max_tokens: useClaudeAI ? maxTokens : undefined,
         };
 
         const fixes = await generateFixes(fixRequest);
@@ -146,24 +152,65 @@ export default function AnalyzePage() {
               </label>
             </div>
 
-            {/* API Key (conditional) */}
+            {/* Claude AI Settings (conditional) */}
             {useClaudeAI && (
-              <div>
-                <label htmlFor="apiKey" className="block text-sm font-medium mb-2">
-                  Claude API Key
-                </label>
-                <input
-                  type="password"
-                  id="apiKey"
-                  value={apiKey}
-                  onChange={(e) => setApiKey(e.target.value)}
-                  placeholder="sk-ant-..."
-                  className="w-full px-3 py-2 border rounded-md bg-background"
-                />
-                <p className="text-xs text-muted-foreground mt-1">
-                  Your API key is only stored in your session and never sent to our servers
-                </p>
-              </div>
+              <>
+                <div>
+                  <label htmlFor="apiKey" className="block text-sm font-medium mb-2">
+                    Claude API Key
+                  </label>
+                  <input
+                    type="password"
+                    id="apiKey"
+                    value={apiKey}
+                    onChange={(e) => setApiKey(e.target.value)}
+                    placeholder="sk-ant-..."
+                    className="w-full px-3 py-2 border rounded-md bg-background"
+                  />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Your API key is only stored in your session and never sent to our servers
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="claudeModel" className="block text-sm font-medium mb-2">
+                      Claude Model
+                    </label>
+                    <select
+                      id="claudeModel"
+                      value={claudeModel}
+                      onChange={(e) => setClaudeModel(e.target.value)}
+                      className="w-full px-3 py-2 border rounded-md bg-background"
+                    >
+                      <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet (Latest)</option>
+                      <option value="claude-3-5-haiku-20241022">Claude 3.5 Haiku</option>
+                      <option value="claude-3-opus-20240229">Claude 3 Opus</option>
+                      <option value="claude-3-sonnet-20240229">Claude 3 Sonnet</option>
+                      <option value="claude-3-haiku-20240307">Claude 3 Haiku</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="maxTokens" className="block text-sm font-medium mb-2">
+                      Max Tokens
+                    </label>
+                    <input
+                      type="number"
+                      id="maxTokens"
+                      value={maxTokens}
+                      onChange={(e) => setMaxTokens(parseInt(e.target.value) || 4096)}
+                      min="1024"
+                      max="8192"
+                      step="512"
+                      className="w-full px-3 py-2 border rounded-md bg-background"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Maximum tokens per AI request (1024-8192)
+                    </p>
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>
