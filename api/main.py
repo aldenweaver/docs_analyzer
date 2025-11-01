@@ -170,7 +170,7 @@ async def analyze_docs(request: AnalyzeRequest) -> Dict[str, Any]:
             cwd=analyzer_dir,
             capture_output=True,
             text=True,
-            timeout=300  # 5 minute timeout
+            timeout=1800  # 30 minute timeout
         )
 
         # Parse output - look for JSON in stdout
@@ -209,7 +209,7 @@ async def analyze_docs(request: AnalyzeRequest) -> Dict[str, Any]:
         return json_output
 
     except subprocess.TimeoutExpired:
-        raise HTTPException(status_code=504, detail="Analysis timed out after 5 minutes")
+        raise HTTPException(status_code=504, detail="Analysis timed out after 30 minutes")
     except HTTPException:
         raise  # Re-raise HTTP exceptions
     except Exception as e:
@@ -246,7 +246,7 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
             cwd=fixer_dir,
             capture_output=True,
             text=True,
-            timeout=600  # 10 minute timeout for fixes
+            timeout=1800  # 30 minute timeout for fixes
         )
 
         # Parse output - look for JSON in stdout
@@ -285,7 +285,7 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
         return json_output
 
     except subprocess.TimeoutExpired:
-        raise HTTPException(status_code=504, detail="Fix generation timed out after 10 minutes")
+        raise HTTPException(status_code=504, detail="Fix generation timed out after 30 minutes")
     except HTTPException:
         raise  # Re-raise HTTP exceptions
     except Exception as e:
