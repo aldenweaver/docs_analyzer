@@ -39,6 +39,9 @@ export default function AnalyzePage() {
         setElapsedTime(Math.floor((Date.now() - startTime) / 1000));
       }, 100); // Update every 100ms for smooth display
       return () => clearInterval(interval);
+    } else {
+      // Reset elapsed time when not analyzing
+      setElapsedTime(0);
     }
   }, [isAnalyzing, startTime]);
 
@@ -113,6 +116,7 @@ export default function AnalyzePage() {
     } finally {
       setIsAnalyzing(false);
       setProgressMessage("");
+      setStartTime(null); // Reset timer
     }
   };
 
@@ -289,29 +293,155 @@ export default function AnalyzePage() {
 
           {/* Analysis Results */}
           {analysisResult && (
-            <div className="bg-card rounded-lg border p-6">
-              <h3 className="text-xl font-semibold mb-4">Analysis Summary</h3>
+            <div className="space-y-4">
+              {/* Summary Cards */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div>
-                  <div className="text-2xl font-bold text-primary">
-                    {analysisResult.summary?.total_issues || 0}
+                <div className="bg-card rounded-lg border p-4">
+                  <div className="text-3xl font-bold text-primary">
+                    {(() => {
+                      const rawOutput = analysisResult.raw_output || "";
+                      const totalMatch = rawOutput.match(/Total issues:\s*(\d+)/i);
+                      return totalMatch ? parseInt(totalMatch[1]).toLocaleString() : (analysisResult.summary?.total_issues || 0);
+                    })()}
                   </div>
                   <div className="text-sm text-muted-foreground">Total Issues</div>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary">
-                    {analysisResult.summary?.files_analyzed || 0}
+                <div className="bg-card rounded-lg border p-4">
+                  <div className="text-3xl font-bold text-primary">
+                    {(() => {
+                      const rawOutput = analysisResult.raw_output || "";
+                      const filesMatch = rawOutput.match(/Total files:\s*(\d+)/i);
+                      return filesMatch ? parseInt(filesMatch[1]).toLocaleString() : (analysisResult.summary?.files_analyzed || 0);
+                    })()}
                   </div>
                   <div className="text-sm text-muted-foreground">Files Analyzed</div>
                 </div>
+                <div className="bg-card rounded-lg border p-4">
+                  <div className="text-3xl font-bold text-red-600">
+                    {(() => {
+                      const rawOutput = analysisResult.raw_output || "";
+                      const criticalMatch = rawOutput.match(/Critical:\s*(\d+)/i);
+                      return criticalMatch ? parseInt(criticalMatch[1]).toLocaleString() : 0;
+                    })()}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Critical</div>
+                </div>
+                <div className="bg-card rounded-lg border p-4">
+                  <div className="text-3xl font-bold text-orange-600">
+                    {(() => {
+                      const rawOutput = analysisResult.raw_output || "";
+                      const mediumMatch = rawOutput.match(/Medium:\s*(\d+)/i);
+                      return mediumMatch ? parseInt(mediumMatch[1]).toLocaleString() : 0;
+                    })()}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Medium</div>
+                </div>
               </div>
 
+              {/* Issues by Severity */}
+              <div className="bg-card rounded-lg border p-6">
+                <h3 className="text-xl font-semibold mb-4">Issues by Severity</h3>
+                <div className="space-y-3">
+                  {(() => {
+                    const rawOutput = analysisResult.raw_output || "";
+                    const criticalMatch = rawOutput.match(/Critical:\s*(\d+)/i);
+                    const highMatch = rawOutput.match(/High:\s*(\d+)/i);
+                    const mediumMatch = rawOutput.match(/Medium:\s*(\d+)/i);
+                    const lowMatch = rawOutput.match(/Low:\s*(\d+)/i);
+
+                    const critical = criticalMatch ? parseInt(criticalMatch[1]) : 0;
+                    const high = highMatch ? parseInt(highMatch[1]) : 0;
+                    const medium = mediumMatch ? parseInt(mediumMatch[1]) : 0;
+                    const low = lowMatch ? parseInt(lowMatch[1]) : 0;
+                    const total = critical + high + medium + low;
+
+                    return (
+                      <>
+                        {critical > 0 && (
+                          <div className="flex items-center space-x-3">
+                            <div className="flex-1">
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm font-medium text-red-600">Critical</span>
+                                <span className="text-sm text-muted-foreground">{critical.toLocaleString()} ({((critical/total)*100).toFixed(1)}%)</span>
+                              </div>
+                              <div className="w-full bg-secondary rounded-full h-2">
+                                <div className="bg-red-600 h-2 rounded-full" style={{width: `${(critical/total)*100}%`}}></div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                        {high > 0 && (
+                          <div className="flex items-center space-x-3">
+                            <div className="flex-1">
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm font-medium text-orange-500">High</span>
+                                <span className="text-sm text-muted-foreground">{high.toLocaleString()} ({((high/total)*100).toFixed(1)}%)</span>
+                              </div>
+                              <div className="w-full bg-secondary rounded-full h-2">
+                                <div className="bg-orange-500 h-2 rounded-full" style={{width: `${(high/total)*100}%`}}></div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                        {medium > 0 && (
+                          <div className="flex items-center space-x-3">
+                            <div className="flex-1">
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm font-medium text-yellow-600">Medium</span>
+                                <span className="text-sm text-muted-foreground">{medium.toLocaleString()} ({((medium/total)*100).toFixed(1)}%)</span>
+                              </div>
+                              <div className="w-full bg-secondary rounded-full h-2">
+                                <div className="bg-yellow-600 h-2 rounded-full" style={{width: `${(medium/total)*100}%`}}></div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                        {low > 0 && (
+                          <div className="flex items-center space-x-3">
+                            <div className="flex-1">
+                              <div className="flex justify-between mb-1">
+                                <span className="text-sm font-medium text-blue-600">Low</span>
+                                <span className="text-sm text-muted-foreground">{low.toLocaleString()} ({((low/total)*100).toFixed(1)}%)</span>
+                              </div>
+                              <div className="w-full bg-secondary rounded-full h-2">
+                                <div className="bg-blue-600 h-2 rounded-full" style={{width: `${(low/total)*100}%`}}></div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                        {total === 0 && (
+                          <p className="text-sm text-muted-foreground">No issues found</p>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
+              </div>
+
+              {/* Repository Information */}
+              {analysisResult.raw_output && (() => {
+                const rawOutput = analysisResult.raw_output;
+                const repoMatch = rawOutput.match(/Repository:\s*(\S+)/i);
+                return repoMatch && (
+                  <div className="bg-card rounded-lg border p-6">
+                    <h3 className="text-xl font-semibold mb-4">Repository Information</h3>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Repository:</span>
+                        <span className="font-mono">{repoMatch[1]}</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              {/* Raw Output (collapsed by default) */}
               {analysisResult.raw_output && (
-                <details className="mt-4">
-                  <summary className="cursor-pointer text-sm font-medium text-primary">
-                    View raw output
+                <details className="bg-card rounded-lg border p-6">
+                  <summary className="cursor-pointer text-sm font-medium text-primary hover:text-primary/80">
+                    View detailed raw output
                   </summary>
-                  <pre className="mt-2 p-4 bg-secondary rounded-md text-xs overflow-auto max-h-96">
+                  <pre className="mt-4 p-4 bg-secondary rounded-md text-xs overflow-auto max-h-96 font-mono">
                     {analysisResult.raw_output}
                   </pre>
                 </details>
