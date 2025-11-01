@@ -245,8 +245,7 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
             "python3",
             "doc_fixer.py",
             request.project_path,
-            "--dry-run",
-            "--format", "all"  # Generate HTML, MD, and JSON
+            "--dry-run"
         ]
 
         # Add Claude AI integration if enabled
@@ -326,16 +325,91 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
 @app.post("/api/apply-fixes")
 async def apply_fixes(request: ApplyFixesRequest) -> Dict[str, Any]:
     """
-    Apply selected fixes to the documentation
+    Apply fixes to the documentation (removes --dry-run flag)
 
-    Note: This is a placeholder. In production, you'd want more sophisticated
-    fix selection and application logic.
+    WARNING: This will modify your documentation files!
     """
-    # TODO: Implement selective fix application
-    raise HTTPException(
-        status_code=501,
-        detail="Selective fix application not yet implemented. Use dry-run to preview fixes."
-    )
+    try:
+        # Build command without --dry-run to actually apply fixes
+        cmd = [
+            "python3",
+            "doc_fixer.py",
+            request.project_path
+        ]
+
+        # Run fixer from parent directory
+        fixer_dir = Path(__file__).parent.parent
+        result = subprocess.run(
+            cmd,
+            cwd=fixer_dir,
+            capture_output=True,
+            text=True,
+            timeout=1800  # 30 minute timeout
+        )
+
+        # Parse output
+        output_lines = result.stdout.strip().split('\n') if result.stdout else []
+        json_output = None
+        report_dir = None
+
+        for line in output_lines:
+            # Look for JSON output
+            if line.strip().startswith('{'):
+                try:
+                    json_output = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+            # Look for report directory
+            if "Report exported to:" in line or "reports/" in line:
+                import re
+                match = re.search(r'reports/[\d\-_]+', line)
+                if match:
+                    report_dir = match.group(0)
+
+        # If no JSON output and command failed, raise error
+        if not json_output and result.returncode != 0:
+            error_msg = f"Fix application failed with return code {result.returncode}"
+            if result.stderr:
+                error_msg += f"\n\nError output:\n{result.stderr[:500]}"
+            if result.stdout:
+                error_msg += f"\n\nStandard output:\n{result.stdout[:500]}"
+            raise HTTPException(
+                status_code=500,
+                detail=error_msg
+            )
+
+        if not json_output:
+            # Return raw output if JSON parsing fails but command succeeded
+            return {
+                "summary": {
+                    "total_fixes_applied": 0,
+                    "files_modified": 0,
+                    "success": True
+                },
+                "message": "Fixes applied successfully (no detailed output available)",
+                "raw_output": result.stdout,
+                "stderr": result.stderr if result.stderr else None
+            }
+
+        # Add report directory and success flag to response
+        json_output["success"] = True
+        json_output["message"] = "Fixes applied successfully to your documentation files"
+        if report_dir:
+            json_output["report_dir"] = report_dir
+            json_output["report_files"] = {
+                "json": "doc_fix_report.json",
+                "html": "doc_fix_report.html",
+                "markdown": "doc_fix_report.md"
+            }
+
+        return json_output
+
+    except subprocess.TimeoutExpired:
+        raise HTTPException(status_code=504, detail="Fix application timed out after 30 minutes")
+    except HTTPException:
+        raise  # Re-raise HTTP exceptions
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
 
 
 @app.get("/api/reports/{report_dir}/{filename}")

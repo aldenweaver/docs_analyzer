@@ -36,6 +36,12 @@ export interface AnalyzeResponse {
   };
   issues: any[];
   raw_output?: string;
+  report_dir?: string;
+  report_files?: {
+    json: string;
+    html: string;
+    markdown: string;
+  };
 }
 
 export interface FixRequest {
@@ -55,6 +61,12 @@ export interface FixResponse {
   };
   fixes: any[];
   raw_output?: string;
+  report_dir?: string;
+  report_files?: {
+    json: string;
+    html: string;
+    markdown: string;
+  };
 }
 
 /**

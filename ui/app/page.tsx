@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import ModuleSelector, { type Module } from "@/components/ModuleSelector";
 import { getAnalyzers, getFixers, runAnalysis, generateFixes } from "@/lib/api";
 
 export default function AnalyzePage() {
+  const router = useRouter();
+
   // State for modules
   const [analyzers, setAnalyzers] = useState<Module[]>([]);
   const [fixers, setFixers] = useState<Module[]>([]);
@@ -116,7 +119,8 @@ export default function AnalyzePage() {
     } finally {
       setIsAnalyzing(false);
       setProgressMessage("");
-      setStartTime(null); // Reset timer
+      setStartTime(null);
+      setElapsedTime(0); // Explicitly reset timer
     }
   };
 
@@ -480,6 +484,39 @@ export default function AnalyzePage() {
               )}
             </div>
           )}
+
+          {/* View Results Buttons */}
+          <div className="flex gap-4 justify-center mt-6">
+            {analysisResult && analysisResult.report_dir && (
+              <button
+                onClick={() => {
+                  // Store report info in sessionStorage for the results page
+                  sessionStorage.setItem('analysisReportDir', analysisResult.report_dir || '');
+                  sessionStorage.setItem('analysisReportFiles', JSON.stringify(analysisResult.report_files || {}));
+                  sessionStorage.setItem('analysisSummary', JSON.stringify(analysisResult.summary || {}));
+                  router.push('/analysis-results');
+                }}
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90"
+              >
+                View Analysis Results
+              </button>
+            )}
+            {fixResult && fixResult.report_dir && (
+              <button
+                onClick={() => {
+                  // Store report info and project path in sessionStorage for the results page
+                  sessionStorage.setItem('fixReportDir', fixResult.report_dir || '');
+                  sessionStorage.setItem('fixReportFiles', JSON.stringify(fixResult.report_files || {}));
+                  sessionStorage.setItem('fixSummary', JSON.stringify(fixResult.summary || {}));
+                  sessionStorage.setItem('fixProjectPath', projectPath);  // Store project path for Apply Fixes
+                  router.push('/fix-results');
+                }}
+                className="px-6 py-3 bg-secondary text-secondary-foreground rounded-md font-semibold hover:opacity-90"
+              >
+                View Fix Results
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>
