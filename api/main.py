@@ -153,7 +153,7 @@ async def analyze_docs(request: AnalyzeRequest) -> Dict[str, Any]:
             "doc_analyzer.py",
             request.project_path,
             "--repo-type", request.repo_type,
-            "--format", "json"
+            "--format", "all"  # Generate HTML, MD, and JSON
         ]
 
         # Add Claude AI integration if enabled
@@ -171,17 +171,24 @@ async def analyze_docs(request: AnalyzeRequest) -> Dict[str, Any]:
             timeout=1800  # 30 minute timeout
         )
 
-        # Parse output - look for JSON in stdout
+        # Parse output - look for JSON and report directory in stdout
         output_lines = result.stdout.strip().split('\n') if result.stdout else []
         json_output = None
+        report_dir = None
 
         for line in output_lines:
+            # Look for JSON output
             if line.strip().startswith('{'):
                 try:
                     json_output = json.loads(line)
-                    break
                 except json.JSONDecodeError:
                     continue
+            # Look for report directory (e.g., "Report exported to: reports/2025-10-31_19-30-15")
+            if "Report exported to:" in line or "reports/" in line:
+                import re
+                match = re.search(r'reports/[\d\-_]+', line)
+                if match:
+                    report_dir = match.group(0)
 
         # If no JSON output and command failed, raise error
         if not json_output and result.returncode != 0:
@@ -202,6 +209,15 @@ async def analyze_docs(request: AnalyzeRequest) -> Dict[str, Any]:
                 "issues": [],
                 "raw_output": result.stdout,
                 "stderr": result.stderr if result.stderr else None
+            }
+
+        # Add report directory and file paths to response
+        if report_dir:
+            json_output["report_dir"] = report_dir
+            json_output["report_files"] = {
+                "json": "doc_analysis_report.json",
+                "html": "doc_analysis_report.html",
+                "markdown": "doc_analysis_report.md"
             }
 
         return json_output
@@ -229,7 +245,8 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
             "python3",
             "doc_fixer.py",
             request.project_path,
-            "--dry-run"
+            "--dry-run",
+            "--format", "all"  # Generate HTML, MD, and JSON
         ]
 
         # Add Claude AI integration if enabled
@@ -247,17 +264,24 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
             timeout=1800  # 30 minute timeout for fixes
         )
 
-        # Parse output - look for JSON in stdout
+        # Parse output - look for JSON and report directory in stdout
         output_lines = result.stdout.strip().split('\n') if result.stdout else []
         json_output = None
+        report_dir = None
 
         for line in output_lines:
+            # Look for JSON output
             if line.strip().startswith('{'):
                 try:
                     json_output = json.loads(line)
-                    break
                 except json.JSONDecodeError:
                     continue
+            # Look for report directory
+            if "Report exported to:" in line or "reports/" in line:
+                import re
+                match = re.search(r'reports/[\d\-_]+', line)
+                if match:
+                    report_dir = match.group(0)
 
         # If no JSON output and command failed, raise error
         if not json_output and result.returncode != 0:
@@ -278,6 +302,15 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
                 "fixes": [],
                 "raw_output": result.stdout,
                 "stderr": result.stderr if result.stderr else None
+            }
+
+        # Add report directory and file paths to response
+        if report_dir:
+            json_output["report_dir"] = report_dir
+            json_output["report_files"] = {
+                "json": "doc_fix_report.json",
+                "html": "doc_fix_report.html",
+                "markdown": "doc_fix_report.md"
             }
 
         return json_output
@@ -302,6 +335,57 @@ async def apply_fixes(request: ApplyFixesRequest) -> Dict[str, Any]:
     raise HTTPException(
         status_code=501,
         detail="Selective fix application not yet implemented. Use dry-run to preview fixes."
+    )
+
+
+@app.get("/api/reports/{report_dir}/{filename}")
+async def serve_report(report_dir: str, filename: str):
+    """
+    Serve report files (HTML, MD, JSON) for viewing or download
+
+    Args:
+        report_dir: Report directory name (e.g., '2025-10-31_19-30-15')
+        filename: Report filename (e.g., 'doc_analysis_report.html')
+
+    Returns:
+        FileResponse: The requested report file
+    """
+    from fastapi.responses import FileResponse
+    import os
+
+    # Validate report directory name (prevent directory traversal)
+    if '..' in report_dir or '/' in report_dir or '\\' in report_dir:
+        raise HTTPException(status_code=400, detail="Invalid report directory")
+
+    # Validate filename
+    allowed_files = [
+        'doc_analysis_report.json', 'doc_analysis_report.html', 'doc_analysis_report.md',
+        'doc_fix_report.json', 'doc_fix_report.html', 'doc_fix_report.md'
+    ]
+    if filename not in allowed_files:
+        raise HTTPException(status_code=400, detail="Invalid filename")
+
+    # Construct file path
+    reports_base = Path(__file__).parent.parent / "reports"
+    file_path = reports_base / report_dir / filename
+
+    # Check if file exists
+    if not file_path.exists():
+        raise HTTPException(status_code=404, detail="Report file not found")
+
+    # Determine media type based on extension
+    media_types = {
+        '.json': 'application/json',
+        '.html': 'text/html',
+        '.md': 'text/markdown'
+    }
+    ext = os.path.splitext(filename)[1]
+    media_type = media_types.get(ext, 'text/plain')
+
+    return FileResponse(
+        path=str(file_path),
+        media_type=media_type,
+        filename=filename
     )
 
 

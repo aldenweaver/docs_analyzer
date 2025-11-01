@@ -173,7 +173,14 @@ class RepositoryManager:
     def get_files(self) -> List[Path]:
         """Get all documentation files based on config"""
         include_patterns = self.config.get('include_patterns', ['**/*.md', '**/*.mdx'])
-        exclude_patterns = self.config.get('exclude_patterns', [])
+        exclude_patterns = self.config.get('exclude_patterns', [
+            '**/node_modules/**',
+            '**/build/**',
+            '**/dist/**',
+            '**/.git/**',
+            '**/CLAUDE.md',
+            '**/README.md'
+        ])
         
         files = []
         for pattern in include_patterns:
