@@ -78,6 +78,36 @@ test.describe('Documentation Analyzer UI', () => {
     await expect(page.getByLabel('Claude API Key')).toBeVisible();
   });
 
+  test('Claude AI settings show model selector and max tokens', async ({ page }) => {
+    await page.goto('/analyze');
+
+    // Claude model and max tokens should not be visible initially
+    await expect(page.getByLabel('Claude Model')).not.toBeVisible();
+    await expect(page.getByLabel('Max Tokens')).not.toBeVisible();
+
+    // Toggle Claude AI
+    await page.getByLabel('Use Claude AI for advanced analysis').click();
+
+    // Model selector and max tokens should now be visible
+    await expect(page.getByLabel('Claude Model')).toBeVisible();
+    await expect(page.getByLabel('Max Tokens')).toBeVisible();
+
+    // Check default values
+    const modelSelector = page.getByLabel('Claude Model');
+    await expect(modelSelector).toHaveValue('claude-3-5-sonnet-20241022');
+
+    const maxTokensInput = page.getByLabel('Max Tokens');
+    await expect(maxTokensInput).toHaveValue('4096');
+
+    // Test model selection
+    await modelSelector.selectOption('claude-3-5-haiku-20241022');
+    await expect(modelSelector).toHaveValue('claude-3-5-haiku-20241022');
+
+    // Test max tokens input
+    await maxTokensInput.fill('8192');
+    await expect(maxTokensInput).toHaveValue('8192');
+  });
+
   test('run analysis button is disabled without project path', async ({ page }) => {
     await page.goto('/analyze');
 
