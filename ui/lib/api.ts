@@ -6,6 +6,11 @@ import axios from "axios";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001/api";
 
+// Configure axios with longer timeout for large documentation analysis
+const axiosInstance = axios.create({
+  timeout: 1800000, // 30 minutes
+});
+
 export interface ModuleInfo {
   id: string;
   name: string;
@@ -56,7 +61,7 @@ export interface FixResponse {
  * Fetch available analyzer modules
  */
 export async function getAnalyzers(): Promise<ModuleInfo[]> {
-  const response = await axios.get(`${API_BASE}/analyzers`);
+  const response = await axiosInstance.get(`${API_BASE}/analyzers`);
   return response.data;
 }
 
@@ -64,7 +69,7 @@ export async function getAnalyzers(): Promise<ModuleInfo[]> {
  * Fetch available fixer modules
  */
 export async function getFixers(): Promise<ModuleInfo[]> {
-  const response = await axios.get(`${API_BASE}/fixers`);
+  const response = await axiosInstance.get(`${API_BASE}/fixers`);
   return response.data;
 }
 
@@ -74,7 +79,7 @@ export async function getFixers(): Promise<ModuleInfo[]> {
 export async function runAnalysis(
   request: AnalyzeRequest
 ): Promise<AnalyzeResponse> {
-  const response = await axios.post(`${API_BASE}/analyze`, request);
+  const response = await axiosInstance.post(`${API_BASE}/analyze`, request);
   return response.data;
 }
 
@@ -82,6 +87,6 @@ export async function runAnalysis(
  * Generate fixes in dry-run mode
  */
 export async function generateFixes(request: FixRequest): Promise<FixResponse> {
-  const response = await axios.post(`${API_BASE}/fix`, request);
+  const response = await axiosInstance.post(`${API_BASE}/fix`, request);
   return response.data;
 }

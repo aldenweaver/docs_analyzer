@@ -65,7 +65,6 @@ class ModuleInfo(BaseModel):
 # Available analyzers and fixers metadata
 ANALYZERS = [
     # Core Analyzers
-    {"id": "h1_heading", "name": "H1 Heading", "description": "Ensures exactly one H1 heading per file", "category": "core"},
     {"id": "frontmatter", "name": "Frontmatter", "description": "Validates required frontmatter fields", "category": "core"},
     {"id": "code_blocks", "name": "Code Blocks", "description": "Checks for language tags on code blocks", "category": "core"},
     {"id": "broken_links", "name": "Broken Links", "description": "Detects broken internal links", "category": "core"},
@@ -91,7 +90,6 @@ ANALYZERS = [
 
 FIXERS = [
     # Core Fixers
-    {"id": "h1_heading_fixer", "name": "H1 Heading Fixer", "description": "Fixes H1 heading issues", "category": "core"},
     {"id": "frontmatter_fixer", "name": "Frontmatter Fixer", "description": "Adds/fixes frontmatter fields", "category": "core"},
     {"id": "code_blocks_fixer", "name": "Code Blocks Fixer", "description": "Adds language tags to code blocks", "category": "core"},
     {"id": "broken_links_fixer", "name": "Broken Links Fixer", "description": "Fixes broken internal links", "category": "core"},
