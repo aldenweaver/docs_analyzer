@@ -23,11 +23,24 @@ export default function AnalyzePage() {
   const [analysisResult, setAnalysisResult] = useState<any>(null);
   const [fixResult, setFixResult] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [progressMessage, setProgressMessage] = useState<string>("");
+  const [startTime, setStartTime] = useState<number | null>(null);
 
   // Load modules on mount
   useEffect(() => {
     loadModules();
   }, []);
+
+  // Update elapsed time every second while analyzing
+  const [elapsedTime, setElapsedTime] = useState(0);
+  useEffect(() => {
+    if (isAnalyzing && startTime) {
+      const interval = setInterval(() => {
+        setElapsedTime(Math.floor((Date.now() - startTime) / 1000));
+      }, 100); // Update every 100ms for smooth display
+      return () => clearInterval(interval);
+    }
+  }, [isAnalyzing, startTime]);
 
   const loadModules = async () => {
     try {
@@ -57,9 +70,11 @@ export default function AnalyzePage() {
     setError(null);
     setAnalysisResult(null);
     setFixResult(null);
+    setStartTime(Date.now());
 
     try {
       // Run analysis
+      setProgressMessage(`Running analysis with ${selectedAnalyzers.length} analyzers...`);
       const analyzeRequest = {
         project_path: projectPath,
         repo_type: "mintlify",
@@ -72,9 +87,11 @@ export default function AnalyzePage() {
 
       const result = await runAnalysis(analyzeRequest);
       setAnalysisResult(result);
+      setProgressMessage("Analysis complete!");
 
       // Run fixes if any fixers are selected
       if (selectedFixers.length > 0) {
+        setProgressMessage(`Generating fixes with ${selectedFixers.length} fixers...`);
         const fixRequest = {
           project_path: projectPath,
           enabled_fixers: selectedFixers,
@@ -86,12 +103,16 @@ export default function AnalyzePage() {
 
         const fixes = await generateFixes(fixRequest);
         setFixResult(fixes);
+        setProgressMessage("Fixes generated!");
       }
     } catch (err: any) {
-      setError(err.response?.data?.detail || err.message || "Analysis failed");
-      console.error(err);
+      // Extract detailed error message from backend
+      const errorDetail = err.response?.data?.detail || err.message || "Analysis failed";
+      setError(errorDetail);
+      console.error("Analysis error:", err);
     } finally {
       setIsAnalyzing(false);
+      setProgressMessage("");
     }
   };
 
@@ -109,8 +130,25 @@ export default function AnalyzePage() {
       {/* Error Display */}
       {error && (
         <div className="bg-destructive/10 border border-destructive text-destructive rounded-lg p-4 mb-6">
-          <h3 className="font-semibold mb-1">Error</h3>
-          <p className="text-sm">{error}</p>
+          <h3 className="font-semibold mb-2">Error</h3>
+          <pre className="text-sm whitespace-pre-wrap font-mono bg-destructive/5 p-3 rounded overflow-auto max-h-96">
+            {error}
+          </pre>
+        </div>
+      )}
+
+      {/* Progress Display */}
+      {isAnalyzing && (
+        <div className="bg-primary/10 border border-primary rounded-lg p-4 mb-6">
+          <div className="flex items-center space-x-3">
+            <div className="animate-spin h-5 w-5 border-2 border-primary border-t-transparent rounded-full"></div>
+            <div className="flex-1">
+              <h3 className="font-semibold text-primary">{progressMessage}</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Elapsed: {elapsedTime}s
+              </p>
+            </div>
+          </div>
         </div>
       )}
 
