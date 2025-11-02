@@ -1,0 +1,180 @@
+{
+  "timestamp": "2025-11-02T11:45:51.568507",
+  "repository": {
+    "path": "/Users/alden/dev/docs_analyzer/test_docs",
+    "type": "mintlify"
+  },
+  "summary": {
+    "total_files": 4,
+    "total_issues": 9,
+    "by_severity": {
+      "low": 1,
+      "medium": 2,
+      "critical": 4,
+      "high": 2
+    },
+    "by_category": {
+      "clarity": 2,
+      "style": 2,
+      "ux": 1,
+      "technical": 2,
+      "gaps": 2
+    }
+  },
+  "recommendations": [
+    "4 critical issues require immediate attention (broken links, missing frontmatter, etc.)"
+  ],
+  "ai_insights": [],
+  "issues": [
+    {
+      "severity": "critical",
+      "category": "mintlify",
+      "file": "guides/configuration.mdx",
+      "line": 1,
+      "type": "missing_frontmatter",
+      "description": "MDX files MUST have YAML frontmatter",
+      "suggestion": "Add frontmatter with at minimum: title and description",
+      "context": null
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "guides/quickstart.mdx",
+      "line": 20,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "To begin using the tool, you need to first configure your settings by editing the configuration file..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "guides/quickstart.mdx",
+      "line": 20,
+      "type": "sentence_too_long",
+      "description": "Sentence has 50 words (recommend <30)",
+      "suggestion": "Break into shorter sentences for better readability",
+      "context": "To begin using the tool, you need to first configure your settings by editing the configuration file..."
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "guides/quickstart.mdx",
+      "line": 14,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "ux",
+      "file": "guides/quickstart.mdx",
+      "line": 31,
+      "type": "non_descriptive_link",
+      "description": "Link text is non-descriptive: \"here\"",
+      "suggestion": "Use descriptive link text explaining destination",
+      "context": "[here](../api/reference)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "guides/quickstart.mdx",
+      "line": 31,
+      "type": "broken_link",
+      "description": "Broken relative link: ../api/reference",
+      "suggestion": "Fix link or update target path",
+      "context": "[here](../api/reference)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "guides/quickstart.mdx",
+      "line": 35,
+      "type": "broken_link",
+      "description": "Broken relative link: ./troubleshooting",
+      "suggestion": "Fix link or update target path",
+      "context": "[troubleshooting guide](./troubleshooting)"
+    },
+    {
+      "severity": "critical",
+      "category": "mintlify",
+      "file": "api/reference.mdx",
+      "line": 1,
+      "type": "missing_required_frontmatter",
+      "description": "Missing required frontmatter field: description",
+      "suggestion": "Add \"description: <value>\" to frontmatter",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "api/reference.mdx",
+      "line": 13,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No troubleshooting documentation found",
+      "suggestion": "Add troubleshooting section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No examples documentation found",
+      "suggestion": "Add examples section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"First time setup\" is incomplete",
+      "suggestion": "Add documentation for: install, authenticate, first-use",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"Feature implementation\" is incomplete",
+      "suggestion": "Add documentation for: concept-doc, how-to-guide, code-example, troubleshooting",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"Troubleshooting\" is incomplete",
+      "suggestion": "Add documentation for: error-identification, diagnostic-guide, solution",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"API integration\" is incomplete",
+      "suggestion": "Add documentation for: api-overview, authentication, endpoints, sdk-reference, examples",
+      "context": null
+    }
+  ]
+}
