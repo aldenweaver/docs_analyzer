@@ -126,6 +126,7 @@ export default function ModuleSelector({
                       checked={selectedModules.includes(module.id)}
                       onChange={() => handleToggle(module.id)}
                       className="w-4 h-4 mt-1 rounded border-input cursor-pointer"
+                      data-testid={title.toLowerCase().includes('analyzer') ? 'analyzer-checkbox' : 'fixer-checkbox'}
                     />
                     <label
                       htmlFor={module.id}

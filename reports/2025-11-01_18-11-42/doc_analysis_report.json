@@ -1,0 +1,2014 @@
+{
+  "timestamp": "2025-11-01T18:08:23.855152",
+  "repository": {
+    "path": "/Users/alden/dev/docs_analyzer/docs",
+    "type": "mintlify"
+  },
+  "summary": {
+    "total_files": 12,
+    "total_issues": 174,
+    "by_severity": {
+      "low": 96,
+      "medium": 42,
+      "critical": 32,
+      "high": 4
+    },
+    "by_category": {
+      "clarity": 51,
+      "style": 67,
+      "ia": 33,
+      "ux": 1,
+      "technical": 15,
+      "consistency": 1,
+      "gaps": 6
+    }
+  },
+  "recommendations": [
+    "High number of clarity issues (51). Recommend focused audit in this area.",
+    "High number of style issues (67). Recommend focused audit in this area.",
+    "32 critical issues require immediate attention (broken links, missing frontmatter, etc.)"
+  ],
+  "ai_insights": [],
+  "issues": [
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "USAGE_GUIDE.md",
+      "line": 72,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "- **Subfolder Analysis**: Analyze specific sections (e.g., `/pages`, `/guides`) while maintaining pl..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "USAGE_GUIDE.md",
+      "line": 73,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "- **Timestamped Reports**: Automatic organization of reports in dated directories to prevent overwri..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "USAGE_GUIDE.md",
+      "line": 74,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "- **Smart Platform Detection**: Auto-detects platform config from parent directories (up to 3 levels..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "USAGE_GUIDE.md",
+      "line": 160,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "All reports are saved in timestamped directories under `reports/YYYY-MM-DD_HH-MM-SS/` to preserve an..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 248,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **weak_language**: Words like \"simply\", \"just\", \"easily\""
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 248,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **weak_language**: Words like \"simply\", \"just\", \"easily\""
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 248,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"easily\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **weak_language**: Words like \"simply\", \"just\", \"easily\""
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 160,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "All reports are saved in timestamped directories under `reports/YYYY-MM-DD_HH-MM-SS/` to preserve analysis history. Each analysis run creates a new directory containing all requested report formats."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 167,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "When using `--format all`, all three formats are saved to the same timestamped directory."
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "USAGE_GUIDE.md",
+      "line": 15,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Basic Usage"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "USAGE_GUIDE.md",
+      "line": 116,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Key Configuration Sections"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "USAGE_GUIDE.md",
+      "line": 132,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H4",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "2. Mintlify Settings"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "USAGE_GUIDE.md",
+      "line": 338,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "For Project"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "USAGE_GUIDE.md",
+      "line": 391,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "\"Repository type not detected\""
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "USAGE_GUIDE.md",
+      "line": 537,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Test with Sample Data"
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 42,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 48,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 411,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 438,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 552,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "USAGE_GUIDE.md",
+      "line": 555,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "ux",
+      "file": "USAGE_GUIDE.md",
+      "line": 550,
+      "type": "non_descriptive_link",
+      "description": "Link text is non-descriptive: \"link\"",
+      "suggestion": "Use descriptive link text explaining destination",
+      "context": "[link](https://docs.example.com/absolute)"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 825,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "Would you like me to proceed with implementing these improvements? I can start with Phase 1 and crea..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 15,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- All documentation files MUST have frontmatter (this is enforced)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 16,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- Standard .md files are also supported but MDX is preferred for component support"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 28,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "code_examples: \"Must be tested before publishing\""
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 90,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- Detection: Identify which components are used to recommend upgrade to .mdx"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 465,
+      "type": "terminology",
+      "description": "Use \"use\" instead of \"leverage\"",
+      "suggestion": "Replace with preferred term: \"use\"",
+      "context": "### Key Mintlify Features to Leverage:"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 669,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "# NEW: Repository can be specified directly or via config"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 232,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Proposed Enhancements:"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 615,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H4",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "2. Repository Manager Class"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 660,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H4",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "3. Updated CLI Interface"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 717,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H4",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "4. Platform-Specific Analyzers"
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 48,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 74,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "RESEARCH_FINDINGS.md",
+      "line": 178,
+      "type": "broken_link",
+      "description": "Broken relative link: ./path/image.png",
+      "suggestion": "Fix link or update target path",
+      "context": "[alt text](./path/image.png)"
+    },
+    {
+      "severity": "medium",
+      "category": "mintlify",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 132,
+      "type": "invalid_component",
+      "description": "Unknown Mintlify component: <section>",
+      "suggestion": "Verify component name or use standard Mintlify components",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "mintlify",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 142,
+      "type": "invalid_component",
+      "description": "Unknown Mintlify component: <section>",
+      "suggestion": "Verify component name or use standard Mintlify components",
+      "context": null
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 5,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The `improvements/` folder contains strategic, manual analysis of Claude documentation. This design ..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 346,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This integration would create a powerful \"strategic + tactical\" analysis tool that combines automate..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 38,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "'automation_gaps': [],  # Manual items that can't be automated yet"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 214,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Measure what percentage of manual recommendations can be detected automatically"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 277,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- Coverage analysis (what can/can't be automated)"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 57,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "2. Enhanced Report Structure"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 184,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "5. CLI Integration"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 209,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "6. Tracking Coverage"
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "INTEGRATION_DESIGN.md",
+      "line": 282,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "AI_ANALYSIS_IMPROVEMENTS.md",
+      "line": 5,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The AI-powered analysis has been significantly enhanced to provide **specific, actionable, and evide..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "AI_ANALYSIS_IMPROVEMENTS.md",
+      "line": 21,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "- **Divio Documentation System**: Checks for all four doc types (Tutorial, How-To, Reference, Explan..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "AI_ANALYSIS_IMPROVEMENTS.md",
+      "line": 55,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- **Research principle**: Which framework or guideline is violated"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "AI_ANALYSIS_IMPROVEMENTS.md",
+      "line": 67,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Issues are prioritized by actual user impact:"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "AI_ANALYSIS_IMPROVEMENTS.md",
+      "line": 124,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "For Production-Quality Analysis"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "AI_ANALYSIS_IMPROVEMENTS.md",
+      "line": 131,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "For Maximum Quality"
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "AI_ANALYSIS_IMPROVEMENTS.md",
+      "line": 33,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "AI_ANALYSIS_IMPROVEMENTS.md",
+      "line": 39,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "AI_ANALYSIS_IMPROVEMENTS.md",
+      "line": 83,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "INFRASTRUCTURE.md",
+      "line": 5,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This project is now fully containerized and follows security best practices for easy deployment and ..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "INFRASTRUCTURE.md",
+      "line": 284,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- **Docker**: Ensure Docker and Docker Compose are installed"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "INFRASTRUCTURE.md",
+      "line": 50,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Option 2: Local with Virtual Environment"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "INFRASTRUCTURE.md",
+      "line": 64,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Option 3: Manual Setup"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "INFRASTRUCTURE.md",
+      "line": 176,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "\"Permission denied\" on Docker"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "INFRASTRUCTURE.md",
+      "line": 182,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "AI analysis not working"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "INFRASTRUCTURE.md",
+      "line": 194,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Virtual environment issues"
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "INFRASTRUCTURE.md",
+      "line": 104,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "INFRASTRUCTURE.md",
+      "line": 1,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Readers cannot quickly determine if this documentation applies to them. Evidence: No immediate indication of the project's purpose or target audience (Source: Redish, Task-Oriented Writing)",
+      "suggestion": "Add a concise context statement explaining project type and intended users. Before: \"# Infrastructure & Deployment Guide\" \u2192 After: \"# Documentation Analysis Tool - Infrastructure & Deployment Guide\n\n*A technical documentation evaluation framework for developers and technical writer...\"",
+      "context": "# Infrastructure & Deployment Guide"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "INFRASTRUCTURE.md",
+      "line": 5,
+      "type": "ai_cognitive_load",
+      "description": "[Cognitive Load] Readers might struggle to understand the immediate benefits. Evidence: Sentence contains multiple complex concepts without clear breakdown (Source: Nielsen Norman Group, Cognitive Load Principle)",
+      "suggestion": "Split into focused, shorter statements. Before: \"This project is now fully containerized and follows security best practices for easy deployment and ...\" \u2192 After: \"Key Improvements:\n- Full containerization for consistent environments\n- Enhanced security practices\n- Simplified deployment and development workflows\"",
+      "context": "This project is now fully containerized and follows security best practices for easy deployment and development."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "INFRASTRUCTURE.md",
+      "line": 39,
+      "type": "ai_unclear_heading",
+      "description": "[Unclear Heading] Users cannot immediately understand the scope of this Docker option. Evidence: Lacks specific information about what this option entails (Source: Pirolli & Card, Information Scent Principle)",
+      "suggestion": "Add a brief descriptor explaining the Docker workflow. Before: \"Option 1: Docker (Recommended)\" \u2192 After: \"Option 1: Docker Containerized Deployment (Recommended for Most Users)\"",
+      "context": "Option 1: Docker (Recommended)"
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "INFRASTRUCTURE.md",
+      "line": 84,
+      "type": "ai_undefined_jargon",
+      "description": "[Undefined Jargon] Users might not understand where to obtain this key or its significance. Evidence: API key mentioned without context of origin or purpose (Source: Plain Language Guidelines, Jargon Explanation)",
+      "suggestion": "Provide brief explanation and reference source. Before: \"`ANTHROPIC_API_KEY`: Your Claude API key\" \u2192 After: \"`ANTHROPIC_API_KEY`: API key from Anthropic for accessing Claude AI services (sign up at https://www.anthropic.com)\"",
+      "context": "ANTHROPIC_API_KEY"
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "INFRASTRUCTURE.md",
+      "line": 131,
+      "type": "ai_ambiguous_instruction",
+      "description": "[Ambiguous Instruction] Users cannot confidently activate full analysis mode. Evidence: No clear, step-by-step guidance on enabling full mode (Source: Redish, Task-Oriented Writing)",
+      "suggestion": "Add explicit configuration steps. Before: \"Full Mode (With API Key)\n- \u2713 All quality checks...\" \u2192 After: \"## Full Mode (With API Key)\n\n### Prerequisites\n1. Obtain Anthropic API Key\n2. Configure `.env` file\n3. Set `ENABLE_AI_ANALYSIS=true`\n\n### Available Fe...\"",
+      "context": "Full Mode (With API Key)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "QUICK_REFERENCE.md",
+      "line": 87,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "Should find: weak language (\"simply\")"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "QUICK_REFERENCE.md",
+      "line": 93,
+      "type": "broken_link",
+      "description": "Broken relative link: ./IMPLEMENTATION_SUMMARY.md",
+      "suggestion": "Fix link or update target path",
+      "context": "[Implementation Summary](./IMPLEMENTATION_SUMMARY.md)"
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "QUICK_REFERENCE.md",
+      "line": 6,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Users cannot understand input parameter requirements. Evidence: No explanation of what './docs' represents or requires (Source: Pirolli & Card: Information Scent Principle)",
+      "suggestion": "Add brief inline comment explaining expected input. Before: \"python doc_analyzer.py ./docs\" \u2192 After: \"python doc_analyzer.py ./docs  # Analyze markdown files in 'docs' directory\"",
+      "context": "python doc_analyzer.py ./docs"
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "QUICK_REFERENCE.md",
+      "line": 18,
+      "type": "ai_undefined_jargon",
+      "description": "[Undefined Jargon] Developers unfamiliar with MDX won't understand feature. Evidence: Technical term without definition (Source: plainlanguage.gov: Jargon Reduction Guideline)",
+      "suggestion": "Add brief explanation or link to definition. Before: \"MDX frontmatter validation\" \u2192 After: \"MDX frontmatter validation (metadata validation for markdown files)\"",
+      "context": "MDX frontmatter validation"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "QUICK_REFERENCE.md",
+      "line": 38,
+      "type": "ai_weak_language",
+      "description": "[Weak Language] Reduces perceived professionalism of documentation. Evidence: Unnecessary adverb reduces precision (Source: Nielsen Norman Group: Concise Writing Principle)",
+      "suggestion": "Remove qualifying adverb. Before: \"Simply check this.\" \u2192 After: \"Check this.\"",
+      "context": "Simply check this."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "QUICK_REFERENCE.md",
+      "line": 53,
+      "type": "ai_cognitive_load",
+      "description": "[Cognitive Load] Distracts from technical documentation purpose. Evidence: Exclamatory statement without substantive content (Source: Redish: Task-Oriented Writing Principle)",
+      "suggestion": "Replace with concrete feature summary. Before: \"This tool demonstrates ALL key job responsibilities!\" \u2192 After: \"Comprehensive documentation analysis tool covering multiple validation aspects.\"",
+      "context": "This tool demonstrates ALL key job responsibilities!"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 5,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This proof-of-concept project demonstrates comprehensive technical writing capabilities through an a..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 5,
+      "type": "sentence_too_long",
+      "description": "Sentence has 36 words (recommend <30)",
+      "suggestion": "Break into shorter sentences for better readability",
+      "context": "This proof-of-concept project demonstrates comprehensive technical writing capabilities through an a..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 32,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- Skill in explaining complex topics simply"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 172,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "**You're not just a writer:**"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 199,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"clearly\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- \u2705 Demo video clearly explains value"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 287,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This project isn't just about getting hired\u2014it's about proving you're already thinking like an Anthr..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 287,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "This project isn't just about getting hired\u2014it's about proving you're already thinking like an Anthropic technical writer. You've:"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 200,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- \u2705 Case study is detailed and insightful"
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 30,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Readers cannot connect abstract claim to concrete skills. Evidence: Progressive Disclosure principle violated - lacks specific examples of how readability principles are demonstrated (Source: Redish, Task-Oriented Writing)",
+      "suggestion": "Add specific examples of readability techniques. Before: \"Understanding of readability principles\" \u2192 After: \"Understanding of readability principles, such as using active voice, limiting sentence complexity, and structuring information for clear comprehension...\"",
+      "context": "What you demonstrate: Understanding of readability principles"
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 55,
+      "type": "ai_undefined_jargon",
+      "description": "[Undefined Jargon] Readers cannot understand the specific skills being claimed. Evidence: Plain Language principle violated - lacks definition of 'style guide expertise' (Source: plainlanguage.gov)",
+      "suggestion": "Define and contextualize the term. Before: \"Style guide expertise\" \u2192 After: \"Style guide expertise: Ability to create comprehensive documentation standards that ensure consistency across technical writing, including terminology...\"",
+      "context": "Style guide expertise"
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 86,
+      "type": "ai_cognitive_load",
+      "description": "[Cognitive Load] Readers cannot quantify the actual time savings. Evidence: Nielsen Norman Group cognitive load principle - sentence creates comparison without concrete metrics (Source: Nielsen Norman Group)",
+      "suggestion": "Add specific time reduction percentages or examples. Before: \"Analyze entire doc sets in minutes vs. days of manual review\" \u2192 After: \"Reduce documentation review time by up to 90%, transforming days of manual review into minutes of automated analysis\"",
+      "context": "Analyze entire doc sets in minutes vs. days of manual review"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/PROJECT_SUMMARY.md",
+      "line": 120,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Readers cannot understand the full automation potential. Evidence: Progressive Disclosure principle - lacks explanation of CLI's specific capabilities (Source: Pirolli & Card, Information Scent)",
+      "suggestion": "Add brief explanation of CLI functionality. Before: \"CLI interface for automation\" \u2192 After: \"CLI interface for automation, allowing seamless integration with existing development workflows and continuous integration pipelines\"",
+      "context": "CLI interface for automation"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 60,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Platform Detection"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 74,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Mintlify-Specific"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 83,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Claude API Integration"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 102,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Advanced Features"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 136,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "With Configuration"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 146,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Remote Repository"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 154,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Fast Mode (No AI)"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 363,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Reports Generated"
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 162,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 13,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Developers cannot understand the full scope of the implementation stages. Evidence: Lacks clear explanation of what these phases mean or entail (Source: Nielsen Norman Group: Progressive Disclosure Principle)",
+      "suggestion": "Add a brief explanation of each phase's purpose and key deliverables. Before: \"\u2705 **Phase 1**: MDX/Mintlify support, configurable repository, Claude Docs style rules\" \u2192 After: \"\u2705 **Phase 1**: Core platform support\n- MDX/Mintlify document parsing\n- Flexible repository configuration\n- Initial style rule implementation for Claud...\"",
+      "context": "\u2705 **Phase 1**: MDX/Mintlify support, configurable repository, Claude Docs style rules"
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 46,
+      "type": "ai_undefined_jargon",
+      "description": "[Undefined Jargon] Developers may not understand what 'frontmatter' or 'component validation' means. Evidence: Technical terms without clear explanation (Source: Redish: Task-Oriented Writing Principle)",
+      "suggestion": "Add brief definitions for technical terms. Before: \"# Critical checks:\n- Absolute URLs \u2192 Relative paths (CRITICAL!)\n- Frontmatter presence\n- Component v...\" \u2192 After: \"# Critical Checks:\n- Convert Absolute URLs to Relative Paths (improves portability)\n- Verify Frontmatter (metadata at the top of documentation files)\n...\"",
+      "context": "# Critical checks:\n- Absolute URLs \u2192 Relative paths (CRITICAL!)\n- Frontmatter presence\n- Component validation\n- Navigation structure"
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 77,
+      "type": "ai_ambiguous_instruction",
+      "description": "[Ambiguous Instruction] Developers might expose sensitive credentials or struggle with key setup. Evidence: Lacks specific guidance on API key management (Source: Google Developer Documentation Style Guide)",
+      "suggestion": "Provide secure key management instructions. Before: \"export ANTHROPIC_API_KEY='your-key-here'\" \u2192 After: \"# Securely set API key (do NOT commit to version control)\n# Option 1: Temporary session\nexport ANTHROPIC_API_KEY='your-actual-key'\n\n# Option 2: Use .e...\"",
+      "context": "Export ANTHROPIC_API_KEY='your-key-here'"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 99,
+      "type": "ai_cognitive_load",
+      "description": "[Cognitive Load] Reduced readability and professional presentation. Evidence: Overly terse output with emoji-heavy formatting (Source: Nielsen Norman Group: Cognitive Load Reduction)",
+      "suggestion": "Use clear, concise language with minimal emoji. Before: \"\ud83e\udd16 Running AI semantic analysis...\n  AI clarity check...\n  Semantic gap analysis...\" \u2192 After: \"Performing Advanced AI Documentation Analysis:\n  - Clarity Assessment\n  - Semantic Consistency Verification\"",
+      "context": "\ud83e\udd16 Running AI semantic analysis...\n  AI clarity check...\n  Semantic gap analysis..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/IMPLEMENTATION_SUMMARY.md",
+      "line": 50,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Developers cannot understand exact mechanism of semantic analysis. Evidence: Code comment lacks specific implementation details (Source: Redish: Task-Oriented Writing Principle)",
+      "suggestion": "Add more detailed explanation of analysis process. Before: \"# Claude identifies:\n- Confusing explanations\n- Missing context\n- Undefined jargon\n- Logical gaps\" \u2192 After: \"# Semantic Analysis Methodology:\n# Uses AI to detect documentation quality issues:\n# - Identifies overly complex explanations\n# - Checks for missing c...\"",
+      "context": "class SemanticAnalyzer:\n    \"\"\"AI-powered analysis\"\"\"\n    \n    def analyze_clarity(self):\n        # Claude identifies:\n        - Confusing explanations\n        - Missing context\n        - Undefined ja"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/INDEX.md",
+      "line": 3,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "Welcome to your complete Claude Docs Quality Analyzer project! This index explains every file and ho..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/INDEX.md",
+      "line": 8,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "**Want the full story?** \u2192 Read [PROJECT_SUMMARY.md](computer:///mnt/user-data/outputs/PROJECT_SUMMA..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/INDEX.md",
+      "line": 9,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "**Ready to build?** \u2192 Follow [IMPLEMENTATION_GUIDE.md](computer:///mnt/user-data/outputs/IMPLEMENTAT..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/INDEX.md",
+      "line": 262,
+      "type": "terminology",
+      "description": "Use \"use\" instead of \"utilize\"",
+      "suggestion": "Replace with preferred term: \"use\"",
+      "context": "echo \"# Overview\\n\\nSimply utilize Claude.\" > docs/overview.md"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/INDEX.md",
+      "line": 271,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Workflow 2: Full Implementation"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/INDEX.md",
+      "line": 281,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Workflow 3: Continuous Improvement"
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "gitignored/INDEX.md",
+      "line": 174,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 5,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This guide walks through implementing the documentation quality analyzer for your Anthropic Technica..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 481,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This isn't just a project\u2014it's a comprehensive demonstration of your capability to excel in this rol..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 481,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "This isn't just a project\u2014it's a comprehensive demonstration of your capability to excel in this role."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 163,
+      "type": "terminology",
+      "description": "Use \"use\" instead of \"utilize\"",
+      "suggestion": "Replace with preferred term: \"use\"",
+      "context": "\"Utilize the Claude Code CLI in order to leverage advanced agentic"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 163,
+      "type": "terminology",
+      "description": "Use \"use\" instead of \"leverage\"",
+      "suggestion": "Replace with preferred term: \"use\"",
+      "context": "\"Utilize the Claude Code CLI in order to leverage advanced agentic"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 163,
+      "type": "terminology",
+      "description": "Use \"to\" instead of \"in order to\"",
+      "suggestion": "Replace with preferred term: \"to\"",
+      "context": "\"Utilize the Claude Code CLI in order to leverage advanced agentic"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 164,
+      "type": "terminology",
+      "description": "Use \"by\" instead of \"by means of\"",
+      "suggestion": "Replace with preferred term: \"by\"",
+      "context": "coding capabilities which can be configured by means of the settings"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 164,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "coding capabilities which can be configured by means of the settings"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 165,
+      "type": "terminology",
+      "description": "Use \"to\" instead of \"for the purpose of\"",
+      "suggestion": "Replace with preferred term: \"to\"",
+      "context": "file for the purpose of customizing the behavior.\""
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 345,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- Configuration is documented"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 465,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- [ ] Demo video is recorded"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 179,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "After (Organized)"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 211,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Enhancement 2: Create Visual Reports"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 224,
+      "type": "heading_skip",
+      "description": "Heading skips from H1 to H3",
+      "suggestion": "Use H2 instead to maintain hierarchy",
+      "context": "Enhancement 3: Integration Examples"
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "gitignored/IMPLEMENTATION_GUIDE.md",
+      "line": 16,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 3,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "**To adapt this for your application: Replace [brackets] with your info and customize to your voice*..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 9,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "I'm applying for the Technical Writer: Documentation Polish & Information Architecture (Contract) po..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 9,
+      "type": "sentence_too_long",
+      "description": "Sentence has 36 words (recommend <30)",
+      "suggestion": "Break into shorter sentences for better readability",
+      "context": "I'm applying for the Technical Writer: Documentation Polish & Information Architecture (Contract) po..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "I'm applying for the Technical Writer: Documentation Polish & Information Architecture (Contract) position. Rather than simply describing my qualifications, I've created a working proof-of-concept that demonstrates my ability to handle all key responsibilities of this role."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"rather\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "I'm applying for the Technical Writer: Documentation Polish & Information Architecture (Contract) position. Rather than simply describing my qualifications, I've created a working proof-of-concept that demonstrates my ability to handle all key responsibilities of this role."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 13,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "I developed a comprehensive documentation quality analyzer specifically designed for Anthropic's doc..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 15,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "- **Automates documentation review** across clarity, information architecture, consistency, style, c..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 26,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The analyzer detects readability issues, passive voice, weak language, and uses Claude to identify c..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 26,
+      "type": "sentence_too_long",
+      "description": "Sentence has 41 words (recommend <30)",
+      "suggestion": "Break into shorter sentences for better readability",
+      "context": "The analyzer detects readability issues, passive voice, weak language, and uses Claude to identify c..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 29,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The tool validates heading hierarchy, identifies navigation issues, and detects content organization..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 29,
+      "type": "sentence_too_long",
+      "description": "Sentence has 31 words (recommend <30)",
+      "suggestion": "Break into shorter sentences for better readability",
+      "context": "The tool validates heading hierarchy, identifies navigation issues, and detects content organization..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 32,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "I've built a system that tracks terminology variations, formatting inconsistencies, and style deviat..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 32,
+      "type": "sentence_too_long",
+      "description": "Sentence has 31 words (recommend <30)",
+      "suggestion": "Break into shorter sentences for better readability",
+      "context": "I've built a system that tracks terminology variations, formatting inconsistencies, and style deviat..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 35,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The configurable rule engine demonstrates my ability to codify and enforce documentation standards. ..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 38,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The gap analysis functionality identified [X] missing content types (troubleshooting, migration guid..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 41,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The tool assesses link quality, context sufficiency, and example clarity\u2014all focused on improving th..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 41,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "The tool assesses link quality, context sufficiency, and example clarity\u2014all focused on improving the developer experience. My improvements prioritize making documentation genuinely helpful, not just technically correct."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 54,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "I'm drawn to Anthropic's mission to create safe, beneficial AI systems. Your commitment to documenta..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 54,
+      "type": "sentence_too_long",
+      "description": "Sentence has 39 words (recommend <30)",
+      "suggestion": "Break into shorter sentences for better readability",
+      "context": "I'm drawn to Anthropic's mission to create safe, beneficial AI systems. Your commitment to documenta..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 63,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "1. **Immediate Impact**: The analyzer could be deployed on Claude Docs to identify improvement oppor..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 65,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "3. **Technical Depth**: I can understand complex technical concepts well enough to make them accessi..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 66,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "4. **Quality Focus**: I genuinely care about making documentation excellent, not just adequate"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 71,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "While this analyzer showcases my technical capabilities, my core strength is clear communication. I ..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 73,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"actually\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- Identify what users actually need to know vs. what's technically possible to explain"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 94,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "Thank you for considering my application. I'm excited about the possibility of contributing to Anthr..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 113,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "> \"I didn't just apply for this role\u2014I built a proof-of-concept tool that demonstrates exactly how I..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 113,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "> \"I didn't just apply for this role\u2014I built a proof-of-concept tool that demonstrates exactly how I would approach the work.\""
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 116,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "> \"In preparing this application, I analyzed 12 pages of Claude Code documentation and identified 87..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 119,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "> \"Documentation quality at scale is challenging. Manual review is time-consuming and inconsistency ..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 144,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "> \"While I have [Y years] rather than [required years] of experience, I've compensated by [specific ..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 144,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"rather\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "> \"While I have [Y years] rather than [required years] of experience, I've compensated by [specific actions taken]. This project demonstrates that I can deliver at the level you need.\""
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 147,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "> \"My background in [previous field] gives me a unique perspective on [relevant skill]. I've specifi..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 152,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "> \"I'd love to discuss how this tool could integrate with your current workflow and where else I cou..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 155,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "> \"I have ideas for three more documentation projects that could provide immediate value to your tea..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 158,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "> \"I'd appreciate your feedback on this approach. I'm confident we could refine it further to meet y..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 190,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The goal isn't just to get an interview\u2014it's to start the conversation from a position of having alr..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 190,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "The goal isn't just to get an interview\u2014it's to start the conversation from a position of having already contributed value."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 63,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "1. **Immediate Impact**: The analyzer could be deployed on Claude Docs to identify improvement opportunities across the entire documentation set"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 171,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- [ ] All placeholder [brackets] are replaced"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/COVER_LETTER_TEMPLATE.md",
+      "line": 177,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- [ ] Resume is attached/linked"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 5,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "A **complete, production-ready documentation quality analyzer** designed specifically to demonstrate..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 214,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "3. **Start Building:** [Open IMPLEMENTATION_GUIDE.md](./IMPLEMENTATION_GUIDE.md) for step-by-step pl..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 218,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This isn't just a project\u2014it's **proof** that you can do the job. You're not asking Anthropic to tak..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 218,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "This isn't just a project\u2014it's **proof** that you can do the job. You're not asking Anthropic to take a chance on you. You're showing them exactly what you can deliver."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 232,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "You're not just applying for a job. You're demonstrating your value. You're showing initiative. You'..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 232,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "You're not just applying for a job. You're demonstrating your value. You're showing initiative. You're proving you can contribute from day one."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 148,
+      "type": "terminology",
+      "description": "Use \"use\" instead of \"utilize\"",
+      "suggestion": "Replace with preferred term: \"use\"",
+      "context": "Simply utilize Claude to leverage advanced features."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 148,
+      "type": "terminology",
+      "description": "Use \"use\" instead of \"leverage\"",
+      "suggestion": "Replace with preferred term: \"use\"",
+      "context": "Simply utilize Claude to leverage advanced features."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 149,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "This is a very long sentence that should be flagged."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 173,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- **Documentation:** Every function is documented (shows care)"
+    },
+    {
+      "severity": "critical",
+      "category": "style",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 114,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 20,
+      "type": "broken_link",
+      "description": "Broken relative link: ./QUICK_START.md",
+      "suggestion": "Fix link or update target path",
+      "context": "[QUICK_START.md](./QUICK_START.md)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 33,
+      "type": "broken_link",
+      "description": "Broken relative link: ./README.md",
+      "suggestion": "Fix link or update target path",
+      "context": "[README.md](./README.md)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 34,
+      "type": "broken_link",
+      "description": "Broken relative link: ./doc_analyzer.py",
+      "suggestion": "Fix link or update target path",
+      "context": "[doc_analyzer.py](./doc_analyzer.py)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 35,
+      "type": "broken_link",
+      "description": "Broken relative link: ./config.yaml",
+      "suggestion": "Fix link or update target path",
+      "context": "[config.yaml](./config.yaml)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 58,
+      "type": "broken_link",
+      "description": "Broken relative link: ./QUICK_START.md",
+      "suggestion": "Fix link or update target path",
+      "context": "[QUICK_START.md](./QUICK_START.md)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 69,
+      "type": "broken_link",
+      "description": "Broken relative link: ./QUICK_START.md",
+      "suggestion": "Fix link or update target path",
+      "context": "[QUICK_START.md](./QUICK_START.md)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 70,
+      "type": "broken_link",
+      "description": "Broken relative link: ./doc_analyzer.py",
+      "suggestion": "Fix link or update target path",
+      "context": "[doc_analyzer.py](./doc_analyzer.py)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 71,
+      "type": "broken_link",
+      "description": "Broken relative link: ./config.yaml",
+      "suggestion": "Fix link or update target path",
+      "context": "[config.yaml](./config.yaml)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 75,
+      "type": "broken_link",
+      "description": "Broken relative link: ./README.md",
+      "suggestion": "Fix link or update target path",
+      "context": "[README.md](./README.md)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 83,
+      "type": "broken_link",
+      "description": "Broken relative link: ./test_analyzer.py",
+      "suggestion": "Fix link or update target path",
+      "context": "[test_analyzer.py](./test_analyzer.py)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 84,
+      "type": "broken_link",
+      "description": "Broken relative link: ./requirements.txt",
+      "suggestion": "Fix link or update target path",
+      "context": "[requirements.txt](./requirements.txt)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 181,
+      "type": "broken_link",
+      "description": "Broken relative link: ./QUICK_START.md",
+      "suggestion": "Fix link or update target path",
+      "context": "[QUICK_START.md](./QUICK_START.md)"
+    },
+    {
+      "severity": "critical",
+      "category": "technical",
+      "file": "gitignored/00_START_HERE.md",
+      "line": 212,
+      "type": "broken_link",
+      "description": "Broken relative link: ./QUICK_START.md",
+      "suggestion": "Fix link or update target path",
+      "context": "[Open QUICK_START.md](./QUICK_START.md)"
+    },
+    {
+      "severity": "low",
+      "category": "consistency",
+      "file": "[multiple]",
+      "line": null,
+      "type": "term_inconsistency",
+      "description": "Inconsistent usage of \"claude-code\": 3 variants",
+      "suggestion": "Standardize on: \"Claude Code\"",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "gaps",
+      "file": "[multiple]",
+      "line": null,
+      "type": "redundant_content",
+      "description": "Topic \"run analysis\" appears in 5 files",
+      "suggestion": "Consider consolidating or cross-referencing",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "gaps",
+      "file": "[multiple]",
+      "line": null,
+      "type": "redundant_content",
+      "description": "Topic \"overview\" appears in 4 files",
+      "suggestion": "Consider consolidating or cross-referencing",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No overview documentation found",
+      "suggestion": "Add overview section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No quickstart documentation found",
+      "suggestion": "Add quickstart section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No troubleshooting documentation found",
+      "suggestion": "Add troubleshooting section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No examples documentation found",
+      "suggestion": "Add examples section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"First time setup\" is incomplete",
+      "suggestion": "Add documentation for: overview, install, authenticate, first-use",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"Feature implementation\" is incomplete",
+      "suggestion": "Add documentation for: concept-doc, how-to-guide, code-example, troubleshooting",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"Troubleshooting\" is incomplete",
+      "suggestion": "Add documentation for: error-identification, diagnostic-guide, solution",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"API integration\" is incomplete",
+      "suggestion": "Add documentation for: api-overview, authentication, endpoints, sdk-reference, examples",
+      "context": null
+    }
+  ]
+}
