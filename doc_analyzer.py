@@ -172,7 +172,7 @@ class RepositoryManager:
     
     def get_files(self) -> List[Path]:
         """Get all documentation files based on config"""
-        include_patterns = self.config.get('include_patterns', ['**/*.md', '**/*.mdx'])
+        include_patterns = self.config.get('include_patterns', ['**/*.mdx'])  # Only .mdx files by default
         exclude_patterns = self.config.get('exclude_patterns', [
             '**/node_modules/**',
             '**/build/**',
