@@ -76,6 +76,42 @@ export default function AnalyzePage() {
     }
   };
 
+  const handleGenerateFixes = async () => {
+    if (!projectPath) {
+      setError("Please enter a project path");
+      return;
+    }
+
+    setIsAnalyzing(true);
+    setError(null);
+    setFixResult(null);
+    setStartTime(Date.now());
+    setProgressMessage("Generating documentation fixes...");
+
+    try {
+      const fixRequest = {
+        project_path: projectPath,
+        use_claude_ai: useClaudeAI,
+        claude_api_key: useClaudeAI ? apiKey : undefined,
+        claude_model: useClaudeAI ? claudeModel : undefined,
+        max_tokens: useClaudeAI ? maxTokens : undefined,
+      };
+
+      const result = await generateFixes(fixRequest);
+      setFixResult(result);
+      setProgressMessage("Fix generation complete!");
+    } catch (err: any) {
+      const errorDetail = err.response?.data?.detail || err.message || "Fix generation failed";
+      setError(errorDetail);
+      console.error("Fix generation error:", err);
+    } finally {
+      setIsAnalyzing(false);
+      setProgressMessage("");
+      setStartTime(null);
+      setElapsedTime(0);
+    }
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <header className="mb-8">
@@ -224,15 +260,24 @@ export default function AnalyzePage() {
           </div>
         </div>
 
-        {/* Run Button */}
-        <div className="flex justify-center">
+        {/* Run Buttons */}
+        <div className="flex justify-center gap-4">
           <button
             onClick={handleAnalyze}
             disabled={isAnalyzing || !projectPath}
             className="px-8 py-3 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isAnalyzing ? "Analyzing..." : "Run Analysis"}
+            {isAnalyzing && !fixResult ? "Analyzing..." : "Run Analysis"}
           </button>
+          {(analysisResult || fixResult) && (
+            <button
+              onClick={handleGenerateFixes}
+              disabled={isAnalyzing || !projectPath}
+              className="px-8 py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isAnalyzing && fixResult === null && progressMessage.includes("fix") ? "Generating Fixes..." : "Generate Fixes"}
+            </button>
+          )}
         </div>
       </div>
 
@@ -259,9 +304,14 @@ export default function AnalyzePage() {
                 <div className="bg-card rounded-lg border p-4">
                   <div className="text-3xl font-bold text-primary">
                     {(() => {
+                      // Check summary for total_files (correct field from API)
+                      if (analysisResult.summary?.total_files) {
+                        return analysisResult.summary.total_files.toLocaleString();
+                      }
+                      // Fallback to parsing raw output
                       const rawOutput = analysisResult.raw_output || "";
-                      const filesMatch = rawOutput.match(/Total files:\s*(\d+)/i);
-                      return filesMatch ? parseInt(filesMatch[1]).toLocaleString() : (analysisResult.summary?.files_analyzed || 0);
+                      const filesMatch = rawOutput.match(/Total files:\s*(\d+)/i) || rawOutput.match(/Files Analyzed:\s*(\d+)/i);
+                      return filesMatch ? parseInt(filesMatch[1]).toLocaleString() : 0;
                     })()}
                   </div>
                   <div className="text-sm text-muted-foreground">Files Analyzed</div>
@@ -401,29 +451,57 @@ export default function AnalyzePage() {
 
           {/* Fix Results */}
           {fixResult && (
-            <div className="bg-card rounded-lg border p-6">
-              <h3 className="text-xl font-semibold mb-4">Generated Fixes</h3>
+            <div className="space-y-4">
+              {/* Summary Cards */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div>
-                  <div className="text-2xl font-bold text-primary">
+                <div className="bg-card rounded-lg border p-4">
+                  <div className="text-3xl font-bold text-green-600">
                     {fixResult.summary?.total_fixes || 0}
                   </div>
                   <div className="text-sm text-muted-foreground">Total Fixes</div>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold text-primary">
+                <div className="bg-card rounded-lg border p-4">
+                  <div className="text-3xl font-bold text-primary">
                     {fixResult.summary?.files_modified || 0}
                   </div>
                   <div className="text-sm text-muted-foreground">Files Modified</div>
                 </div>
+                <div className="bg-card rounded-lg border p-4">
+                  <div className="text-3xl font-bold text-primary">
+                    {fixResult.summary?.total_files || 0}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Files Processed</div>
+                </div>
+                <div className="bg-card rounded-lg border p-4">
+                  <div className="text-3xl font-bold text-orange-600">
+                    {fixResult.summary?.mode === 'dry_run' ? 'Preview' : 'Applied'}
+                  </div>
+                  <div className="text-sm text-muted-foreground">Mode</div>
+                </div>
               </div>
 
+              {/* Fixes by Type */}
+              {fixResult.summary?.fixes_by_type && Object.keys(fixResult.summary.fixes_by_type).length > 0 && (
+                <div className="bg-card rounded-lg border p-6">
+                  <h3 className="text-xl font-semibold mb-4">Fixes by Type</h3>
+                  <div className="space-y-2">
+                    {Object.entries(fixResult.summary.fixes_by_type).map(([type, count]) => (
+                      <div key={type} className="flex justify-between">
+                        <span className="text-sm">{type}</span>
+                        <span className="text-sm font-semibold">{count as number}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Raw Output (collapsed by default) */}
               {fixResult.raw_output && (
-                <details className="mt-4">
-                  <summary className="cursor-pointer text-sm font-medium text-primary">
-                    View raw output
+                <details className="bg-card rounded-lg border p-6">
+                  <summary className="cursor-pointer text-sm font-medium text-primary hover:text-primary/80">
+                    View detailed raw output
                   </summary>
-                  <pre className="mt-2 p-4 bg-secondary rounded-md text-xs overflow-auto max-h-96">
+                  <pre className="mt-4 p-4 bg-secondary rounded-md text-xs overflow-auto max-h-96 font-mono">
                     {fixResult.raw_output}
                   </pre>
                 </details>

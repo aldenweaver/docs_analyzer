@@ -155,7 +155,7 @@ export default function AnalysisResultsPage() {
           </div>
           <div className="bg-card rounded-lg border p-4">
             <div className="text-3xl font-bold text-primary">
-              {summary.files_analyzed || 0}
+              {summary.total_files || summary.files_analyzed || 0}
             </div>
             <div className="text-sm text-muted-foreground">Files Analyzed</div>
           </div>

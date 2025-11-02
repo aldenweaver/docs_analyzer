@@ -15,9 +15,11 @@ Usage:
 import argparse
 import sys
 from pathlib import Path
-from typing import List
+from typing import List, Dict, Any, Optional
 import shutil
 from datetime import datetime
+import json
+from dataclasses import dataclass, field, asdict
 
 from core.config import Config
 from core.models import FixResult, FixerStats
@@ -45,6 +47,26 @@ from fixers import (
     AccessibilityFixer,
 )
 import os
+
+
+@dataclass
+class FixReport:
+    """Fix analysis report matching analyzer format"""
+    timestamp: str
+    repository: Dict[str, Any]
+    summary: Dict[str, Any]
+    fixes: List[Dict[str, Any]] = field(default_factory=list)
+    recommendations: List[str] = field(default_factory=list)
+
+    def to_dict(self):
+        """Convert to dictionary for JSON export"""
+        return {
+            'timestamp': self.timestamp,
+            'repository': self.repository,
+            'summary': self.summary,
+            'fixes': self.fixes,
+            'recommendations': self.recommendations
+        }
 
 
 class DocFixer:
@@ -135,6 +157,7 @@ class DocFixer:
             print("✓ Accessibility Fixer enabled (WCAG 2.1 AA compliance)")
 
         self.stats = FixerStats()
+        self.all_fix_results = []  # Store all fixes for report generation
 
     def process_directory(self, docs_path: Path, dry_run: bool = False, backup: bool = True) -> FixerStats:
         """
@@ -169,8 +192,9 @@ class DocFixer:
             # Apply all fixers to this file
             combined_result = self._process_file(file_path)
 
-            # Record stats
+            # Record stats and store result
             self.stats.add_result(combined_result)
+            self.all_fix_results.append(combined_result)
 
             # Write changes if not dry run
             if not dry_run and combined_result.content_changed:
@@ -254,6 +278,139 @@ class DocFixer:
 
         shutil.copy2(file_path, backup_path)
 
+    def create_report(self, docs_path: Path, dry_run: bool = False) -> FixReport:
+        """Create a fix report similar to analyzer report format"""
+        # Collect all fixes from results
+        all_fixes = []
+        for result in self.all_fix_results:
+            if result.content_changed:
+                for i, fix_desc in enumerate(result.fixes_applied):
+                    all_fixes.append({
+                        'file': str(Path(result.file_path).relative_to(docs_path)),
+                        'type': fix_desc,
+                        'description': fix_desc,
+                        'applied': not dry_run
+                    })
+
+        # Create summary
+        summary = {
+            'total_files': self.stats.total_files_processed,
+            'files_modified': self.stats.files_modified,
+            'total_fixes': self.stats.total_fixes_applied,
+            'fixes_by_type': self.stats.fixes_by_type,
+            'mode': 'dry_run' if dry_run else 'applied'
+        }
+
+        # Create recommendations
+        recommendations = []
+        if self.stats.total_fixes_applied > 0:
+            recommendations.append(f"{self.stats.total_fixes_applied} fixes {'would be' if dry_run else 'were'} applied across {self.stats.files_modified} files")
+        if self.stats.errors:
+            recommendations.append(f"{len(self.stats.errors)} errors occurred during processing")
+
+        return FixReport(
+            timestamp=datetime.now().isoformat(),
+            repository={
+                'path': str(docs_path),
+                'type': 'local'
+            },
+            summary=summary,
+            fixes=all_fixes,
+            recommendations=recommendations
+        )
+
+    def export_report(self, report: FixReport, output_format: str = 'json', output_dir: Path = None) -> Path:
+        """Export report in specified format"""
+        if output_dir is None:
+            # Create timestamped directory
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            output_dir = Path("reports") / timestamp
+            output_dir.mkdir(parents=True, exist_ok=True)
+
+        if output_format == 'json' or output_format == 'all':
+            json_path = output_dir / "doc_fix_report.json"
+            with open(json_path, 'w') as f:
+                json.dump(report.to_dict(), f, indent=2)
+
+        if output_format == 'html' or output_format == 'all':
+            html_path = output_dir / "doc_fix_report.html"
+            self._export_html(report, html_path)
+
+        if output_format == 'markdown' or output_format == 'all':
+            md_path = output_dir / "doc_fix_report.md"
+            self._export_markdown(report, md_path)
+
+        return output_dir
+
+    def _export_html(self, report: FixReport, output_path: Path):
+        """Export report as HTML"""
+        html_content = f"""<!DOCTYPE html>
+<html>
+<head>
+    <title>Documentation Fix Report</title>
+    <style>
+        body {{ font-family: -apple-system, system-ui, sans-serif; margin: 40px; }}
+        h1, h2 {{ color: #333; }}
+        .summary {{ background: #f5f5f5; padding: 20px; border-radius: 8px; }}
+        .fix {{ background: #fff; border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 4px; }}
+        .applied {{ color: green; }}
+        .dry-run {{ color: orange; }}
+    </style>
+</head>
+<body>
+    <h1>📝 Documentation Fix Report</h1>
+    <p><strong>Generated:</strong> {report.timestamp}</p>
+    <p><strong>Repository:</strong> {report.repository['path']}</p>
+
+    <div class="summary">
+        <h2>Summary</h2>
+        <ul>
+            <li><strong>Total Files Processed:</strong> {report.summary['total_files']}</li>
+            <li><strong>Files Modified:</strong> {report.summary['files_modified']}</li>
+            <li><strong>Total Fixes:</strong> {report.summary['total_fixes']}</li>
+            <li><strong>Mode:</strong> <span class="{'applied' if report.summary['mode'] == 'applied' else 'dry-run'}">{report.summary['mode'].replace('_', ' ').title()}</span></li>
+        </ul>
+    </div>
+
+    <h2>Fixes Applied</h2>
+    {"".join([f'<div class="fix"><strong>File:</strong> {fix["file"]}<br><strong>Fix:</strong> {fix["description"]}</div>' for fix in report.fixes])}
+
+    <h2>Recommendations</h2>
+    <ul>
+        {"".join([f'<li>{rec}</li>' for rec in report.recommendations])}
+    </ul>
+</body>
+</html>"""
+        with open(output_path, 'w') as f:
+            f.write(html_content)
+
+    def _export_markdown(self, report: FixReport, output_path: Path):
+        """Export report as Markdown"""
+        md_content = f"""# 📝 Documentation Fix Report
+
+**Generated:** {report.timestamp}
+**Repository:** {report.repository['path']}
+
+## Summary
+
+- **Total Files Processed:** {report.summary['total_files']}
+- **Files Modified:** {report.summary['files_modified']}
+- **Total Fixes:** {report.summary['total_fixes']}
+- **Mode:** {report.summary['mode'].replace('_', ' ').title()}
+
+## Fixes Applied
+
+"""
+        for fix in report.fixes:
+            md_content += f"### {fix['file']}\n- {fix['description']}\n\n"
+
+        md_content += "\n## Recommendations\n\n"
+        for rec in report.recommendations:
+            md_content += f"- {rec}\n"
+
+        with open(output_path, 'w') as f:
+            f.write(md_content)
+
 
 def main():
     """Main CLI entry point"""
@@ -325,8 +482,23 @@ Examples:
         backup=not args.no_backup
     )
 
+    # Create and export report
+    report = fixer.create_report(
+        docs_path=args.docs_directory,
+        dry_run=args.dry_run
+    )
+
+    # Export reports in all formats
+    report_dir = fixer.export_report(report, output_format='all')
+
     # Print final summary
     print(stats.summary())
+    print(f"\nReports exported to: {report_dir}")
+
+    # Also print JSON to stdout for API to capture
+    print("\n=== JSON OUTPUT START ===")
+    print(json.dumps(report.to_dict()))
+    print("=== JSON OUTPUT END ===")
 
     # Exit with appropriate code
     if stats.errors:

@@ -236,7 +236,7 @@ export default function FixResultsPage() {
       {summary && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <div className="bg-card rounded-lg border p-4">
-            <div className="text-3xl font-bold text-primary">
+            <div className="text-3xl font-bold text-green-600">
               {summary.total_fixes || 0}
             </div>
             <div className="text-sm text-muted-foreground">Total Fixes</div>
@@ -246,6 +246,18 @@ export default function FixResultsPage() {
               {summary.files_modified || 0}
             </div>
             <div className="text-sm text-muted-foreground">Files Modified</div>
+          </div>
+          <div className="bg-card rounded-lg border p-4">
+            <div className="text-3xl font-bold text-primary">
+              {summary.total_files || 0}
+            </div>
+            <div className="text-sm text-muted-foreground">Files Processed</div>
+          </div>
+          <div className="bg-card rounded-lg border p-4">
+            <div className="text-3xl font-bold text-orange-600">
+              {summary.mode === 'dry_run' ? 'Preview' : 'Applied'}
+            </div>
+            <div className="text-sm text-muted-foreground">Mode</div>
           </div>
         </div>
       )}
