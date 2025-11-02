@@ -1,5 +1,5 @@
-# UI Branch Improvements: Implementation Plan
-## Comprehensive Roadmap for Incorporating UI Enhancements into Main Project
+# Project Improvements: Implementation Plan
+## Comprehensive Roadmap for Incorporating Research-Based Enhancements into Main Project
 
 **Created:** November 2, 2025
 **Branch Analyzed:** `ui`
@@ -12,7 +12,7 @@
 
 The `ui` branch contains **extensive documentation quality improvements** organized into 7 major categories with multiple iterations. This implementation plan provides a structured approach to incorporate these enhancements into the main project.
 
-### What's in the UI Branch
+### What's in the Improvements Folder
 
 The improvements folder contains:
 
