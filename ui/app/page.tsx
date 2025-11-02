@@ -83,7 +83,7 @@ export default function AnalyzePage() {
           Analyze Documentation
         </h1>
         <p className="text-muted-foreground">
-          Configure analysis settings and select modules to run
+          Configure analysis settings. Analysis process may take several minutes depending on project size.
         </p>
       </header>
 
