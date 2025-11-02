@@ -2,17 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import ModuleSelector, { type Module } from "@/components/ModuleSelector";
-import { getAnalyzers, getFixers, runAnalysis, generateFixes } from "@/lib/api";
+import { runAnalysis, generateFixes } from "@/lib/api";
 
 export default function AnalyzePage() {
   const router = useRouter();
-
-  // State for modules
-  const [analyzers, setAnalyzers] = useState<Module[]>([]);
-  const [fixers, setFixers] = useState<Module[]>([]);
-  const [selectedAnalyzers, setSelectedAnalyzers] = useState<string[]>([]);
-  const [selectedFixers, setSelectedFixers] = useState<string[]>([]);
 
   // State for form inputs
   const [projectPath, setProjectPath] = useState("");
@@ -29,11 +22,6 @@ export default function AnalyzePage() {
   const [progressMessage, setProgressMessage] = useState<string>("");
   const [startTime, setStartTime] = useState<number | null>(null);
 
-  // Load modules on mount
-  useEffect(() => {
-    loadModules();
-  }, []);
-
   // Update elapsed time every second while analyzing
   const [elapsedTime, setElapsedTime] = useState(0);
   useEffect(() => {
@@ -48,24 +36,6 @@ export default function AnalyzePage() {
     }
   }, [isAnalyzing, startTime]);
 
-  const loadModules = async () => {
-    try {
-      const [analyzersData, fixersData] = await Promise.all([
-        getAnalyzers(),
-        getFixers(),
-      ]);
-      setAnalyzers(analyzersData);
-      setFixers(fixersData);
-
-      // Select all by default
-      setSelectedAnalyzers(analyzersData.map((a) => a.id));
-      setSelectedFixers(fixersData.map((f) => f.id));
-    } catch (err) {
-      setError("Failed to load modules. Is the backend running?");
-      console.error(err);
-    }
-  };
-
   const handleAnalyze = async () => {
     if (!projectPath) {
       setError("Please enter a project path");
@@ -79,12 +49,11 @@ export default function AnalyzePage() {
     setStartTime(Date.now());
 
     try {
-      // Run analysis
-      setProgressMessage(`Running analysis with ${selectedAnalyzers.length} analyzers...`);
+      // Run analysis with all analyzers
+      setProgressMessage("Running comprehensive documentation analysis...");
       const analyzeRequest = {
         project_path: projectPath,
         repo_type: "mintlify",
-        enabled_analyzers: selectedAnalyzers,
         use_claude_ai: useClaudeAI,
         claude_api_key: useClaudeAI ? apiKey : undefined,
         claude_model: useClaudeAI ? claudeModel : undefined,
@@ -94,23 +63,6 @@ export default function AnalyzePage() {
       const result = await runAnalysis(analyzeRequest);
       setAnalysisResult(result);
       setProgressMessage("Analysis complete!");
-
-      // Run fixes if any fixers are selected
-      if (selectedFixers.length > 0) {
-        setProgressMessage(`Generating fixes with ${selectedFixers.length} fixers...`);
-        const fixRequest = {
-          project_path: projectPath,
-          enabled_fixers: selectedFixers,
-          use_claude_ai: useClaudeAI,
-          claude_api_key: useClaudeAI ? apiKey : undefined,
-          claude_model: useClaudeAI ? claudeModel : undefined,
-          max_tokens: useClaudeAI ? maxTokens : undefined,
-        };
-
-        const fixes = await generateFixes(fixRequest);
-        setFixResult(fixes);
-        setProgressMessage("Fixes generated!");
-      }
     } catch (err: any) {
       // Extract detailed error message from backend
       const errorDetail = err.response?.data?.detail || err.message || "Analysis failed";
@@ -261,21 +213,15 @@ export default function AnalyzePage() {
           </div>
         </div>
 
-        {/* Module Selectors */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <ModuleSelector
-            title="Analyzers"
-            modules={analyzers}
-            selectedModules={selectedAnalyzers}
-            onSelectionChange={setSelectedAnalyzers}
-          />
-
-          <ModuleSelector
-            title="Fixers"
-            modules={fixers}
-            selectedModules={selectedFixers}
-            onSelectionChange={setSelectedFixers}
-          />
+        {/* Info about what will be analyzed */}
+        <div className="bg-card rounded-lg border p-6">
+          <h2 className="text-xl font-semibold mb-4">Analysis Scope</h2>
+          <div className="space-y-2 text-sm text-muted-foreground">
+            <p>✓ Runs comprehensive analysis with all quality checks</p>
+            <p>✓ Analyzes .mdx documentation files only</p>
+            <p>✓ Excludes node_modules, build artifacts, and README files</p>
+            <p>✓ Generates HTML, Markdown, and JSON reports</p>
+          </div>
         </div>
 
         {/* Run Button */}
