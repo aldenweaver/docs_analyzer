@@ -171,24 +171,32 @@ async def analyze_docs(request: AnalyzeRequest) -> Dict[str, Any]:
             timeout=1800  # 30 minute timeout
         )
 
-        # Parse output - look for JSON and report directory in stdout
+        # Parse output - look for report directory in stdout
         output_lines = result.stdout.strip().split('\n') if result.stdout else []
-        json_output = None
         report_dir = None
 
         for line in output_lines:
-            # Look for JSON output
-            if line.strip().startswith('{'):
-                try:
-                    json_output = json.loads(line)
-                except json.JSONDecodeError:
-                    continue
             # Look for report directory (e.g., "Report exported to: reports/2025-10-31_19-30-15")
             if "Report exported to:" in line or "reports/" in line:
                 import re
-                match = re.search(r'reports/[\d\-_]+', line)
+                match = re.search(r'reports/([\d\-_]+)', line)
                 if match:
-                    report_dir = match.group(0)
+                    report_dir = match.group(1)  # Extract just the timestamp, not "reports/"
+                    break
+
+        # Read JSON directly from generated file instead of parsing stdout
+        json_output = None
+        if report_dir:
+            json_file = analyzer_dir / "reports" / report_dir / "doc_analysis_report.json"
+            if json_file.exists():
+                try:
+                    with open(json_file, 'r') as f:
+                        json_output = json.load(f)
+                except json.JSONDecodeError as e:
+                    raise HTTPException(
+                        status_code=500,
+                        detail=f"Failed to parse generated JSON report: {str(e)}"
+                    )
 
         # If no JSON output and command failed, raise error
         if not json_output and result.returncode != 0:
@@ -263,24 +271,32 @@ async def generate_fixes(request: FixRequest) -> Dict[str, Any]:
             timeout=1800  # 30 minute timeout for fixes
         )
 
-        # Parse output - look for JSON and report directory in stdout
+        # Parse output - look for report directory in stdout
         output_lines = result.stdout.strip().split('\n') if result.stdout else []
-        json_output = None
         report_dir = None
 
         for line in output_lines:
-            # Look for JSON output
-            if line.strip().startswith('{'):
-                try:
-                    json_output = json.loads(line)
-                except json.JSONDecodeError:
-                    continue
             # Look for report directory
             if "Report exported to:" in line or "reports/" in line:
                 import re
-                match = re.search(r'reports/[\d\-_]+', line)
+                match = re.search(r'reports/([\d\-_]+)', line)
                 if match:
-                    report_dir = match.group(0)
+                    report_dir = match.group(1)  # Extract just the timestamp, not "reports/"
+                    break
+
+        # Read JSON directly from generated file instead of parsing stdout
+        json_output = None
+        if report_dir:
+            json_file = fixer_dir / "reports" / report_dir / "doc_fix_report.json"
+            if json_file.exists():
+                try:
+                    with open(json_file, 'r') as f:
+                        json_output = json.load(f)
+                except json.JSONDecodeError as e:
+                    raise HTTPException(
+                        status_code=500,
+                        detail=f"Failed to parse generated JSON report: {str(e)}"
+                    )
 
         # If no JSON output and command failed, raise error
         if not json_output and result.returncode != 0:
