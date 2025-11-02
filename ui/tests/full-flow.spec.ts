@@ -5,22 +5,13 @@ test.describe('Documentation Analyzer Full Flow', () => {
     await page.goto('http://localhost:3000');
   });
 
-  test('should load modules and run analysis successfully', async ({ page }) => {
+  test('should run analysis successfully with simplified UI', async ({ page }) => {
     // Wait for page to load
     await page.waitForSelector('h1:has-text("Analyze Documentation")');
 
-    // Wait for modules to load
-    await page.waitForSelector('text=Frontmatter', { timeout: 10000 });
-
-    // Check that analyzers loaded
-    const analyzerCount = await page.locator('[data-testid="analyzer-checkbox"]').count();
-    console.log(`Found ${analyzerCount} analyzers`);
-    expect(analyzerCount).toBeGreaterThan(0);
-
-    // Check that fixers loaded
-    const fixerCount = await page.locator('[data-testid="fixer-checkbox"]').count();
-    console.log(`Found ${fixerCount} fixers`);
-    expect(fixerCount).toBeGreaterThan(0);
+    // Check that Analysis Scope section is visible
+    await page.waitForSelector('h2:has-text("Analysis Scope")', { timeout: 5000 });
+    console.log('✓ Analysis Scope section loaded');
 
     // Fill in project path - use a small test folder
     await page.fill('input[id="projectPath"]', '/Users/alden/dev/docs_analyzer/docs');
@@ -29,20 +20,6 @@ test.describe('Documentation Analyzer Full Flow', () => {
     const claudeCheckbox = page.locator('input[id="useClaudeAI"]');
     if (await claudeCheckbox.isChecked()) {
       await claudeCheckbox.uncheck();
-    }
-
-    // Uncheck all fixers to speed up test - use Select None button
-    const fixersSection = page.locator('text=Fixers').locator('..');
-    await fixersSection.locator('button:has-text("Select None")').click();
-
-    // Keep only first 3 analyzers for speed
-    const analyzersSection = page.locator('text=Analyzers').locator('..');
-    await analyzersSection.locator('button:has-text("Select None")').click();
-
-    // Then select just the first 3
-    const analyzerCheckboxes = page.locator('[data-testid="analyzer-checkbox"]');
-    for (let i = 0; i < 3; i++) {
-      await analyzerCheckboxes.nth(i).check();
     }
 
     // Click Run Analysis
@@ -106,17 +83,13 @@ test.describe('Documentation Analyzer Full Flow', () => {
     // Fill in project path
     await page.fill('input[id="projectPath"]', '/Users/alden/dev/claude_docs_clone_mintlify');
 
-    // Uncheck Claude AI
+    // Uncheck Claude AI for faster testing
     const claudeCheckbox = page.locator('input[id="useClaudeAI"]');
     if (await claudeCheckbox.isChecked()) {
       await claudeCheckbox.uncheck();
     }
 
-    // Uncheck all fixers
-    const fixersSection = page.locator('text=Fixers').locator('..');
-    await fixersSection.locator('button:has-text("Select None")').click();
-
-    // Run analysis
+    // Run analysis (runs all analyzers/fixers automatically with simplified UI)
     await page.click('button:has-text("Run Analysis")');
 
     // Wait for completion
