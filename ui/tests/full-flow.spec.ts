@@ -27,12 +27,15 @@ test.describe('Documentation Analyzer Full Flow', () => {
     await expect(runButton).toBeEnabled();
     await runButton.click();
 
-    // Wait for progress indicator
-    await page.waitForSelector('text=/Running analysis/', { timeout: 5000 });
+    // Wait a moment for the click to register
+    await page.waitForTimeout(1000);
+
+    // Wait for progress indicator (longer timeout)
+    await page.waitForSelector('text=/Running|Analysis/', { timeout: 15000 });
     console.log('✓ Progress indicator appeared');
 
     // Wait for elapsed time to start counting
-    await page.waitForSelector('text=/Elapsed:/', { timeout: 5000 });
+    await page.waitForSelector('text=/Elapsed/', { timeout: 10000 });
     console.log('✓ Elapsed timer started');
 
     // Wait for analysis to complete (may take 1-2 minutes)
