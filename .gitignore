@@ -61,5 +61,6 @@ tmp/
 temp/
 *.tmp
 
-# Front End
+# Front End / UI (removed from MVP)
+ui/
 frontend/node_modules/

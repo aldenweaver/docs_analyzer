@@ -457,6 +457,12 @@ Examples:
         help='Path to custom config.yaml file'
     )
 
+    parser.add_argument(
+        '--output',
+        type=Path,
+        help='Custom output directory for reports'
+    )
+
     args = parser.parse_args()
 
     # Validate docs directory
@@ -489,7 +495,7 @@ Examples:
     )
 
     # Export reports in all formats
-    report_dir = fixer.export_report(report, output_format='all')
+    report_dir = fixer.export_report(report, output_format='all', output_dir=args.output)
 
     # Print final summary
     print(stats.summary())
