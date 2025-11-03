@@ -62,7 +62,29 @@ export default function AnalyzePage() {
 
       const result = await runAnalysis(analyzeRequest);
       setAnalysisResult(result);
-      setProgressMessage("Analysis complete!");
+      setProgressMessage("Analysis complete! Generating fixes...");
+
+      // Automatically generate fixes after analysis
+      try {
+        const fixRequest = {
+          project_path: projectPath,
+          use_claude_ai: useClaudeAI,
+          claude_api_key: useClaudeAI ? apiKey : undefined,
+          claude_model: useClaudeAI ? claudeModel : undefined,
+          max_tokens: useClaudeAI ? maxTokens : undefined,
+        };
+
+        const fixResult = await generateFixes(fixRequest);
+        setFixResult(fixResult);
+        setProgressMessage("Analysis and fix generation complete!");
+      } catch (fixErr: any) {
+        // Log fix generation error but don't show it as error - analysis was still successful
+        console.error("Fix generation error:", fixErr);
+        const errorMsg = fixErr.code === 'ECONNABORTED'
+          ? "Fix generation timed out, but you can try again"
+          : (fixErr.message || "Fix generation had an issue");
+        setProgressMessage(`Analysis complete! ${errorMsg}`);
+      }
     } catch (err: any) {
       // Extract detailed error message from backend
       const errorDetail = err.response?.data?.detail || err.message || "Analysis failed";
@@ -247,6 +269,17 @@ export default function AnalyzePage() {
               </>
             )}
           </div>
+
+          {/* Run Analysis button at bottom right */}
+          <div className="flex justify-end mt-6">
+            <button
+              onClick={handleAnalyze}
+              disabled={isAnalyzing || !projectPath}
+              className="px-6 py-2 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isAnalyzing ? "Analyzing..." : "Run Analysis"}
+            </button>
+          </div>
         </div>
 
         {/* Info about what will be analyzed */}
@@ -257,287 +290,60 @@ export default function AnalyzePage() {
             <p>✓ Analyzes .mdx documentation files only</p>
             <p>✓ Excludes node_modules, build artifacts, and README files</p>
             <p>✓ Generates HTML, Markdown, and JSON reports</p>
+            <p>✓ Automatically generates fixes after analysis</p>
           </div>
-        </div>
-
-        {/* Run Buttons */}
-        <div className="flex justify-center gap-4">
-          <button
-            onClick={handleAnalyze}
-            disabled={isAnalyzing || !projectPath}
-            className="px-8 py-3 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isAnalyzing && !fixResult ? "Analyzing..." : "Run Analysis"}
-          </button>
-          {(analysisResult || fixResult) && (
-            <button
-              onClick={handleGenerateFixes}
-              disabled={isAnalyzing || !projectPath}
-              className="px-8 py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isAnalyzing && fixResult === null && progressMessage.includes("fix") ? "Generating Fixes..." : "Generate Fixes"}
-            </button>
-          )}
         </div>
       </div>
 
-      {/* Results Section */}
+      {/* Results Section - Just buttons */}
       {(analysisResult || fixResult) && (
-        <div className="space-y-6">
-          <h2 className="text-2xl font-semibold">Results</h2>
-
-          {/* Analysis Results */}
-          {analysisResult && (
-            <div className="space-y-4">
-              {/* Summary Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-card rounded-lg border p-4">
-                  <div className="text-3xl font-bold text-primary">
-                    {(() => {
-                      const rawOutput = analysisResult.raw_output || "";
-                      const totalMatch = rawOutput.match(/Total issues:\s*(\d+)/i);
-                      return totalMatch ? parseInt(totalMatch[1]).toLocaleString() : (analysisResult.summary?.total_issues || 0);
-                    })()}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Total Issues</div>
-                </div>
-                <div className="bg-card rounded-lg border p-4">
-                  <div className="text-3xl font-bold text-primary">
-                    {(() => {
-                      // Check summary for total_files (correct field from API)
-                      if (analysisResult.summary?.total_files) {
-                        return analysisResult.summary.total_files.toLocaleString();
-                      }
-                      // Fallback to parsing raw output
-                      const rawOutput = analysisResult.raw_output || "";
-                      const filesMatch = rawOutput.match(/Total files:\s*(\d+)/i) || rawOutput.match(/Files Analyzed:\s*(\d+)/i);
-                      return filesMatch ? parseInt(filesMatch[1]).toLocaleString() : 0;
-                    })()}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Files Analyzed</div>
-                </div>
-                <div className="bg-card rounded-lg border p-4">
-                  <div className="text-3xl font-bold text-red-600">
-                    {(() => {
-                      const rawOutput = analysisResult.raw_output || "";
-                      const criticalMatch = rawOutput.match(/Critical:\s*(\d+)/i);
-                      return criticalMatch ? parseInt(criticalMatch[1]).toLocaleString() : 0;
-                    })()}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Critical</div>
-                </div>
-                <div className="bg-card rounded-lg border p-4">
-                  <div className="text-3xl font-bold text-orange-600">
-                    {(() => {
-                      const rawOutput = analysisResult.raw_output || "";
-                      const mediumMatch = rawOutput.match(/Medium:\s*(\d+)/i);
-                      return mediumMatch ? parseInt(mediumMatch[1]).toLocaleString() : 0;
-                    })()}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Medium</div>
-                </div>
-              </div>
-
-              {/* Issues by Severity */}
-              <div className="bg-card rounded-lg border p-6">
-                <h3 className="text-xl font-semibold mb-4">Issues by Severity</h3>
-                <div className="space-y-3">
-                  {(() => {
-                    const rawOutput = analysisResult.raw_output || "";
-                    const criticalMatch = rawOutput.match(/Critical:\s*(\d+)/i);
-                    const highMatch = rawOutput.match(/High:\s*(\d+)/i);
-                    const mediumMatch = rawOutput.match(/Medium:\s*(\d+)/i);
-                    const lowMatch = rawOutput.match(/Low:\s*(\d+)/i);
-
-                    const critical = criticalMatch ? parseInt(criticalMatch[1]) : 0;
-                    const high = highMatch ? parseInt(highMatch[1]) : 0;
-                    const medium = mediumMatch ? parseInt(mediumMatch[1]) : 0;
-                    const low = lowMatch ? parseInt(lowMatch[1]) : 0;
-                    const total = critical + high + medium + low;
-
-                    return (
-                      <>
-                        {critical > 0 && (
-                          <div className="flex items-center space-x-3">
-                            <div className="flex-1">
-                              <div className="flex justify-between mb-1">
-                                <span className="text-sm font-medium text-red-600">Critical</span>
-                                <span className="text-sm text-muted-foreground">{critical.toLocaleString()} ({((critical/total)*100).toFixed(1)}%)</span>
-                              </div>
-                              <div className="w-full bg-secondary rounded-full h-2">
-                                <div className="bg-red-600 h-2 rounded-full" style={{width: `${(critical/total)*100}%`}}></div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                        {high > 0 && (
-                          <div className="flex items-center space-x-3">
-                            <div className="flex-1">
-                              <div className="flex justify-between mb-1">
-                                <span className="text-sm font-medium text-orange-500">High</span>
-                                <span className="text-sm text-muted-foreground">{high.toLocaleString()} ({((high/total)*100).toFixed(1)}%)</span>
-                              </div>
-                              <div className="w-full bg-secondary rounded-full h-2">
-                                <div className="bg-orange-500 h-2 rounded-full" style={{width: `${(high/total)*100}%`}}></div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                        {medium > 0 && (
-                          <div className="flex items-center space-x-3">
-                            <div className="flex-1">
-                              <div className="flex justify-between mb-1">
-                                <span className="text-sm font-medium text-yellow-600">Medium</span>
-                                <span className="text-sm text-muted-foreground">{medium.toLocaleString()} ({((medium/total)*100).toFixed(1)}%)</span>
-                              </div>
-                              <div className="w-full bg-secondary rounded-full h-2">
-                                <div className="bg-yellow-600 h-2 rounded-full" style={{width: `${(medium/total)*100}%`}}></div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                        {low > 0 && (
-                          <div className="flex items-center space-x-3">
-                            <div className="flex-1">
-                              <div className="flex justify-between mb-1">
-                                <span className="text-sm font-medium text-blue-600">Low</span>
-                                <span className="text-sm text-muted-foreground">{low.toLocaleString()} ({((low/total)*100).toFixed(1)}%)</span>
-                              </div>
-                              <div className="w-full bg-secondary rounded-full h-2">
-                                <div className="bg-blue-600 h-2 rounded-full" style={{width: `${(low/total)*100}%`}}></div>
-                              </div>
-                            </div>
-                          </div>
-                        )}
-                        {total === 0 && (
-                          <p className="text-sm text-muted-foreground">No issues found</p>
-                        )}
-                      </>
-                    );
-                  })()}
-                </div>
-              </div>
-
-              {/* Repository Information */}
-              {analysisResult.raw_output && (() => {
-                const rawOutput = analysisResult.raw_output;
-                const repoMatch = rawOutput.match(/Repository:\s*(\S+)/i);
-                return repoMatch && (
-                  <div className="bg-card rounded-lg border p-6">
-                    <h3 className="text-xl font-semibold mb-4">Repository Information</h3>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">Repository:</span>
-                        <span className="font-mono">{repoMatch[1]}</span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })()}
-
-              {/* Raw Output (collapsed by default) */}
-              {analysisResult.raw_output && (
-                <details className="bg-card rounded-lg border p-6">
-                  <summary className="cursor-pointer text-sm font-medium text-primary hover:text-primary/80">
-                    View detailed raw output
-                  </summary>
-                  <pre className="mt-4 p-4 bg-secondary rounded-md text-xs overflow-auto max-h-96 font-mono">
-                    {analysisResult.raw_output}
-                  </pre>
-                </details>
-              )}
-            </div>
-          )}
-
-          {/* Fix Results */}
-          {fixResult && (
-            <div className="space-y-4">
-              {/* Summary Cards */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="bg-card rounded-lg border p-4">
-                  <div className="text-3xl font-bold text-green-600">
-                    {fixResult.summary?.total_fixes || 0}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Total Fixes</div>
-                </div>
-                <div className="bg-card rounded-lg border p-4">
-                  <div className="text-3xl font-bold text-primary">
-                    {fixResult.summary?.files_modified || 0}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Files Modified</div>
-                </div>
-                <div className="bg-card rounded-lg border p-4">
-                  <div className="text-3xl font-bold text-primary">
-                    {fixResult.summary?.total_files || 0}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Files Processed</div>
-                </div>
-                <div className="bg-card rounded-lg border p-4">
-                  <div className="text-3xl font-bold text-orange-600">
-                    {fixResult.summary?.mode === 'dry_run' ? 'Preview' : 'Applied'}
-                  </div>
-                  <div className="text-sm text-muted-foreground">Mode</div>
-                </div>
-              </div>
-
-              {/* Fixes by Type */}
-              {fixResult.summary?.fixes_by_type && Object.keys(fixResult.summary.fixes_by_type).length > 0 && (
-                <div className="bg-card rounded-lg border p-6">
-                  <h3 className="text-xl font-semibold mb-4">Fixes by Type</h3>
-                  <div className="space-y-2">
-                    {Object.entries(fixResult.summary.fixes_by_type).map(([type, count]) => (
-                      <div key={type} className="flex justify-between">
-                        <span className="text-sm">{type}</span>
-                        <span className="text-sm font-semibold">{count as number}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Raw Output (collapsed by default) */}
-              {fixResult.raw_output && (
-                <details className="bg-card rounded-lg border p-6">
-                  <summary className="cursor-pointer text-sm font-medium text-primary hover:text-primary/80">
-                    View detailed raw output
-                  </summary>
-                  <pre className="mt-4 p-4 bg-secondary rounded-md text-xs overflow-auto max-h-96 font-mono">
-                    {fixResult.raw_output}
-                  </pre>
-                </details>
-              )}
-            </div>
-          )}
+        <div className="bg-card rounded-lg border p-6">
+          <h2 className="text-2xl font-semibold mb-4">Results</h2>
+          <p className="text-muted-foreground mb-6">
+            {analysisResult && !fixResult
+              ? "Analysis complete! Generating fixes... You can view the analysis results while fixes are being generated."
+              : "Analysis and fix generation complete! View detailed results and downloadable reports."}
+          </p>
 
           {/* View Results Buttons */}
-          <div className="flex gap-4 justify-center mt-6">
+          <div className="flex gap-4 justify-center">
             {analysisResult && analysisResult.report_dir && (
               <button
                 onClick={() => {
-                  // Store report info in sessionStorage for the results page
-                  sessionStorage.setItem('analysisReportDir', analysisResult.report_dir || '');
-                  sessionStorage.setItem('analysisReportFiles', JSON.stringify(analysisResult.report_files || {}));
-                  sessionStorage.setItem('analysisSummary', JSON.stringify(analysisResult.summary || {}));
-                  router.push('/analysis-results');
+                  // Pass data via URL parameters for cross-tab access
+                  const params = new URLSearchParams({
+                    dir: analysisResult.report_dir || '',
+                    files: JSON.stringify(analysisResult.report_files || {}),
+                    summary: JSON.stringify(analysisResult.summary || {})
+                  });
+                  window.open(`/analysis-results?${params.toString()}`, '_blank');
                 }}
-                className="px-6 py-3 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90"
+                className="px-6 py-3 bg-primary text-primary-foreground rounded-md font-semibold hover:opacity-90 flex items-center gap-2"
               >
-                View Analysis Results
+                View Analysis
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
               </button>
             )}
             {fixResult && fixResult.report_dir && (
               <button
                 onClick={() => {
-                  // Store report info and project path in sessionStorage for the results page
-                  sessionStorage.setItem('fixReportDir', fixResult.report_dir || '');
-                  sessionStorage.setItem('fixReportFiles', JSON.stringify(fixResult.report_files || {}));
-                  sessionStorage.setItem('fixSummary', JSON.stringify(fixResult.summary || {}));
-                  sessionStorage.setItem('fixProjectPath', projectPath);  // Store project path for Apply Fixes
-                  router.push('/fix-results');
+                  // Pass data via URL parameters for cross-tab access
+                  const params = new URLSearchParams({
+                    dir: fixResult.report_dir || '',
+                    files: JSON.stringify(fixResult.report_files || {}),
+                    summary: JSON.stringify(fixResult.summary || {}),
+                    projectPath: projectPath
+                  });
+                  window.open(`/fix-results?${params.toString()}`, '_blank');
                 }}
-                className="px-6 py-3 bg-secondary text-secondary-foreground rounded-md font-semibold hover:opacity-90"
+                className="px-6 py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 flex items-center gap-2"
               >
-                View Fix Results
+                View Fixes
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
               </button>
             )}
           </div>

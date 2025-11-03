@@ -171,8 +171,8 @@ class DocFixer:
         Returns:
             FixerStats with summary of changes
         """
-        # Find all MDX and MD files
-        md_files = list(docs_path.rglob("*.md")) + list(docs_path.rglob("*.mdx"))
+        # Find all MDX files (not MD)
+        md_files = list(docs_path.rglob("*.mdx"))
 
         print(f"\n{'='*70}")
         print(f"Documentation Fixer")

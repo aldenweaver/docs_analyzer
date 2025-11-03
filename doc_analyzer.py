@@ -275,13 +275,13 @@ class MintlifyValidator:
     
     def validate_frontmatter(self, file_path: str, content: str, issues: List[Issue]):
         """Validate frontmatter requirements"""
-        if not file_path.endswith('.mdx') and not file_path.endswith('.md'):
+        if not file_path.endswith('.mdx'):
             return
-        
+
         frontmatter, _ = MDXParser.parse_frontmatter(content)
-        
+
         # Check if frontmatter exists (critical for MDX)
-        if file_path.endswith('.mdx') and frontmatter is None:
+        if frontmatter is None:
             issues.append(Issue(
                 severity='critical',
                 category='mintlify',

@@ -7,8 +7,9 @@ import axios from "axios";
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001/api";
 
 // Configure axios with longer timeout for large documentation analysis
+// Especially important for fix generation which can take several minutes
 const axiosInstance = axios.create({
-  timeout: 1800000, // 30 minutes
+  timeout: 3600000, // 60 minutes (1 hour) - generous timeout for AI-powered operations
 });
 
 export interface ModuleInfo {

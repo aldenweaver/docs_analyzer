@@ -1,12 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001/api";
 
 export default function AnalysisResultsPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [reportDir, setReportDir] = useState<string>("");
   const [reportFiles, setReportFiles] = useState<any>({});
   const [summary, setSummary] = useState<any>({});
@@ -16,24 +17,32 @@ export default function AnalysisResultsPage() {
   const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
-    // Load data from sessionStorage
-    const dir = sessionStorage.getItem('analysisReportDir');
-    const files = sessionStorage.getItem('analysisReportFiles');
-    const summaryData = sessionStorage.getItem('analysisSummary');
+    // Load data from URL parameters
+    const dir = searchParams.get('dir');
+    const filesParam = searchParams.get('files');
+    const summaryParam = searchParams.get('summary');
 
-    if (!dir || !files) {
+    if (!dir || !filesParam) {
       setError("No analysis results found. Please run an analysis first.");
       setLoading(false);
       return;
     }
 
-    setReportDir(dir);
-    setReportFiles(JSON.parse(files));
-    setSummary(JSON.parse(summaryData || '{}'));
+    try {
+      const files = JSON.parse(filesParam);
+      const summaryData = summaryParam ? JSON.parse(summaryParam) : {};
 
-    // Fetch HTML content
-    fetchHtmlReport(dir, JSON.parse(files).html);
-  }, []);
+      setReportDir(dir);
+      setReportFiles(files);
+      setSummary(summaryData);
+
+      // Fetch HTML content
+      fetchHtmlReport(dir, files.html);
+    } catch (e) {
+      setError("Failed to parse report data");
+      setLoading(false);
+    }
+  }, [searchParams]);
 
   const fetchHtmlReport = async (dir: string, filename: string) => {
     try {
