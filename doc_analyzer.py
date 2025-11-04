@@ -478,8 +478,9 @@ Prioritize issues by user impact. Return ONLY valid JSON array."""
                 elif '```' in response_text:
                     response_text = response_text.split('```')[1].split('```')[0].strip()
 
-                # Try to extract JSON array with regex
-                json_match = re.search(r'\[.*?\]', response_text, re.DOTALL)
+                # Try to extract JSON array with better regex (non-greedy to avoid capturing too much)
+                # Look for array starting with [ and try to find matching ]
+                json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
                 if not json_match:
                     # AI returned no issues or invalid response
                     return
@@ -490,7 +491,21 @@ Prioritize issues by user impact. Return ONLY valid JSON array."""
                 if response_text == '[]' or not response_text:
                     return
 
-                ai_issues = json.loads(response_text)
+                try:
+                    ai_issues = json.loads(response_text)
+                except json.JSONDecodeError as e:
+                    # Try to fix common JSON issues
+                    # Remove trailing commas
+                    response_text = re.sub(r',\s*}', '}', response_text)
+                    response_text = re.sub(r',\s*\]', ']', response_text)
+
+                    # Try again
+                    try:
+                        ai_issues = json.loads(response_text)
+                    except json.JSONDecodeError:
+                        # If still failing, skip this clarity check
+                        print(f"⚠️ Skipping AI clarity check for {file_path}: Invalid JSON response", file=sys.stderr)
+                        return
 
                 for issue in ai_issues:  # Process all issues
                         # Build detailed description with evidence
@@ -613,8 +628,8 @@ Cite SPECIFIC files from the provided list. Return ONLY valid JSON array."""
             elif '```' in response_text:
                 response_text = response_text.split('```')[1].split('```')[0].strip()
 
-            # Try to extract JSON array with regex
-            json_match = re.search(r'\[.*?\]', response_text, re.DOTALL)
+            # Try to extract JSON array with better regex
+            json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
             if not json_match:
                 # AI returned no gaps
                 return
@@ -625,7 +640,21 @@ Cite SPECIFIC files from the provided list. Return ONLY valid JSON array."""
             if response_text == '[]' or not response_text:
                 return
 
-            gaps = json.loads(response_text)
+            try:
+                gaps = json.loads(response_text)
+            except json.JSONDecodeError:
+                # Try to fix common JSON issues
+                # Remove trailing commas
+                response_text = re.sub(r',\s*}', '}', response_text)
+                response_text = re.sub(r',\s*\]', ']', response_text)
+
+                # Try again
+                try:
+                    gaps = json.loads(response_text)
+                except json.JSONDecodeError:
+                    # If still failing, skip this semantic gap check
+                    print(f"⚠️ Skipping semantic gap analysis: Invalid JSON response", file=sys.stderr)
+                    return
 
             for gap in gaps:  # Process all gaps
                     # Build evidence-based description

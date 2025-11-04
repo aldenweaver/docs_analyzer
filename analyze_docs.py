@@ -19,13 +19,14 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 
-def run_command(command: list, description: str) -> tuple[bool, str]:
+def run_command(command: list, description: str, timeout: int = 600) -> tuple[bool, str]:
     """
-    Run a command and capture its output.
+    Run a command with real-time output streaming and timeout.
 
     Args:
         command: Command and arguments as list
         description: Description of what's being run
+        timeout: Maximum seconds to wait (default: 600 = 10 minutes)
 
     Returns:
         Tuple of (success: bool, output: str)
@@ -34,21 +35,53 @@ def run_command(command: list, description: str) -> tuple[bool, str]:
     print(f"📊 {description}")
     print(f"{'='*70}")
 
+    output_lines = []
+
     try:
-        result = subprocess.run(
+        # Use Popen for real-time output streaming
+        # Add PYTHONUNBUFFERED to ensure Python scripts output in real-time
+        env = os.environ.copy()
+        env['PYTHONUNBUFFERED'] = '1'
+
+        process = subprocess.Popen(
             command,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,  # Combine stderr with stdout
             text=True,
-            check=False
+            bufsize=1,  # Line buffered
+            env=env
         )
 
-        # Print the output
-        if result.stdout:
-            print(result.stdout)
-        if result.stderr and result.returncode != 0:
-            print(f"⚠️  Warnings/Errors:\n{result.stderr}", file=sys.stderr)
+        # Read output in real-time
+        start_time = datetime.now()
+        while True:
+            # Check timeout
+            if (datetime.now() - start_time).total_seconds() > timeout:
+                process.kill()
+                error_msg = f"Command timed out after {timeout} seconds"
+                print(f"\n❌ {error_msg}", file=sys.stderr)
+                return False, error_msg
 
-        return result.returncode == 0, result.stdout
+            # Read a line
+            line = process.stdout.readline()
+            if not line:
+                # Check if process has finished
+                if process.poll() is not None:
+                    break
+                continue
+
+            # Print the line in real-time and save it
+            print(line.rstrip())
+            output_lines.append(line)
+
+        # Get final return code
+        returncode = process.poll()
+
+        # Join all output lines
+        full_output = ''.join(output_lines)
+
+        return returncode == 0, full_output
+
     except Exception as e:
         error_msg = f"Failed to run {command[0]}: {str(e)}"
         print(f"❌ {error_msg}", file=sys.stderr)
