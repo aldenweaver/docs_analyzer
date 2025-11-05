@@ -19,14 +19,14 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 
-def run_command(command: list, description: str, timeout: int = 600) -> tuple[bool, str]:
+def run_command(command: list, description: str, timeout: int = 1800) -> tuple[bool, str]:
     """
     Run a command with real-time output streaming and timeout.
 
     Args:
         command: Command and arguments as list
         description: Description of what's being run
-        timeout: Maximum seconds to wait (default: 600 = 10 minutes)
+        timeout: Maximum seconds to wait (default: 1800 = 30 minutes)
 
     Returns:
         Tuple of (success: bool, output: str)
@@ -226,6 +226,10 @@ Examples:
         # Add fix-specific arguments
         if not args.apply_fixes:
             fixer_cmd.append('--dry-run')  # Default is dry-run
+
+        # Pass --no-ai flag to fixer if set (disables slow StyleGuideValidator)
+        if args.no_ai:
+            fixer_cmd.append('--no-ai')
 
         success, output = run_command(fixer_cmd, "Running Documentation Fixer")
 

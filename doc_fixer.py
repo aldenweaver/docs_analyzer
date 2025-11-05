@@ -463,6 +463,12 @@ Examples:
         help='Custom output directory for reports'
     )
 
+    parser.add_argument(
+        '--no-ai',
+        action='store_true',
+        help='Disable AI-powered analysis (StyleGuideValidator) for faster execution'
+    )
+
     args = parser.parse_args()
 
     # Validate docs directory
@@ -474,9 +480,12 @@ Examples:
         print(f"Error: Not a directory: {args.docs_directory}", file=sys.stderr)
         sys.exit(1)
 
-    # Initialize fixer
+    # Initialize fixer (disable style guide validator if --no-ai is set)
     try:
-        fixer = DocFixer(config_path=args.config)
+        fixer = DocFixer(
+            config_path=args.config,
+            enable_style_guide=not args.no_ai  # Disable AI analysis when --no-ai is used
+        )
     except FileNotFoundError as e:
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)
