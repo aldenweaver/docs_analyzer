@@ -40,7 +40,10 @@ cp .env.example .env
 source venv/bin/activate    # Linux/macOS
 venv\Scripts\activate.bat   # Windows
 
-# Analyze your documentation (generates all 6 reports)
+# Analyze your documentation (recommended: use --no-ai for speed)
+python analyze_docs.py /path/to/docs --no-ai
+
+# Or with AI analysis (slower, but more comprehensive)
 python analyze_docs.py /path/to/docs
 ```
 
@@ -49,6 +52,8 @@ python analyze_docs.py /path/to/docs
 2. ✅ Run 20+ automated quality checks
 3. ✅ Generate fix suggestions
 4. ✅ Save 6 reports in `reports/<timestamp>/`
+
+> 💡 **Pro Tip**: Use `--no-ai` for documentation sets with 50+ files to avoid long processing times (30+ minutes). See [Performance Tips](#-performance-tips) for details.
 
 ---
 
@@ -233,15 +238,39 @@ docker-compose --profile dev run shell
 
 ## 💡 Performance Tips
 
-**For Faster Analysis:**
-- Use `--no-ai` to skip AI-powered checks (reduces time by 80-90%)
-- Use `--format json` if you only need machine-readable output
-- Process smaller documentation sets at a time
-- Disable optional fixers via environment variables
+### ⚡ Recommended: Use --no-ai for Production
+
+**For large documentation sets (50+ files), use `--no-ai` to avoid timeouts:**
+
+```bash
+python analyze_docs.py /path/to/docs --no-ai
+```
+
+**Why?**
+- AI-powered analysis calls Claude API for **every file** analyzed and fixed
+- For 80+ files, this can take **30-60+ minutes** and may timeout
+- You still get all quality checks except AI semantic analysis
+- **95% faster** execution time
 
 **Typical Processing Times:**
-- **Without AI**: 30-60 seconds for 50-100 files
-- **With AI**: 5-10 minutes for 50-100 files (depends on API response time)
+
+| Files | Without AI | With AI |
+|-------|-----------|---------|
+| 10-20 files | 10-20 seconds | 2-5 minutes |
+| 50-100 files | 30-60 seconds | 10-30 minutes |
+| 100+ files | 1-2 minutes | 30-60+ minutes ⚠️ |
+
+**When to use AI:**
+- Small documentation sets (< 20 files)
+- Deep semantic analysis needed
+- You have time to wait
+- Testing/experimentation
+
+**When to skip AI (use --no-ai):**
+- Production CI/CD pipelines
+- Large documentation sets
+- Quick quality checks
+- Regular automated runs
 
 ---
 
