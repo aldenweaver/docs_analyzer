@@ -1,182 +1,158 @@
-# Documentation Quality Analyzer MVP
+# Documentation Quality Analyzer
 
-> **A comprehensive documentation quality analyzer and fixer for .mdx files that generates detailed reports in multiple formats (HTML, Markdown, JSON).**
+> **Automated quality analysis and fixing for .mdx documentation with comprehensive reporting in HTML, Markdown, and JSON formats.**
 
-## 🎯 Project Overview
+## 🎯 Overview
 
-This MVP provides a unified command-line tool that analyzes Mintlify-based documentation (like Claude Docs) and generates both quality analysis reports and fix suggestions. It processes .mdx documentation files and provides actionable insights for improvement.
+A unified CLI tool that analyzes Mintlify-based documentation (like Claude Docs) and generates both quality analysis reports and automated fix suggestions. Processes .mdx documentation files with optional AI-powered semantic analysis.
 
-### Key Features
+**Key Features:**
+- ✨ Single command runs both analysis and fix generation
+- 📊 Generates 6 comprehensive reports (3 formats × 2 report types)
+- 🤖 Optional Claude API integration for advanced analysis
+- 🔧 20+ automated fixers for documentation improvements
+- 🎨 Platform auto-detection (Mintlify, Docusaurus, MkDocs, generic)
 
-- **Single Command Operation**: One simple CLI command runs both analysis and fix generation
-- **Multiple Report Formats**: Generates 6 comprehensive reports (analysis + fixes in HTML, MD, JSON)
-- **AI-Powered Analysis**: Optional Claude API integration for semantic analysis
-- **20+ Automated Fixers**: Modular system for documentation improvements
-- **Platform Auto-Detection**: Works with Mintlify, Docusaurus, MkDocs, or generic documentation
+---
 
 ## 🚀 Quick Start
 
-### Simple Setup & Run
+### Installation
 
 ```bash
 # 1. Clone the repository
 git clone <repository-url>
 cd docs_analyzer
 
-# 2. Run setup script (creates venv and installs dependencies)
+# 2. Run automated setup (creates venv + installs dependencies)
 ./setup.sh          # Linux/macOS
 setup.bat           # Windows
 
-# 3. Configure environment (optional for AI features)
+# 3. Configure API key (optional - enables AI analysis)
 cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY (optional)
-
-# 4. Run the unified analyzer (single command for everything!)
-python analyze_docs.py /path/to/docs --format all
+# Edit .env and add: ANTHROPIC_API_KEY=your-key-here
 ```
-
-**That's it!** This single command will:
-- Analyze all .mdx files in your documentation
-- Generate analysis reports (HTML, Markdown, JSON)
-- Generate fix suggestion reports (HTML, Markdown, JSON)
-- Save all 6 reports in a timestamped directory under `/reports/`
-
-## 📖 Usage Examples
 
 ### Basic Usage
 
 ```bash
-# Analyze docs and generate all report formats (recommended)
-python analyze_docs.py /path/to/docs --format all
+# Activate virtual environment
+source venv/bin/activate    # Linux/macOS
+venv\Scripts\activate.bat   # Windows
 
-# Analyze with specific configuration
-python analyze_docs.py /path/to/docs --config custom_config.yaml
+# Analyze your documentation (generates all 6 reports)
+python analyze_docs.py /path/to/docs
+```
 
-# Analyze without AI features (faster, no API key needed)
+**That's it!** The tool will:
+1. ✅ Analyze all .mdx files in the directory
+2. ✅ Run 20+ automated quality checks
+3. ✅ Generate fix suggestions
+4. ✅ Save 6 reports in `reports/<timestamp>/`
+
+---
+
+## 📖 Usage Guide
+
+### Command Options
+
+```bash
+# Basic analysis (generates all 3 report formats by default)
+python analyze_docs.py /path/to/docs
+
+# Generate specific report format only
+python analyze_docs.py /path/to/docs --format html      # HTML only
+python analyze_docs.py /path/to/docs --format json      # JSON only
+python analyze_docs.py /path/to/docs --format markdown  # Markdown only
+
+# Run without AI (faster, no API key required)
 python analyze_docs.py /path/to/docs --no-ai
 
-# Apply fixes instead of just previewing
+# Apply fixes automatically (default is preview/dry-run)
 python analyze_docs.py /path/to/docs --apply-fixes
+
+# Use custom configuration
+python analyze_docs.py /path/to/docs --config custom_config.yaml
 
 # Analyze remote repository
 python analyze_docs.py --repo-url https://github.com/user/docs --repo-type mintlify
+
+# Skip analysis, only generate fixes
+python analyze_docs.py /path/to/docs --skip-analysis
+
+# Skip fixes, only run analysis
+python analyze_docs.py /path/to/docs --skip-fixes
 ```
 
-### Advanced Usage (Individual Scripts)
+### Report Formats Explained
 
-While the unified `analyze_docs.py` is recommended, you can also run components individually:
+The `--format` flag controls which report file types are generated:
 
-```bash
-# Run only analysis
-python doc_analyzer.py /path/to/docs --format all
+| Format | File Type | Use Case |
+|--------|-----------|----------|
+| `html` | `.html` | 🌐 Interactive web report with filtering and color-coding - best for human review |
+| `markdown` | `.md` | 📝 GitHub-friendly format - great for issues and PR comments |
+| `json` | `.json` | 🔧 Machine-readable data - perfect for CI/CD and custom tooling |
+| `all` | All 3 | 💎 Maximum flexibility - **default and recommended** |
 
-# Run only fixer
-python doc_fixer.py /path/to/docs --format all
+### Generated Reports
+
+Each run creates a timestamped directory with up to 6 reports:
+
+```
+reports/2024-11-04_14-30-15/
+├── doc_analysis_report.html    # Analysis: Interactive web view
+├── doc_analysis_report.md      # Analysis: GitHub-friendly
+├── doc_analysis_report.json    # Analysis: Raw data
+├── doc_fixes_report.html       # Fixes: Visual preview
+├── doc_fixes_report.md         # Fixes: List format
+└── doc_fixes_report.json       # Fixes: Structured data
 ```
 
-## 📊 Generated Reports
+**Analysis Reports** show issues found:
+- Clarity problems, readability metrics
+- Information architecture issues
+- Consistency checks, style guide violations
+- Content gaps, broken links
 
-Running `python analyze_docs.py /path/to/docs --format all` generates:
+**Fix Reports** show suggested corrections:
+- Frontmatter additions/corrections
+- Code block language tag additions
+- Terminology standardization
+- Heading hierarchy fixes
+- And 20+ other automated improvements
 
-### Analysis Reports
-1. **doc_analysis_report.html** - Interactive HTML with filtering and color-coding
-2. **doc_analysis_report.md** - GitHub-friendly Markdown format
-3. **doc_analysis_report.json** - Machine-readable for CI/CD integration
-
-### Fix Suggestion Reports
-1. **doc_fixes_report.html** - Visual fix preview with before/after comparisons
-2. **doc_fixes_report.md** - Markdown format for review and tracking
-3. **doc_fixes_report.json** - Structured fix data for automation
-
-All reports are saved in timestamped directories:
-```
-reports/
-  2024-10-27_14-30-15/
-    doc_analysis_report.html
-    doc_analysis_report.md
-    doc_analysis_report.json
-    doc_fixes_report.html
-    doc_fixes_report.md
-    doc_fixes_report.json
-```
-
-## 🔍 What Gets Analyzed
-
-### Analysis Categories
-
-1. **✍️ Clarity**
-   - Readability metrics (sentence length, complexity)
-   - Passive voice detection
-   - Jargon and undefined terminology
-   - AI-powered clarity analysis (optional)
-
-2. **🏗️ Information Architecture**
-   - Document structure and heading hierarchy
-   - Navigation and findability
-   - Category balance and organization
-   - Orphan content detection
-
-3. **🎨 Consistency**
-   - Terminology standardization
-   - Formatting consistency
-   - Style patterns across files
-   - Voice and tone uniformity
-
-4. **📋 Style Guide Compliance**
-   - Configurable style rules
-   - Preferred terminology enforcement
-   - Weak language detection
-   - Code block formatting standards
-
-5. **📚 Content Gaps**
-   - Missing topics and sections
-   - Redundancy detection
-   - Required section validation
-   - Cross-file topic mapping
-
-6. **📊 User Experience**
-   - Link quality assessment
-   - Context sufficiency
-   - Example and prerequisite validation
-   - Accessibility considerations
-
-### Available Fixers (20+ Modules)
-
-The fixer system includes:
-- **Frontmatter validation** - Ensures proper MDX frontmatter
-- **Terminology consistency** - Standardizes terms across docs
-- **URL normalization** - Fixes link formatting
-- **Code block formatting** - Adds missing language tags
-- **Accessibility improvements** - WCAG 2.1 AA compliance
-- **Heading hierarchy** - Fixes structure issues
-- **Capitalization** - Standardizes title case
-- **Passive voice conversion** - Improves readability
-- **Long sentence splitting** - Enhances clarity
-- **Link text improvement** - Makes links descriptive
-- **Broken link detection** - Identifies dead links
-- And many more...
+---
 
 ## ⚙️ Configuration
 
-### Environment Variables (.env)
+### Environment Variables
+
+Create a `.env` file for optional settings:
 
 ```bash
-# Optional - for AI-powered analysis
+# AI-Powered Analysis (optional)
 ANTHROPIC_API_KEY=your-api-key-here
 ENABLE_AI_ANALYSIS=true
 CLAUDE_MODEL=claude-3-5-haiku-20241022
 AI_MAX_TOKENS=4000
 
-# Other settings
-DOCS_PATH=./docs
+# Output Settings
 DEFAULT_OUTPUT_FORMAT=all
+DOCS_PATH=./docs
 ```
 
-### Custom Configuration (config.yaml)
+**Running Without AI:**
+- Omit `ANTHROPIC_API_KEY` or use `--no-ai` flag
+- All quality checks still run except AI semantic analysis
+- Significantly faster execution (30-60 seconds vs 5-10 minutes)
+
+### Custom Style Rules
+
+Create `config.yaml` to customize analysis:
 
 ```yaml
 style_rules:
-  max_line_length: 100
   max_sentence_length: 30
   preferred_terms:
     utilize: use
@@ -184,12 +160,10 @@ style_rules:
   avoid_terms:
     - simply
     - just
-    - obviously
 
 required_sections:
   - overview
   - prerequisites
-  - examples
 
 mintlify:
   required_frontmatter:
@@ -197,9 +171,52 @@ mintlify:
     - description
 ```
 
-## 🚀 Docker Support
+---
 
-For containerized deployment:
+## 🔍 What Gets Analyzed
+
+### Analysis Categories
+
+1. **Clarity** - Readability metrics, passive voice, jargon detection, AI-powered clarity analysis
+2. **Information Architecture** - Document structure, heading hierarchy, navigation patterns
+3. **Consistency** - Terminology standardization, formatting uniformity, style patterns
+4. **Style Guide** - Configurable rules, preferred terminology, weak language detection
+5. **Content Gaps** - Missing topics, redundancy, incomplete user journeys
+6. **User Experience** - Link quality, context sufficiency, accessibility
+
+### Automated Fixers (20+)
+
+- ✅ **Frontmatter validation** - Ensures proper MDX frontmatter
+- ✅ **Code block formatting** - Adds missing language tags
+- ✅ **URL normalization** - Fixes link formatting
+- ✅ **Heading hierarchy** - Corrects structure issues
+- ✅ **Terminology consistency** - Standardizes terms
+- ✅ **Accessibility** - WCAG 2.1 AA compliance
+- ✅ **Capitalization** - Standardizes title case
+- ✅ **Link text improvement** - Makes links descriptive
+- And many more...
+
+---
+
+## 🧪 Testing
+
+```bash
+# Activate venv first
+source venv/bin/activate
+
+# Run all tests
+pytest test_analyzer.py -v
+
+# Run with coverage report
+pytest test_analyzer.py -v --cov=doc_analyzer
+
+# Run specific test class
+pytest test_analyzer.py::TestDocumentationAnalyzer -v
+```
+
+---
+
+## 🐳 Docker Support
 
 ```bash
 # Build and run with Docker Compose
@@ -208,59 +225,31 @@ docker-compose up
 # Run tests in Docker
 docker-compose --profile testing run test
 
-# Interactive shell
+# Interactive shell for development
 docker-compose --profile dev run shell
 ```
 
-## 🧪 Testing
+---
 
-```bash
-# Run all tests
-pytest test_analyzer.py -v
+## 💡 Performance Tips
 
-# Run with coverage
-pytest test_analyzer.py -v --cov=doc_analyzer
+**For Faster Analysis:**
+- Use `--no-ai` to skip AI-powered checks (reduces time by 80-90%)
+- Use `--format json` if you only need machine-readable output
+- Process smaller documentation sets at a time
+- Disable optional fixers via environment variables
 
-# Run specific test class
-pytest test_analyzer.py::TestDocumentationAnalyzer -v
-```
+**Typical Processing Times:**
+- **Without AI**: 30-60 seconds for 50-100 files
+- **With AI**: 5-10 minutes for 50-100 files (depends on API response time)
 
-## 📋 Requirements
-
-- Python 3.8+
-- Optional: ANTHROPIC_API_KEY for AI features
-- Dependencies (auto-installed by setup.sh):
-  - anthropic
-  - pyyaml
-  - python-dotenv
-  - GitPython
-  - pytest
-  - beautifulsoup4
-  - textstat
-  - jinja2
-
-## 🏃 Running Without AI
-
-The analyzer works perfectly without an API key:
-
-```bash
-# Disable AI features
-python analyze_docs.py /path/to/docs --no-ai
-
-# Or set in .env
-ENABLE_AI_ANALYSIS=false
-```
-
-Without AI, you still get:
-- All quality checks and metrics
-- All 20+ fixer modules
-- Complete report generation
-- Full consistency and style analysis
+---
 
 ## 🔧 CI/CD Integration
 
+### GitHub Actions Example
+
 ```yaml
-# .github/workflows/docs-quality.yml
 name: Documentation Quality Check
 
 on: [pull_request]
@@ -270,78 +259,122 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
+
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Run Documentation Analysis
+
+      - name: Run Analysis (no AI for speed)
         run: python analyze_docs.py ./docs --format json --no-ai
-      - name: Upload reports
+
+      - name: Upload Reports
         uses: actions/upload-artifact@v2
         with:
           name: doc-reports
           path: reports/
 ```
 
-## 🎓 Technical Implementation
+---
 
-### Architecture
+## 🛠️ Advanced Usage
 
-- **doc_analyzer.py** - Main analysis engine
-- **doc_fixer.py** - Fix orchestration system
-- **analyze_docs.py** - Unified CLI entry point
-- **/core/** - Shared data models and configuration
-- **/fixers/** - Modular fixer implementations (20+ modules)
-- **/api/** - FastAPI backend for programmatic access
+### Individual Components
 
-### Key Components
-
-1. **RepositoryManager** - Platform detection and file management
-2. **MDXParser** - MDX/Markdown parsing with frontmatter support
-3. **MintlifyValidator** - Platform-specific validation
-4. **SemanticAnalyzer** - AI-powered content analysis
-5. **DocumentationAnalyzer** - Main orchestration
-6. **FixerOrchestrator** - Manages fix generation
-
-## 📈 Metrics Tracked
-
-- Total issues by severity (critical, high, medium, low)
-- Issues by category (clarity, IA, consistency, style, gaps, UX)
-- Files analyzed and modified
-- Fix suggestions by type
-- Processing time and performance metrics
-
-## 🤝 API Access
-
-The project includes a FastAPI backend for programmatic access:
+While `analyze_docs.py` is recommended, you can run components separately:
 
 ```bash
-# Start API server
+# Run only analysis
+python doc_analyzer.py /path/to/docs --format all
+
+# Run only fixer
+python doc_fixer.py /path/to/docs --dry-run
+```
+
+### API Server
+
+Start the FastAPI backend for programmatic access:
+
+```bash
 cd api
 uvicorn main:app --reload
 
-# Access at http://localhost:8000/docs
+# Access interactive docs at http://localhost:8000/docs
 ```
-
-## 📝 Project Documentation
-
-- **CLAUDE.md** - Detailed project instructions and architecture
-- **README.md** - This file
-- **config.yaml** - Example configuration with best practices
-- **.env.example** - Environment variable template
-
-## 🏆 Why This Project Matters
-
-This analyzer demonstrates:
-1. **Deep understanding of documentation quality** at scale
-2. **Technical proficiency** in Python and API integration
-3. **Information Architecture expertise** with systematic analysis
-4. **Style guide knowledge** with configurable rules
-5. **User-centered thinking** with actionable recommendations
-6. **Automation mindset** for documentation workflows
 
 ---
 
-**Note:** This is an MVP focused on backend analysis and fix generation for .mdx documentation files. The unified CLI provides a simple, powerful interface for comprehensive documentation quality improvement.
+## 📋 Requirements
+
+- **Python**: 3.8 or higher
+- **Optional**: Anthropic API key for AI-powered analysis
+- **Dependencies**: Auto-installed by `setup.sh`
+  - anthropic, pyyaml, python-dotenv, GitPython
+  - pytest, beautifulsoup4, textstat, jinja2
+
+---
+
+## ❓ Troubleshooting
+
+### Common Issues
+
+**"Command appears to hang"**
+- The tool shows real-time output - if AI is enabled, it may take 5-10 minutes
+- Use `--no-ai` for much faster execution
+- Check your API key is valid in `.env`
+
+**"No reports generated"**
+- Check the `reports/` directory for timestamped folders
+- Ensure you have write permissions
+- Look for error messages in the output
+
+**"JSON parsing errors"**
+- These are warnings from AI analysis and don't stop execution
+- The tool will skip problematic files and continue
+- Reports will still be generated successfully
+
+---
+
+## 📁 Project Structure
+
+```
+docs_analyzer/
+├── analyze_docs.py          # Unified CLI entry point (main command)
+├── doc_analyzer.py          # Analysis engine
+├── doc_fixer.py             # Fix orchestration
+├── config.yaml              # Example configuration
+├── .env.example             # Environment template
+├── requirements.txt         # Python dependencies
+├── setup.sh / setup.bat     # Automated setup scripts
+├── core/                    # Data models and configuration
+├── fixers/                  # 20+ fixer modules
+├── api/                     # FastAPI backend
+├── style_guide/             # Validation rules and templates
+└── reports/                 # Generated reports (timestamped)
+```
+
+---
+
+## 🏆 Key Capabilities
+
+This analyzer demonstrates:
+- **Documentation Quality at Scale** - Automated checks based on industry best practices
+- **Technical Proficiency** - Python, API integration, multiple output formats
+- **Information Architecture** - Systematic IA analysis and validation
+- **Style Guide Automation** - Configurable rules with intelligent enforcement
+- **User-Centered Design** - Actionable recommendations prioritized by impact
+
+---
+
+## 📚 Additional Documentation
+
+- **[CLAUDE.md](CLAUDE.md)** - Detailed architecture and development guide
+- **[config.yaml](config.yaml)** - Full configuration options with examples
+- **[.env.example](.env.example)** - All environment variables explained
+
+---
+
+**Built for technical writers who want to automate documentation quality checks and focus on high-value content improvements.**
