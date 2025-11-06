@@ -31,6 +31,7 @@ setup.bat           # Windows
 # 3. Configure API key (optional - enables AI analysis)
 cp .env.example .env
 # Edit .env and add: ANTHROPIC_API_KEY=your-key-here
+# ⚠️  IMPORTANT: Never commit .env to git (already in .gitignore)
 ```
 
 ### Basic Usage
@@ -509,8 +510,22 @@ This analyzer demonstrates:
 ## 📚 Additional Documentation
 
 - **[CLAUDE.md](CLAUDE.md)** - Detailed architecture and development guide
+- **[TESTING_HISTORY.md](TESTING_HISTORY.md)** - Real-world testing results and tool evolution
+- **[examples/reports/](examples/reports/)** - Sample analysis reports from production documentation
 - **[config.yaml](config.yaml)** - Full configuration options with examples
 - **[.env.example](.env.example)** - All environment variables explained
+
+---
+
+## 🎯 Real-World Results
+
+Validated on production documentation (287 MDX files):
+- **73,977 issues identified** across 6 categories
+- **60 second runtime** (4.8 files/second with --no-ai)
+- **8,713 critical issues** caught (missing frontmatter, broken links)
+- **0 broken links** in automated fixes (URL protection validated)
+
+See [TESTING_HISTORY.md](TESTING_HISTORY.md) for detailed metrics and [examples/reports/](examples/reports/) for sample output.
 
 ---
 

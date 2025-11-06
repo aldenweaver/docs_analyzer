@@ -133,11 +133,11 @@ class RepositoryManager:
         search_paths = [self.repo_root] + list(self.repo_root.parents)[:3]  # Check up to 3 levels up
 
         for search_path in search_paths:
-            # Check for Mintlify
-            if (search_path / 'mint.json').exists():
+            # Check for Mintlify (docs.json is current standard, mint.json is legacy)
+            if (search_path / 'docs.json').exists():
                 self.repo_root = search_path  # Update to where we found it
                 return 'mintlify'
-            elif (search_path / 'docs.json').exists():
+            elif (search_path / 'mint.json').exists():
                 self.repo_root = search_path
                 return 'mintlify'
             # Check for other platforms
@@ -160,10 +160,11 @@ class RepositoryManager:
             return {}
     
     def _load_mintlify_config(self) -> dict:
-        """Load Mintlify configuration"""
-        config_file = self.repo_root / 'mint.json'
+        """Load Mintlify configuration (docs.json is current standard, mint.json is legacy)"""
+        # Try docs.json first (current standard), then mint.json (backward compatibility)
+        config_file = self.repo_root / 'docs.json'
         if not config_file.exists():
-            config_file = self.repo_root / 'docs.json'
+            config_file = self.repo_root / 'mint.json'
 
         if config_file.exists():
             with open(config_file, 'r') as f:
