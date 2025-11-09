@@ -304,7 +304,13 @@ class DocFixer:
         # Create recommendations
         recommendations = []
         if self.stats.total_fixes_applied > 0:
-            recommendations.append(f"{self.stats.total_fixes_applied} fixes {'would be' if dry_run else 'were'} applied across {self.stats.files_modified} files")
+            recommendations.append(f"{self.stats.total_fixes_applied} automatable fixes {'would be' if dry_run else 'were'} applied across {self.stats.files_modified} files")
+            recommendations.append("These fixes are mechanical changes that can be safely automated (capitalization, language tags, heading hierarchy, etc.)")
+        else:
+            recommendations.append("No automatable fixes found")
+
+        recommendations.append("Note: Issues requiring human judgment (clarity, passive voice, weak language, content gaps) are not auto-fixed and appear in the analysis report")
+
         if self.stats.errors:
             recommendations.append(f"{len(self.stats.errors)} errors occurred during processing")
 

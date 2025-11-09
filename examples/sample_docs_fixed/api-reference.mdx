@@ -1,0 +1,81 @@
+---
+title: API reference
+description: 'GET /API/users/{id} This endpoint retrieves a user. `id` - user identifier
+  { "id": "123", "name": "john doe",'
+---
+## Get User
+
+```python
+GET /API/users/{id}
+```
+
+This endpoint retrieves a user.
+
+### Parameters
+
+`id` - user identifier
+
+#### Response
+
+```json
+{
+  "id": "123",
+  "name": "john doe",
+  "email": "john@example.com"
+}
+```
+
+## Create User
+
+```python
+POST /API/users
+```
+
+Creates a new user in the system.
+
+### Request Body
+
+```json
+{
+  "name": "string",
+  "email": "string"
+}
+```
+
+## Delete User
+
+```python
+DELETE /API/users/{id}
+```
+
+This endpoint is used for deleting users from the system. The deletion is permanent and cannot be undone.
+
+### Response
+
+200 OK - user deleted
+404 Not Found - user not found
+
+## List Users
+
+Endpoint: `/API/users`
+Method: GET
+
+Returns all users. [Click here](HTTPS://docs.example.com/api/users) for more info.
+
+Response:
+```json
+[
+  { "id": "1", "name": "user1" },
+  { "id": "2", "name": "user2" }
+]
+```
+
+## Common Errors
+
+The API may return errors. Here are the common ones:
+
+- 400 - Bad Request
+- 401 - unauthorized
+- 403 - Forbidden
+- 404 - not found
+- 500 - Server Error

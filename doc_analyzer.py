@@ -1274,6 +1274,16 @@ class DocumentationAnalyzer:
 
         return self._report_dir
 
+    def _recalculate_summary(self):
+        """Recalculate summary stats from actual issues list (fixes Phase 3 count bug)"""
+        actual_total = len(self.report.issues)
+        actual_by_severity = {}
+        actual_by_category = {}
+        for issue in self.report.issues:
+            actual_by_severity[issue.severity] = actual_by_severity.get(issue.severity, 0) + 1
+            actual_by_category[issue.category] = actual_by_category.get(issue.category, 0) + 1
+        return actual_total, actual_by_severity, actual_by_category
+
     def export_report(self, output_format: str = 'json', output_path: Optional[str] = None):
         """Export analysis report"""
         if output_format == 'json':
@@ -1282,21 +1292,24 @@ class DocumentationAnalyzer:
             return self._export_html(output_path)
         elif output_format == 'markdown':
             return self._export_markdown(output_path)
-    
+
     def _export_json(self, output_path: Optional[str]) -> str:
         """Export as JSON"""
         if not output_path:
             report_dir = self._create_timestamped_report_dir()
             output_path = str(report_dir / 'doc_analysis_report.json')
 
+        # Recalculate summary stats from actual issues list
+        actual_total, actual_by_severity, actual_by_category = self._recalculate_summary()
+
         report_data = {
             'timestamp': self.report.timestamp,
             'repository': self.report.repository_info,
             'summary': {
                 'total_files': self.report.total_files,
-                'total_issues': self.report.total_issues,
-                'by_severity': self.report.issues_by_severity,
-                'by_category': self.report.issues_by_category,
+                'total_issues': actual_total,
+                'by_severity': actual_by_severity,
+                'by_category': actual_by_category,
             },
             'recommendations': self.report.recommendations,
             'ai_insights': self.report.ai_insights,
@@ -1326,8 +1339,9 @@ class DocumentationAnalyzer:
     
     def _generate_html_report(self) -> str:
         """Generate HTML report"""
-        # Implementation similar to original but with AI insights section
-        # (Keeping it concise - full implementation would be quite long)
+        # Recalculate summary stats from actual issues list
+        actual_total, actual_by_severity, actual_by_category = self._recalculate_summary()
+
         html = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -1362,33 +1376,33 @@ class DocumentationAnalyzer:
         <p><strong>Platform:</strong> {self.report.repository_info.get('type')}</p>
         <p><strong>Files Analyzed:</strong> {self.report.total_files}</p>
     </div>
-    
+
     <div class="summary">
         <div class="stat-card">
             <div>Total Issues</div>
-            <div class="stat-number">{self.report.total_issues}</div>
+            <div class="stat-number">{actual_total}</div>
         </div>
         <div class="stat-card">
             <div>Critical</div>
-            <div class="stat-number critical">{self.report.issues_by_severity.get('critical', 0)}</div>
+            <div class="stat-number critical">{actual_by_severity.get('critical', 0)}</div>
         </div>
         <div class="stat-card">
             <div>High</div>
-            <div class="stat-number high">{self.report.issues_by_severity.get('high', 0)}</div>
+            <div class="stat-number high">{actual_by_severity.get('high', 0)}</div>
         </div>
         <div class="stat-card">
             <div>Medium</div>
-            <div class="stat-number medium">{self.report.issues_by_severity.get('medium', 0)}</div>
+            <div class="stat-number medium">{actual_by_severity.get('medium', 0)}</div>
         </div>
         <div class="stat-card">
             <div>Low</div>
-            <div class="stat-number low">{self.report.issues_by_severity.get('low', 0)}</div>
+            <div class="stat-number low">{actual_by_severity.get('low', 0)}</div>
         </div>
     </div>
-    
+
     {self._generate_recommendations_html()}
     {self._generate_ai_insights_html()}
-    
+
     <div class="issues">
         <h2>Issues Found</h2>
         <p>Showing first 100 issues. See JSON report for complete list.</p>
@@ -1449,27 +1463,30 @@ class DocumentationAnalyzer:
             report_dir = self._create_timestamped_report_dir()
             output_path = str(report_dir / 'doc_analysis_report.md')
 
+        # Recalculate summary stats from actual issues list
+        actual_total, actual_by_severity, actual_by_category = self._recalculate_summary()
+
         md = f"""# Documentation Analysis Report
 
 **Generated:** {self.report.timestamp}
 **Repository:** {self.report.repository_info.get('path')}
 **Platform:** {self.report.repository_info.get('type')}
 **Files Analyzed:** {self.report.total_files}
-**Total Issues:** {self.report.total_issues}
+**Total Issues:** {actual_total}
 
 ## Summary
 
 | Severity | Count |
 |----------|-------|
-| Critical | {self.report.issues_by_severity.get('critical', 0)} |
-| High | {self.report.issues_by_severity.get('high', 0)} |
-| Medium | {self.report.issues_by_severity.get('medium', 0)} |
-| Low | {self.report.issues_by_severity.get('low', 0)} |
+| Critical | {actual_by_severity.get('critical', 0)} |
+| High | {actual_by_severity.get('high', 0)} |
+| Medium | {actual_by_severity.get('medium', 0)} |
+| Low | {actual_by_severity.get('low', 0)} |
 
 ## Issues by Category
 
 """
-        for category, count in sorted(self.report.issues_by_category.items(), key=lambda x: x[1], reverse=True):
+        for category, count in sorted(actual_by_category.items(), key=lambda x: x[1], reverse=True):
             md += f"- **{category.title()}:** {count} issues\n"
         
         if self.report.recommendations:

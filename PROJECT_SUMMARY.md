@@ -605,7 +605,13 @@ Your documentation quality insights are just one command away.
 
 ---
 
-**Author:** Alden Weaver (with Claude)
+**Author:** Alden Weaver & Claude
 **Created:** October 26-28, 2025
 **License:** MIT
-**Contact:** [Your contact information]
+
+## Contact
+
+**Alden Weaver**
+- Email: aldenweavercodes@outlook.com
+- LinkedIn: [linkedin.com/in/aldenweaver](https://www.linkedin.com/in/aldenweaver/)
+- GitHub: [github.com/aldenweaver](https://github.com/aldenweaver)

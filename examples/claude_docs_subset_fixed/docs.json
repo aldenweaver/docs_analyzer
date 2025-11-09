@@ -1,0 +1,599 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Claude Docs",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#CC785C",
+    "light": "#E89B80",
+    "dark": "#B35A3C"
+  },
+  "modeToggle": {
+    "default": "dark"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Home",
+        "pages": ["home"]
+      },
+      {
+        "tab": "Developer Guide",
+        "groups": [
+          {
+            "group": "First steps",
+            "pages": [
+              "docs/intro",
+              "docs/get-started"
+            ]
+          },
+          {
+            "group": "Models & pricing",
+            "pages": [
+              "docs/about-claude/models/overview",
+              "docs/about-claude/models/choosing-a-model",
+              "docs/about-claude/models/whats-new-claude-4-5",
+              "docs/about-claude/models/migrating-to-claude-4",
+              "docs/about-claude/model-deprecations",
+              "docs/about-claude/pricing"
+            ]
+          },
+          {
+            "group": "Build with Claude",
+            "pages": [
+              "docs/build-with-claude/overview",
+              "docs/build-with-claude/context-windows"
+            ]
+          },
+          {
+            "group": "Capabilities",
+            "pages": [
+              "docs/build-with-claude/prompt-caching",
+              "docs/build-with-claude/context-editing",
+              "docs/build-with-claude/extended-thinking",
+              "docs/build-with-claude/streaming",
+              "docs/build-with-claude/batch-processing",
+              "docs/build-with-claude/citations",
+              "docs/build-with-claude/multilingual-support",
+              "docs/build-with-claude/token-counting",
+              "docs/build-with-claude/embeddings",
+              "docs/build-with-claude/vision",
+              "docs/build-with-claude/pdf-support",
+              "docs/build-with-claude/files",
+              "docs/build-with-claude/search-results",
+              "docs/agents-and-tools/claude-for-sheets"
+            ]
+          },
+          {
+            "group": "Tools",
+            "pages": [
+              "docs/agents-and-tools/tool-use/overview",
+              "docs/agents-and-tools/tool-use/implement-tool-use",
+              "docs/agents-and-tools/tool-use/token-efficient-tool-use",
+              "docs/agents-and-tools/tool-use/fine-grained-tool-streaming",
+              "docs/agents-and-tools/tool-use/bash-tool",
+              "docs/agents-and-tools/tool-use/code-execution-tool",
+              "docs/agents-and-tools/tool-use/computer-use-tool",
+              "docs/agents-and-tools/tool-use/text-editor-tool",
+              "docs/agents-and-tools/tool-use/web-fetch-tool",
+              "docs/agents-and-tools/tool-use/web-search-tool",
+              "docs/agents-and-tools/tool-use/memory-tool"
+            ]
+          },
+          {
+            "group": "Agent Skills",
+            "pages": [
+              "docs/agents-and-tools/agent-skills/overview",
+              "docs/agents-and-tools/agent-skills/quickstart",
+              "docs/agents-and-tools/agent-skills/best-practices"
+            ]
+          },
+          {
+            "group": "Agent SDK",
+            "pages": [
+              "api/agent-sdk/overview",
+              "api/agent-sdk/typescript",
+              "api/agent-sdk/python",
+              "api/agent-sdk/custom-tools",
+              "api/agent-sdk/mcp",
+              "api/agent-sdk/sessions",
+              "api/agent-sdk/streaming-vs-single-mode",
+              "api/agent-sdk/permissions",
+              "api/agent-sdk/cost-tracking",
+              "api/agent-sdk/modifying-system-prompts",
+              "api/agent-sdk/todo-tracking",
+              "api/agent-sdk/subagents",
+              "api/agent-sdk/skills",
+              "api/agent-sdk/slash-commands",
+              "api/agent-sdk/plugins",
+              "api/agent-sdk/hosting"
+            ]
+          },
+          {
+            "group": "MCP in the API",
+            "pages": [
+              "docs/mcp",
+              "docs/agents-and-tools/mcp-connector",
+              "docs/agents-and-tools/remote-mcp-servers"
+            ]
+          },
+          {
+            "group": "Claude on 3rd-party platforms",
+            "pages": [
+              "api/claude-on-amazon-bedrock",
+              "api/claude-on-vertex-ai"
+            ]
+          },
+          {
+            "group": "Prompt engineering",
+            "pages": [
+              "docs/build-with-claude/prompt-engineering/overview",
+              "docs/build-with-claude/prompt-engineering/be-clear-and-direct",
+              "docs/build-with-claude/prompt-engineering/use-xml-tags",
+              "docs/build-with-claude/prompt-engineering/chain-of-thought",
+              "docs/build-with-claude/prompt-engineering/prefill-claudes-response",
+              "docs/build-with-claude/prompt-engineering/chain-prompts",
+              "docs/build-with-claude/prompt-engineering/system-prompts",
+              "docs/build-with-claude/prompt-engineering/multishot-prompting",
+              "docs/build-with-claude/prompt-engineering/prompt-templates-and-variables",
+              "docs/build-with-claude/prompt-engineering/long-context-tips",
+              "docs/build-with-claude/prompt-engineering/extended-thinking-tips",
+              "docs/build-with-claude/prompt-engineering/claude-4-best-practices",
+              "docs/build-with-claude/prompt-engineering/prompt-generator",
+              "docs/build-with-claude/prompt-engineering/prompt-improver"
+            ]
+          },
+          {
+            "group": "Test & evaluate",
+            "pages": [
+              "docs/test-and-evaluate/define-success",
+              "docs/test-and-evaluate/develop-tests",
+              "docs/test-and-evaluate/eval-tool",
+              "docs/test-and-evaluate/strengthen-guardrails/reduce-latency"
+            ]
+          },
+          {
+            "group": "Strengthen guardrails",
+            "pages": [
+              "docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations",
+              "docs/test-and-evaluate/strengthen-guardrails/increase-consistency",
+              "docs/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks",
+              "docs/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals",
+              "docs/test-and-evaluate/strengthen-guardrails/reduce-prompt-leak",
+              "docs/test-and-evaluate/strengthen-guardrails/keep-claude-in-character"
+            ]
+          },
+          {
+            "group": "Use case guides",
+            "pages": [
+              "docs/about-claude/use-case-guides/overview",
+              "docs/about-claude/use-case-guides/content-moderation",
+              "docs/about-claude/use-case-guides/customer-support-chat",
+              "docs/about-claude/use-case-guides/legal-summarization",
+              "docs/about-claude/use-case-guides/ticket-routing"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "docs/about-claude/glossary"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "api/overview",
+              "api/client-sdks",
+              "api/versioning"
+            ]
+          },
+          {
+            "group": "Messages API",
+            "pages": [
+              "api/messages",
+              "api/messages-examples",
+              "api/messages-count-tokens",
+              "api/streaming",
+              "api/errors",
+              "api/rate-limits",
+              "api/supported-regions"
+            ]
+          },
+          {
+            "group": "Message Batches API",
+            "pages": [
+              "api/creating-message-batches",
+              "api/retrieving-message-batches",
+              "api/retrieving-message-batch-results",
+              "api/listing-message-batches",
+              "api/canceling-message-batches",
+              "api/deleting-message-batches",
+              "api/messages-batch-examples"
+            ]
+          },
+          {
+            "group": "Files API",
+            "pages": [
+              "api/files-create",
+              "api/files-content",
+              "api/files-metadata",
+              "api/files-list",
+              "api/files-delete"
+            ]
+          },
+          {
+            "group": "Models API",
+            "pages": [
+              "api/models",
+              "api/models-list"
+            ]
+          },
+          {
+            "group": "Admin API",
+            "pages": [
+              "api/administration-api",
+              "api/admin-api/organization/get-me",
+              "api/admin-api/users/list-users",
+              "api/admin-api/users/get-user",
+              "api/admin-api/users/update-user",
+              "api/admin-api/users/remove-user",
+              "api/admin-api/apikeys/list-api-keys",
+              "api/admin-api/apikeys/get-api-key",
+              "api/admin-api/apikeys/update-api-key",
+              "api/admin-api/invites/create-invite",
+              "api/admin-api/invites/list-invites",
+              "api/admin-api/invites/get-invite",
+              "api/admin-api/invites/delete-invite",
+              "api/admin-api/workspaces/create-workspace",
+              "api/admin-api/workspaces/list-workspaces",
+              "api/admin-api/workspaces/get-workspace",
+              "api/admin-api/workspaces/update-workspace",
+              "api/admin-api/workspaces/archive-workspace",
+              "api/admin-api/workspace_members/create-workspace-member",
+              "api/admin-api/workspace_members/list-workspace-members",
+              "api/admin-api/workspace_members/get-workspace-member",
+              "api/admin-api/workspace_members/update-workspace-member",
+              "api/admin-api/workspace_members/delete-workspace-member",
+              "api/admin-api/usage-cost/get-cost-report",
+              "api/admin-api/usage-cost/get-messages-usage-report",
+              "api/admin-api/claude-code/get-claude-code-usage-report"
+            ]
+          },
+          {
+            "group": "Skills API",
+            "pages": [
+              "api/skills-guide",
+              "api/skills/create-skill",
+              "api/skills/list-skills",
+              "api/skills/get-skill",
+              "api/skills/delete-skill",
+              "api/skills/create-skill-version",
+              "api/skills/list-skill-versions",
+              "api/skills/get-skill-version",
+              "api/skills/delete-skill-version"
+            ]
+          },
+          {
+            "group": "Prompt Tools API",
+            "pages": [
+              "api/prompt-tools-generate",
+              "api/prompt-tools-improve",
+              "api/prompt-tools-templatize"
+            ]
+          },
+          {
+            "group": "Platform & infrastructure",
+            "pages": [
+              "api/service-tiers",
+              "api/ip-addresses",
+              "api/beta-headers"
+            ]
+          },
+          {
+            "group": "Migration guides",
+            "pages": [
+              "api/migrating-from-text-completions-to-messages",
+              "api/openai-sdk"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Claude Code",
+        "groups": [
+          {
+            "group": "Getting started",
+            "pages": [
+              "docs/claude-code/overview",
+              "docs/claude-code/setup",
+              "docs/claude-code/quickstart"
+            ]
+          },
+          {
+            "group": "Using Claude Code",
+            "pages": [
+              "docs/claude-code/interactive-mode",
+              "docs/claude-code/common-workflows",
+              "docs/claude-code/headless",
+              "docs/claude-code/cli-reference"
+            ]
+          },
+          {
+            "group": "Extending Claude Code",
+            "pages": [
+              "docs/claude-code/mcp",
+              "docs/claude-code/plugins",
+              "docs/claude-code/plugin-marketplaces",
+              "docs/claude-code/plugins-reference",
+              "docs/claude-code/skills",
+              "docs/claude-code/slash-commands",
+              "docs/claude-code/hooks",
+              "docs/claude-code/hooks-guide"
+            ]
+          },
+          {
+            "group": "Configuration",
+            "pages": [
+              "docs/claude-code/settings",
+              "docs/claude-code/model-config",
+              "docs/claude-code/statusline",
+              "docs/claude-code/output-styles",
+              "docs/claude-code/terminal-config",
+              "docs/claude-code/network-config",
+              "docs/claude-code/sub-agents"
+            ]
+          },
+          {
+            "group": "Features",
+            "pages": [
+              "docs/claude-code/memory",
+              "docs/claude-code/checkpointing",
+              "docs/claude-code/sandboxing"
+            ]
+          },
+          {
+            "group": "IDE integrations",
+            "pages": [
+              "docs/claude-code/vs-code",
+              "docs/claude-code/jetbrains",
+              "docs/claude-code/claude-code-on-the-web"
+            ]
+          },
+          {
+            "group": "CI/CD & automation",
+            "pages": [
+              "docs/claude-code/github-actions",
+              "docs/claude-code/gitlab-ci-cd",
+              "docs/claude-code/devcontainer"
+            ]
+          },
+          {
+            "group": "Cloud platforms",
+            "pages": [
+              "docs/claude-code/amazon-bedrock",
+              "docs/claude-code/google-vertex-ai"
+            ]
+          },
+          {
+            "group": "Enterprise",
+            "pages": [
+              "docs/claude-code/llm-gateway",
+              "docs/claude-code/iam",
+              "docs/claude-code/monitoring-usage",
+              "docs/claude-code/analytics",
+              "docs/claude-code/costs",
+              "docs/claude-code/data-usage",
+              "docs/claude-code/security",
+              "docs/claude-code/legal-and-compliance"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "docs/claude-code/third-party-integrations"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "docs/claude-code/troubleshooting"
+            ]
+          },
+          {
+            "group": "SDK Migration",
+            "pages": [
+              "docs/claude-code/sdk/migration-guide"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Resources",
+        "groups": [
+          {
+            "group": "Resources",
+            "pages": [
+              "resources/overview"
+            ]
+          },
+          {
+            "group": "Prompt library",
+            "pages": [
+              "resources/prompt-library/library",
+              "resources/prompt-library/code-consultant",
+              "resources/prompt-library/grammar-genie",
+              "resources/prompt-library/cite-your-sources",
+              "resources/prompt-library/adaptive-editor",
+              "resources/prompt-library/career-coach",
+              "resources/prompt-library/csv-converter",
+              "resources/prompt-library/corporate-clairvoyant",
+              "resources/prompt-library/direction-decoder",
+              "resources/prompt-library/dream-interpreter",
+              "resources/prompt-library/email-extractor",
+              "resources/prompt-library/function-fabricator",
+              "resources/prompt-library/git-gud",
+              "resources/prompt-library/grading-guru",
+              "resources/prompt-library/interview-question-crafter",
+              "resources/prompt-library/latex-legend",
+              "resources/prompt-library/lesson-planner",
+              "resources/prompt-library/meeting-scribe",
+              "resources/prompt-library/mindfulness-mentor",
+              "resources/prompt-library/perspectives-ponderer",
+              "resources/prompt-library/philosophical-musings",
+              "resources/prompt-library/pii-purifier",
+              "resources/prompt-library/product-naming-pro",
+              "resources/prompt-library/prose-polisher",
+              "resources/prompt-library/python-bug-buster",
+              "resources/prompt-library/review-classifier",
+              "resources/prompt-library/second-grade-simplifier",
+              "resources/prompt-library/socratic-sage",
+              "resources/prompt-library/sql-sorcerer",
+              "resources/prompt-library/time-travel-consultant",
+              "resources/prompt-library/tweet-tone-detector",
+              "resources/prompt-library/website-wizard",
+              "resources/prompt-library/code-clarifier",
+              "resources/prompt-library/data-organizer",
+              "resources/prompt-library/efficiency-estimator",
+              "resources/prompt-library/emoji-encoder",
+              "resources/prompt-library/ethical-dilemma-navigator",
+              "resources/prompt-library/excel-formula-expert",
+              "resources/prompt-library/google-apps-scripter",
+              "resources/prompt-library/hal-the-humorous-helper",
+              "resources/prompt-library/idiom-illuminator",
+              "resources/prompt-library/master-moderator",
+              "resources/prompt-library/memo-maestro",
+              "resources/prompt-library/mood-colorizer",
+              "resources/prompt-library/motivational-muse",
+              "resources/prompt-library/neologism-creator",
+              "resources/prompt-library/polyglot-superpowers",
+              "resources/prompt-library/portmanteau-poet",
+              "resources/prompt-library/pun-dit",
+              "resources/prompt-library/riddle-me-this",
+              "resources/prompt-library/simile-savant",
+              "resources/prompt-library/spreadsheet-sorcerer",
+              "resources/prompt-library/storytelling-sidekick",
+              "resources/prompt-library/tongue-twister",
+              "resources/prompt-library/trivia-generator",
+              "resources/prompt-library/brand-builder",
+              "resources/prompt-library/culinary-creator",
+              "resources/prompt-library/futuristic-fashion-advisor",
+              "resources/prompt-library/sci-fi-scenario-simulator",
+              "resources/prompt-library/vr-fitness-innovator",
+              "resources/prompt-library/airport-code-analyst",
+              "resources/prompt-library/alien-anthropologist",
+              "resources/prompt-library/alliteration-alchemist",
+              "resources/prompt-library/babels-broadcasts",
+              "resources/prompt-library/cosmic-keystrokes"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Release Notes",
+        "groups": [
+          {
+            "group": "Release notes",
+            "pages": [
+              "release-notes/overview",
+              "release-notes/system-prompts"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Console",
+          "href": "https://console.anthropic.com",
+          "icon": "square-terminal"
+        },
+        {
+          "anchor": "Support",
+          "href": "https://support.anthropic.com",
+          "icon": "headset"
+        },
+        {
+          "anchor": "Discord",
+          "href": "https://discord.gg/anthropic",
+          "icon": "discord"
+        }
+      ]
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Sign in",
+        "href": "https://console.anthropic.com"
+      }
+    ]
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/anthropicai",
+      "github": "https://github.com/anthropics",
+      "linkedin": "https://www.linkedin.com/company/anthropic-ai"
+    },
+    "links": [
+      {
+        "group": "Company",
+        "items": [
+          {
+            "label": "About",
+            "href": "https://www.anthropic.com/company"
+          },
+          {
+            "label": "Careers",
+            "href": "https://www.anthropic.com/careers"
+          },
+          {
+            "label": "News",
+            "href": "https://www.anthropic.com/news"
+          }
+        ]
+      },
+      {
+        "group": "Resources",
+        "items": [
+          {
+            "label": "Research",
+            "href": "https://www.anthropic.com/research"
+          },
+          {
+            "label": "Safety",
+            "href": "https://www.anthropic.com/safety"
+          },
+          {
+            "label": "Status",
+            "href": "https://status.anthropic.com"
+          }
+        ]
+      }
+    ]
+  },
+  "search": {
+    "prompt": "Ask Claude about docs..."
+  }
+}

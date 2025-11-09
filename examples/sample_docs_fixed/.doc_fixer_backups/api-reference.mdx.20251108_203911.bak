@@ -1,0 +1,80 @@
+---
+title: "api reference"
+---
+
+## Get User
+
+```
+GET /api/users/{id}
+```
+
+This endpoint retrieves a user.
+
+#### Parameters
+
+`id` - user identifier
+
+#### Response
+
+```
+{
+  "id": "123",
+  "name": "john doe",
+  "email": "john@example.com"
+}
+```
+
+## Create User
+
+```
+POST /api/users
+```
+
+Creates a new user in the system.
+
+##### Request Body
+
+```json
+{
+  "name": "string",
+  "email": "string"
+}
+```
+
+## Delete User
+
+```
+DELETE /api/users/{id}
+```
+
+This endpoint is used for deleting users from the system. The deletion is permanent and cannot be undone.
+
+###### Response
+
+200 OK - user deleted
+404 Not Found - user not found
+
+## List Users
+
+Endpoint: `/api/users`
+Method: GET
+
+Returns all users. [Click here](https://docs.example.com/api/users) for more info.
+
+Response:
+```
+[
+  { "id": "1", "name": "user1" },
+  { "id": "2", "name": "user2" }
+]
+```
+
+## Common Errors
+
+The API may return errors. Here are the common ones:
+
+- 400 - Bad Request
+- 401 - unauthorized
+- 403 - Forbidden
+- 404 - not found
+- 500 - Server Error
