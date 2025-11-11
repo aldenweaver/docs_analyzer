@@ -110,9 +110,9 @@ reports/2024-11-04_14-30-15/
 ├── doc_analysis_report.html    # Analysis: Interactive web view
 ├── doc_analysis_report.md      # Analysis: GitHub-friendly
 ├── doc_analysis_report.json    # Analysis: Raw data
-├── doc_fixes_report.html       # Fixes: Visual preview
-├── doc_fixes_report.md         # Fixes: List format
-└── doc_fixes_report.json       # Fixes: Structured data
+├── doc_fix_report.html         # Fixes: Visual preview
+├── doc_fix_report.md           # Fixes: List format
+└── doc_fix_report.json         # Fixes: Structured data
 ```
 
 **Analysis Reports** show issues found:
