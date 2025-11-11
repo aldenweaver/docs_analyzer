@@ -1,10 +1,13 @@
 # Building a Documentation Quality Analyzer: A Development Journey
 
+> **Note:** This document captures the initial development journey of the analyzer (October 2024). The project has since evolved significantly with the addition of automated fixing capabilities, a unified CLI (analyze_docs.py), and 20+ specialized fixer modules. For current architecture and usage, see [CLAUDE.md](./CLAUDE.md) and [README.md](./README.md).
+
 ## Project Origin & Motivation
 
-**Created:** October 26-28, 2025
+**Created:** October 26-28, 2024
 **Purpose:** A proof-of-concept demonstrating technical documentation polish and information architecture skills
-**Scale:** ~1,950 lines of production code + 421 lines of tests
+**Initial Scale:** ~1,950 lines of production code + 421 lines of tests
+**Current Scale:** ~2,466 lines across analyzer, fixer, and unified CLI + comprehensive test suite
 
 This project started as a demonstration of what's possible when you combine technical writing expertise with software development skills. The goal was to automate the key responsibilities of a Technical Writer focused on documentation polish and information architecture—specifically for Mintlify-based documentation like Claude Docs.
 
