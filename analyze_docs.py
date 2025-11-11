@@ -162,6 +162,16 @@ Examples:
     # Track overall success
     overall_success = True
 
+    # Create shared timestamped directory for all reports if no custom output specified
+    if not args.output:
+        timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+        shared_output_dir = Path('reports') / timestamp
+        shared_output_dir.mkdir(parents=True, exist_ok=True)
+        print(f"📁 Created shared report directory: {shared_output_dir}")
+    else:
+        shared_output_dir = Path(args.output)
+        shared_output_dir.mkdir(parents=True, exist_ok=True)
+
     # Build base command arguments that both scripts share
     base_args = []
 
@@ -177,8 +187,8 @@ Examples:
         base_args.extend(['--config', args.config])
     if args.format:
         base_args.extend(['--format', args.format])
-    if args.output:
-        base_args.extend(['--output', args.output])
+    # Always pass the shared output directory to both scripts
+    base_args.extend(['--output', str(shared_output_dir)])
     if args.no_ai:
         base_args.append('--no-ai')
 
@@ -222,6 +232,11 @@ Examples:
         # Add configuration file if specified
         if args.config:
             fixer_cmd.extend(['--config', args.config])
+
+        # Add format and output arguments (IMPORTANT: fixer needs same output dir)
+        if args.format:
+            fixer_cmd.extend(['--format', args.format])
+        fixer_cmd.extend(['--output', str(shared_output_dir)])
 
         # Add fix-specific arguments
         if not args.apply_fixes:

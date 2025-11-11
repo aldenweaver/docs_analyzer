@@ -1298,6 +1298,9 @@ class DocumentationAnalyzer:
         if not output_path:
             report_dir = self._create_timestamped_report_dir()
             output_path = str(report_dir / 'doc_analysis_report.json')
+        elif Path(output_path).is_dir():
+            # If output_path is a directory, use default filename in that directory
+            output_path = str(Path(output_path) / 'doc_analysis_report.json')
 
         # Recalculate summary stats from actual issues list
         actual_total, actual_by_severity, actual_by_category = self._recalculate_summary()
@@ -1327,6 +1330,9 @@ class DocumentationAnalyzer:
         if not output_path:
             report_dir = self._create_timestamped_report_dir()
             output_path = str(report_dir / 'doc_analysis_report.html')
+        elif Path(output_path).is_dir():
+            # If output_path is a directory, use default filename in that directory
+            output_path = str(Path(output_path) / 'doc_analysis_report.html')
 
         # Use HTML template with AI insights
         html = self._generate_html_report()
@@ -1462,6 +1468,9 @@ class DocumentationAnalyzer:
         if not output_path:
             report_dir = self._create_timestamped_report_dir()
             output_path = str(report_dir / 'doc_analysis_report.md')
+        elif Path(output_path).is_dir():
+            # If output_path is a directory, use default filename in that directory
+            output_path = str(Path(output_path) / 'doc_analysis_report.md')
 
         # Recalculate summary stats from actual issues list
         actual_total, actual_by_severity, actual_by_category = self._recalculate_summary()
@@ -1570,8 +1579,8 @@ def main():
     parser.add_argument(
         '--format',
         choices=['json', 'html', 'markdown', 'all'],
-        default='html',
-        help='Output format for report'
+        default='all',
+        help='Output format for report (default: all formats)'
     )
     
     parser.add_argument(
