@@ -45,9 +45,7 @@ htmlcov/
 *.sublime-workspace
 
 # Reports and Output
-# reports/
-# *.json
-# *.html
+reports/
 !docker-compose.yml
 
 # Logs
@@ -61,5 +59,6 @@ tmp/
 temp/
 *.tmp
 
-# Front End
+# Front End / UI (removed from MVP)
+ui/
 frontend/node_modules/

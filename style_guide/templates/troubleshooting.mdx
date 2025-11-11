@@ -1,0 +1,374 @@
+---
+title: "Troubleshooting [Feature/Area]"
+description: "[1-2 sentences about common issues and how this guide helps]"
+---
+
+[Opening paragraph: 2-3 sentences explaining what issues this guide covers and how to use it]
+
+## Common Issues
+
+[Overview of the most common issues covered]
+
+---
+
+## Issue: [Error Message or Symptom 1]
+
+### Symptoms
+
+[Describe what the user experiences]
+
+You may see error messages like:
+```
+[Exact error message]
+```
+
+or experience:
+- [Symptom 1]
+- [Symptom 2]
+
+### Causes
+
+This issue typically occurs when:
+1. [Most common cause]
+2. [Second most common cause]
+3. [Less common cause]
+
+### Solution
+
+<Accordion title="Quick Fix (for most cases)">
+
+[Fastest solution for the most common cause]
+
+```python
+# Fixed code
+[corrected code example]
+```
+
+This works if [condition when this fix applies].
+
+</Accordion>
+
+<Accordion title="Detailed Troubleshooting">
+
+#### Step 1: Verify [First Thing to Check]
+
+[Explanation of what to verify and how]
+
+```bash
+# Command to check this
+[verification command]
+```
+
+Expected output:
+```
+[what you should see]
+```
+
+#### Step 2: Check [Second Thing]
+
+[Explanation]
+
+```python
+# How to check this
+[code to verify]
+```
+
+#### Step 3: Apply Fix
+
+[Detailed fix instructions]
+
+```python
+# Complete corrected code
+[full working example]
+```
+
+</Accordion>
+
+### Prevention
+
+To avoid this issue in the future:
+- [Preventive measure 1]
+- [Preventive measure 2]
+- [Preventive measure 3]
+
+### Related Issues
+
+This is similar to:
+- [Related Issue 1](#issue-related-issue-1)
+- [Related Issue 2](#issue-related-issue-2)
+
+---
+
+## Issue: [Error Message or Symptom 2]
+
+### Symptoms
+
+[What the user experiences]
+
+Error message:
+```
+[Exact error message]
+```
+
+### Causes
+
+[Explanation of causes]
+
+### Solution
+
+[Step-by-step solution]
+
+```python
+# Corrected code
+[solution]
+```
+
+### Example
+
+**Before (broken)**:
+```python
+# Code that causes the error
+[broken code]
+```
+
+**After (fixed)**:
+```python
+# Corrected code
+[fixed code]
+```
+
+**Why this works**: [Explanation of why the fix resolves the issue]
+
+---
+
+## Issue: [Error Message or Symptom 3]
+
+[Continue pattern for additional issues]
+
+---
+
+## Diagnostic Checklist
+
+If you're experiencing issues but don't see your specific error above, work through this checklist:
+
+### Environment and Setup
+- [ ] Verify API key is set correctly
+- [ ] Check Python/Node.js version meets requirements
+- [ ] Confirm SDK is installed and up to date
+- [ ] Verify network connectivity to API
+
+```bash
+# Check SDK version
+pip show anthropic  # Python
+npm list @anthropic-ai/sdk  # JavaScript
+```
+
+### Code and Configuration
+- [ ] Check parameter names match documentation
+- [ ] Verify required parameters are provided
+- [ ] Confirm data types are correct
+- [ ] Review request format
+
+### API and Limits
+- [ ] Check rate limits haven't been exceeded
+- [ ] Verify account status and billing
+- [ ] Confirm model name is correct
+- [ ] Check token limits
+
+---
+
+## Error Code Reference
+
+| Error Code | Meaning | Common Causes | Solution |
+|------------|---------|---------------|----------|
+| `400` | Bad Request | Invalid parameters, malformed JSON | [Check request format](../api/errors#400) |
+| `401` | Unauthorized | Missing/invalid API key | [Verify authentication](../api/authentication) |
+| `403` | Forbidden | Insufficient permissions | [Check account permissions](../account/permissions) |
+| `429` | Rate Limit | Too many requests | [Implement backoff](../guides/rate-limiting) |
+| `500` | Server Error | Temporary API issue | Retry with exponential backoff |
+
+---
+
+## Getting More Help
+
+### Enable Debug Logging
+
+Get more detailed error information:
+
+<CodeGroup>
+
+```python Python
+import anthropic
+import logging
+
+# Enable debug logging
+logging.basicConfig(level=logging.DEBUG)
+
+client = anthropic.Anthropic()
+# Your code here
+```
+
+```javascript JavaScript
+import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic({
+  // Enable debug mode
+  debug: true
+});
+```
+
+</CodeGroup>
+
+### Check API Status
+
+Verify the API is operational:
+- [Status page URL]
+
+### Review Recent Changes
+
+Check the [changelog](../changelog) for recent updates that might affect your code.
+
+### Contact Support
+
+If you've tried the solutions above and still need help:
+
+1. **Gather information**:
+   - Error message (full text)
+   - Code snippet causing the issue
+   - SDK version
+   - Request ID (from response headers)
+
+2. **Search documentation**:
+   - [Search docs](/)
+   - [API Reference](../api/)
+   - [Community forum](link)
+
+3. **Contact support**:
+   - [Support portal](link)
+   - [Community forum](link)
+   - Include all gathered information
+
+---
+
+## Frequently Asked Questions
+
+### [Common Question 1]?
+
+[Answer with example if applicable]
+
+```python
+# Example demonstrating the answer
+[code]
+```
+
+### [Common Question 2]?
+
+[Answer]
+
+### [Common Question 3]?
+
+[Answer]
+
+---
+
+## Best Practices to Avoid Issues
+
+Follow these practices to prevent common problems:
+
+### Error Handling
+
+Always implement proper error handling:
+
+```python
+import anthropic
+from anthropic import APIError
+
+client = anthropic.Anthropic()
+
+try:
+    response = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": "Hello"}]
+    )
+except APIError as e:
+    print(f"API error: {e}")
+    # Handle error appropriately
+```
+
+### Rate Limiting
+
+Implement exponential backoff:
+
+```python
+import time
+
+def create_with_retry(client, **kwargs):
+    """Create message with retry logic."""
+    max_retries = 3
+    backoff_factor = 2
+
+    for attempt in range(max_retries):
+        try:
+            return client.messages.create(**kwargs)
+        except anthropic.RateLimitError:
+            if attempt == max_retries - 1:
+                raise
+            wait_time = backoff_factor ** attempt
+            time.sleep(wait_time)
+```
+
+### Input Validation
+
+Validate inputs before sending requests:
+
+```python
+def validate_message(content, max_tokens):
+    """Validate message parameters."""
+    if not content:
+        raise ValueError("Content cannot be empty")
+    if max_tokens < 1 or max_tokens > 4096:
+        raise ValueError("max_tokens must be between 1 and 4096")
+    # Additional validation...
+```
+
+---
+
+## Related Topics
+
+- [Error Reference](../api/errors) - Complete error code documentation
+- [Rate Limits](../api/rate-limits) - Rate limiting details
+- [Authentication](../api/authentication) - API key setup and troubleshooting
+- [Best Practices](../guides/best-practices) - Prevent common issues
+- [API Reference](../api/) - Complete API documentation
+
+---
+
+## Template Usage Notes
+
+**When to use this template**:
+- Diagnosing and fixing problems
+- Error documentation
+- "Why isn't this working?" questions
+- Common mistakes and solutions
+
+**Minimum word count**: 200 words
+
+**Required elements**:
+- [ ] Frontmatter with title and description
+- [ ] Multiple common issues with symptoms, causes, solutions
+- [ ] Diagnostic checklist
+- [ ] Error code reference table
+- [ ] Prevention/best practices
+- [ ] "Getting more help" section
+- [ ] 3-5 related topic links
+
+**Writing tips**:
+- Start with symptoms (what users experience)
+- Provide exact error messages when possible
+- Order solutions by likelihood (most common first)
+- Include both quick fixes and detailed troubleshooting
+- Show before/after code examples
+- Explain why the fix works
+- Include prevention strategies
+- Link to related issues and documentation

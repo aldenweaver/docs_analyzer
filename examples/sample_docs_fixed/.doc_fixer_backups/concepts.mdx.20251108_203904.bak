@@ -1,0 +1,84 @@
+---
+title: "Core Concepts"
+description: "Learn about the core concepts"
+---
+
+# Understanding Our Platform
+
+## What is an API Key?
+
+An API Key is basically a unique identifier for authentication. api keys are used to authenticate requests. Your API-key should be kept secret.
+
+## Users and Accounts
+
+A user is someone who uses the system. An account represents a user's profile. Each account has a User associated with it.
+
+### User Roles
+
+There are different types of users:
+- admin users
+- Regular Users
+- guest users
+
+## Rate Limiting
+
+Our API implements rate-limiting to prevent abuse. Rate limits are applied per API key. If you exceed the rate limit, you'll receive a 429 error.
+
+The rate-limit is 1000 requests per hour.
+
+## Webhooks
+
+webhooks allow you to receive real-time notifications. A webhook is simply an HTTP callback. You can configure webhooks in the dashboard.
+
+### Setting Up Webhooks
+
+To setup a webhook:
+
+1. Navigate to settings
+2. Click on "webhooks"
+3. Enter your webhook URL
+4. Select events
+5. Save
+
+## Data Models
+
+### User Model
+
+The user model contains:
+- id
+- Name
+- email address
+- created_at
+
+### Account Model
+
+Each Account has:
+- account_id
+- user_id
+- account_name
+- subscription type
+
+## authentication
+
+Authentication is handled via API keys. You must include your api key in all requests. Simply add it to the Authorization header.
+
+Example:
+```
+Authorization: Bearer your-api-key
+```
+
+## Error Handling
+
+Errors are returned with appropriate status codes. Common errors include:
+- 400: bad request
+- 401: Unauthorized
+- 404: Resource Not Found
+- 500: internal server error
+
+## Best Practices
+
+- Always validate user input
+- Use HTTPS
+- Rotate your API Keys regularly
+- implement proper error handling
+- Use webhooks for real-time updates

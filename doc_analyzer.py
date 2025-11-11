@@ -18,6 +18,7 @@ import re
 import json
 import yaml
 import hashlib
+import time
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Set, Any
 from dataclasses import dataclass, field
@@ -30,6 +31,33 @@ from difflib import SequenceMatcher
 # Load environment variables from .env file
 from dotenv import load_dotenv
 load_dotenv()
+
+
+def sanitize_content_for_ai(content: str) -> str:
+    """
+    Sanitize content before sending to AI API to prevent JSON parsing errors.
+
+    Handles:
+    - Control characters that break JSON
+    - Escape sequences
+    - Null bytes
+    - Invalid Unicode
+    """
+    # Remove null bytes
+    content = content.replace('\x00', '')
+
+    # Replace other control characters (except newlines, tabs, carriage returns)
+    control_chars = ''.join(chr(i) for i in range(32) if i not in (9, 10, 13))
+    translator = str.maketrans('', '', control_chars)
+    content = content.translate(translator)
+
+    # Normalize line endings
+    content = content.replace('\r\n', '\n').replace('\r', '\n')
+
+    # Remove invalid Unicode sequences
+    content = content.encode('utf-8', errors='ignore').decode('utf-8', errors='ignore')
+
+    return content
 
 # Try to import optional dependencies
 try:
@@ -105,11 +133,11 @@ class RepositoryManager:
         search_paths = [self.repo_root] + list(self.repo_root.parents)[:3]  # Check up to 3 levels up
 
         for search_path in search_paths:
-            # Check for Mintlify
-            if (search_path / 'mint.json').exists():
+            # Check for Mintlify (docs.json is current standard, mint.json is legacy)
+            if (search_path / 'docs.json').exists():
                 self.repo_root = search_path  # Update to where we found it
                 return 'mintlify'
-            elif (search_path / 'docs.json').exists():
+            elif (search_path / 'mint.json').exists():
                 self.repo_root = search_path
                 return 'mintlify'
             # Check for other platforms
@@ -132,10 +160,11 @@ class RepositoryManager:
             return {}
     
     def _load_mintlify_config(self) -> dict:
-        """Load Mintlify configuration"""
-        config_file = self.repo_root / 'mint.json'
+        """Load Mintlify configuration (docs.json is current standard, mint.json is legacy)"""
+        # Try docs.json first (current standard), then mint.json (backward compatibility)
+        config_file = self.repo_root / 'docs.json'
         if not config_file.exists():
-            config_file = self.repo_root / 'docs.json'
+            config_file = self.repo_root / 'mint.json'
 
         if config_file.exists():
             with open(config_file, 'r') as f:
@@ -144,8 +173,15 @@ class RepositoryManager:
     
     def get_files(self) -> List[Path]:
         """Get all documentation files based on config"""
-        include_patterns = self.config.get('include_patterns', ['**/*.md', '**/*.mdx'])
-        exclude_patterns = self.config.get('exclude_patterns', [])
+        include_patterns = self.config.get('include_patterns', ['**/*.mdx'])  # Only .mdx files by default
+        exclude_patterns = self.config.get('exclude_patterns', [
+            '**/node_modules/**',
+            '**/build/**',
+            '**/dist/**',
+            '**/.git/**',
+            '**/CLAUDE.md',
+            '**/README.md'
+        ])
         
         files = []
         for pattern in include_patterns:
@@ -240,13 +276,13 @@ class MintlifyValidator:
     
     def validate_frontmatter(self, file_path: str, content: str, issues: List[Issue]):
         """Validate frontmatter requirements"""
-        if not file_path.endswith('.mdx') and not file_path.endswith('.md'):
+        if not file_path.endswith('.mdx'):
             return
-        
+
         frontmatter, _ = MDXParser.parse_frontmatter(content)
-        
+
         # Check if frontmatter exists (critical for MDX)
-        if file_path.endswith('.mdx') and frontmatter is None:
+        if frontmatter is None:
             issues.append(Issue(
                 severity='critical',
                 category='mintlify',
@@ -387,12 +423,17 @@ class SemanticAnalyzer:
         if not self.enabled:
             return
 
-        try:
-            # Sample content to stay within limits
-            lines = content.split('\n')
-            sample = '\n'.join(lines[:200])  # First 200 lines
+        max_retries = 3
+        base_delay = 2  # seconds
 
-            prompt = f"""You are a technical documentation analyst. Analyze this documentation for clarity issues using evidence-based criteria.
+        for attempt in range(max_retries):
+            try:
+                # Sample and sanitize content to stay within limits and prevent JSON errors
+                lines = content.split('\n')
+                sample = '\n'.join(lines[:200])  # First 200 lines
+                sample = sanitize_content_for_ai(sample)  # Sanitize before sending
+
+                prompt = f"""You are a technical documentation analyst. Analyze this documentation for clarity issues using evidence-based criteria.
 
 Documentation file: {file_path}
 
@@ -424,51 +465,100 @@ For EVERY issue found (prioritize by severity, but include ALL), provide:
 
 Prioritize issues by user impact. Return ONLY valid JSON array."""
 
-            message = self.claude_client.messages.create(
-                model=self.model,
-                max_tokens=self.max_tokens,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            
-            response_text = message.content[0].text
-            
-            # Try to extract JSON
-            json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
-            if json_match:
-                ai_issues = json.loads(json_match.group())
+                message = self.claude_client.messages.create(
+                    model=self.model,
+                    max_tokens=self.max_tokens,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+
+                response_text = message.content[0].text.strip()
+
+                # Extract JSON array (handle markdown code blocks and explanatory text)
+                if '```json' in response_text:
+                    response_text = response_text.split('```json')[1].split('```')[0].strip()
+                elif '```' in response_text:
+                    response_text = response_text.split('```')[1].split('```')[0].strip()
+
+                # Try to extract JSON array with better regex (non-greedy to avoid capturing too much)
+                # Look for array starting with [ and try to find matching ]
+                json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
+                if not json_match:
+                    # AI returned no issues or invalid response
+                    return
+
+                response_text = json_match.group().strip()
+
+                # Handle empty arrays gracefully
+                if response_text == '[]' or not response_text:
+                    return
+
+                try:
+                    ai_issues = json.loads(response_text)
+                except json.JSONDecodeError as e:
+                    # Try to fix common JSON issues
+                    # Remove trailing commas
+                    response_text = re.sub(r',\s*}', '}', response_text)
+                    response_text = re.sub(r',\s*\]', ']', response_text)
+
+                    # Try again
+                    try:
+                        ai_issues = json.loads(response_text)
+                    except json.JSONDecodeError:
+                        # If still failing, skip this clarity check
+                        print(f"⚠️ Skipping AI clarity check for {file_path}: Invalid JSON response", file=sys.stderr)
+                        return
 
                 for issue in ai_issues:  # Process all issues
-                    # Build detailed description with evidence
-                    description = (
-                        f"[{issue.get('issue_type', 'clarity_issue').replace('_', ' ').title()}] "
-                        f"{issue.get('user_impact', 'Impacts user comprehension')}. "
-                        f"Evidence: {issue.get('evidence', 'See citation')} "
-                        f"(Source: {issue.get('citation', 'Documentation research')})"
-                    )
+                        # Build detailed description with evidence
+                        description = (
+                            f"[{issue.get('issue_type', 'clarity_issue').replace('_', ' ').title()}] "
+                            f"{issue.get('user_impact', 'Impacts user comprehension')}. "
+                            f"Evidence: {issue.get('evidence', 'See citation')} "
+                            f"(Source: {issue.get('citation', 'Documentation research')})"
+                        )
 
-                    # Build actionable suggestion with before/after
-                    before_text = issue.get('before', issue.get('quoted_text', ''))[:100]
-                    after_text = issue.get('after', '')[:150]
+                        # Build actionable suggestion with before/after
+                        before_text = issue.get('before', issue.get('quoted_text', ''))[:100]
+                        after_text = issue.get('after', '')[:150]
 
-                    suggestion = (
-                        f"{issue.get('fix_approach', 'Review and improve')}. "
-                        f"Before: \"{before_text}{'...' if len(before_text) == 100 else ''}\" "
-                        f"→ After: \"{after_text}{'...' if len(after_text) == 150 else ''}\""
-                    )
+                        suggestion = (
+                            f"{issue.get('fix_approach', 'Review and improve')}. "
+                            f"Before: \"{before_text}{'...' if len(before_text) == 100 else ''}\" "
+                            f"→ After: \"{after_text}{'...' if len(after_text) == 150 else ''}\""
+                        )
 
-                    issues.append(Issue(
-                        severity=issue.get('severity', 'medium'),
-                        category='clarity',
-                        file_path=file_path,
-                        line_number=issue.get('line_number'),
-                        issue_type=f"ai_{issue.get('issue_type', 'clarity_check')}",
-                        description=description,
-                        suggestion=suggestion,
-                        context=issue.get('quoted_text', '')[:200]  # Add quoted text as context
-                    ))
-        
-        except Exception as e:
-            print(f"  ⚠️  AI clarity check failed for {file_path}: {str(e)}")
+                        issues.append(Issue(
+                            severity=issue.get('severity', 'medium'),
+                            category='clarity',
+                            file_path=file_path,
+                            line_number=issue.get('line_number'),
+                            issue_type=f"ai_{issue.get('issue_type', 'clarity_check')}",
+                            description=description,
+                            suggestion=suggestion,
+                            context=issue.get('quoted_text', '')[:200]  # Add quoted text as context
+                        ))
+
+                # Success - break retry loop
+                return
+
+            except anthropic.RateLimitError as e:
+                # Rate limit error (529) - retry with exponential backoff
+                if attempt < max_retries - 1:
+                    delay = base_delay * (2 ** attempt)  # Exponential backoff: 2s, 4s, 8s
+                    print(f"  ⏳ Rate limit hit for {file_path}, retrying in {delay}s (attempt {attempt + 1}/{max_retries})...")
+                    time.sleep(delay)
+                else:
+                    print(f"  ⚠️  AI clarity check failed for {file_path} after {max_retries} retries: Rate limit exceeded")
+
+            except json.JSONDecodeError as e:
+                # JSON parsing error - log and skip (content sanitization should prevent most of these)
+                print(f"  ⚠️  AI clarity check failed for {file_path}: JSON parsing error - {str(e)}")
+                return
+
+            except Exception as e:
+                # Other errors - log and skip
+                print(f"  ⚠️  AI clarity check failed for {file_path}: {str(e)}")
+                return
     
     def analyze_semantic_gaps(self, doc_structure: Dict[str, Any], issues: List[Issue], insights: List[str]):
         """Identify conceptual gaps in documentation coverage with evidence-based analysis"""
@@ -530,14 +620,44 @@ Cite SPECIFIC files from the provided list. Return ONLY valid JSON array."""
                 max_tokens=self.max_tokens,
                 messages=[{"role": "user", "content": prompt}]
             )
-            
-            response_text = message.content[0].text
-            
-            json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
-            if json_match:
-                gaps = json.loads(json_match.group())
 
-                for gap in gaps:  # Process all gaps
+            response_text = message.content[0].text.strip()
+
+            # Extract JSON array (handle markdown code blocks and explanatory text)
+            if '```json' in response_text:
+                response_text = response_text.split('```json')[1].split('```')[0].strip()
+            elif '```' in response_text:
+                response_text = response_text.split('```')[1].split('```')[0].strip()
+
+            # Try to extract JSON array with better regex
+            json_match = re.search(r'\[.*\]', response_text, re.DOTALL)
+            if not json_match:
+                # AI returned no gaps
+                return
+
+            response_text = json_match.group().strip()
+
+            # Handle empty arrays gracefully
+            if response_text == '[]' or not response_text:
+                return
+
+            try:
+                gaps = json.loads(response_text)
+            except json.JSONDecodeError:
+                # Try to fix common JSON issues
+                # Remove trailing commas
+                response_text = re.sub(r',\s*}', '}', response_text)
+                response_text = re.sub(r',\s*\]', ']', response_text)
+
+                # Try again
+                try:
+                    gaps = json.loads(response_text)
+                except json.JSONDecodeError:
+                    # If still failing, skip this semantic gap check
+                    print(f"⚠️ Skipping semantic gap analysis: Invalid JSON response", file=sys.stderr)
+                    return
+
+            for gap in gaps:  # Process all gaps
                     # Build evidence-based description
                     affected = gap.get('affected_files', [])
                     affected_str = ', '.join(affected[:3]) if affected else 'Multiple files'
@@ -1154,6 +1274,16 @@ class DocumentationAnalyzer:
 
         return self._report_dir
 
+    def _recalculate_summary(self):
+        """Recalculate summary stats from actual issues list (fixes Phase 3 count bug)"""
+        actual_total = len(self.report.issues)
+        actual_by_severity = {}
+        actual_by_category = {}
+        for issue in self.report.issues:
+            actual_by_severity[issue.severity] = actual_by_severity.get(issue.severity, 0) + 1
+            actual_by_category[issue.category] = actual_by_category.get(issue.category, 0) + 1
+        return actual_total, actual_by_severity, actual_by_category
+
     def export_report(self, output_format: str = 'json', output_path: Optional[str] = None):
         """Export analysis report"""
         if output_format == 'json':
@@ -1162,21 +1292,24 @@ class DocumentationAnalyzer:
             return self._export_html(output_path)
         elif output_format == 'markdown':
             return self._export_markdown(output_path)
-    
+
     def _export_json(self, output_path: Optional[str]) -> str:
         """Export as JSON"""
         if not output_path:
             report_dir = self._create_timestamped_report_dir()
             output_path = str(report_dir / 'doc_analysis_report.json')
 
+        # Recalculate summary stats from actual issues list
+        actual_total, actual_by_severity, actual_by_category = self._recalculate_summary()
+
         report_data = {
             'timestamp': self.report.timestamp,
             'repository': self.report.repository_info,
             'summary': {
                 'total_files': self.report.total_files,
-                'total_issues': self.report.total_issues,
-                'by_severity': self.report.issues_by_severity,
-                'by_category': self.report.issues_by_category,
+                'total_issues': actual_total,
+                'by_severity': actual_by_severity,
+                'by_category': actual_by_category,
             },
             'recommendations': self.report.recommendations,
             'ai_insights': self.report.ai_insights,
@@ -1206,8 +1339,9 @@ class DocumentationAnalyzer:
     
     def _generate_html_report(self) -> str:
         """Generate HTML report"""
-        # Implementation similar to original but with AI insights section
-        # (Keeping it concise - full implementation would be quite long)
+        # Recalculate summary stats from actual issues list
+        actual_total, actual_by_severity, actual_by_category = self._recalculate_summary()
+
         html = f"""<!DOCTYPE html>
 <html>
 <head>
@@ -1242,33 +1376,33 @@ class DocumentationAnalyzer:
         <p><strong>Platform:</strong> {self.report.repository_info.get('type')}</p>
         <p><strong>Files Analyzed:</strong> {self.report.total_files}</p>
     </div>
-    
+
     <div class="summary">
         <div class="stat-card">
             <div>Total Issues</div>
-            <div class="stat-number">{self.report.total_issues}</div>
+            <div class="stat-number">{actual_total}</div>
         </div>
         <div class="stat-card">
             <div>Critical</div>
-            <div class="stat-number critical">{self.report.issues_by_severity.get('critical', 0)}</div>
+            <div class="stat-number critical">{actual_by_severity.get('critical', 0)}</div>
         </div>
         <div class="stat-card">
             <div>High</div>
-            <div class="stat-number high">{self.report.issues_by_severity.get('high', 0)}</div>
+            <div class="stat-number high">{actual_by_severity.get('high', 0)}</div>
         </div>
         <div class="stat-card">
             <div>Medium</div>
-            <div class="stat-number medium">{self.report.issues_by_severity.get('medium', 0)}</div>
+            <div class="stat-number medium">{actual_by_severity.get('medium', 0)}</div>
         </div>
         <div class="stat-card">
             <div>Low</div>
-            <div class="stat-number low">{self.report.issues_by_severity.get('low', 0)}</div>
+            <div class="stat-number low">{actual_by_severity.get('low', 0)}</div>
         </div>
     </div>
-    
+
     {self._generate_recommendations_html()}
     {self._generate_ai_insights_html()}
-    
+
     <div class="issues">
         <h2>Issues Found</h2>
         <p>Showing first 100 issues. See JSON report for complete list.</p>
@@ -1329,27 +1463,30 @@ class DocumentationAnalyzer:
             report_dir = self._create_timestamped_report_dir()
             output_path = str(report_dir / 'doc_analysis_report.md')
 
+        # Recalculate summary stats from actual issues list
+        actual_total, actual_by_severity, actual_by_category = self._recalculate_summary()
+
         md = f"""# Documentation Analysis Report
 
 **Generated:** {self.report.timestamp}
 **Repository:** {self.report.repository_info.get('path')}
 **Platform:** {self.report.repository_info.get('type')}
 **Files Analyzed:** {self.report.total_files}
-**Total Issues:** {self.report.total_issues}
+**Total Issues:** {actual_total}
 
 ## Summary
 
 | Severity | Count |
 |----------|-------|
-| Critical | {self.report.issues_by_severity.get('critical', 0)} |
-| High | {self.report.issues_by_severity.get('high', 0)} |
-| Medium | {self.report.issues_by_severity.get('medium', 0)} |
-| Low | {self.report.issues_by_severity.get('low', 0)} |
+| Critical | {actual_by_severity.get('critical', 0)} |
+| High | {actual_by_severity.get('high', 0)} |
+| Medium | {actual_by_severity.get('medium', 0)} |
+| Low | {actual_by_severity.get('low', 0)} |
 
 ## Issues by Category
 
 """
-        for category, count in sorted(self.report.issues_by_category.items(), key=lambda x: x[1], reverse=True):
+        for category, count in sorted(actual_by_category.items(), key=lambda x: x[1], reverse=True):
             md += f"- **{category.title()}:** {count} issues\n"
         
         if self.report.recommendations:

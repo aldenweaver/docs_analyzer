@@ -1,0 +1,45 @@
+---
+title: "Getting Started Guide"
+description: "Get started"
+---
+
+# Getting Started with the API
+
+This guide will simply help you get started with our API. It's really easy to use and can be quickly integrated into your application in just a few minutes.
+
+## Prerequisites
+
+Before you begin, you should basically have the following things that are needed for getting started with the integration process:
+- An API key that can be obtained from your dashboard
+- Basic knowledge of making HTTP requests
+- A development environment that has been set up properly
+
+## Installation Process
+
+The installation process is really simple and can be easily completed by running the following command:
+
+```
+npm install @example/sdk
+```
+
+Just run the above command and the package will be installed automatically.
+
+## Making Your First Request
+
+Here's how you can simply make your first API call to our endpoint which will return the data:
+
+```python
+import example_sdk
+
+client = example_sdk.Client(api_key="your-key-here")
+response = client.get("/endpoint")
+print(response.json())
+```
+
+The response will be returned in JSON format and can be processed by your application.
+
+## Next Steps
+
+After you have completed this quickstart guide, you can explore the <a href="./api-reference.mdx">API Reference</a> to learn more about the available endpoints, or check out the authentication guide to understand how authentication is handled by the system.
+
+You might also want to look at our examples page which has lots of different examples that show various use cases.

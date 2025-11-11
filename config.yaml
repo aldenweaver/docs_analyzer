@@ -31,7 +31,7 @@ repository:
 # Mintlify-Specific Configuration
 mintlify:
   enabled: true
-  config_file: "mint.json"  # or docs.json
+  config_file: "docs.json"  # Current standard (mint.json is legacy, also supported)
   
   # Required frontmatter fields
   required_frontmatter:

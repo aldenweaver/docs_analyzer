@@ -166,11 +166,11 @@ pytest test_analyzer.py -v -m "not skipif"
 - Auto-detects documentation platform (Mintlify, Docusaurus, MkDocs, generic)
 - Handles local and remote repositories (with git cloning)
 - Manages file inclusion/exclusion patterns
-- Loads platform-specific configuration (e.g., `mint.json` for Mintlify)
+- Loads platform-specific configuration (e.g., `docs.json` for Mintlify, with `mint.json` legacy support)
 - **Subfolder Analysis:** Supports analyzing specific subfolders while maintaining platform detection
   - `repo_path`: Directory to analyze (can be a subfolder)
   - `repo_root`: Repository root for platform detection (auto-detected up to 3 parent levels)
-  - Searches parent directories for platform config files (mint.json, docusaurus.config.js, etc.)
+  - Searches parent directories for platform config files (docs.json/mint.json, docusaurus.config.js, etc.)
 
 **MDXParser** (`doc_analyzer.py:176-211`)
 - Extracts YAML frontmatter from MDX files
