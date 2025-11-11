@@ -134,19 +134,45 @@ reports/2024-11-04_14-30-15/
 
 ### Environment Variables
 
-Create a `.env` file for optional settings:
+The repository includes a comprehensive `.env.example` file with all available configuration options. To configure the analyzer:
 
 ```bash
-# AI-Powered Analysis (optional)
+# 1. Copy the example file
+cp .env.example .env
+
+# 2. Edit .env and add your configuration
+# Note: .env is gitignored and will never be committed
+```
+
+**Key Configuration Options:**
+
+```bash
+# AI-Powered Analysis (optional - analyzer works without API key)
 ANTHROPIC_API_KEY=your-api-key-here
 ENABLE_AI_ANALYSIS=true
-CLAUDE_MODEL=claude-3-5-haiku-20241022
+CLAUDE_MODEL=claude-3-5-haiku-20241022  # Budget-friendly: ~$0.14 for 60 files
+# Alternative models:
+# - claude-sonnet-4-5-20250929 (recommended: ~$0.54 for 60 files)
+# - claude-opus-4-20250514 (highest quality: ~$2.68 for 60 files)
 AI_MAX_TOKENS=4000
 
 # Output Settings
-DEFAULT_OUTPUT_FORMAT=all
+DEFAULT_OUTPUT_FORMAT=all  # Options: json, html, markdown, all
+OUTPUT_DIR=./reports
 DOCS_PATH=./docs
+
+# Performance Settings
+PARALLEL_THREADS=4
+ENABLE_DUPLICATION_DETECTION=true
+DUPLICATION_THRESHOLD=0.8
+
+# Repository Settings
+REPO_TYPE=auto  # Options: auto, mintlify, docusaurus, mkdocs, generic
+ENABLE_REMOTE_CLONE=false
+GITHUB_TOKEN=  # For private repositories (optional)
 ```
+
+> **Important**: The `.env.example` file includes detailed comments and cost estimates for each Claude model. Review it for the complete list of options.
 
 ### Performance Impact
 
