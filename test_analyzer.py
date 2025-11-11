@@ -16,76 +16,43 @@ class TestDocumentationAnalyzer:
 
     @pytest.fixture
     def temp_docs_setup(self):
-        """Create a temporary directory with sample docs and proper config"""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            docs_path = Path(tmpdir)
+        """Use existing sample docs for testing"""
+        # Use the examples/sample_docs directory with intentional issues
+        docs_path = Path(__file__).parent / 'examples' / 'sample_docs'
 
-            # Create sample markdown files
-            (docs_path / "overview.md").write_text("""
-# Overview
-
-This is a simple overview document.
-
-Claude Code is a tool that helps developers write code faster.
-""")
-
-            (docs_path / "guide.md").write_text("""
-# Getting Started Guide
-
-## Installation
-
-Simply install the package by running npm install.
-
-Utilize the CLI to leverage advanced features.
-
-## Usage
-
-This section has a very long sentence that exceeds the recommended length and should be flagged by the analyzer as being too complex for readers to easily understand without breaking it down into smaller more digestible pieces.
-""")
-
-            (docs_path / "reference.md").write_text("""
-# API Reference
-
-##### Incorrect Heading Level
-
-Content here.
-
-[click here](./nonexistent.md) for more info.
-""")
-
-            # Create config for analyzer
-            config = {
-                'repository': {
-                    'path': str(docs_path),
-                    'type': 'generic'
-                },
-                'analysis': {
-                    'enable_ai_analysis': False  # Disable AI for tests
-                },
-                'gap_detection': {
-                    'semantic_analysis': {
-                        'enabled': False
-                    }
-                },
-                'duplication_detection': {
+        # Create config for analyzer
+        config = {
+            'repository': {
+                'path': str(docs_path),
+                'type': 'generic'
+            },
+            'analysis': {
+                'enable_ai_analysis': False  # Disable AI for tests
+            },
+            'gap_detection': {
+                'semantic_analysis': {
                     'enabled': False
-                },
-                'style_rules': {
-                    'avoid_terms': ['simply', 'just', 'easily', 'obviously', 'clearly'],
-                    'preferred_terms': {
-                        'utilize': 'use',
-                        'leverage': 'use'
-                    },
-                    'max_sentence_length': 30
                 }
+            },
+            'duplication_detection': {
+                'enabled': False
+            },
+            'style_rules': {
+                'avoid_terms': ['simply', 'just', 'easily', 'obviously', 'clearly'],
+                'preferred_terms': {
+                    'utilize': 'use',
+                    'leverage': 'use'
+                },
+                'max_sentence_length': 30
             }
+        }
 
-            # Create repository manager
-            repo_manager = RepositoryManager(config)
-            repo_manager.repo_path = docs_path
-            repo_manager.repo_type = 'generic'
+        # Create repository manager
+        repo_manager = RepositoryManager(config)
+        repo_manager.repo_path = docs_path
+        repo_manager.repo_type = 'generic'
 
-            yield docs_path, repo_manager, config
+        yield docs_path, repo_manager, config
     
     def test_initialization(self, temp_docs_setup):
         """Test analyzer initialization"""
@@ -244,11 +211,11 @@ console.log(x);
         """Test full analysis workflow"""
         docs_path, repo_manager, config = temp_docs_setup
         analyzer = DocumentationAnalyzer(repo_manager, config)
-        
+
         report = analyzer.analyze_all()
-        
-        # Should analyze all files
-        assert report.total_files == 3
+
+        # Should analyze all files (4 .mdx files in examples/sample_docs)
+        assert report.total_files == 4
         
         # Should find issues
         assert report.total_issues > 0
@@ -355,7 +322,7 @@ class TestInformationArchitecture:
             category_dir.mkdir()
             
             for i in range(25):
-                (category_dir / f"guide_{i}.md").write_text(f"# Guide {i}\n\nContent")
+                (category_dir / f"guide_{i}.mdx").write_text(f"# Guide {i}\n\nContent")
             
             # Create config for analyzer
             config = {
@@ -374,8 +341,8 @@ class TestInformationArchitecture:
         """Test detection of overloaded categories"""
         docs_path, repo_manager, config = large_docs_setup
         analyzer = DocumentationAnalyzer(repo_manager, config)
-        
-        files = list(docs_path.rglob("*.md"))
+
+        files = list(docs_path.rglob("*.mdx"))
         analyzer.analyze_information_architecture(files)
         
         # Should detect overloaded category
@@ -395,9 +362,9 @@ class TestConsistency:
         with tempfile.TemporaryDirectory() as tmpdir:
             docs_path = Path(tmpdir)
             
-            (docs_path / "doc1.md").write_text("Use the CLI to access features.")
-            (docs_path / "doc2.md").write_text("The command-line interface is powerful.")
-            (docs_path / "doc3.md").write_text("Try the command line tools.")
+            (docs_path / "doc1.mdx").write_text("Use the CLI to access features.")
+            (docs_path / "doc2.mdx").write_text("The command-line interface is powerful.")
+            (docs_path / "doc3.mdx").write_text("Try the command line tools.")
             
             # Create config for analyzer
             config = {
@@ -472,7 +439,7 @@ The user should configure the settings appropriately.
 
         # If AI is enabled (API key present), run full analysis
         if analyzer.semantic_analyzer.enabled:
-            (docs_path / "complex.md").write_text(test_content)
+            (docs_path / "complex.mdx").write_text(test_content)
             analyzer.analyze_all()
 
             # Should find AI-identified issues if API key works
@@ -495,10 +462,10 @@ class TestPerformance:
         """Test that analyzer can handle large files"""
         with tempfile.TemporaryDirectory() as tmpdir:
             docs_path = Path(tmpdir)
-            
-            # Create a large file
+
+            # Create a large file (.mdx to match default include patterns)
             large_content = "# Large Document\n\n" + ("This is a line of content.\n" * 1000)
-            (docs_path / "large.md").write_text(large_content)
+            (docs_path / "large.mdx").write_text(large_content)
             
             # Create config for analyzer
             config = {
