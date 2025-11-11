@@ -41,10 +41,14 @@ cp .env.example .env
 source venv/bin/activate    # Linux/macOS
 venv\Scripts\activate.bat   # Windows
 
-# Analyze your documentation (recommended: use --no-ai for speed)
+# Try with built-in example docs (no API key needed)
+python analyze_docs.py examples/sample_docs/ --no-ai
+python analyze_docs.py examples/claude_docs_subset/ --no-ai
+
+# Analyze your own documentation (recommended: use --no-ai for speed)
 python analyze_docs.py /path/to/docs --no-ai
 
-# Or with AI analysis (slower, but more comprehensive)
+# Or with AI analysis (requires ANTHROPIC_API_KEY in .env)
 python analyze_docs.py /path/to/docs
 ```
 
