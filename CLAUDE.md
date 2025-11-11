@@ -172,11 +172,11 @@ python doc_fixer.py /path/to/docs --config custom_config.yaml
 Reports are automatically organized in timestamped directories to prevent overwriting:
 ```
 reports/
-  2024-10-27_14-30-15/
+  2025-11-10_14-30-15/
     doc_analysis_report.json
     doc_analysis_report.html
     doc_analysis_report.md
-  2024-10-27_15-45-22/
+  2025-11-10_15-45-22/
     doc_analysis_report.json
     doc_analysis_report.html
     doc_analysis_report.md
@@ -393,7 +393,7 @@ AI analysis is optional and controlled by:
 - **HTML** (`doc_fix_report.html`): Visual preview of fixes with before/after comparison
 - **Markdown** (`doc_fix_report.md`): List format suitable for review and documentation
 
-All reports are organized in timestamped directories (e.g., `reports/2024-11-10_14-30-15/`)
+All reports are organized in timestamped directories (e.g., `reports/2025-11-10_14-30-15/`)
 
 ## Extension Points
 

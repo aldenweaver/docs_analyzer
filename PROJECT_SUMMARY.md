@@ -1,10 +1,10 @@
 # Building a Documentation Quality Analyzer: A Development Journey
 
-> **Note:** This document captures the initial development journey of the analyzer (October 2024). The project has since evolved significantly with the addition of automated fixing capabilities, a unified CLI (analyze_docs.py), and 20+ specialized fixer modules. For current architecture and usage, see [CLAUDE.md](./CLAUDE.md) and [README.md](./README.md).
+> **Note:** This document captures the initial development journey of the analyzer (October 2025). The project has since evolved significantly with the addition of automated fixing capabilities, a unified CLI (analyze_docs.py), and 20+ specialized fixer modules. For current architecture and usage, see [CLAUDE.md](./CLAUDE.md) and [README.md](./README.md).
 
 ## Project Origin & Motivation
 
-**Created:** October 26-28, 2024
+**Created:** October 26-28, 2025
 **Purpose:** A proof-of-concept demonstrating technical documentation polish and information architecture skills
 **Initial Scale:** ~1,950 lines of production code + 421 lines of tests
 **Current Scale:** ~2,466 lines across analyzer, fixer, and unified CLI + comprehensive test suite
@@ -173,11 +173,11 @@ This principle was discovered during development and codified for future work.
 2. **Timestamped Report Organization:**
    ```
    reports/
-     2024-10-27_14-30-15/
+     2025-10-27_14-30-15/
        doc_analysis_report.json
        doc_analysis_report.html
        doc_analysis_report.md
-     2024-10-27_15-45-22/
+     2025-10-27_15-45-22/
        ...
    ```
 
