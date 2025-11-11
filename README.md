@@ -41,10 +41,14 @@ cp .env.example .env
 source venv/bin/activate    # Linux/macOS
 venv\Scripts\activate.bat   # Windows
 
-# Analyze your documentation (recommended: use --no-ai for speed)
+# Try with built-in example docs (no API key needed)
+python analyze_docs.py examples/sample_docs/ --no-ai
+python analyze_docs.py examples/claude_docs_subset/ --no-ai
+
+# Analyze your own documentation (recommended: use --no-ai for speed)
 python analyze_docs.py /path/to/docs --no-ai
 
-# Or with AI analysis (slower, but more comprehensive)
+# Or with AI analysis (requires ANTHROPIC_API_KEY in .env)
 python analyze_docs.py /path/to/docs
 ```
 
@@ -507,12 +511,19 @@ uvicorn main:app --reload
 ```
 docs_analyzer/
 ├── analyze_docs.py          # Unified CLI entry point (main command)
-├── doc_analyzer.py          # Analysis engine
+├── doc_analyzer.py          # Analysis engine (main orchestrator)
 ├── doc_fixer.py             # Fix orchestration
 ├── config.yaml              # Example configuration
 ├── .env.example             # Environment template
 ├── requirements.txt         # Python dependencies
 ├── setup.sh / setup.bat     # Automated setup scripts
+├── analyzers/               # Modular analyzer components
+│   ├── repository_manager.py    # Platform detection & file management
+│   ├── mdx_parser.py            # MDX frontmatter parsing
+│   ├── mintlify_validator.py   # Mintlify-specific validation
+│   ├── semantic_analyzer.py    # AI-powered analysis
+│   ├── content_duplication.py  # Duplication detection
+│   └── user_journey.py          # User journey validation
 ├── core/                    # Data models and configuration
 ├── fixers/                  # 20+ fixer modules
 ├── api/                     # FastAPI backend

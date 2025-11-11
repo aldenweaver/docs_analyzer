@@ -331,7 +331,10 @@ class DocFixer:
             # Create timestamped directory
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             output_dir = Path("reports") / timestamp
-            output_dir.mkdir(parents=True, exist_ok=True)
+
+        # Ensure output directory exists
+        output_dir = Path(output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
 
         if output_format == 'json' or output_format == 'all':
             json_path = output_dir / "doc_fix_report.json"
@@ -470,6 +473,13 @@ Examples:
     )
 
     parser.add_argument(
+        '--format',
+        choices=['json', 'html', 'markdown', 'all'],
+        default='all',
+        help='Output format for reports (default: all formats)'
+    )
+
+    parser.add_argument(
         '--no-ai',
         action='store_true',
         help='Disable AI-powered analysis (StyleGuideValidator) for faster execution'
@@ -509,8 +519,8 @@ Examples:
         dry_run=args.dry_run
     )
 
-    # Export reports in all formats
-    report_dir = fixer.export_report(report, output_format='all', output_dir=args.output)
+    # Export reports in requested format(s)
+    report_dir = fixer.export_report(report, output_format=args.format, output_dir=args.output)
 
     # Print final summary
     print(stats.summary())

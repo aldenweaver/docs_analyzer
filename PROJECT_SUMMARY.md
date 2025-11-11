@@ -300,48 +300,107 @@ reports/
 
 ---
 
+### Phase 10: Bug Fixes & Modular Refactoring (Nov 2025)
+
+**Commits:**
+- "Fix report generation and format handling"
+- "Refactor analyzer components into modular structure"
+
+**Problem Identified:** When running `analyze_docs.py`, only 1-2 files were generated instead of the expected 6 output files (3 analysis reports + 3 fix reports in HTML, MD, JSON).
+
+**Root Cause Analysis:**
+1. **Bug 1:** `analyze_docs.py` didn't pass `--format` argument to `doc_fixer.py`
+2. **Bug 2:** `doc_fixer.py` didn't accept `--format` argument
+3. **Bug 3:** Separate timestamped directories created by both scripts
+4. **Bug 4:** `doc_analyzer.py` defaulted to 'html' instead of 'all'
+
+**Fixes Applied:**
+
+1. **Unified Report Directory:**
+   - `analyze_docs.py` now creates a single shared timestamped directory
+   - Both analyzer and fixer write to the same directory
+   - Result: All 6 reports in one organized location
+
+2. **Format Argument Support:**
+   - Added `--format` argument to `doc_fixer.py`
+   - Pass format argument from `analyze_docs.py` to both scripts
+   - Changed default format from 'html' to 'all'
+
+3. **Directory-Aware Exports:**
+   - Modified all export methods to handle directory paths
+   - Use default filenames when given a directory
+   - Backward compatible with explicit file paths
+
+**Modular Refactoring:**
+
+Inspired by the successful `fixers/` package structure, refactored monolithic `doc_analyzer.py` into modular components:
+
+**Created `analyzers/` Package:**
+- `repository_manager.py` (127 lines) - Platform detection, file management
+- `mdx_parser.py` (44 lines) - MDX frontmatter parsing
+- `mintlify_validator.py` (165 lines) - Mintlify-specific validation
+- `semantic_analyzer.py` (333 lines) - AI-powered analysis
+- `content_duplication.py` (87 lines) - Duplication detection
+- `user_journey.py` (59 lines) - User journey validation
+
+**Impact:**
+- `doc_analyzer.py` reduced from 1,693 lines to 1,008 lines (40% reduction)
+- Improved maintainability with focused, single-responsibility modules
+- Consistent architecture pattern matching `fixers/` package
+- Easier testing and extension of individual components
+
+**Testing:**
+- Integration test: Verified 6 files generated in single directory
+- Full test suite: All 18 tests passing
+- Validated on sample documentation with `--no-ai` flag
+
+---
+
 ## Final Architecture & Capabilities
 
 ### Core Components:
 
-1. **RepositoryManager** (`doc_analyzer.py:85-174`)
+**Modular Architecture:** As of November 2025, analyzer components have been refactored into the `analyzers/` package for better maintainability and organization (matching the `fixers/` pattern).
+
+1. **RepositoryManager** (`analyzers/repository_manager.py`)
    - Auto-detects platform (Mintlify, Docusaurus, MkDocs, generic)
    - Handles local and remote repositories
    - Manages file inclusion/exclusion patterns
    - Loads platform-specific configuration
    - Supports subfolder analysis
 
-2. **MDXParser** (`doc_analyzer.py:176-211`)
+2. **MDXParser** (`analyzers/mdx_parser.py`)
    - Extracts YAML frontmatter
    - Parses JSX-style Mintlify components
    - Handles `.md` and `.mdx` formats
 
-3. **MintlifyValidator** (`doc_analyzer.py:213-347`)
+3. **MintlifyValidator** (`analyzers/mintlify_validator.py`)
    - Validates frontmatter requirements
    - Checks component usage
    - **Critical:** Validates relative links
    - SEO-optimal description lengths
 
-4. **SemanticAnalyzer** (`doc_analyzer.py:349-481`)
+4. **SemanticAnalyzer** (`analyzers/semantic_analyzer.py`)
    - AI-powered clarity analysis using Claude API
    - Detects confusing explanations, missing context
    - Identifies conceptual gaps across documentation
    - Evidence-based recommendations
 
-5. **ContentDuplicationDetector** (`doc_analyzer.py:483-543`)
+5. **ContentDuplicationDetector** (`analyzers/content_duplication.py`)
    - Finds duplicate/similar content (SequenceMatcher)
    - Configurable similarity threshold (80%)
    - Consolidation opportunities
 
-6. **UserJourneyAnalyzer** (`doc_analyzer.py:545-579`)
+6. **UserJourneyAnalyzer** (`analyzers/user_journey.py`)
    - Validates required user journeys
    - Checks for missing steps (installation, auth, first-use)
 
-7. **DocumentationAnalyzer** (`doc_analyzer.py:581-1269`)
-   - Main orchestrator (1,537 lines total)
+7. **DocumentationAnalyzer** (`doc_analyzer.py` - main orchestrator)
+   - Main orchestrator (~1,000 lines)
    - Three-phase analysis
    - Multi-format reports
    - Extensible architecture
+   - Imports and coordinates all analyzer modules from `analyzers/` package
 
 ### Key Features:
 
