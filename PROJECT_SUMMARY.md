@@ -586,7 +586,7 @@ The development journey—from initial concept to production-ready tool in 3 day
 **Ready to try it?**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/aldenweaver/docs_analyzer
 cd docs_analyzer
 docker-compose up
 ```
@@ -612,6 +612,5 @@ Your documentation quality insights are just one command away.
 ## Contact
 
 **Alden Weaver**
-- Email: aldenweavercodes@outlook.com
 - LinkedIn: [linkedin.com/in/aldenweaver](https://www.linkedin.com/in/aldenweaver/)
 - GitHub: [github.com/aldenweaver](https://github.com/aldenweaver)

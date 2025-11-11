@@ -1,27 +1,27 @@
 # Documentation Quality Analyzer
 
-> **Automated quality analysis and fixing for .mdx documentation with comprehensive reporting in HTML, Markdown, and JSON formats.**
+> Automated quality analysis and fixing for .mdx documentation with comprehensive reporting in HTML, Markdown, and JSON formats.
 
-## 🎯 Overview
+## Overview
 
 A unified CLI tool that analyzes Mintlify-based documentation (like Claude Docs) and generates both quality analysis reports and automated fix suggestions. Processes .mdx documentation files with optional AI-powered semantic analysis.
 
 **Key Features:**
-- ✨ Single command runs both analysis and fix generation
-- 📊 Generates 6 comprehensive reports (3 formats × 2 report types)
-- 🤖 Optional Claude API integration for advanced analysis
-- 🔧 20+ automated fixers for documentation improvements
-- 🎨 Platform auto-detection (Mintlify, Docusaurus, MkDocs, generic)
+- Single command runs both analysis and fix generation
+- Generates 6 comprehensive reports (3 formats × 2 report types)
+- Optional Claude API integration for advanced analysis
+- 20+ automated fixers for documentation improvements
+- Platform auto-detection (Mintlify, Docusaurus, MkDocs, generic)
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
 ```bash
 # 1. Clone the repository
-git clone <repository-url>
+git clone https://github.com/aldenweaver/docs_analyzer
 cd docs_analyzer
 
 # 2. Run automated setup (creates venv + installs dependencies)
@@ -31,7 +31,7 @@ setup.bat           # Windows
 # 3. Configure API key (optional - enables AI analysis)
 cp .env.example .env
 # Edit .env and add: ANTHROPIC_API_KEY=your-key-here
-# ⚠️  IMPORTANT: Never commit .env to git (already in .gitignore)
+# IMPORTANT: Never commit .env to git (already in .gitignore)
 ```
 
 ### Basic Usage
@@ -49,16 +49,16 @@ python analyze_docs.py /path/to/docs
 ```
 
 **That's it!** The tool will:
-1. ✅ Analyze all .mdx files in the directory
-2. ✅ Run 20+ automated quality checks
-3. ✅ Generate fix suggestions
-4. ✅ Save 6 reports in `reports/<timestamp>/`
+1. Analyze all .mdx files in the directory
+2. Run 20+ automated quality checks
+3. Generate fix suggestions
+4. Save 6 reports in `reports/<timestamp>/`
 
-> 💡 **Pro Tip**: Use `--no-ai` for documentation sets with 50+ files to avoid long processing times (30+ minutes). See [Performance Tips](#-performance-tips) for details.
+> **Note**: Use `--no-ai` for documentation sets with 50+ files to avoid long processing times (30+ minutes). See [Performance Tips](#performance-tips) for details.
 
 ---
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### Command Options
 
@@ -96,10 +96,10 @@ The `--format` flag controls which report file types are generated:
 
 | Format | File Type | Use Case |
 |--------|-----------|----------|
-| `html` | `.html` | 🌐 Interactive web report with filtering and color-coding - best for human review |
-| `markdown` | `.md` | 📝 GitHub-friendly format - great for issues and PR comments |
-| `json` | `.json` | 🔧 Machine-readable data - perfect for CI/CD and custom tooling |
-| `all` | All 3 | 💎 Maximum flexibility - **default and recommended** |
+| `html` | `.html` | Interactive web report with filtering and color-coding - best for human review |
+| `markdown` | `.md` | GitHub-friendly format - great for issues and PR comments |
+| `json` | `.json` | Machine-readable data - perfect for CI/CD and custom tooling |
+| `all` | All 3 | Maximum flexibility - **default and recommended** |
 
 ### Generated Reports
 
@@ -130,7 +130,7 @@ reports/2024-11-04_14-30-15/
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -173,24 +173,24 @@ DOCS_PATH=./docs
 ### Recommended Usage
 
 **Use `--no-ai` when:**
-- ✅ Processing 50+ documentation files
-- ✅ Running in CI/CD pipelines (speed critical)
-- ✅ Regular automated quality checks
-- ✅ You want results in under 1 minute
-- ✅ API costs are a concern
+- Processing 50+ documentation files
+- Running in CI/CD pipelines (speed critical)
+- Regular automated quality checks
+- You want results in under 1 minute
+- API costs are a concern
 
 **Use AI analysis when:**
-- 📊 Small documentation sets (< 20 files)
-- 📊 Deep semantic analysis needed
-- 📊 Detecting subtle clarity issues
-- 📊 One-time comprehensive audits
-- 📊 You have 30+ minutes to wait
+- Small documentation sets (< 20 files)
+- Deep semantic analysis needed
+- Detecting subtle clarity issues
+- One-time comprehensive audits
+- You have 30+ minutes to wait
 
 ### What You Still Get With --no-ai
 
 Even without AI, you get comprehensive quality analysis:
 
-**✅ All 20+ Automated Fixers:**
+**All 20+ Automated Fixers:**
 - Frontmatter validation and correction
 - Code block language tag insertion
 - Heading hierarchy fixes
@@ -200,7 +200,7 @@ Even without AI, you get comprehensive quality analysis:
 - Accessibility improvements (WCAG 2.1 AA)
 - Broken link detection
 
-**✅ Complete Quality Checks:**
+**Complete Quality Checks:**
 - Readability metrics (sentence length, complexity)
 - Passive voice detection
 - Style guide compliance
@@ -208,13 +208,13 @@ Even without AI, you get comprehensive quality analysis:
 - Content consistency analysis
 - Formatting standardization
 
-**✅ Full Reporting:**
+**Full Reporting:**
 - All 6 report formats (HTML, Markdown, JSON)
 - Interactive web reports with filtering
 - GitHub-friendly markdown reports
 - Machine-readable JSON for automation
 
-**❌ Only Skipped:**
+**Only Skipped:**
 - AI-powered semantic clarity analysis
 - Advanced context understanding
 - Subtle jargon detection
@@ -248,7 +248,7 @@ mintlify:
 
 ---
 
-## 🔍 What Gets Analyzed
+## What Gets Analyzed
 
 ### Analysis Categories
 
@@ -261,19 +261,19 @@ mintlify:
 
 ### Automated Fixers (20+)
 
-- ✅ **Frontmatter validation** - Ensures proper MDX frontmatter
-- ✅ **Code block formatting** - Adds missing language tags
-- ✅ **URL normalization** - Fixes link formatting
-- ✅ **Heading hierarchy** - Corrects structure issues
-- ✅ **Terminology consistency** - Standardizes terms
-- ✅ **Accessibility** - WCAG 2.1 AA compliance
-- ✅ **Capitalization** - Standardizes title case
-- ✅ **Link text improvement** - Makes links descriptive
+- **Frontmatter validation** - Ensures proper MDX frontmatter
+- **Code block formatting** - Adds missing language tags
+- **URL normalization** - Fixes link formatting
+- **Heading hierarchy** - Corrects structure issues
+- **Terminology consistency** - Standardizes terms
+- **Accessibility** - WCAG 2.1 AA compliance
+- **Capitalization** - Standardizes title case
+- **Link text improvement** - Makes links descriptive
 - And many more...
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Activate venv first
@@ -291,7 +291,7 @@ pytest test_analyzer.py::TestDocumentationAnalyzer -v
 
 ---
 
-## 🐳 Docker Support
+## Docker Support
 
 ```bash
 # Build and run with Docker Compose
@@ -306,9 +306,9 @@ docker-compose --profile dev run shell
 
 ---
 
-## 💡 Performance Tips
+## Performance Tips
 
-### ⚡ Recommended: Use --no-ai for Production
+### Recommended: Use --no-ai for Production
 
 **For large documentation sets (50+ files), use `--no-ai` to avoid timeouts:**
 
@@ -328,7 +328,7 @@ python analyze_docs.py /path/to/docs --no-ai
 |-------|-----------|---------|
 | 10-20 files | 10-20 seconds | 2-5 minutes |
 | 50-100 files | 30-60 seconds | 10-30 minutes |
-| 100+ files | 1-2 minutes | 30-60+ minutes ⚠️ |
+| 100+ files | 1-2 minutes | 30-60+ minutes |
 
 **When to use AI:**
 - Small documentation sets (< 20 files)
@@ -342,9 +342,9 @@ python analyze_docs.py /path/to/docs --no-ai
 - Quick quality checks
 - Regular automated runs
 
-### 🚀 Future Performance Optimizations
+### Future Performance Optimizations
 
-We've identified several optimization strategies to make the analyzer even faster. See [OPTIMIZATION_PLAN.md](OPTIMIZATION_PLAN.md) for full details.
+Several optimization strategies have been identified to make the analyzer even faster. See [OPTIMIZATION_PLAN.md](OPTIMIZATION_PLAN.md) for full details.
 
 **Planned Improvements:**
 
@@ -367,11 +367,11 @@ We've identified several optimization strategies to make the analyzer even faste
    - Concurrent API requests
    - Better resource utilization
 
-**Implementation Timeline:**
-- ✅ Phase 0: --no-ai flag (completed)
-- 🔄 Phase 1: Parallel processing + caching (next)
-- 📅 Phase 2: Batch API + async (Q1)
-- 📅 Phase 3: ML-based optimization (Q2)
+**Implementation Status:**
+- Phase 0: --no-ai flag (completed)
+- Phase 1: Parallel processing + caching (planned)
+- Phase 2: Batch API + async (planned)
+- Phase 3: ML-based optimization (planned)
 
 **Performance Targets:**
 
@@ -383,7 +383,7 @@ We've identified several optimization strategies to make the analyzer even faste
 
 ---
 
-## 🔧 CI/CD Integration
+## CI/CD Integration
 
 ### GitHub Actions Example
 
@@ -418,7 +418,7 @@ jobs:
 
 ---
 
-## 🛠️ Advanced Usage
+## Advanced Usage
 
 ### Individual Components
 
@@ -445,7 +445,7 @@ uvicorn main:app --reload
 
 ---
 
-## 📋 Requirements
+## Requirements
 
 - **Python**: 3.8 or higher
 - **Optional**: Anthropic API key for AI-powered analysis
@@ -455,7 +455,7 @@ uvicorn main:app --reload
 
 ---
 
-## ❓ Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -476,7 +476,7 @@ uvicorn main:app --reload
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 docs_analyzer/
@@ -496,18 +496,29 @@ docs_analyzer/
 
 ---
 
-## 🏆 Key Capabilities
+## Features
 
-This analyzer demonstrates:
-- **Documentation Quality at Scale** - Automated checks based on industry best practices
-- **Technical Proficiency** - Python, API integration, multiple output formats
-- **Information Architecture** - Systematic IA analysis and validation
-- **Style Guide Automation** - Configurable rules with intelligent enforcement
-- **User-Centered Design** - Actionable recommendations prioritized by impact
+### Documentation Quality at Scale
+Automated checks based on industry best practices for technical documentation, including readability analysis, style guide enforcement, and information architecture validation.
+
+### Comprehensive Analysis
+Analyzes multiple dimensions of documentation quality:
+- Clarity and readability
+- Information architecture and navigation
+- Terminology consistency
+- Style guide compliance
+- Content completeness
+- User experience and accessibility
+
+### Intelligent Automation
+20+ automated fixers handle common documentation issues, from frontmatter validation to heading hierarchy correction, reducing manual review time.
+
+### Flexible Integration
+Multiple output formats (HTML, Markdown, JSON) support different workflows, from human review to CI/CD automation. Works with or without AI analysis depending on speed and depth requirements.
 
 ---
 
-## 📚 Additional Documentation
+## Additional Documentation
 
 - **[CLAUDE.md](CLAUDE.md)** - Detailed architecture and development guide
 - **[TESTING_HISTORY.md](TESTING_HISTORY.md)** - Real-world testing results and tool evolution
@@ -517,7 +528,7 @@ This analyzer demonstrates:
 
 ---
 
-## 🎯 Real-World Results
+## Real-World Results
 
 Validated on production documentation (287 MDX files):
 - **73,977 issues identified** across 6 categories
@@ -529,4 +540,10 @@ See [TESTING_HISTORY.md](TESTING_HISTORY.md) for detailed metrics and [examples/
 
 ---
 
-**Built for technical writers who want to automate documentation quality checks and focus on high-value content improvements.**
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
