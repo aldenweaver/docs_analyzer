@@ -1,0 +1,667 @@
+{
+  "timestamp": "2025-11-08T20:37:55.106747",
+  "repository": {
+    "path": "examples/sample_docs",
+    "type": "generic"
+  },
+  "summary": {
+    "total_files": 5,
+    "total_issues": 60,
+    "by_severity": {
+      "low": 42,
+      "medium": 15,
+      "high": 3
+    },
+    "by_category": {
+      "clarity": 14,
+      "style": 38,
+      "ia": 4,
+      "ux": 1,
+      "gaps": 3
+    }
+  },
+  "recommendations": [],
+  "ai_insights": [],
+  "issues": [
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "README.md",
+      "line": 3,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This directory contains sample MDX documentation files with **intentional quality issues** designed ..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"easily\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"really\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"basically\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 42,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Style**: Weak words (basically, simply)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 42,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"basically\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Style**: Weak words (basically, simply)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 48,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "These files are used to:"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "tutorial.mdx",
+      "line": 3,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "description: \"This comprehensive tutorial will guide you through the complete process of building yo..."
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "tutorial.mdx",
+      "line": 33,
+      "type": "heading_skip",
+      "description": "Heading skips from H3 to H5",
+      "suggestion": "Use H4 instead to maintain hierarchy",
+      "context": "Using API Keys"
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "tutorial.mdx",
+      "line": 55,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "tutorial.mdx",
+      "line": 63,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 10,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "An API Key is basically a unique identifier for authentication. api keys are used to authenticate re..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 10,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"basically\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "An API Key is basically a unique identifier for authentication. api keys are used to authenticate requests. Your API-key should be kept secret."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 14,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "A user is someone who uses the system. An account represents a user's profile. Each account has a Us..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 25,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "Our API implements rate-limiting to prevent abuse. Rate limits are applied per API key. If you excee..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 31,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "webhooks allow you to receive real-time notifications. A webhook is simply an HTTP callback. You can..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 31,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "webhooks allow you to receive real-time notifications. A webhook is simply an HTTP callback. You can configure webhooks in the dashboard."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 63,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "Authentication is handled via API keys. You must include your api key in all requests. Simply add it..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 63,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "Authentication is handled via API keys. You must include your api key in all requests. Simply add it to the Authorization header."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 10,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "An API Key is basically a unique identifier for authentication. api keys are used to authenticate requests. Your API-key should be kept secret."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 25,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Our API implements rate-limiting to prevent abuse. Rate limits are applied per API key. If you exceed the rate limit, you'll receive a 429 error."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 63,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Authentication is handled via API keys. You must include your api key in all requests. Simply add it to the Authorization header."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 72,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Errors are returned with appropriate status codes. Common errors include:"
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 66,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "api-reference.mdx",
+      "line": 50,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This endpoint is used for deleting users from the system. The deletion is permanent and cannot be un..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 50,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "This endpoint is used for deleting users from the system. The deletion is permanent and cannot be undone."
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "api-reference.mdx",
+      "line": 13,
+      "type": "heading_skip",
+      "description": "Heading skips from H2 to H4",
+      "suggestion": "Use H3 instead to maintain hierarchy",
+      "context": "Parameters"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "api-reference.mdx",
+      "line": 35,
+      "type": "heading_skip",
+      "description": "Heading skips from H2 to H5",
+      "suggestion": "Use H3 instead to maintain hierarchy",
+      "context": "Request Body"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "api-reference.mdx",
+      "line": 52,
+      "type": "heading_skip",
+      "description": "Heading skips from H2 to H6",
+      "suggestion": "Use H3 instead to maintain hierarchy",
+      "context": "Response"
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 7,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 19,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 29,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 46,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 65,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "ux",
+      "file": "api-reference.mdx",
+      "line": 62,
+      "type": "non_descriptive_link",
+      "description": "Link text is non-descriptive: \"Click here\"",
+      "suggestion": "Use descriptive link text explaining destination",
+      "context": "[Click here](https://docs.example.com/api/users)"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 8,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This guide will simply help you get started with our API. It's really easy to use and can be quickly..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 8,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "This guide will simply help you get started with our API. It's really easy to use and can be quickly integrated into your application in just a few minutes."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 8,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "This guide will simply help you get started with our API. It's really easy to use and can be quickly integrated into your application in just a few minutes."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 8,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"really\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "This guide will simply help you get started with our API. It's really easy to use and can be quickly integrated into your application in just a few minutes."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 12,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "Before you begin, you should basically have the following things that are needed for getting started..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 12,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"basically\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "Before you begin, you should basically have the following things that are needed for getting started with the integration process:"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 19,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The installation process is really simple and can be easily completed by running the following comma..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 19,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"easily\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "The installation process is really simple and can be easily completed by running the following command:"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 19,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"really\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "The installation process is really simple and can be easily completed by running the following command:"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 25,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "Just run the above command and the package will be installed automatically."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 29,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "Here's how you can simply make your first API call to our endpoint which will return the data:"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 43,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "After you have completed this quickstart guide, you can explore the <a href=\"./api-reference.mdx\">AP..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 43,
+      "type": "sentence_too_long",
+      "description": "Sentence has 36 words (recommend <30)",
+      "suggestion": "Break into shorter sentences for better readability",
+      "context": "After you have completed this quickstart guide, you can explore the <a href=\"./api-reference.mdx\">AP..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 45,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "You might also want to look at our examples page which has lots of different examples that show vari..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 12,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Before you begin, you should basically have the following things that are needed for getting started with the integration process:"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 13,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- An API key that can be obtained from your dashboard"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 25,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Just run the above command and the package will be installed automatically."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 39,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "The response will be returned in JSON format and can be processed by your application."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 43,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "After you have completed this quickstart guide, you can explore the <a href=\"./api-reference.mdx\">API Reference</a> to learn more about the available endpoints, or check out the authentication guide to understand how authentication is handled by the system."
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 21,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No overview documentation found",
+      "suggestion": "Add overview section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No troubleshooting documentation found",
+      "suggestion": "Add troubleshooting section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No examples documentation found",
+      "suggestion": "Add examples section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"First time setup\" is incomplete",
+      "suggestion": "Add documentation for: overview, install, authenticate, first-use",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"Feature implementation\" is incomplete",
+      "suggestion": "Add documentation for: concept-doc, how-to-guide, code-example, troubleshooting",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"Troubleshooting\" is incomplete",
+      "suggestion": "Add documentation for: error-identification, diagnostic-guide, solution",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"API integration\" is incomplete",
+      "suggestion": "Add documentation for: api-overview, authentication, endpoints, sdk-reference, examples",
+      "context": null
+    }
+  ]
+}

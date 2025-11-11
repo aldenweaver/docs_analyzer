@@ -170,11 +170,11 @@ This principle was discovered during development and codified for future work.
 2. **Timestamped Report Organization:**
    ```
    reports/
-     2024-10-27_14-30-15/
+     2025-10-27_14-30-15/
        doc_analysis_report.json
        doc_analysis_report.html
        doc_analysis_report.md
-     2024-10-27_15-45-22/
+     2025-10-27_15-45-22/
        ...
    ```
 

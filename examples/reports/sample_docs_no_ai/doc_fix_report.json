@@ -1,0 +1,173 @@
+{
+  "timestamp": "2025-11-08T20:38:01.208542",
+  "repository": {
+    "path": "examples/sample_docs",
+    "type": "local"
+  },
+  "summary": {
+    "total_files": 4,
+    "files_modified": 4,
+    "total_fixes": 22,
+    "fixes_by_type": {
+      "Fixed capitalization: 'claude' \u2192 'Claude'": 1,
+      "Added language tag: ```bash at line 55": 1,
+      "Added language tag: ```bash at line 63": 1,
+      "Fixed heading hierarchy at line 6: H5 \u2192 H2": 1,
+      "Fixed heading hierarchy at line 33: H5 \u2192 H4": 1,
+      "Fixed capitalization at line 85: \"https\" \u2192 \"HTTPS\"": 1,
+      "Fixed capitalization: 'api' \u2192 'API'": 2,
+      "Added language tag: ```python at line 66": 1,
+      "Added missing 'description' field": 1,
+      "Added language tag: ```python at line 8": 1,
+      "Added language tag: ```json at line 20": 1,
+      "Added language tag: ```python at line 30": 1,
+      "Added language tag: ```python at line 47": 1,
+      "Added language tag: ```json at line 66": 1,
+      "Fixed heading hierarchy at line 14: H4 \u2192 H3": 1,
+      "Fixed heading hierarchy at line 36: H5 \u2192 H3": 1,
+      "Fixed heading hierarchy at line 53: H6 \u2192 H3": 1,
+      "Fixed capitalization at line 63: \"https\" \u2192 \"HTTPS\"": 1,
+      "Fixed capitalization: 'sdk' \u2192 'SDK'": 1,
+      "Fixed capitalization: 'json' \u2192 'JSON'": 1,
+      "Added language tag: ```bash at line 21": 1
+    },
+    "mode": "dry_run"
+  },
+  "fixes": [
+    {
+      "file": "tutorial.mdx",
+      "type": "Fixed capitalization: 'claude' \u2192 'Claude'",
+      "description": "Fixed capitalization: 'claude' \u2192 'Claude'",
+      "applied": false
+    },
+    {
+      "file": "tutorial.mdx",
+      "type": "Added language tag: ```bash at line 55",
+      "description": "Added language tag: ```bash at line 55",
+      "applied": false
+    },
+    {
+      "file": "tutorial.mdx",
+      "type": "Added language tag: ```bash at line 63",
+      "description": "Added language tag: ```bash at line 63",
+      "applied": false
+    },
+    {
+      "file": "tutorial.mdx",
+      "type": "Fixed heading hierarchy at line 6: H5 \u2192 H2",
+      "description": "Fixed heading hierarchy at line 6: H5 \u2192 H2",
+      "applied": false
+    },
+    {
+      "file": "tutorial.mdx",
+      "type": "Fixed heading hierarchy at line 33: H5 \u2192 H4",
+      "description": "Fixed heading hierarchy at line 33: H5 \u2192 H4",
+      "applied": false
+    },
+    {
+      "file": "tutorial.mdx",
+      "type": "Fixed capitalization at line 85: \"https\" \u2192 \"HTTPS\"",
+      "description": "Fixed capitalization at line 85: \"https\" \u2192 \"HTTPS\"",
+      "applied": false
+    },
+    {
+      "file": "concepts.mdx",
+      "type": "Fixed capitalization: 'api' \u2192 'API'",
+      "description": "Fixed capitalization: 'api' \u2192 'API'",
+      "applied": false
+    },
+    {
+      "file": "concepts.mdx",
+      "type": "Added language tag: ```python at line 66",
+      "description": "Added language tag: ```python at line 66",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Added missing 'description' field",
+      "description": "Added missing 'description' field",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Fixed capitalization: 'api' \u2192 'API'",
+      "description": "Fixed capitalization: 'api' \u2192 'API'",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Added language tag: ```python at line 8",
+      "description": "Added language tag: ```python at line 8",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Added language tag: ```json at line 20",
+      "description": "Added language tag: ```json at line 20",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Added language tag: ```python at line 30",
+      "description": "Added language tag: ```python at line 30",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Added language tag: ```python at line 47",
+      "description": "Added language tag: ```python at line 47",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Added language tag: ```json at line 66",
+      "description": "Added language tag: ```json at line 66",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Fixed heading hierarchy at line 14: H4 \u2192 H3",
+      "description": "Fixed heading hierarchy at line 14: H4 \u2192 H3",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Fixed heading hierarchy at line 36: H5 \u2192 H3",
+      "description": "Fixed heading hierarchy at line 36: H5 \u2192 H3",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Fixed heading hierarchy at line 53: H6 \u2192 H3",
+      "description": "Fixed heading hierarchy at line 53: H6 \u2192 H3",
+      "applied": false
+    },
+    {
+      "file": "api-reference.mdx",
+      "type": "Fixed capitalization at line 63: \"https\" \u2192 \"HTTPS\"",
+      "description": "Fixed capitalization at line 63: \"https\" \u2192 \"HTTPS\"",
+      "applied": false
+    },
+    {
+      "file": "quickstart.mdx",
+      "type": "Fixed capitalization: 'sdk' \u2192 'SDK'",
+      "description": "Fixed capitalization: 'sdk' \u2192 'SDK'",
+      "applied": false
+    },
+    {
+      "file": "quickstart.mdx",
+      "type": "Fixed capitalization: 'json' \u2192 'JSON'",
+      "description": "Fixed capitalization: 'json' \u2192 'JSON'",
+      "applied": false
+    },
+    {
+      "file": "quickstart.mdx",
+      "type": "Added language tag: ```bash at line 21",
+      "description": "Added language tag: ```bash at line 21",
+      "applied": false
+    }
+  ],
+  "recommendations": [
+    "22 fixes would be applied across 4 files"
+  ]
+}

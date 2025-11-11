@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Documentation Analysis Report</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .header { background: white; padding: 30px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .stat-number { font-size: 2.5em; font-weight: bold; margin: 10px 0; }
+        .critical { color: #dc2626; }
+        .high { color: #ea580c; }
+        .medium { color: #ca8a04; }
+        .low { color: #65a30d; }
+        .recommendations { background: #dbeafe; border-left: 4px solid #3b82f6; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .ai-insights { background: #f0fdf4; border-left: 4px solid #10b981; padding: 20px; margin: 20px 0; border-radius: 4px; }
+        .issues { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .issue-item { border-left: 4px solid #e5e7eb; padding: 15px; margin: 10px 0; background: #f9fafb; border-radius: 4px; }
+        .issue-item.critical { border-left-color: #dc2626; }
+        .issue-item.high { border-left-color: #ea580c; }
+        .issue-item.medium { border-left-color: #ca8a04; }
+        .issue-item.low { border-left-color: #65a30d; }
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: 600; margin-right: 8px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Documentation Analysis Report</h1>
+        <p><strong>Generated:</strong> 2025-11-05T13:49:02.369750</p>
+        <p><strong>Repository:</strong> /Users/alden/dev/claude_docs_clone_mintlify</p>
+        <p><strong>Platform:</strong> mintlify</p>
+        <p><strong>Files Analyzed:</strong> 293</p>
+    </div>
+    
+    <div class="summary">
+        <div class="stat-card">
+            <div>Total Issues</div>
+            <div class="stat-number">73952</div>
+        </div>
+        <div class="stat-card">
+            <div>Critical</div>
+            <div class="stat-number critical">8715</div>
+        </div>
+        <div class="stat-card">
+            <div>High</div>
+            <div class="stat-number high">0</div>
+        </div>
+        <div class="stat-card">
+            <div>Medium</div>
+            <div class="stat-number medium">11312</div>
+        </div>
+        <div class="stat-card">
+            <div>Low</div>
+            <div class="stat-number low">53925</div>
+        </div>
+    </div>
+    
+    <div class="recommendations">
+<h3>💡 Recommendations</h3>
+<ul>
+<li>High number of clarity issues (59738). Recommend focused audit in this area.</li>
+<li>High number of style issues (11684). Recommend focused audit in this area.</li>
+<li>High number of ia issues (1696). Recommend focused audit in this area.</li>
+<li>High number of ux issues (163). Recommend focused audit in this area.</li>
+<li>High number of gaps issues (668). Recommend focused audit in this area.</li>
+<li>8715 critical issues require immediate attention (broken links, missing frontmatter, etc.)</li>
+</ul>
+</div>
+
+    
+    
+    <div class="issues">
+        <h2>Issues Found</h2>
+        <p>Showing first 100 issues. See JSON report for complete list.</p>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 10
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">During development of a Claude Documentation clone for analysis purposes, we identified **77 accessi...</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">clarity</span>
+                <strong>Sentence Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 10
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Sentence has 44 words (recommend <30)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter sentences for better readability
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">During development of a Claude Documentation clone for analysis purposes, we identified **77 accessi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 35
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Images throughout the documentation contain empty alt attributes (`alt=""`), making visual informati...</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">clarity</span>
+                <strong>Sentence Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 35
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Sentence has 34 words (recommend <30)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter sentences for better readability
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Images throughout the documentation contain empty alt attributes (`alt=""`), making visual informati...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 50
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Example from:** `https://anthropic.mintlify.app/en/docs/about-claude/use-case-guides/ticket-routin...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 244
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">This report was prepared as part of documentation analysis work. For questions or to discuss these f...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 273
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Note:** This report is provided in good faith to help improve accessibility for all users of Claud...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 10
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">During development of a Claude Documentation clone for analysis purposes, we identified **77 accessibility violations** in the official Anthropic Claude documentation that violate WCAG 2.1 Level A standards. All issues were verified against the live production site and have been resolved in our clone.</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 216
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Our fixes are documented in commit: `4f9ec84914ad9729184898fc41cc6b7570666022`</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 244
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">This report was prepared as part of documentation analysis work. For questions or to discuss these findings:</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 273
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Note:** This report is provided in good faith to help improve accessibility for all users of Claude documentation. All testing was performed on publicly accessible documentation at https://anthropic.mintlify.app/.</div>
+        </div>
+        
+        <div class="issue-item critical">
+            <div>
+                <span class="badge critical">CRITICAL</span>
+                <span class="badge">style</span>
+                <strong>Missing Language Tag</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> ACCESSIBILITY_REPORT.md
+                <strong> Line:</strong> 204
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Code block missing language identifier (REQUIRED in Mintlify)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Specify language for syntax highlighting (e.g., ```python)
+            </div>
+            
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> README.md
+                <strong> Line:</strong> 5
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Click the green **Use this template** button at the top of this repo to copy the Mintlify starter ki...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> README.md
+                <strong> Line:</strong> 17
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> README.md
+                <strong> Line:</strong> 33
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/gi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> README.md
+                <strong> Line:</strong> 39
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">- If your dev environment isn't running: Run `mint update` to ensure you have the most recent versio...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> README.md
+                <strong> Line:</strong> 23
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Run the following command at the root of your documentation, where your `docs.json` is located:</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> README.md
+                <strong> Line:</strong> 33
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.</div>
+        </div>
+        
+        <div class="issue-item critical">
+            <div>
+                <span class="badge critical">CRITICAL</span>
+                <span class="badge">style</span>
+                <strong>Missing Language Tag</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> README.md
+                <strong> Line:</strong> 19
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Code block missing language identifier (REQUIRED in Mintlify)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Specify language for syntax highlighting (e.g., ```python)
+            </div>
+            
+        </div>
+        
+        <div class="issue-item critical">
+            <div>
+                <span class="badge critical">CRITICAL</span>
+                <span class="badge">style</span>
+                <strong>Missing Language Tag</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> README.md
+                <strong> Line:</strong> 25
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Code block missing language identifier (REQUIRED in Mintlify)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Specify language for syntax highlighting (e.g., ```python)
+            </div>
+            
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> CLAUDE.md
+                <strong> Line:</strong> 4
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">The purpose of this project is to create a clone of the Claude Docs website. The homepage is: https:...</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">clarity</span>
+                <strong>Sentence Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> CLAUDE.md
+                <strong> Line:</strong> 4
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Sentence has 70 words (recommend <30)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter sentences for better readability
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">The purpose of this project is to create a clone of the Claude Docs website. The homepage is: https:...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> CLAUDE.md
+                <strong> Line:</strong> 9
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">- You can push back on ideas-this can lead to better documentation. Cite sources and explain your re...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Weak Language</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> CLAUDE.md
+                <strong> Line:</strong> 10
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Avoid weak or unnecessary word: "rather"
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Remove or replace with more precise language
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">- ALWAYS ask for clarification rather than making assumptions</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Weak Language</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> CLAUDE.md
+                <strong> Line:</strong> 19
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Avoid weak or unnecessary word: "just"
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Remove or replace with more precise language
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">- Document just enough for user success - not too much, not too little</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> CLAUDE.md
+                <strong> Line:</strong> 22
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">- Search for existing content before adding anything new. Avoid duplication unless it is done for a ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> CLAUDE.md
+                <strong> Line:</strong> 28
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">- Refer to the [docs.json schema](https://mintlify.com/docs.json) when building the docs.json file a...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> CLAUDE.md
+                <strong> Line:</strong> 4
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">The purpose of this project is to create a clone of the Claude Docs website. The homepage is: https://anthropic.mintlify.app/en/home, but we need a clone of all subpages as well (many .mdx files, all with the exact same content and file/nav structure as the official Claude Docs). llms.txt and llms-full.txt can help us to that. This is a Mintlify project so all Mintlify best practices should be used (Mintlify Docs: https://www.mintlify.com/docs).</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 3
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">[![npm version](https://img.shields.io/npm/v/playwright.svg)](https://www.npmjs.com/package/playwrig...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 7
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Playwright is a framework for Web Testing and Automation. It allows testing [Chromium](https://www.c...</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">clarity</span>
+                <strong>Sentence Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 7
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Sentence has 35 words (recommend <30)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter sentences for better readability
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Playwright is a framework for Web Testing and Automation. It allows testing [Chromium](https://www.c...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 11
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">| Chromium <!-- GEN:chromium-version -->141.0.7390.37<!-- GEN:stop --> | :white_check_mark: | :white...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 12
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">| WebKit <!-- GEN:webkit-version -->26.0<!-- GEN:stop --> | :white_check_mark: | :white_check_mark: ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 13
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">| Firefox <!-- GEN:firefox-version -->142.0.1<!-- GEN:stop --> | :white_check_mark: | :white_check_m...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 15
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Headless execution is supported for all browsers on all platforms. Check out [system requirements](h...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 17
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Looking for Playwright for [Python](https://playwright.dev/python/docs/intro), [.NET](https://playwr...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 34
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">This will create a configuration file, optionally add examples, a GitHub Action workflow and a first...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 46
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">You can optionally install only selected browsers, see [install browsers](https://playwright.dev/doc...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 55
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Auto-wait**. Playwright waits for elements to be actionable prior to performing actions. It also h...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 57
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Web-first assertions**. Playwright assertions are created specifically for the dynamic web. Checks...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 59
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Tracing**. Configure test retry strategy, capture execution trace, videos and screenshots to elimi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 63
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Browsers run web content belonging to different origins in different processes. Playwright is aligne...</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">clarity</span>
+                <strong>Sentence Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 63
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Sentence has 36 words (recommend <30)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter sentences for better readability
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Browsers run web content belonging to different origins in different processes. Playwright is aligne...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 65
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Multiple everything**. Test scenarios that span multiple tabs, multiple origins and multiple users...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 67
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Trusted events**. Hover elements, interact with dynamic controls and produce trusted events. Playw...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 69
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Test frames, pierce Shadow DOM. Playwright selectors pierce shadow DOM and allow entering frames sea...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 73
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Browser contexts**. Playwright creates a browser context for each test. Browser context is equival...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 75
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Log in once**. Save the authentication state of the context and reuse it in all the tests. This by...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 79
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**[Codegen](https://playwright.dev/docs/codegen)**. Generate tests by recording your actions. Save t...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 81
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**[Playwright inspector](https://playwright.dev/docs/inspector)**. Inspect page, generate selectors,...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 83
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**[Trace Viewer](https://playwright.dev/docs/trace-viewer)**. Capture all the information to investi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 85
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Looking for Playwright for [TypeScript](https://playwright.dev/docs/intro), [JavaScript](https://pla...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 89
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">To learn how to run these Playwright Test examples, check out our [getting started docs](https://pla...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 106
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">This snippet emulates Mobile Safari on a device at given geolocation, navigates to maps.google.com, ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 15
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Headless execution is supported for all browsers on all platforms. Check out [system requirements](https://playwright.dev/docs/intro#system-requirements) for details.</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Terminology</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 55
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Use "before" instead of "prior to"
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Replace with preferred term: "before"
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Auto-wait**. Playwright waits for elements to be actionable prior to performing actions. It also has a rich set of introspection events. The combination of the two eliminates the need for artificial timeouts - a primary cause of flaky tests.</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 57
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Web-first assertions**. Playwright assertions are created specifically for the dynamic web. Checks are automatically retried until the necessary conditions are met.</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 63
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Browsers run web content belonging to different origins in different processes. Playwright is aligned with the architecture of the modern browsers and runs tests out-of-process. This makes Playwright free of the typical in-process test runner limitations.</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">ia</span>
+                <strong>Heading Skip</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 36
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Heading skips from H1 to H3
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Use H2 instead to maintain hierarchy
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Manually</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">ia</span>
+                <strong>Heading Skip</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/@playwright/test/README.md
+                <strong> Line:</strong> 91
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Heading skips from H2 to H4
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Use H3 instead to maintain hierarchy
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Page screenshot</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 3
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">[![npm version](https://img.shields.io/npm/v/playwright.svg)](https://www.npmjs.com/package/playwrig...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 7
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Playwright is a framework for Web Testing and Automation. It allows testing [Chromium](https://www.c...</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">clarity</span>
+                <strong>Sentence Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 7
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Sentence has 35 words (recommend <30)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter sentences for better readability
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Playwright is a framework for Web Testing and Automation. It allows testing [Chromium](https://www.c...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 11
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">| Chromium <!-- GEN:chromium-version -->141.0.7390.37<!-- GEN:stop --> | :white_check_mark: | :white...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 12
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">| WebKit <!-- GEN:webkit-version -->26.0<!-- GEN:stop --> | :white_check_mark: | :white_check_mark: ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 13
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">| Firefox <!-- GEN:firefox-version -->142.0.1<!-- GEN:stop --> | :white_check_mark: | :white_check_m...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 15
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Headless execution is supported for all browsers on all platforms. Check out [system requirements](h...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 17
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Looking for Playwright for [Python](https://playwright.dev/python/docs/intro), [.NET](https://playwr...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 34
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">This will create a configuration file, optionally add examples, a GitHub Action workflow and a first...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 46
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">You can optionally install only selected browsers, see [install browsers](https://playwright.dev/doc...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 55
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Auto-wait**. Playwright waits for elements to be actionable prior to performing actions. It also h...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 57
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Web-first assertions**. Playwright assertions are created specifically for the dynamic web. Checks...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 59
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Tracing**. Configure test retry strategy, capture execution trace, videos and screenshots to elimi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 63
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Browsers run web content belonging to different origins in different processes. Playwright is aligne...</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">clarity</span>
+                <strong>Sentence Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 63
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Sentence has 36 words (recommend <30)
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter sentences for better readability
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Browsers run web content belonging to different origins in different processes. Playwright is aligne...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 65
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Multiple everything**. Test scenarios that span multiple tabs, multiple origins and multiple users...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 67
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Trusted events**. Hover elements, interact with dynamic controls and produce trusted events. Playw...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 69
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Test frames, pierce Shadow DOM. Playwright selectors pierce shadow DOM and allow entering frames sea...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 73
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Browser contexts**. Playwright creates a browser context for each test. Browser context is equival...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 75
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Log in once**. Save the authentication state of the context and reuse it in all the tests. This by...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 79
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**[Codegen](https://playwright.dev/docs/codegen)**. Generate tests by recording your actions. Save t...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 81
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**[Playwright inspector](https://playwright.dev/docs/inspector)**. Inspect page, generate selectors,...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 83
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**[Trace Viewer](https://playwright.dev/docs/trace-viewer)**. Capture all the information to investi...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 85
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Looking for Playwright for [TypeScript](https://playwright.dev/docs/intro), [JavaScript](https://pla...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 89
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">To learn how to run these Playwright Test examples, check out our [getting started docs](https://pla...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 106
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">This snippet emulates Mobile Safari on a device at given geolocation, navigates to maps.google.com, ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 15
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Headless execution is supported for all browsers on all platforms. Check out [system requirements](https://playwright.dev/docs/intro#system-requirements) for details.</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Terminology</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 55
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Use "before" instead of "prior to"
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Replace with preferred term: "before"
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Auto-wait**. Playwright waits for elements to be actionable prior to performing actions. It also has a rich set of introspection events. The combination of the two eliminates the need for artificial timeouts - a primary cause of flaky tests.</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 57
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">**Web-first assertions**. Playwright assertions are created specifically for the dynamic web. Checks are automatically retried until the necessary conditions are met.</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">style</span>
+                <strong>Passive Voice</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 63
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Consider using active voice
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Rewrite in active voice for clarity
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Browsers run web content belonging to different origins in different processes. Playwright is aligned with the architecture of the modern browsers and runs tests out-of-process. This makes Playwright free of the typical in-process test runner limitations.</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">ia</span>
+                <strong>Heading Skip</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 36
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Heading skips from H1 to H3
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Use H2 instead to maintain hierarchy
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Manually</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">ia</span>
+                <strong>Heading Skip</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/README.md
+                <strong> Line:</strong> 91
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Heading skips from H2 to H4
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Use H3 instead to maintain hierarchy
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">Page screenshot</div>
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">mintlify</span>
+                <strong>Invalid Component</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/lib/agents/healer.md
+                <strong> Line:</strong> 60
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Unknown Mintlify component: <example>
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Verify component name or use standard Mintlify components
+            </div>
+            
+        </div>
+        
+        <div class="issue-item medium">
+            <div>
+                <span class="badge medium">MEDIUM</span>
+                <span class="badge">mintlify</span>
+                <strong>Invalid Component</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/lib/agents/healer.md
+                <strong> Line:</strong> 70
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Unknown Mintlify component: <example>
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Verify component name or use standard Mintlify components
+            </div>
+            
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/lib/agents/healer.md
+                <strong> Line:</strong> 27
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">1. **Initial Execution**: Run all tests using playwright_test_run_test tool to identify failing test...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/lib/agents/healer.md
+                <strong> Line:</strong> 54
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">- If the error persists and you have high level of confidence that the test is correct, mark this te...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/lib/agents/healer.md
+                <strong> Line:</strong> 55
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">  so that it is skipped during the execution. Add a comment before the failing step explaining what ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/lib/agents/healer.md
+                <strong> Line:</strong> 57
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">- Do not ask user questions, you are not interactive tool, do the most reasonable thing possible to ...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/lib/agents/healer.md
+                <strong> Line:</strong> 65
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">    The user has identified a specific failing test that needs debugging and fixing, which is exactl...</div>
+        </div>
+        
+        <div class="issue-item low">
+            <div>
+                <span class="badge low">LOW</span>
+                <span class="badge">clarity</span>
+                <strong>Line Too Long</strong>
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>File:</strong> node_modules/playwright/lib/agents/healer.md
+                <strong> Line:</strong> 75
+            </div>
+            <div style="margin-top: 10px;">
+                <strong>Issue:</strong> Line exceeds 100 characters
+            </div>
+            <div style="margin-top: 5px; color: #059669;">
+                <strong>Suggestion:</strong> Break into shorter lines or sentences
+            </div>
+            <div style="margin-top: 10px; font-family: monospace; background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 0.9em;">     A specific test file is failing and needs debugging, which requires the systematic approach of ...</div>
+        </div>
+        
+    </div>
+</body>
+</html>

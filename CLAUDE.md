@@ -132,11 +132,11 @@ python doc_analyzer.py /path/to/docs --output custom_report.json
 Reports are automatically organized in timestamped directories to prevent overwriting:
 ```
 reports/
-  2024-10-27_14-30-15/
+  2025-10-27_14-30-15/
     doc_analysis_report.json
     doc_analysis_report.html
     doc_analysis_report.md
-  2024-10-27_15-45-22/
+  2025-10-27_15-45-22/
     doc_analysis_report.json
     doc_analysis_report.html
     doc_analysis_report.md

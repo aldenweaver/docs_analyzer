@@ -1,0 +1,873 @@
+{
+  "timestamp": "2025-11-08T20:35:57.349746",
+  "repository": {
+    "path": "examples/sample_docs",
+    "type": "generic"
+  },
+  "summary": {
+    "total_files": 5,
+    "total_issues": 60,
+    "by_severity": {
+      "low": 42,
+      "medium": 15,
+      "high": 3
+    },
+    "by_category": {
+      "clarity": 14,
+      "style": 38,
+      "ia": 4,
+      "ux": 1,
+      "gaps": 3
+    }
+  },
+  "recommendations": [
+    "AI analysis identified 3 key insights. Review AI insights section."
+  ],
+  "ai_insights": [
+    "\ud83d\udcca Missing Troubleshooting: Create troubleshooting.mdx (Affects: README.md, quickstart.mdx)",
+    "\ud83d\udcca Incomplete Journey: Expand concepts.mdx with architectural overview and design principles (Affects: tutorial.mdx, quickstart.mdx)",
+    "\ud83d\udcca Missing Reference: Enhance api-reference.mdx with detailed parameter tables and example requests/responses (Affects: api-reference.mdx)"
+  ],
+  "issues": [
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "README.md",
+      "line": 3,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This directory contains sample MDX documentation files with **intentional quality issues** designed ..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"easily\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"really\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 9,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"basically\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Clarity**: Weak words (simply, really, easily, quickly, just, basically)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 42,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Style**: Weak words (basically, simply)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 42,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"basically\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "- **Style**: Weak words (basically, simply)"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "README.md",
+      "line": 48,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "These files are used to:"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "tutorial.mdx",
+      "line": 3,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "description: \"This comprehensive tutorial will guide you through the complete process of building yo..."
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "tutorial.mdx",
+      "line": 33,
+      "type": "heading_skip",
+      "description": "Heading skips from H3 to H5",
+      "suggestion": "Use H4 instead to maintain hierarchy",
+      "context": "Using API Keys"
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "tutorial.mdx",
+      "line": 55,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "tutorial.mdx",
+      "line": 63,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "clarity",
+      "file": "tutorial.mdx",
+      "line": 9,
+      "type": "ai_ambiguous_instruction",
+      "description": "[Ambiguous Instruction] Users cannot understand what these commands do or why they're needed. Evidence: Lack of prerequisite context and explanation of commands (Source: Redish, Task-Oriented Writing Principles)",
+      "suggestion": "Add explanatory comments and describe expected outcomes. Before: \"npm install\nnpm run setup\" \u2192 After: \"# Install project dependencies\nnpm install\n\n# Initialize project configuration\nnpm run setup  # This configures initial project settings\"",
+      "context": "npm install\nnpm run setup"
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "tutorial.mdx",
+      "line": 16,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Users cannot locate or understand API key generation process. Evidence: No specifics on dashboard location or key retrieval process (Source: Nielsen Norman Group, Progressive Disclosure Principle)",
+      "suggestion": "Provide detailed, step-by-step navigation instructions. Before: \"Go to the dashboard and get your keys.\" \u2192 After: \"1. Navigate to https://[platform].com/dashboard\n2. Click 'API Management' in left sidebar\n3. Select 'Generate New API Key'\n4. Copy generated key to cl...\"",
+      "context": "Go to the dashboard and get your keys."
+    },
+    {
+      "severity": "critical",
+      "category": "clarity",
+      "file": "tutorial.mdx",
+      "line": 25,
+      "type": "ai_ambiguous_instruction",
+      "description": "[Ambiguous Instruction] Developers cannot understand deployment process. Evidence: No specific deployment mechanism or method specified (Source: Google Developer Documentation Style Guide)",
+      "suggestion": "Provide concrete deployment method with multiple options. Before: \"Upload to server.\" \u2192 After: \"# Deploy using preferred method:\n# Option 1: FTP\nscp -r ./build/* user@serverhost:/path/to/deploy\n\n# Option 2: Cloud Platform\nnpm run deploy:cloud\"",
+      "context": "Upload to server."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "tutorial.mdx",
+      "line": 11,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Users unsure what to include in environment configuration. Evidence: No explanation of .env file structure or required contents (Source: Plain Language Guidelines)",
+      "suggestion": "Provide template and explanation. Before: \"Create a `.env` file.\" \u2192 After: \"# Create .env file with required configurations\n# Example template:\nAPI_KEY=your_api_key_here\nENVIRONMENT=development\nBACKEND_URL=https://api.example....\"",
+      "context": "Create a `.env` file."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "tutorial.mdx",
+      "line": 40,
+      "type": "ai_undefined_jargon",
+      "description": "[Undefined Jargon] Users uncertain about relevance of linked documentation. Evidence: External link without context of what documentation covers (Source: Jakob Nielsen, Information Scent Principle)",
+      "suggestion": "Add brief description of documentation contents. Before: \"https://docs.anthropic.com/api\" \u2192 After: \"Advanced API Documentation: Comprehensive guide to Claude API endpoints and integration strategies (https://docs.anthropic.com/api)\"",
+      "context": "https://docs.anthropic.com/api"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 10,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "An API Key is basically a unique identifier for authentication. api keys are used to authenticate re..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 10,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"basically\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "An API Key is basically a unique identifier for authentication. api keys are used to authenticate requests. Your API-key should be kept secret."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 14,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "A user is someone who uses the system. An account represents a user's profile. Each account has a Us..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 25,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "Our API implements rate-limiting to prevent abuse. Rate limits are applied per API key. If you excee..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 31,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "webhooks allow you to receive real-time notifications. A webhook is simply an HTTP callback. You can..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 31,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "webhooks allow you to receive real-time notifications. A webhook is simply an HTTP callback. You can configure webhooks in the dashboard."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 63,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "Authentication is handled via API keys. You must include your api key in all requests. Simply add it..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 63,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "Authentication is handled via API keys. You must include your api key in all requests. Simply add it to the Authorization header."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 10,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "An API Key is basically a unique identifier for authentication. api keys are used to authenticate requests. Your API-key should be kept secret."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 25,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Our API implements rate-limiting to prevent abuse. Rate limits are applied per API key. If you exceed the rate limit, you'll receive a 429 error."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 63,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Authentication is handled via API keys. You must include your api key in all requests. Simply add it to the Authorization header."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 72,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Errors are returned with appropriate status codes. Common errors include:"
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "concepts.mdx",
+      "line": 66,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 7,
+      "type": "ai_undefined_jargon",
+      "description": "[Undefined Jargon] New developers won't understand what an API key represents or its purpose. Evidence: First mention of technical term without clear definition (Source: plainlanguage.gov Technical Writing Guidelines)",
+      "suggestion": "Add precise definition and example usage. Before: \"An API Key is basically a unique identifier for authentication.\" \u2192 After: \"An API Key is a secure, unique string credential that allows applications to authenticate and access specific services or endpoints. It acts like a di...\"",
+      "context": "An API Key is basically a unique identifier for authentication. api keys are used to authenticate requests. Your API-key should be kept secret."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 15,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Developers won't understand how to handle rate limiting scenarios. Evidence: No explanation of what a 429 error means or how to resolve it (Source: Nielsen Norman Group: Progressive Disclosure Principle)",
+      "suggestion": "Add context about rate limit error handling. Before: \"If you exceed the rate limit, you'll receive a 429 error.\" \u2192 After: \"If you exceed the rate limit, you'll receive a 429 (Too Many Requests) HTTP error. To resolve this, wait for the reset period or contact support about...\"",
+      "context": "Rate limits are applied per API key. If you exceed the rate limit, you'll receive a 429 error."
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 33,
+      "type": "ai_ambiguous_instruction",
+      "description": "[Ambiguous Instruction] Developers cannot reliably implement authentication across different technology stacks. Evidence: Lacks concrete implementation details for different programming contexts (Source: Google Developer Documentation Style Guide)",
+      "suggestion": "Provide multi-language authentication examples. Before: \"Simply add it to the Authorization header.\" \u2192 After: \"Add the API key to the Authorization header using the Bearer token format. Example implementations:\n- Python: headers = {'Authorization': f'Bearer {ap...\"",
+      "context": "Authentication is handled via API keys. You must include your api key in all requests. Simply add it to the Authorization header."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "concepts.mdx",
+      "line": 11,
+      "type": "ai_cognitive_load",
+      "description": "[Cognitive Load] Minor visual distraction that could reduce comprehension. Evidence: Inconsistent capitalization reduces readability (Source: Nielsen Norman Group: Visual Consistency Principles)",
+      "suggestion": "Standardize capitalization. Before: \"- admin users - Regular Users - guest users\" \u2192 After: \"- Admin Users\n- Regular Users\n- Guest Users\"",
+      "context": "There are different types of users: - admin users - Regular Users - guest users"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "api-reference.mdx",
+      "line": 50,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This endpoint is used for deleting users from the system. The deletion is permanent and cannot be un..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 50,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "This endpoint is used for deleting users from the system. The deletion is permanent and cannot be undone."
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "api-reference.mdx",
+      "line": 13,
+      "type": "heading_skip",
+      "description": "Heading skips from H2 to H4",
+      "suggestion": "Use H3 instead to maintain hierarchy",
+      "context": "Parameters"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "api-reference.mdx",
+      "line": 35,
+      "type": "heading_skip",
+      "description": "Heading skips from H2 to H5",
+      "suggestion": "Use H3 instead to maintain hierarchy",
+      "context": "Request Body"
+    },
+    {
+      "severity": "medium",
+      "category": "ia",
+      "file": "api-reference.mdx",
+      "line": 52,
+      "type": "heading_skip",
+      "description": "Heading skips from H2 to H6",
+      "suggestion": "Use H3 instead to maintain hierarchy",
+      "context": "Response"
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 7,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 19,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 29,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 46,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "api-reference.mdx",
+      "line": 65,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "ux",
+      "file": "api-reference.mdx",
+      "line": 62,
+      "type": "non_descriptive_link",
+      "description": "Link text is non-descriptive: \"Click here\"",
+      "suggestion": "Use descriptive link text explaining destination",
+      "context": "[Click here](https://docs.example.com/api/users)"
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "api-reference.mdx",
+      "line": 10,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Users might accidentally delete users without understanding irreversibility. Evidence: Lacks critical user warning about permanent action consequence (Source: Redish: Task-Oriented Writing)",
+      "suggestion": "Add explicit warning and potentially require confirmation step. Before: \"This endpoint is used for deleting users from the system. The deletion is permanent and cannot be un...\" \u2192 After: \"\u26a0\ufe0f WARNING: This endpoint permanently deletes a user. This action CANNOT BE REVERSED. Confirm you want to irrevocably remove all user data before proc...\"",
+      "context": "This endpoint is used for deleting users from the system. The deletion is permanent and cannot be undone."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "api-reference.mdx",
+      "line": 22,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Developers cannot understand additional information without leaving current page. Evidence: External link without context reduces information scent (Source: Pirolli & Card: Information Scent)",
+      "suggestion": "Inline brief description of what additional documentation covers. Before: \"[Click here](https://docs.example.com/api/users) for more info.\" \u2192 After: \"[Additional pagination and filtering details](https://docs.example.com/api/users) available in supplemental documentation\"",
+      "context": "[Click here](https://docs.example.com/api/users) for more info."
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "api-reference.mdx",
+      "line": 3,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Developers cannot determine valid ID structure. Evidence: No explanation of required ID format or constraints (Source: Google Dev Docs Style)",
+      "suggestion": "Add parameter constraints and example. Before: \"GET /api/users/{id}\" \u2192 After: \"GET /api/users/{id}\n// {id}: Unique user identifier (e.g., UUID v4 format, 24-char hexadecimal)\"",
+      "context": "GET /api/users/{id}"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "api-reference.mdx",
+      "line": 31,
+      "type": "ai_unclear_heading",
+      "description": "[Unclear Heading] Developers unsure if these are API-wide or endpoint-specific errors. Evidence: Section title lacks specificity about error context (Source: Nielsen Norman Group: Cognitive Load)",
+      "suggestion": "Add contextual qualifier to heading. Before: \"Common Errors\" \u2192 After: \"API-Wide HTTP Error Responses\"",
+      "context": "Common Errors"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 8,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "This guide will simply help you get started with our API. It's really easy to use and can be quickly..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 8,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "This guide will simply help you get started with our API. It's really easy to use and can be quickly integrated into your application in just a few minutes."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 8,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "This guide will simply help you get started with our API. It's really easy to use and can be quickly integrated into your application in just a few minutes."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 8,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"really\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "This guide will simply help you get started with our API. It's really easy to use and can be quickly integrated into your application in just a few minutes."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 12,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "Before you begin, you should basically have the following things that are needed for getting started..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 12,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"basically\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "Before you begin, you should basically have the following things that are needed for getting started with the integration process:"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 19,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "The installation process is really simple and can be easily completed by running the following comma..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 19,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"easily\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "The installation process is really simple and can be easily completed by running the following command:"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 19,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"really\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "The installation process is really simple and can be easily completed by running the following command:"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 25,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"just\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "Just run the above command and the package will be installed automatically."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 29,
+      "type": "weak_language",
+      "description": "Avoid weak or unnecessary word: \"simply\"",
+      "suggestion": "Remove or replace with more precise language",
+      "context": "Here's how you can simply make your first API call to our endpoint which will return the data:"
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 43,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "After you have completed this quickstart guide, you can explore the <a href=\"./api-reference.mdx\">AP..."
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 43,
+      "type": "sentence_too_long",
+      "description": "Sentence has 36 words (recommend <30)",
+      "suggestion": "Break into shorter sentences for better readability",
+      "context": "After you have completed this quickstart guide, you can explore the <a href=\"./api-reference.mdx\">AP..."
+    },
+    {
+      "severity": "low",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 45,
+      "type": "line_too_long",
+      "description": "Line exceeds 100 characters",
+      "suggestion": "Break into shorter lines or sentences",
+      "context": "You might also want to look at our examples page which has lots of different examples that show vari..."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 12,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Before you begin, you should basically have the following things that are needed for getting started with the integration process:"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 13,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "- An API key that can be obtained from your dashboard"
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 25,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "Just run the above command and the package will be installed automatically."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 39,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "The response will be returned in JSON format and can be processed by your application."
+    },
+    {
+      "severity": "low",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 43,
+      "type": "passive_voice",
+      "description": "Consider using active voice",
+      "suggestion": "Rewrite in active voice for clarity",
+      "context": "After you have completed this quickstart guide, you can explore the <a href=\"./api-reference.mdx\">API Reference</a> to learn more about the available endpoints, or check out the authentication guide to understand how authentication is handled by the system."
+    },
+    {
+      "severity": "medium",
+      "category": "style",
+      "file": "quickstart.mdx",
+      "line": 21,
+      "type": "missing_language_tag",
+      "description": "Code block missing language identifier (REQUIRED in Mintlify)",
+      "suggestion": "Specify language for syntax highlighting (e.g., ```python)",
+      "context": null
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 5,
+      "type": "ai_cognitive_load",
+      "description": "[Cognitive Load] Users will struggle to quickly understand prerequisite requirements. Evidence: Sentence exceeds recommended 25-word length, creating comprehension barriers (Source: Nielsen Norman Group: Cognitive Load Principles)",
+      "suggestion": "Break into shorter, clearer sentences. Before: \"Before you begin, you should basically have the following things that are needed for getting started...\" \u2192 After: \"Before starting integration, ensure you have these prerequisites:\"",
+      "context": "Before you begin, you should basically have the following things that are needed for getting started with the integration process:"
+    },
+    {
+      "severity": "high",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 4,
+      "type": "ai_missing_context",
+      "description": "[Missing Context] Developers cannot determine if this guide is relevant to their needs. Evidence: No context about what specific API or domain is being introduced (Source: Redish: Task-Oriented Writing)",
+      "suggestion": "Add specific API/product name and brief description. Before: \"Getting Started with the API\" \u2192 After: \"Getting Started with Example Company's Payment Processing API\"",
+      "context": "Getting Started with the API"
+    },
+    {
+      "severity": "critical",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 14,
+      "type": "ai_undefined_jargon",
+      "description": "[Undefined Jargon] Developers cannot complete authentication process. Evidence: No explanation of how to obtain or generate actual API key (Source: plainlanguage.gov: Jargon Clarity Guidelines)",
+      "suggestion": "Add link or inline instructions for key generation. Before: \"client = example_sdk.Client(api_key=\"your-key-here\")\" \u2192 After: \"# Navigate to dashboard.example.com to generate API key\nclient = example_sdk.Client(api_key=\"your-generated-key\")\"",
+      "context": "client = example_sdk.Client(api_key=\"your-key-here\")"
+    },
+    {
+      "severity": "medium",
+      "category": "clarity",
+      "file": "quickstart.mdx",
+      "line": 20,
+      "type": "ai_ambiguous_instruction",
+      "description": "[Ambiguous Instruction] Developers uncertain about next learning steps. Evidence: Vague recommendation without clear navigation or specific guidance (Source: Redish: Task-Oriented Writing)",
+      "suggestion": "Add direct link and categorize example types. Before: \"You might also want to look at our examples page which has lots of different examples that show vari...\" \u2192 After: \"Explore our [Examples Page](/examples) categorized by use case: Payment Processing, Authentication, Webhook Handling\"",
+      "context": "You might also want to look at our examples page which has lots of different examples that show various use cases."
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No overview documentation found",
+      "suggestion": "Add overview section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No troubleshooting documentation found",
+      "suggestion": "Add troubleshooting section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "missing_content_type",
+      "description": "No examples documentation found",
+      "suggestion": "Add examples section",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"First time setup\" is incomplete",
+      "suggestion": "Add documentation for: overview, install, authenticate, first-use",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"Feature implementation\" is incomplete",
+      "suggestion": "Add documentation for: concept-doc, how-to-guide, code-example, troubleshooting",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"Troubleshooting\" is incomplete",
+      "suggestion": "Add documentation for: error-identification, diagnostic-guide, solution",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "incomplete_user_journey",
+      "description": "User journey \"API integration\" is incomplete",
+      "suggestion": "Add documentation for: api-overview, authentication, endpoints, sdk-reference, examples",
+      "context": null
+    },
+    {
+      "severity": "critical",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "gap_missing_troubleshooting",
+      "description": "[Missing Troubleshooting] Users cannot resolve common configuration and authentication issues. Evidence: No dedicated troubleshooting section despite complex API setup. Framework: Missing How-To Guide. Affected files: README.md, quickstart.mdx. Priority: Critical for user onboarding and reducing support overhead",
+      "suggestion": "Create troubleshooting.mdx. User journey blocked: setup. Suggested content: # Troubleshooting Guide\n## Authentication Issues\n- API Key Validation\n- Rate Limit Errors\n## Common Setup Problems\n- Dependency Conflicts\n- Environment Configuration",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "gap_incomplete_journey",
+      "description": "[Incomplete Journey] Advanced users cannot understand deeper platform capabilities. Evidence: Lacks clear progression from beginner to advanced usage. Framework: Missing Explanation documentation. Affected files: tutorial.mdx, quickstart.mdx. Priority: Essential for developer understanding and advanced usage",
+      "suggestion": "Expand concepts.mdx with architectural overview and design principles. User journey blocked: learning. Suggested content: # Platform Architecture\n## Core Design Philosophy\n- Modular API Design\n- Scalability Principles\n- Security Considerations",
+      "context": null
+    },
+    {
+      "severity": "high",
+      "category": "gaps",
+      "file": "[documentation set]",
+      "line": null,
+      "type": "gap_missing_reference",
+      "description": "[Missing Reference] Developers must guess correct API request structures. Evidence: API reference lacks comprehensive parameter descriptions. Framework: Incomplete Reference documentation. Affected files: api-reference.mdx. Priority: Direct barrier to successful API integration",
+      "suggestion": "Enhance api-reference.mdx with detailed parameter tables and example requests/responses. User journey blocked: configuration. Suggested content: ## User Endpoints\n### Parameters\n| Field | Type | Required | Description |\n|-------|------|----------|-------------|\n| email | string | Yes | User's email address |\n| role | enum | No | User permissio",
+      "context": null
+    }
+  ]
+}
