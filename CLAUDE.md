@@ -97,10 +97,35 @@ cp .env.example .env
 
 ### Running the Analyzer
 
-```bash
-# Using convenience script (auto-activates venv)
-./run.sh /path/to/docs
+**Unified CLI (Recommended) - analyze_docs.py:**
 
+This runs both analyzer and fixer in one command, generating 6 comprehensive reports (3 analysis + 3 fix reports).
+
+```bash
+# Basic usage (recommended: use --no-ai for speed)
+python analyze_docs.py /path/to/docs --no-ai
+
+# With AI analysis (slower, more comprehensive)
+python analyze_docs.py /path/to/docs
+
+# Skip analysis, only generate fixes
+python analyze_docs.py /path/to/docs --skip-analysis
+
+# Skip fixes, only run analysis
+python analyze_docs.py /path/to/docs --skip-fixes
+
+# Apply fixes automatically (default is preview/dry-run)
+python analyze_docs.py /path/to/docs --apply-fixes
+
+# With custom configuration
+python analyze_docs.py /path/to/docs --config custom_config.yaml
+```
+
+**Direct Analyzer - doc_analyzer.py:**
+
+Run analyzer only (no fix suggestions):
+
+```bash
 # Basic analysis
 python doc_analyzer.py /path/to/docs
 
@@ -126,6 +151,21 @@ python doc_analyzer.py /path/to/docs --no-ai
 
 # Custom output path (overrides default timestamped directory)
 python doc_analyzer.py /path/to/docs --output custom_report.json
+```
+
+**Direct Fixer - doc_fixer.py:**
+
+Run fixer only (requires prior analysis):
+
+```bash
+# Generate fix suggestions (dry-run mode)
+python doc_fixer.py /path/to/docs
+
+# Apply fixes automatically
+python doc_fixer.py /path/to/docs --apply
+
+# With custom configuration
+python doc_fixer.py /path/to/docs --config custom_config.yaml
 ```
 
 **Report Organization:**
@@ -205,6 +245,56 @@ pytest test_analyzer.py -v -m "not skipif"
 - Phase 3: Advanced analysis (content gaps, duplication, user journeys, AI semantic analysis)
 - Generates reports with recommendations and AI insights
 
+### Fixer Architecture
+
+**analyze_docs.py** (260 lines)
+- Unified CLI entry point that runs both analyzer and fixer sequentially
+- Generates 6 total reports: 3 analysis reports (JSON/HTML/MD) + 3 fix reports (JSON/HTML/MD)
+- Supports `--skip-analysis` and `--skip-fixes` flags for flexibility
+- Implements real-time output streaming for long-running operations
+
+**doc_fixer.py** (532 lines)
+- Automated fixing companion tool that applies corrections based on analysis
+- Operates in two modes: preview (dry-run) or apply (`--apply` flag)
+- Creates timestamped backups of all modified files
+- URL protection ensures links remain intact during text transformations
+- Integrates with 20+ modular fixer implementations
+
+**Fixers Directory** (`fixers/`)
+
+20+ specialized fixer modules for automated corrections:
+
+Core Fixers:
+- `base.py` - Base fixer class with common functionality
+- `frontmatter.py` - MDX frontmatter validation and addition
+- `code_blocks.py` - Code block language tag enforcement
+- `urls.py` - URL validation and relative path conversion
+
+Content Fixers:
+- `capitalization_fixer.py` - Product name capitalization (Claude, API)
+- `terminology.py` - Terminology standardization
+- `terminology_consistency_fixer.py` - Cross-file terminology consistency
+- `heading_hierarchy.py` - Heading level structure fixes
+- `long_sentence_splitter.py` - Sentence length reduction
+- `passive_voice_converter.py` - Active voice conversion
+
+Advanced Fixers:
+- `accessibility_fixer.py` - WCAG compliance improvements
+- `broken_link_detector.py` - Link validation and repair
+- `callout_standardization_fixer.py` - Consistent callout formatting
+- `code_language_tags.py` - Code block language enforcement
+- `link_text_improver.py` - Descriptive link text
+- `missing_prerequisites_detector.py` - Prerequisites validation
+- `production_code_validator.py` - Code example quality checks
+- `style_guide_validator.py` - Style guide compliance
+- `github_informed_fixer.py` - GitHub issue-based improvements
+
+Each fixer follows the base pattern:
+1. Detect issues in content
+2. Generate specific fixes with before/after examples
+3. Apply fixes with URL protection
+4. Create backups before modification
+
 ### Analysis Categories
 
 Issues are categorized as:
@@ -251,13 +341,32 @@ Violations of these are marked as **critical** severity.
 
 ## Data Flow
 
+### Analysis Workflow (doc_analyzer.py or analyze_docs.py --skip-fixes)
+
 1. `RepositoryManager` detects platform and loads files
 2. `DocumentationAnalyzer` runs three phases:
    - Phase 1: File-by-file analysis (all validators run on each file)
    - Phase 2: Cross-file analysis (IA patterns, consistency checks)
    - Phase 3: Advanced analysis (AI semantic gaps, duplication, user journeys)
 3. Issues are collected in `AnalysisReport` with categorization
-4. Reports are exported in requested format(s)
+4. Analysis reports exported in requested format(s)
+
+### Fixer Workflow (doc_fixer.py or analyze_docs.py --skip-analysis)
+
+1. Load analysis results from previous run
+2. Initialize 20+ specialized fixers based on detected issues
+3. For each fixer:
+   - Detect applicable issues in content
+   - Generate specific fixes with before/after examples
+   - Apply fixes (if `--apply` flag) with URL protection
+   - Create timestamped backups before modification
+4. Fix reports exported showing all proposed/applied changes
+
+### Unified Workflow (analyze_docs.py)
+
+1. Run full analyzer (generates 3 analysis reports)
+2. Run full fixer (generates 3 fix reports)
+3. Result: 6 comprehensive reports in one execution
 
 ## AI Integration
 
@@ -272,9 +381,19 @@ AI analysis is optional and controlled by:
 
 ## Report Formats
 
-**JSON** (`doc_analysis_report.json`): Machine-readable, complete issue list, suitable for CI/CD integration
-**HTML** (`doc_analysis_report.html`): Interactive, color-coded by severity, includes executive summary
-**Markdown** (`doc_analysis_report.md`): GitHub-friendly, grouped by severity, suitable for issue tracking
+### Analysis Reports
+
+- **JSON** (`doc_analysis_report.json`): Machine-readable, complete issue list, suitable for CI/CD integration
+- **HTML** (`doc_analysis_report.html`): Interactive, color-coded by severity, includes executive summary
+- **Markdown** (`doc_analysis_report.md`): GitHub-friendly, grouped by severity, suitable for issue tracking
+
+### Fix Reports
+
+- **JSON** (`doc_fix_report.json`): Structured data of all proposed/applied fixes
+- **HTML** (`doc_fix_report.html`): Visual preview of fixes with before/after comparison
+- **Markdown** (`doc_fix_report.md`): List format suitable for review and documentation
+
+All reports are organized in timestamped directories (e.g., `reports/2024-11-10_14-30-15/`)
 
 ## Extension Points
 
