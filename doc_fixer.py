@@ -356,6 +356,7 @@ class DocFixer:
         html_content = f"""<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Documentation Fix Report</title>
     <style>
         body {{ font-family: -apple-system, system-ui, sans-serif; margin: 40px; }}
