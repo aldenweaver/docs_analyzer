@@ -195,10 +195,10 @@ Examples:
     print(f"\n{'='*70}")
     print(f"🚀 UNIFIED DOCUMENTATION ANALYZER & FIXER")
     print(f"{'='*70}")
-    print(f"📁 Target: {args.docs_path or args.repo_url}")
-    print(f"📝 Format: {args.format}")
-    print(f"🤖 AI Analysis: {'Disabled' if args.no_ai else 'Enabled'}")
-    print(f"🔧 Fix Mode: {'Apply' if args.apply_fixes else 'Preview (dry-run)'}")
+    print(f"Target: {args.docs_path or args.repo_url}")
+    print(f"Format: {args.format}")
+    print(f"AI Analysis: {'Disabled' if args.no_ai else 'Enabled'}")
+    print(f"Fix Mode: {'Apply' if args.apply_fixes else 'Preview (dry-run)'}")
     print(f"{'='*70}")
 
     # Run analysis phase

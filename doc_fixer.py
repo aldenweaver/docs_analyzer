@@ -367,7 +367,7 @@ class DocFixer:
     </style>
 </head>
 <body>
-    <h1>📝 Documentation Fix Report</h1>
+    <h1>Documentation Fix Report</h1>
     <p><strong>Generated:</strong> {report.timestamp}</p>
     <p><strong>Repository:</strong> {report.repository['path']}</p>
 
@@ -395,7 +395,7 @@ class DocFixer:
 
     def _export_markdown(self, report: FixReport, output_path: Path):
         """Export report as Markdown"""
-        md_content = f"""# 📝 Documentation Fix Report
+        md_content = f"""# Documentation Fix Report
 
 **Generated:** {report.timestamp}
 **Repository:** {report.repository['path']}

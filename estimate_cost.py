@@ -201,7 +201,7 @@ def main():
         print(f"   Estimated cost: ${default_estimate['total_cost']:.2f}")
         print(f"   Remaining budget: ${5.00 - default_estimate['total_cost']:.2f}")
 
-    print("\n📝 Cost-Saving Tips:")
+    print("\n Cost-Saving Tips:")
     print("   • Analyze subfolders first (e.g., just /pages)")
     print("   • Use --no-ai flag for free structural analysis")
     print("   • Run AI analysis only on final review")
