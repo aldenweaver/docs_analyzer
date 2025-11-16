@@ -45,6 +45,10 @@ from fixers import (
     ProductionCodeValidator,
     # Accessibility
     AccessibilityFixer,
+    # New AI searchability fixers
+    HeadingDescriptivenessFixer,
+    ContextEnrichmentFixer,
+    MetadataEnrichmentFixer,
 )
 import os
 
@@ -155,6 +159,19 @@ class DocFixer:
         if os.getenv('ENABLE_ACCESSIBILITY_FIXER', 'true').lower() not in ['false', '0', 'no']:
             self.fixers.append(AccessibilityFixer(self.config))
             print("✓ Accessibility Fixer enabled (WCAG 2.1 AA compliance)")
+
+        # AI searchability fixers (Inkeep-ready optimizations)
+        if os.getenv('ENABLE_HEADING_DESCRIPTIVENESS_FIXER', 'true').lower() not in ['false', '0', 'no']:
+            self.fixers.append(HeadingDescriptivenessFixer(self.config))
+            print("✓ Heading Descriptiveness Fixer enabled (AI searchability)")
+
+        if os.getenv('ENABLE_CONTEXT_ENRICHMENT_FIXER', 'true').lower() not in ['false', '0', 'no']:
+            self.fixers.append(ContextEnrichmentFixer(self.config))
+            print("✓ Context Enrichment Fixer enabled (AI searchability)")
+
+        if os.getenv('ENABLE_METADATA_ENRICHMENT_FIXER', 'true').lower() not in ['false', '0', 'no']:
+            self.fixers.append(MetadataEnrichmentFixer(self.config))
+            print("✓ Metadata Enrichment Fixer enabled (AI searchability)")
 
         self.stats = FixerStats()
         self.all_fix_results = []  # Store all fixes for report generation

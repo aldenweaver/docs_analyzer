@@ -358,17 +358,88 @@ gap_detection:
     detect_circular_refs: true
     find_dead_ends: true
 
+# AI Search & RAG Optimization (Inkeep-Ready Features)
+ai_search_optimization:
+  enabled: true
+
+  # Semantic chunking readiness
+  semantic_chunking:
+    enabled: true
+    require_topic_sentences: true
+    max_section_length_for_coherence: 500  # words
+    check_standalone_comprehension: true
+    check_orphaned_references: true
+    require_descriptive_headings: true
+    require_code_context: true  # Code blocks need explanatory text
+
+  # Citation optimization
+  citation_readiness:
+    enabled: true
+    require_unique_headings: true
+    check_descriptive_headings: true
+    avoid_buried_key_info: true
+    require_list_context: true  # Lists need introductory sentences
+
+  # Metadata enrichment
+  metadata:
+    require_content_type: false  # guide, tutorial, reference, concept
+    require_audience_level: false  # beginner, intermediate, advanced
+    require_keywords: false
+    min_description_length: 50
+    max_description_length: 160
+    validate_keyword_relevance: true
+    suggest_missing_keywords: true
+
+  # Conversational interface optimization
+  conversational:
+    enabled: false
+    check_answer_directness: true
+    check_natural_language: true
+    avoid_parentheticals: true
+    expand_abbreviations: true
+
+  # Content atomicity
+  atomicity:
+    check_single_topic_focus: true
+    require_prerequisites_section: false
+    check_external_dependencies: true
+
+  # Question-answer format detection
+  check_qa_opportunities: true
+  suggest_qa_conversion: true
+
+  # AI searchability scoring
+  scoring:
+    enabled: true
+    weight_semantic_chunking: 0.3
+    weight_citation_readiness: 0.3
+    weight_metadata_richness: 0.2
+    weight_standalone_comprehension: 0.2
+
+# Inkeep Integration Settings (Optional)
+inkeep_integration:
+  enabled: false
+  export_format: "inkeep-ready-json"
+  include_readiness_scores: true
+  generate_suggestions: true
+
+  # Thresholds for Inkeep readiness
+  readiness_thresholds:
+    minimum_overall_score: 70
+    critical_issues_allowed: 0
+    high_issues_allowed: 3
+
 # Content Duplication Detection
 duplication_detection:
   enabled: false  # DISABLED: Performance issue with large repos (O(n²×m²) complexity)
   similarity_threshold: 0.8  # 80% similar = duplicate
-  
+
   # What to check
   check_levels:
     - paragraph
     - code_block
     - heading_structure
-  
+
   # When duplicates are okay
   allowed_duplicates:
     - boilerplate_text

@@ -29,6 +29,11 @@ from .production_code_validator import ProductionCodeValidator
 # Accessibility fixer
 from .accessibility_fixer import AccessibilityFixer
 
+# AI searchability fixers (Inkeep-ready)
+from .heading_descriptiveness import HeadingDescriptivenessFixer
+from .context_enrichment import ContextEnrichmentFixer
+from .metadata_enrichment import MetadataEnrichmentFixer
+
 __all__ = [
     'BaseFixer',
     'FrontmatterFixer',
@@ -52,4 +57,8 @@ __all__ = [
     'ProductionCodeValidator',
     # Accessibility
     'AccessibilityFixer',
+    # AI searchability
+    'HeadingDescriptivenessFixer',
+    'ContextEnrichmentFixer',
+    'MetadataEnrichmentFixer',
 ]

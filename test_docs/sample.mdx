@@ -1,0 +1,40 @@
+---
+title: API Documentation
+---
+
+## Overview
+
+This describes the API.
+
+## Examples
+
+```javascript
+fetch('/api/users')
+  .then(response => response.json())
+  .then(data => console.log(data));
+```
+
+## Details
+
+As mentioned above, the API provides various endpoints. The previous section covered authentication.
+
+It works by sending requests to the server.
+
+## Configuration
+
+These options are available:
+
+- API_KEY - Your API key
+- BASE_URL - The base URL
+- TIMEOUT - Request timeout
+
+See below for more information.
+
+## Troubleshooting
+
+What if the API returns an error?
+
+Check the following:
+- Is your API key valid?
+- Are you using the correct endpoint?
+- Is the server running?

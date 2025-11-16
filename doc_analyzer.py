@@ -42,6 +42,10 @@ from analyzers import (
     UserJourneyAnalyzer
 )
 
+# Import new AI searchability analyzers
+from analyzers.ai_searchability import AISearchabilityAnalyzer
+from analyzers.metadata_enrichment import MetadataEnrichmentValidator
+
 
 def sanitize_content_for_ai(content: str) -> str:
     """
@@ -150,6 +154,10 @@ class DocumentationAnalyzer:
         self.semantic_analyzer = SemanticAnalyzer(config)
         self.duplication_detector = ContentDuplicationDetector(config)
         self.journey_analyzer = UserJourneyAnalyzer(config)
+
+        # Initialize new AI searchability analyzers
+        self.ai_searchability_analyzer = AISearchabilityAnalyzer(config)
+        self.metadata_validator = MetadataEnrichmentValidator(config)
     
     def analyze_all(self) -> AnalysisReport:
         """Run comprehensive analysis"""
@@ -218,6 +226,40 @@ class DocumentationAnalyzer:
             # AI-powered clarity check
             if self.semantic_analyzer.enabled and self.config.get('analysis', {}).get('enable_ai_analysis', True):
                 self.semantic_analyzer.analyze_clarity(relative_path, content, self.report.issues)
+
+            # New AI searchability checks (Inkeep-ready features)
+            if self.config.get('ai_search_optimization', {}).get('enabled', True):
+                # Parse frontmatter for metadata validation
+                from analyzers.mdx_parser import MDXParser
+                frontmatter, _ = MDXParser.parse_frontmatter(content)
+
+                # Run AI searchability analysis
+                ai_issues = self.ai_searchability_analyzer.analyze(content, relative_path, frontmatter)
+                for issue in ai_issues:
+                    self.report.add_issue(Issue(
+                        severity=issue.severity,
+                        category='ai_search',  # AI searchability issues go in ai_search category
+                        file_path=issue.file_path,
+                        line_number=issue.line_number,
+                        issue_type=issue.issue_type,
+                        description=issue.message,
+                        suggestion=issue.suggestion,
+                        context=issue.context
+                    ))
+
+                # Run metadata enrichment validation
+                metadata_issues = self.metadata_validator.validate(frontmatter, content, relative_path)
+                for issue in metadata_issues:
+                    self.report.add_issue(Issue(
+                        severity=issue.severity,
+                        category='ai_search',  # Metadata issues also affect AI search
+                        file_path=issue.file_path,
+                        line_number=issue.line_number,
+                        issue_type=issue.issue_type,
+                        description=issue.message,
+                        suggestion=issue.suggestion,
+                        context=str(issue.current_value) if hasattr(issue, 'current_value') else issue.context if hasattr(issue, 'context') else None
+                    ))
         
         except Exception as e:
             self.report.add_issue(Issue(
@@ -617,6 +659,8 @@ class DocumentationAnalyzer:
             return self._export_html(output_path)
         elif output_format == 'markdown':
             return self._export_markdown(output_path)
+        elif output_format == 'inkeep':
+            return self._export_inkeep_ready(output_path)
 
     def _export_json(self, output_path: Optional[str]) -> str:
         """Export as JSON"""
@@ -855,9 +899,283 @@ class DocumentationAnalyzer:
         
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(md)
-        
+
         print(f"\n📄 Markdown report exported to: {output_path}")
         return output_path
+
+    def _export_inkeep_ready(self, output_path: Optional[str]) -> str:
+        """Export Inkeep readiness report with AI searchability scores"""
+        if not output_path:
+            report_dir = self._create_timestamped_report_dir()
+            output_path = str(report_dir / 'inkeep_readiness_report.json')
+        elif Path(output_path).is_dir():
+            output_path = str(Path(output_path) / 'inkeep_readiness_report.json')
+
+        # Calculate AI searchability scores per file
+        file_scores = self._calculate_ai_searchability_scores()
+
+        # Calculate overall readiness
+        overall_readiness = self._calculate_overall_inkeep_readiness(file_scores)
+
+        # Get recommendations specific to Inkeep preparation
+        inkeep_recommendations = self._generate_inkeep_recommendations()
+
+        # Recalculate summary stats
+        actual_total, actual_by_severity, actual_by_category = self._recalculate_summary()
+
+        report_data = {
+            'timestamp': self.report.timestamp,
+            'repository': self.report.repository_info,
+            'inkeep_readiness': {
+                'overall_score': overall_readiness['overall_score'],
+                'readiness_level': overall_readiness['readiness_level'],
+                'critical_blockers': overall_readiness['critical_blockers'],
+                'high_priority_issues': overall_readiness['high_priority_issues'],
+                'improvement_areas': overall_readiness['improvement_areas'],
+                'scores': {
+                    'ai_searchability': overall_readiness['ai_searchability_score'],
+                    'metadata_richness': overall_readiness['metadata_richness_score'],
+                    'citation_readiness': overall_readiness['citation_readiness_score'],
+                    'content_structure': overall_readiness['content_structure_score'],
+                },
+                'thresholds': {
+                    'minimum_score': 70,
+                    'critical_issues_allowed': 0,
+                    'high_issues_allowed': 3,
+                    'current_critical_issues': actual_by_severity.get('critical', 0),
+                    'current_high_issues': actual_by_severity.get('high', 0),
+                },
+            },
+            'file_analysis': file_scores,
+            'recommendations': inkeep_recommendations,
+            'ai_search_issues': {
+                'total': actual_by_category.get('ai_search', 0),
+                'by_type': self._categorize_ai_search_issues(),
+            },
+            'summary': {
+                'total_files': self.report.total_files,
+                'files_ready': len([f for f in file_scores if f['score'] >= 70]),
+                'files_need_work': len([f for f in file_scores if f['score'] < 70]),
+                'total_issues': actual_total,
+                'ai_search_issues': actual_by_category.get('ai_search', 0),
+            }
+        }
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(report_data, f, indent=2)
+
+        # Also generate a human-readable summary
+        self._print_inkeep_readiness_summary(overall_readiness, file_scores)
+
+        print(f"\n📄 Inkeep readiness report exported to: {output_path}")
+        return output_path
+
+    def _calculate_ai_searchability_scores(self) -> List[Dict]:
+        """Calculate AI searchability score for each file"""
+        file_scores = []
+        files_issues = defaultdict(list)
+
+        # Group issues by file
+        for issue in self.report.issues:
+            files_issues[issue.file_path].append(issue)
+
+        # Calculate scores per file
+        for file_path in files_issues.keys():
+            file_issues = files_issues[file_path]
+            ai_issues = [i for i in file_issues if i.category == 'ai_search']
+
+            # Calculate score based on AI searchability issues
+            if self.ai_searchability_analyzer:
+                from analyzers.ai_searchability import AISearchabilityIssue
+                ai_searchability_issues = [
+                    AISearchabilityIssue(
+                        file_path=i.file_path,
+                        issue_type=i.issue_type,
+                        severity=i.severity,
+                        message=i.description,
+                        line_number=i.line_number,
+                        suggestion=i.suggestion,
+                        context=i.context
+                    ) for i in ai_issues
+                ]
+                score = self.ai_searchability_analyzer.calculate_ai_searchability_score(ai_searchability_issues)
+            else:
+                # Fallback scoring if analyzer not available
+                severity_deductions = {'critical': 25, 'high': 15, 'medium': 8, 'low': 3}
+                deduction = sum(severity_deductions.get(i.severity, 0) for i in ai_issues)
+                score = max(0, 100 - deduction)
+
+            file_scores.append({
+                'file': file_path,
+                'score': score,
+                'issues': len(ai_issues),
+                'critical_issues': len([i for i in ai_issues if i.severity == 'critical']),
+                'needs_improvement': score < 70,
+                'top_issues': [i.issue_type for i in ai_issues[:3]]
+            })
+
+        # Sort by score (lowest first to highlight problem files)
+        file_scores.sort(key=lambda x: x['score'])
+
+        return file_scores
+
+    def _calculate_overall_inkeep_readiness(self, file_scores: List[Dict]) -> Dict:
+        """Calculate overall Inkeep readiness metrics"""
+        if not file_scores:
+            return {
+                'overall_score': 100,
+                'readiness_level': 'ready',
+                'critical_blockers': [],
+                'high_priority_issues': [],
+                'improvement_areas': [],
+                'ai_searchability_score': 100,
+                'metadata_richness_score': 100,
+                'citation_readiness_score': 100,
+                'content_structure_score': 100,
+            }
+
+        # Calculate average score
+        avg_score = sum(f['score'] for f in file_scores) / len(file_scores)
+
+        # Count critical blockers
+        critical_blockers = []
+        high_priority_issues = []
+        improvement_areas = []
+
+        # Analyze issues by type
+        issue_types = defaultdict(int)
+        for issue in self.report.issues:
+            if issue.category == 'ai_search':
+                issue_types[issue.issue_type] += 1
+                if issue.severity == 'critical':
+                    critical_blockers.append(f"{issue.issue_type}: {issue.file_path}")
+                elif issue.severity == 'high':
+                    high_priority_issues.append(f"{issue.issue_type}: {issue.file_path}")
+
+        # Identify top improvement areas
+        for issue_type, count in sorted(issue_types.items(), key=lambda x: x[1], reverse=True)[:5]:
+            improvement_areas.append(f"{issue_type} ({count} occurrences)")
+
+        # Calculate category scores
+        metadata_issues = [i for i in self.report.issues if 'metadata' in i.issue_type.lower()]
+        citation_issues = [i for i in self.report.issues if 'citation' in i.issue_type.lower() or 'heading' in i.issue_type.lower()]
+        structure_issues = [i for i in self.report.issues if 'structure' in i.issue_type.lower() or 'hierarchy' in i.issue_type.lower()]
+
+        # Simple scoring (could be enhanced)
+        metadata_score = max(0, 100 - len(metadata_issues) * 5)
+        citation_score = max(0, 100 - len(citation_issues) * 5)
+        structure_score = max(0, 100 - len(structure_issues) * 5)
+
+        # Determine readiness level
+        if avg_score >= 85 and len(critical_blockers) == 0:
+            readiness_level = 'ready'
+        elif avg_score >= 70 and len(critical_blockers) <= 2:
+            readiness_level = 'nearly_ready'
+        elif avg_score >= 50:
+            readiness_level = 'needs_work'
+        else:
+            readiness_level = 'not_ready'
+
+        return {
+            'overall_score': round(avg_score, 1),
+            'readiness_level': readiness_level,
+            'critical_blockers': critical_blockers[:10],  # Top 10
+            'high_priority_issues': high_priority_issues[:10],
+            'improvement_areas': improvement_areas,
+            'ai_searchability_score': round(avg_score, 1),
+            'metadata_richness_score': round(metadata_score, 1),
+            'citation_readiness_score': round(citation_score, 1),
+            'content_structure_score': round(structure_score, 1),
+        }
+
+    def _categorize_ai_search_issues(self) -> Dict:
+        """Categorize AI search issues by type"""
+        issue_categories = defaultdict(int)
+        for issue in self.report.issues:
+            if issue.category == 'ai_search':
+                issue_categories[issue.issue_type] += 1
+        return dict(issue_categories)
+
+    def _generate_inkeep_recommendations(self) -> List[str]:
+        """Generate specific recommendations for Inkeep preparation"""
+        recommendations = []
+
+        # Analyze issues to generate recommendations
+        issue_types = set(i.issue_type for i in self.report.issues if i.category == 'ai_search')
+
+        if 'non_descriptive_heading' in issue_types:
+            recommendations.append("Replace generic headings with descriptive ones for better AI citation")
+
+        if 'orphaned_reference' in issue_types:
+            recommendations.append("Fix orphaned references to ensure content is understandable when chunked")
+
+        if 'missing_frontmatter' in issue_types or 'missing_required_metadata' in issue_types:
+            recommendations.append("Add comprehensive frontmatter with title, description, and keywords")
+
+        if 'code_block_lacks_context' in issue_types:
+            recommendations.append("Add explanatory text before code blocks to provide context")
+
+        if 'undefined_pronoun' in issue_types:
+            recommendations.append("Replace undefined pronouns at section starts with specific nouns")
+
+        if 'metadata_lacks_richness' in issue_types:
+            recommendations.append("Enrich metadata with content_type, audience_level, and related topics")
+
+        # Add general recommendations
+        if not recommendations:
+            recommendations.append("Documentation is generally well-prepared for Inkeep integration")
+
+        recommendations.append("Consider running the doc_fixer.py tool with AI searchability fixers enabled")
+        recommendations.append("Review Inkeep's documentation ingestion guidelines for platform-specific optimizations")
+
+        return recommendations
+
+    def _print_inkeep_readiness_summary(self, readiness: Dict, file_scores: List[Dict]):
+        """Print a human-readable summary of Inkeep readiness"""
+        print("\n" + "="*60)
+        print("🎯 INKEEP READINESS SUMMARY")
+        print("="*60)
+
+        # Overall score with color coding
+        score = readiness['overall_score']
+        level = readiness['readiness_level']
+
+        level_emojis = {
+            'ready': '✅',
+            'nearly_ready': '🔶',
+            'needs_work': '⚠️',
+            'not_ready': '❌'
+        }
+
+        print(f"\nOverall Score: {score}/100 {level_emojis.get(level, '')} ({level.replace('_', ' ').title()})")
+
+        # Category scores
+        print(f"\nCategory Scores:")
+        print(f"  • AI Searchability: {readiness['ai_searchability_score']}/100")
+        print(f"  • Metadata Richness: {readiness['metadata_richness_score']}/100")
+        print(f"  • Citation Readiness: {readiness['citation_readiness_score']}/100")
+        print(f"  • Content Structure: {readiness['content_structure_score']}/100")
+
+        # Critical blockers
+        if readiness['critical_blockers']:
+            print(f"\n❌ Critical Blockers ({len(readiness['critical_blockers'])}):")
+            for blocker in readiness['critical_blockers'][:5]:
+                print(f"  • {blocker}")
+
+        # Files needing attention
+        problem_files = [f for f in file_scores if f['score'] < 70][:5]
+        if problem_files:
+            print(f"\n⚠️  Files Needing Attention:")
+            for file_info in problem_files:
+                print(f"  • {file_info['file']} (score: {file_info['score']}/100)")
+
+        # Top improvement areas
+        if readiness['improvement_areas']:
+            print(f"\n📈 Top Improvement Areas:")
+            for area in readiness['improvement_areas'][:5]:
+                print(f"  • {area}")
+
+        print("\n" + "="*60)
 
 
 def main():
@@ -903,7 +1221,7 @@ def main():
     # Output options
     parser.add_argument(
         '--format',
-        choices=['json', 'html', 'markdown', 'all'],
+        choices=['json', 'html', 'markdown', 'inkeep', 'all'],
         default='all',
         help='Output format for report (default: all formats)'
     )

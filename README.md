@@ -12,6 +12,8 @@ A unified CLI tool that analyzes Mintlify-based documentation (like Claude Docs)
 - Optional Claude API integration for advanced analysis
 - 20+ automated fixers for documentation improvements
 - Platform auto-detection (Mintlify, Docusaurus, MkDocs, generic)
+- **NEW:** Inkeep-ready analysis for AI search optimization
+- **NEW:** AI searchability scoring and recommendations
 
 ---
 
@@ -74,6 +76,7 @@ python analyze_docs.py /path/to/docs
 python analyze_docs.py /path/to/docs --format html      # HTML only
 python analyze_docs.py /path/to/docs --format json      # JSON only
 python analyze_docs.py /path/to/docs --format markdown  # Markdown only
+python analyze_docs.py /path/to/docs --format inkeep    # Inkeep readiness report
 
 # Run without AI (faster, no API key required)
 python analyze_docs.py /path/to/docs --no-ai
@@ -574,6 +577,19 @@ Validated on production documentation (287 MDX files):
 - **0 broken links** in automated fixes (URL protection validated)
 
 See [TESTING_HISTORY.md](TESTING_HISTORY.md) for detailed metrics and [examples/reports/](examples/reports/) for sample output.
+
+---
+
+## Inkeep Integration Support
+
+The analyzer includes specialized features for preparing documentation for AI-powered search systems like Inkeep:
+
+- **AI Searchability Analysis**: Checks for semantic chunking readiness, citation readiness, and standalone comprehension
+- **Metadata Enrichment**: Validates and suggests improvements for frontmatter to enhance AI discoverability
+- **Inkeep Readiness Scoring**: Provides an overall score (0-100) indicating how well-prepared your docs are for Inkeep
+- **Automated Fixers**: Three new fixers specifically designed for AI search optimization
+
+See the [INKEEP_PREPARATION_GUIDE.md](INKEEP_PREPARATION_GUIDE.md) for detailed instructions on using these features.
 
 ---
 
